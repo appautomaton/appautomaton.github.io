@@ -1,0 +1,101 @@
+/* =========================================================
+   App Automaton — Blue palette override
+   Re-skins the AppCubic warm palette to a cool blue system
+   without touching the rest of the stylesheet.
+   ========================================================= */
+
+:root {
+  /* Core ink & surface — deep navy → slate → mist */
+  --ac-charcoal:      #0c1726;   /* deepest navy; hero backgrounds */
+  --ac-brown:         #18253a;   /* secondary dark */
+  --ac-text:          #2a3a55;   /* body text on light */
+  --ac-stone:         #6a7a92;   /* muted text */
+  --ac-smoke:         #b8c4d6;   /* hairline borders on dark surfaces */
+  --ac-light-stone:   #d6deea;   /* hairline borders on light */
+  --ac-cream:         #eaf1fa;   /* cool surface (was warm cream) */
+  --ac-warm-bg:       #f3f7fc;   /* page background (cool mist) */
+  --ac-white:         #ffffff;
+
+  /* Brand accent — sky / azure */
+  --ac-amber:         #2f7ad9;   /* primary accent (was amber) */
+  --ac-gold:          #5fb0f5;   /* secondary accent, gradient pair */
+  --ac-amber-soft:    rgba(47, 122, 217, 0.12);
+  --ac-amber-line:    rgba(47, 122, 217, 0.38);
+
+  /* Semantic */
+  --ac-success:       #2c8a6a;
+  --ac-warning:       #c98a2a;
+  --ac-danger:        #c1432e;
+  --ac-info:          #2f7ad9;
+
+  /* Roles re-bound */
+  --fg-1:             var(--ac-brown);
+  --fg-2:             var(--ac-text);
+  --fg-3:             var(--ac-stone);
+  --fg-inverse-1:     var(--ac-cream);
+  --fg-inverse-2:     var(--ac-smoke);
+  --fg-accent:        var(--ac-amber);
+
+  --bg-page:          var(--ac-warm-bg);
+  --bg-surface:       var(--ac-white);
+  --bg-sunken:        var(--ac-cream);
+  --bg-inverse:       var(--ac-charcoal);
+  --bg-inverse-2:     var(--ac-brown);
+
+  --border-1:         rgba(24, 37, 58, 0.08);
+  --border-2:         rgba(24, 37, 58, 0.14);
+  --border-inverse:   rgba(255, 255, 255, 0.08);
+
+  /* Brand gradient (cool) */
+  --grad-amber: linear-gradient(135deg, #2f7ad9, #5fb0f5);
+  --grad-rule:  linear-gradient(90deg, #2f7ad9, #5fb0f5, #2f7ad9);
+
+  /* Soft shadows — cool tint instead of warm */
+  --shadow-1: 0 1px 2px rgba(12, 23, 38, 0.07);
+  --shadow-2: 0 2px 8px rgba(12, 23, 38, 0.10), 0 1px 2px rgba(12, 23, 38, 0.05);
+  --shadow-3: 0 8px 24px rgba(12, 23, 38, 0.12), 0 2px 6px rgba(12, 23, 38, 0.06);
+  --shadow-inset: inset 0 1px 2px rgba(12, 23, 38, 0.06);
+  --shadow-accent: 0 0 0 3px rgba(47, 122, 217, 0.22);
+}
+
+/* ── Hero / dark sections — replace warm ambient glow with cool ── */
+.aa-hero-bg {
+  background:
+    radial-gradient(ellipse 70% 50% at 25% 75%, rgba(47, 122, 217, 0.18) 0%, transparent 60%) !important,
+    radial-gradient(ellipse 50% 50% at 80% 20%, rgba(95, 176, 245, 0.10) 0%, transparent 55%) !important;
+}
+.aa-hero-grid {
+  background-image:
+    linear-gradient(rgba(180, 210, 255, 0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(180, 210, 255, 0.05) 1px, transparent 1px) !important;
+}
+
+.aa-section-dark::before {
+  background: radial-gradient(ellipse 60% 40% at 50% 0%, rgba(47, 122, 217, 0.10), transparent 60%) !important;
+}
+
+.aa-cta::before {
+  background:
+    radial-gradient(ellipse 50% 50% at 80% 50%, rgba(47, 122, 217, 0.16), transparent 60%),
+    radial-gradient(ellipse 60% 60% at 20% 80%, rgba(95, 176, 245, 0.10), transparent 65%) !important;
+}
+
+/* Footer — slightly cooler near-black */
+.aa-footer { background: #070d18 !important; }
+
+/* Trace/code pane — cooler syntax tints */
+.aa-code .kw  { color: #9bb6e8 !important; }   /* keywords — periwinkle */
+.aa-code .fn  { color: #5fb0f5 !important; }   /* functions — sky */
+.aa-code .str { color: #7fcfd0 !important; }   /* strings — teal */
+.aa-code .num { color: #5fb0f5 !important; }   /* numbers — sky */
+.aa-code .dec { color: #2f7ad9 !important; }   /* decorators — azure */
+
+.aa-trace-tag.tool { background: rgba(47, 122, 217, 0.16) !important; color: #8fc1f5 !important; border-color: rgba(47, 122, 217, 0.45) !important; }
+.aa-trace-tag.llm  { background: rgba(127, 207, 208, 0.14) !important; color: #8fd4d5 !important; border-color: rgba(127, 207, 208, 0.4) !important; }
+.aa-trace-tag.done { background: rgba(44, 138, 106, 0.16) !important; color: #8fd4b6 !important; border-color: rgba(44, 138, 106, 0.4) !important; }
+
+/* Numeric values inside trace messages */
+.aa-trace-msg .num { color: #7fcfd0 !important; }
+.aa-trace-msg .arg { color: #5fb0f5 !important; }
+
+/* Quickstart terminal output greens stay green for "ok" semantics — leave */
