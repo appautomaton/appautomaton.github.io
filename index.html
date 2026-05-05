@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=1200" />
-<title>App Automaton — portable SKILLs for coding agents</title>
-<meta name="description" content="SKILLs, configs, and bridge scripts for Codex, Claude Code, and Gemini. Clone a repo, symlink the skills, get back to work." />
+<title>App Automaton — open skills, harnesses, and on-device tools for coding agents</title>
+<meta name="description" content="An open-source workshop for engineering with coding agents — portable SKILLs, stage-gated runtimes, and a quiet streak of pure-MLX work for Apple Silicon." />
 <link rel="stylesheet" href="styles/site.css" />
 <link rel="stylesheet" href="styles/palette-blue.css" />
 <style>
@@ -53,9 +53,9 @@
       <a class="aa-nav-link" href="https://github.com/appautomaton">GitHub</a>
     </nav>
     <div class="aa-header-right">
-      <span class="aa-gh-pill" title="Stars across org">
-        <span><i data-lucide="star"></i> <span class="aa-gh-stars">103</span></span>
-        <span><i data-lucide="git-branch"></i> 4 repos</span>
+      <span class="aa-gh-pill" title="Stars across the org">
+        <span><i data-lucide="star"></i> <span class="aa-gh-stars">300+</span></span>
+        <span><i data-lucide="git-branch"></i> 30 repos</span>
       </span>
       <a class="aa-btn aa-btn-sm aa-btn-primary" href="https://github.com/appautomaton">
         <i data-lucide="github"></i> GitHub
@@ -70,18 +70,18 @@
   <div class="aa-hero-inner">
     <div>
       <div class="aa-hero-meta">
-        <span>4 repos · 100+ stars</span>
+        <span>30 repos · 300+ stars</span>
         <span class="dot"></span>
-        <span>Codex · Claude Code · Gemini</span>
+        <span>Claude Code · Codex · Gemini · OpenCode</span>
         <span class="dot"></span>
-        <span>MIT / Apache-2.0</span>
+        <span>MIT licensed</span>
       </div>
       <h1 class="aa-hero-title">
-        SKILLs that ship<br/>
-        with <em>your agent.</em>
+        Skills, harnesses,<br/>
+        and <em>on-device tools.</em>
       </h1>
       <p class="aa-hero-sub">
-        SKILLs, configs, and bridge scripts for Codex, Claude Code, and Gemini. Clone a repo, symlink the skills, get back to work.
+        App Automaton is an open-source workshop for engineering with coding agents — Claude Code, Codex, Gemini, and OpenCode. Portable SKILLs, stage-gated runtimes, and a quiet streak of pure-MLX work for Apple Silicon.
       </p>
       <div class="aa-hero-ctas">
         <a class="aa-btn aa-btn-accent" href="https://github.com/appautomaton">
@@ -93,27 +93,27 @@
       </div>
     </div>
 
-    <div class="aa-install" role="region" aria-label="Clone an App Automaton repo">
+    <div class="aa-install" role="region" aria-label="Install an App Automaton repo">
       <div class="aa-install-tabs" role="tablist">
         <button role="tab" aria-selected="true"  class="aa-install-tab is-active"
                 data-cmd="gh repo clone " data-pkg="appautomaton/agent-designer">agent-designer</button>
         <button role="tab" aria-selected="false" class="aa-install-tab"
                 data-cmd="git clone "    data-pkg="https://github.com/appautomaton/document-SKILLs">document-SKILLs</button>
         <button role="tab" aria-selected="false" class="aa-install-tab"
-                data-cmd="git clone --recurse-submodules " data-pkg="https://github.com/appautomaton/openclaw-monorepo">openclaw</button>
+                data-cmd="npx @appautomaton/automaton " data-pkg="install --all .">automaton</button>
         <button role="tab" aria-selected="false" class="aa-install-tab"
                 data-cmd="ln -s "        data-pkg="$(pwd)/docx ~/.claude/skills/docx">symlink</button>
       </div>
       <div class="aa-install-cmd">
         <span class="aa-install-prompt">$</span>
         <span class="aa-install-text"><span class="aa-cmd">gh repo clone </span><span class="pkg">appautomaton/agent-designer</span></span>
-        <button class="aa-install-copy" aria-label="Copy clone command" title="Copy">
+        <button class="aa-install-copy" aria-label="Copy install command" title="Copy">
           <i class="ico-copy"  data-lucide="copy"></i>
           <i class="ico-check" data-lucide="check"></i>
         </button>
       </div>
       <div class="aa-install-foot">
-        <span>Clone · symlink · use</span>
+        <span>Clone · symlink · run</span>
         <span><strong>Workflow-first</strong> · text, not code</span>
       </div>
     </div>
@@ -128,19 +128,19 @@
 <section class="aa-strip">
   <div class="aa-strip-inner">
     <div class="aa-strip-cell">
-      <div class="aa-strip-val">4</div>
+      <div class="aa-strip-val">30</div>
       <div class="aa-strip-lbl">Public repos</div>
     </div>
     <div class="aa-strip-cell">
-      <div class="aa-strip-val">8</div>
-      <div class="aa-strip-lbl">Skill packs</div>
+      <div class="aa-strip-val">18</div>
+      <div class="aa-strip-lbl">SKILLs published</div>
     </div>
     <div class="aa-strip-cell">
-      <div class="aa-strip-val">3</div>
+      <div class="aa-strip-val">4</div>
       <div class="aa-strip-lbl">Agent CLIs supported</div>
     </div>
     <div class="aa-strip-cell">
-      <div class="aa-strip-val">103</div>
+      <div class="aa-strip-val">300<span class="unit">+</span></div>
       <div class="aa-strip-lbl">Stars (org-wide)</div>
     </div>
     <div class="aa-strip-cell">
@@ -154,35 +154,56 @@
   <div class="aa-wrap">
     <div class="aa-section-head">
       <div>
-        <div class="aa-kicker">Three repos</div>
+        <div class="aa-kicker">What's in the org</div>
         <hr class="aa-rule" />
-        <h2 class="aa-section-title">What's in the org.</h2>
+        <h2 class="aa-section-title">Six repos to know.</h2>
       </div>
       <p class="aa-section-lede">
-        Most of it is text — SKILL.md, AGENTS.md, prompt recipes, JSON5. The code is thin. Pick the repo you need.
+        App Automaton ships about thirty repositories. These six map the territory — designing skills, distributing them, the runtimes that hold them together, and what runs locally on the laptop.
       </p>
     </div>
     <div class="aa-grid-3">
       <div class="aa-feature">
         <div class="aa-feature-icon"><i data-lucide="pen-tool"></i></div>
         <div class="aa-feature-num">agent-designer</div>
-        <h3 class="aa-feature-title">Where the SKILLs live</h3>
-        <p class="aa-feature-body">Codex- and Claude-style skills, prompt recipes, and an MCP tool catalog. Start here.</p>
+        <h3 class="aa-feature-title">Where the skills are designed.</h3>
+        <p class="aa-feature-body">Codex- and Claude-style SKILLs, an MCP tool catalog, and bridge skills that let one agent delegate to another with session continuity.</p>
         <div class="aa-feature-foot">gh repo clone appautomaton/agent-designer</div>
       </div>
       <div class="aa-feature">
         <div class="aa-feature-icon"><i data-lucide="file-text"></i></div>
         <div class="aa-feature-num">document-SKILLs</div>
-        <h3 class="aa-feature-title">Docs, sheets, slides, PDFs</h3>
-        <p class="aa-feature-body">Four skills for the file types every project ends up needing. Symlink the ones you want.</p>
+        <h3 class="aa-feature-title">Documents, sheets, slides, PDFs.</h3>
+        <p class="aa-feature-body">Four file-format skills — docx, xlsx, pptx, pdf — adapted from Anthropic's official set. uv plus PEP 723 inline metadata; no requirements.txt, no virtualenv.</p>
         <div class="aa-feature-foot">ln -s ./docx ~/.claude/skills/docx</div>
       </div>
       <div class="aa-feature">
-        <div class="aa-feature-icon"><i data-lucide="box"></i></div>
-        <div class="aa-feature-num">openclaw-monorepo</div>
-        <h3 class="aa-feature-title">Repo-local agent runtime</h3>
-        <p class="aa-feature-body">JSON5 config, plugins, optional Docker sandboxes — pinned under the repo, not your home dir.</p>
-        <div class="aa-feature-foot">pnpm openclaw gateway</div>
+        <div class="aa-feature-icon"><i data-lucide="globe"></i></div>
+        <div class="aa-feature-num">webmaton</div>
+        <h3 class="aa-feature-title">The web, the way a researcher reads it.</h3>
+        <p class="aa-feature-body">Five skills for deep search with grounded citations, deterministic HTML→Markdown, and persistent browser sessions over Playwright, nodriver, and Chrome DevTools.</p>
+        <div class="aa-feature-foot">ln -s ./agentic-search ~/.claude/skills/agentic-search</div>
+      </div>
+      <div class="aa-feature">
+        <div class="aa-feature-icon"><i data-lucide="layers"></i></div>
+        <div class="aa-feature-num">automaton</div>
+        <h3 class="aa-feature-title">A stage-gated harness.</h3>
+        <p class="aa-feature-body">frame → plan → review → execute → verify → resume. The npx installer drops the workflow into a project as plain markdown skills, with durable state under <code>.agent/</code>.</p>
+        <div class="aa-feature-foot">npx @appautomaton/automaton install --all .</div>
+      </div>
+      <div class="aa-feature">
+        <div class="aa-feature-icon"><i data-lucide="terminal"></i></div>
+        <div class="aa-feature-num">automux</div>
+        <h3 class="aa-feature-title">Multi-agent in tmux.</h3>
+        <p class="aa-feature-body">Spawn coders, planners, and reviewers in split panes. Each in its own git worktree. Coordination happens through files — never by scraping the terminal.</p>
+        <div class="aa-feature-foot">automux spawn login-page coder --provider claude</div>
+      </div>
+      <div class="aa-feature">
+        <div class="aa-feature-icon"><i data-lucide="audio-waveform"></i></div>
+        <div class="aa-feature-num">mlx-speech</div>
+        <h3 class="aa-feature-title">Local speech, on Apple Silicon.</h3>
+        <p class="aa-feature-body">Eight TTS and ASR models in pure MLX — Fish S2 Pro, VibeVoice, Step-Audio, Cohere ASR. Voice cloning and emotion tags. No cloud, no PyTorch.</p>
+        <div class="aa-feature-foot">mlx-speech tts --model fish-s2-pro --text "..."</div>
       </div>
     </div>
   </div>
@@ -197,7 +218,7 @@
         <h2 class="aa-section-title">Three commands.</h2>
       </div>
       <p class="aa-section-lede">
-        Clone, symlink, point your agent at it. Works the same under Claude Code, Codex, and Gemini.
+        Clone, symlink, point an agent at it. The shape stays the same under Claude Code, Codex, Gemini, and OpenCode.
       </p>
     </div>
 
@@ -229,43 +250,43 @@
         <span class="aa-brand-mark" aria-hidden="true"></span>
         App Automaton
       </div>
-      <p class="aa-footer-tag">A portable skills workspace for AI coding agents — Codex, Claude Code, and Gemini. Workflow-first, version-controlled, methodical by design.</p>
+      <p class="aa-footer-tag">An open-source workshop for engineering with coding agents — Claude Code, Codex, Gemini, OpenCode. SKILLs, runtimes, and pure-MLX models for Apple Silicon.</p>
     </div>
     <div class="aa-footer-cols">
       <div class="aa-footer-col">
         <div class="aa-footer-head">Repos</div>
         <a href="https://github.com/appautomaton/agent-designer">agent-designer</a>
-        <a href="https://github.com/appautomaton/document-SKILLs">document-SKILLs</a>
+        <a href="https://github.com/appautomaton/automaton">automaton</a>
+        <a href="https://github.com/appautomaton/automux">automux</a>
         <a href="https://github.com/appautomaton/openclaw-monorepo">openclaw-monorepo</a>
+      </div>
+      <div class="aa-footer-col">
+        <div class="aa-footer-head">Skill packs</div>
+        <a href="https://github.com/appautomaton/document-SKILLs">document-SKILLs</a>
+        <a href="https://github.com/appautomaton/webmaton">webmaton</a>
+        <a href="https://github.com/appautomaton/presentation">presentation</a>
+        <a href="https://github.com/appautomaton/playwright-skill">playwright-skill</a>
+      </div>
+      <div class="aa-footer-col">
+        <div class="aa-footer-head">Apple Silicon</div>
+        <a href="https://github.com/appautomaton/mlx-speech">mlx-speech</a>
+        <a href="https://github.com/appautomaton/ltx-video-mlx">ltx-video-mlx</a>
+        <a href="https://github.com/appautomaton/tnt-asr">tnt-asr</a>
+        <a href="https://github.com/appautomaton/mlx-spatial">mlx-spatial</a>
+      </div>
+      <div class="aa-footer-col">
+        <div class="aa-footer-head">Tools &amp; bridges</div>
+        <a href="https://github.com/appautomaton/markmaton">markmaton</a>
+        <a href="https://github.com/appautomaton/v0-chat-2api">v0-chat-2api</a>
+        <a href="https://github.com/appautomaton/ai-studio-ab-2api">ai-studio-ab-2api</a>
         <a href="https://github.com/appautomaton">org page</a>
-      </div>
-      <div class="aa-footer-col">
-        <div class="aa-footer-head">Skills</div>
-        <a href="#">collaborating-with-claude</a>
-        <a href="#">collaborating-with-codex</a>
-        <a href="#">collaborating-with-gemini</a>
-        <a href="#">issue-driven-workflow</a>
-      </div>
-      <div class="aa-footer-col">
-        <div class="aa-footer-head">Documents</div>
-        <a href="#">pdf</a>
-        <a href="#">xlsx</a>
-        <a href="#">docx</a>
-        <a href="#">pptx</a>
-      </div>
-      <div class="aa-footer-col">
-        <div class="aa-footer-head">Inspired by</div>
-        <a href="https://github.com/anthropics/skills">anthropics/skills</a>
-        <a href="#">GuDaStudio/skills</a>
-        <a href="#">linux.do</a>
-        <a href="#">Acknowledgements</a>
       </div>
     </div>
   </div>
   <div class="aa-footer-bottom">
     <span>© 2026 App Automaton</span>
     <span>
-      MIT / Apache-2.0
+      MIT licensed
       <span class="sep">·</span>
       Workflow-first
       <span class="sep">·</span>
