@@ -5,6 +5,34 @@
 <meta name="viewport" content="width=1200" />
 <title>App Automaton — open skills, harnesses, and on-device tools for coding agents</title>
 <meta name="description" content="An open-source workshop for engineering with coding agents — portable SKILLs, stage-gated runtimes, and a quiet streak of pure-MLX work for Apple Silicon." />
+<meta name="keywords" content="claude code, codex, gemini cli, opencode, agent skills, SKILL.md, MCP, MLX, apple silicon, agentic coding, stage-gated workflow, tmux orchestration" />
+<meta name="author" content="App Automaton" />
+<meta name="theme-color" content="#0c1726" />
+<link rel="canonical" href="https://appautomaton.github.io/" />
+
+<!-- Open Graph -->
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="App Automaton" />
+<meta property="og:title" content="App Automaton — skills, harnesses, and on-device tools for coding agents" />
+<meta property="og:description" content="Open-source skills for Claude Code, Codex, Gemini, and OpenCode — and a quiet streak of pure-MLX work for Apple Silicon." />
+<meta property="og:url" content="https://appautomaton.github.io/" />
+<meta property="og:image" content="https://appautomaton.github.io/assets/og.png" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta property="og:image:alt" content="App Automaton — Skills, harnesses, and on-device tools." />
+<meta property="og:locale" content="en_US" />
+
+<!-- Twitter -->
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="App Automaton — skills, harnesses, and on-device tools for coding agents" />
+<meta name="twitter:description" content="Open-source skills for Claude Code, Codex, Gemini, and OpenCode — and a quiet streak of pure-MLX work for Apple Silicon." />
+<meta name="twitter:image" content="https://appautomaton.github.io/assets/og.png" />
+<meta name="twitter:image:alt" content="App Automaton — Skills, harnesses, and on-device tools." />
+
+<!-- Favicons -->
+<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+
 <link rel="stylesheet" href="styles/site.css" />
 <link rel="stylesheet" href="styles/palette-blue.css" />
 <style>
@@ -36,6 +64,35 @@
 </style>
 
 <script src="https://unpkg.com/lucide@latest"></script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://appautomaton.github.io/#org",
+      "name": "App Automaton",
+      "alternateName": "appautomaton",
+      "url": "https://appautomaton.github.io/",
+      "logo": "https://appautomaton.github.io/apple-touch-icon.png",
+      "description": "An open-source workshop for engineering with coding agents — portable SKILLs, stage-gated runtimes, and a quiet streak of pure-MLX work for Apple Silicon.",
+      "sameAs": [
+        "https://github.com/appautomaton"
+      ]
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://appautomaton.github.io/#website",
+      "url": "https://appautomaton.github.io/",
+      "name": "App Automaton",
+      "description": "Open-source skills for Claude Code, Codex, Gemini, and OpenCode — and a quiet streak of pure-MLX work for Apple Silicon.",
+      "publisher": { "@id": "https://appautomaton.github.io/#org" },
+      "inLanguage": "en-US"
+    }
+  ]
+}
+</script>
 </head>
 <body>
 
@@ -48,6 +105,7 @@
       <span class="aa-brand-org">github.com/appautomaton</span>
     </a>
     <nav class="aa-nav">
+      <a class="aa-nav-link" href="#anatomy">Anatomy</a>
       <a class="aa-nav-link" href="#repos">Repos</a>
       <a class="aa-nav-link" href="#quickstart">Quickstart</a>
       <a class="aa-nav-link" href="https://github.com/appautomaton">GitHub</a>
@@ -146,6 +204,80 @@
     <div class="aa-strip-cell">
       <div class="aa-strip-val">100<span class="unit">%</span></div>
       <div class="aa-strip-lbl">Workflow-first</div>
+    </div>
+  </div>
+</section>
+
+<section class="aa-section aa-section-white" id="anatomy">
+  <div class="aa-wrap">
+    <div class="aa-section-head">
+      <div>
+        <div class="aa-kicker">Anatomy of a SKILL</div>
+        <hr class="aa-rule" />
+        <h2 class="aa-section-title">
+          One folder. One markdown file.<br/>
+          <em>Three layers</em> of disclosure.
+        </h2>
+      </div>
+      <p class="aa-section-lede">
+        Every App Automaton skill has the same shape — YAML frontmatter the agent always sees, a workflow body it loads on invocation, and a sibling tree of references and scripts pulled only as the path narrows.
+      </p>
+    </div>
+
+    <div class="aa-stage">
+      <div class="aa-stage-bar">
+        <div class="aa-stage-dots"><span></span><span></span><span></span></div>
+        <span class="aa-stage-title">skills/pdf/SKILL.md</span>
+        <span>·</span>
+        <span>main</span>
+        <div class="aa-stage-meta">
+          <span class="pulse"></span> <span class="ok">loaded · 3-tier</span>
+        </div>
+      </div>
+
+      <div class="aa-stage-body">
+        <div class="aa-pane">
+          <div class="aa-pane-head">
+            <span>Source · SKILL.md</span>
+            <span class="label-2">markdown · 18 lines</span>
+          </div>
+          <div class="aa-code">
+            <div><span class="ln"> 1</span><span class="dec">---</span></div>
+            <div><span class="ln"> 2</span><span class="kw">name</span>: <span class="str">pdf</span></div>
+            <div><span class="ln"> 3</span><span class="kw">description</span>: <span class="str">"Extract text &amp; forms,</span></div>
+            <div><span class="ln"> 4</span>  <span class="str">fill, merge, OCR — and split PDFs."</span></div>
+            <div><span class="ln"> 5</span><span class="kw">tags</span>: <span class="pn">[</span><span class="str">pdf</span>, <span class="str">forms</span>, <span class="str">ocr</span><span class="pn">]</span></div>
+            <div><span class="ln"> 6</span><span class="dec">---</span></div>
+            <div><span class="ln"> 7</span></div>
+            <div><span class="ln"> 8</span><span class="fn"># PDF Skill</span></div>
+            <div><span class="ln"> 9</span></div>
+            <div><span class="ln">10</span><span class="cm">## Quick start</span></div>
+            <div><span class="ln">11</span>1. <span class="kw">Pick</span> a path: extract /</div>
+            <div><span class="ln">12</span>   forms / merge / ocr.</div>
+            <div><span class="ln">13</span>2. <span class="kw">Run</span> <span class="str">`uv run scripts/&lt;path&gt;.py`</span>.</div>
+            <div><span class="ln">14</span>3. <span class="kw">Read</span> <span class="str">`references/&lt;path&gt;.md`</span> only</div>
+            <div><span class="ln">15</span>   <span class="kw">if</span> the quick path is unclear.</div>
+            <div><span class="ln">16</span></div>
+            <div><span class="ln">17</span><span class="cm">## Safety</span></div>
+            <div><span class="ln">18</span><span class="var">Never</span> overwrite the input file.</div>
+          </div>
+        </div>
+
+        <div class="aa-pane">
+          <div class="aa-pane-head">
+            <span>Disclosure · live</span>
+            <span class="label-2 aa-trace-step">0 / 8 steps</span>
+          </div>
+          <div class="aa-trace" aria-live="polite"></div>
+        </div>
+      </div>
+
+      <div class="aa-stage-foot">
+        <span><span class="k">L1 metadata</span><span class="v amber">~140 tok</span></span>
+        <span><span class="k">L2 body</span><span class="v amber">on invoke</span></span>
+        <span><span class="k">L3 refs</span><span class="v">on demand</span></span>
+        <span><span class="k">portable</span><span class="v green">claude · codex · gemini · opencode</span></span>
+      </div>
     </div>
   </div>
 </section>
