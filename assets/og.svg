@@ -30,7 +30,8 @@
       .meta { font-family: 'JetBrains Mono', ui-monospace, Menlo, monospace; font-size: 14px; font-weight: 600; fill: rgba(234,241,250,0.5); letter-spacing: 0.18em; text-transform: uppercase; }
       .brand { font-size: 26px; font-weight: 700; fill: #eaf1fa; letter-spacing: -0.005em; }
       .tag { font-family: 'JetBrains Mono', ui-monospace, Menlo, monospace; font-size: 11px; font-weight: 600; fill: rgba(95,176,245,0.78); letter-spacing: 0.16em; text-transform: uppercase; }
-      .corner { font-family: 'JetBrains Mono', ui-monospace, Menlo, monospace; font-size: 14px; font-weight: 600; fill: rgba(234,241,250,0.45); letter-spacing: 0.06em; }
+      .cta { font-size: 17px; font-weight: 600; fill: #eaf1fa; letter-spacing: 0.005em; }
+      .cta-arrow { font-size: 19px; font-weight: 700; fill: #5fb0f5; }
     </style>
   </defs>
 
@@ -60,6 +61,10 @@
   <text x="80" y="510" class="sub">Open-source skills for Claude Code, Codex, Gemini, OpenCode —</text>
   <text x="80" y="544" class="sub">and a quiet streak of pure-MLX work for Apple Silicon.</text>
 
-  <!-- corner url -->
-  <text x="1120" y="588" text-anchor="end" class="corner">github.com/appautomaton</text>
+  <!-- CTA button -->
+  <g transform="translate(900, 522)">
+    <rect x="0" y="0" width="220" height="48" rx="24" fill="rgba(95,176,245,0.10)" stroke="rgba(95,176,245,0.55)" stroke-width="1.5"/>
+    <text x="24" y="31" class="cta">Browse on GitHub</text>
+    <text x="186" y="32" class="cta-arrow">→</text>
+  </g>
 </svg>
