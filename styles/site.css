@@ -814,6 +814,8 @@ body { color: var(--fg-2); }
   letter-spacing: 0.18em; text-transform: uppercase;
 }
 .aa-footer-bottom .sep { color: rgba(255,255,255,0.1); margin: 0 6px; }
+.aa-footer-bottom a { color: var(--ac-smoke); text-decoration: none; transition: color 120ms var(--ease-out); }
+.aa-footer-bottom a:hover { color: var(--ac-gold); }
 
 /* Reduced motion */
 @media (prefers-reduced-motion: reduce) {
