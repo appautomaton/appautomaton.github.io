@@ -111,10 +111,6 @@
       <a class="aa-nav-link" href="https://github.com/appautomaton">GitHub</a>
     </nav>
     <div class="aa-header-right">
-      <span class="aa-gh-pill" title="Stars across the org">
-        <span><i data-lucide="star"></i> <span class="aa-gh-stars">300+</span></span>
-        <span><i data-lucide="git-branch"></i> 30 repos</span>
-      </span>
       <a class="aa-btn aa-btn-sm aa-btn-primary" href="https://github.com/appautomaton">
         <i data-lucide="github"></i> GitHub
       </a>
@@ -128,7 +124,7 @@
   <div class="aa-hero-inner">
     <div>
       <div class="aa-hero-meta">
-        <span>30 repos · 300+ stars</span>
+        <span>Organization · appautomaton</span>
         <span class="dot"></span>
         <span>Claude Code · Codex · Gemini · OpenCode</span>
         <span class="dot"></span>
@@ -186,20 +182,20 @@
 <section class="aa-strip">
   <div class="aa-strip-inner">
     <div class="aa-strip-cell">
-      <div class="aa-strip-val">30</div>
-      <div class="aa-strip-lbl">Public repos</div>
+      <div class="aa-strip-val">3</div>
+      <div class="aa-strip-lbl">Shelves of work</div>
     </div>
     <div class="aa-strip-cell">
-      <div class="aa-strip-val">18</div>
-      <div class="aa-strip-lbl">SKILLs published</div>
+      <div class="aa-strip-val">15</div>
+      <div class="aa-strip-lbl">Repos on the shelves</div>
     </div>
     <div class="aa-strip-cell">
       <div class="aa-strip-val">4</div>
       <div class="aa-strip-lbl">Agent CLIs supported</div>
     </div>
     <div class="aa-strip-cell">
-      <div class="aa-strip-val">300<span class="unit">+</span></div>
-      <div class="aa-strip-lbl">Stars (org-wide)</div>
+      <div class="aa-strip-val">MIT</div>
+      <div class="aa-strip-lbl">Licensed</div>
     </div>
     <div class="aa-strip-cell">
       <div class="aa-strip-val">100<span class="unit">%</span></div>
@@ -288,55 +284,123 @@
       <div>
         <div class="aa-kicker">What's in the org</div>
         <hr class="aa-rule" />
-        <h2 class="aa-section-title">Six repos to know.</h2>
+        <h2 class="aa-section-title">One workshop.<br/><em>Three shelves.</em></h2>
       </div>
       <p class="aa-section-lede">
-        App Automaton ships about thirty repositories. These six map the territory — designing skills, distributing them, the runtimes that hold them together, and what runs locally on the laptop.
+        Everything public in the org sorts onto three shelves — skills that teach agents workflows, harnesses that keep them honest, and models that run on the laptop's own silicon.
       </p>
     </div>
-    <div class="aa-grid-3">
-      <div class="aa-feature">
-        <div class="aa-feature-icon"><i data-lucide="pen-tool"></i></div>
-        <div class="aa-feature-num">agent-designer</div>
-        <h3 class="aa-feature-title">Where the skills are designed.</h3>
-        <p class="aa-feature-body">Codex- and Claude-style SKILLs, an MCP tool catalog, and bridge skills that let one agent delegate to another with session continuity.</p>
-        <div class="aa-feature-foot">gh repo clone appautomaton/agent-designer</div>
+
+    <div class="aa-shelves">
+
+      <div class="aa-shelf">
+        <div class="aa-shelf-side">
+          <div class="aa-shelf-num">SHELF 01</div>
+          <h3 class="aa-shelf-title">SKILLs for coding agents</h3>
+          <p class="aa-shelf-desc">Portable SKILL.md packs — YAML frontmatter the agent always sees, a workflow body it loads on invocation, references pulled on demand. The same folder works under Claude Code, Codex, Gemini, and OpenCode.</p>
+          <div class="aa-shelf-hint">ln -s ./docx ~/.claude/skills/docx</div>
+        </div>
+        <div class="aa-shelf-repos">
+          <a class="aa-repo" href="agent-designer/">
+            <span class="aa-repo-name">agent-designer</span>
+            <p class="aa-repo-desc">The skills workspace — issue-driven workflows, an MCP tool catalog, and bridge skills that let one agent delegate to another with session continuity.</p>
+            <span class="aa-repo-tag is-link">deep dive →</span>
+          </a>
+          <a class="aa-repo" href="https://github.com/appautomaton/document-SKILLs">
+            <span class="aa-repo-name">document-SKILLs</span>
+            <p class="aa-repo-desc">docx, xlsx, pptx, pdf — extraction, forms, formulas, tracked changes. Adapted from Anthropic's official set; uv + PEP 723, no virtualenv.</p>
+            <span class="aa-repo-tag">Python</span>
+          </a>
+          <a class="aa-repo" href="https://github.com/appautomaton/presentation">
+            <span class="aa-repo-name">presentation</span>
+            <p class="aa-repo-desc">Consulting-quality decks — strategy storyboarding, brand-system identity, and pixel-perfect PDF or fully editable PPTX output.</p>
+            <span class="aa-repo-tag">JS</span>
+          </a>
+          <a class="aa-repo" href="https://github.com/appautomaton/webmaton">
+            <span class="aa-repo-name">webmaton</span>
+            <p class="aa-repo-desc">Web research the way a researcher reads — grounded citations, deterministic HTML→Markdown, persistent sessions over Playwright, nodriver, and Chrome DevTools.</p>
+            <span class="aa-repo-tag">Python</span>
+          </a>
+          <a class="aa-repo" href="https://github.com/appautomaton/playwright-skill">
+            <span class="aa-repo-name">playwright-skill</span>
+            <p class="aa-repo-desc">Browser automation that also runs on Android — Termux launcher patch, headless Chromium, installs via git subtree.</p>
+            <span class="aa-repo-tag">JS</span>
+          </a>
+        </div>
       </div>
-      <div class="aa-feature">
-        <div class="aa-feature-icon"><i data-lucide="file-text"></i></div>
-        <div class="aa-feature-num">document-SKILLs</div>
-        <h3 class="aa-feature-title">Documents, sheets, slides, PDFs.</h3>
-        <p class="aa-feature-body">Four file-format skills — docx, xlsx, pptx, pdf — adapted from Anthropic's official set. uv plus PEP 723 inline metadata; no requirements.txt, no virtualenv.</p>
-        <div class="aa-feature-foot">ln -s ./docx ~/.claude/skills/docx</div>
+
+      <div class="aa-shelf">
+        <div class="aa-shelf-side">
+          <div class="aa-shelf-num">SHELF 02</div>
+          <h3 class="aa-shelf-title">Harnesses &amp; runtimes</h3>
+          <p class="aa-shelf-desc">The machinery around the skills — stage-gated workflows, multi-agent orchestration in real terminals, and the small sharp tools agents call along the way.</p>
+          <div class="aa-shelf-hint">npx @appautomaton/automaton install --all .</div>
+        </div>
+        <div class="aa-shelf-repos">
+          <a class="aa-repo" href="https://github.com/appautomaton/automaton">
+            <span class="aa-repo-name">automaton</span>
+            <p class="aa-repo-desc">A stage-gated harness — frame → plan → review → execute → verify → resume. Installs into any project as plain markdown, durable state under <code>.agent/</code>.</p>
+            <span class="aa-repo-tag">JS</span>
+          </a>
+          <a class="aa-repo" href="https://github.com/appautomaton/automux">
+            <span class="aa-repo-name">automux</span>
+            <p class="aa-repo-desc">Multi-agent orchestration in tmux or kitty — coders, planners, and reviewers in parallel git worktrees, coordinating through files, never by scraping the terminal.</p>
+            <span class="aa-repo-tag">TS</span>
+          </a>
+          <a class="aa-repo" href="https://github.com/appautomaton/openclaw-monorepo">
+            <span class="aa-repo-name">openclaw-monorepo</span>
+            <p class="aa-repo-desc">A repo-local OpenClaw workspace — modular JSON5 config, plugins, and Docker sandboxes. Runs coding-agent CLIs on desktop or Android Termux.</p>
+            <span class="aa-repo-tag">JS</span>
+          </a>
+          <a class="aa-repo" href="https://github.com/appautomaton/markmaton">
+            <span class="aa-repo-name">markmaton</span>
+            <p class="aa-repo-desc">HTML→Markdown for agent pipelines — a fast Go engine wrapped in a Python CLI and API, published on PyPI.</p>
+            <span class="aa-repo-tag">Go</span>
+          </a>
+          <a class="aa-repo" href="https://github.com/appautomaton/v0-chat-2api">
+            <span class="aa-repo-name">v0-chat-2api</span>
+            <p class="aa-repo-desc">A local OpenAI-compatible proxy for Vercel v0 chats — /v1/chat/completions, conversation state in SQLite, and a small dashboard.</p>
+            <span class="aa-repo-tag">TS</span>
+          </a>
+        </div>
       </div>
-      <div class="aa-feature">
-        <div class="aa-feature-icon"><i data-lucide="globe"></i></div>
-        <div class="aa-feature-num">webmaton</div>
-        <h3 class="aa-feature-title">The web, the way a researcher reads it.</h3>
-        <p class="aa-feature-body">Five skills for deep search with grounded citations, deterministic HTML→Markdown, and persistent browser sessions over Playwright, nodriver, and Chrome DevTools.</p>
-        <div class="aa-feature-foot">ln -s ./agentic-search ~/.claude/skills/agentic-search</div>
+
+      <div class="aa-shelf">
+        <div class="aa-shelf-side">
+          <div class="aa-shelf-num">SHELF 03</div>
+          <h3 class="aa-shelf-title">On-device, in pure MLX</h3>
+          <p class="aa-shelf-desc">Models that run on the Apple GPU with no cloud and no PyTorch — speech, vision, and video, all MLX-native, all on the laptop.</p>
+          <div class="aa-shelf-hint">mlx-speech tts --model fish-s2-pro --text "..."</div>
+        </div>
+        <div class="aa-shelf-repos">
+          <a class="aa-repo" href="https://github.com/appautomaton/mlx-speech">
+            <span class="aa-repo-name">mlx-speech</span>
+            <p class="aa-repo-desc">Speech synthesis, voice cloning, dialogue, sound effects, and ASR — Fish S2 Pro, VibeVoice, LongCat, MOSS, Step-Audio, Cohere ASR.</p>
+            <span class="aa-repo-tag">Python</span>
+          </a>
+          <a class="aa-repo" href="https://github.com/appautomaton/tnt-asr">
+            <span class="aa-repo-name">tnt-asr</span>
+            <p class="aa-repo-desc">A terminal voice-to-text TUI — Qwen3-ASR-1.7B on the Apple GPU, transcribes in about a second, fully local.</p>
+            <span class="aa-repo-tag">Python</span>
+          </a>
+          <a class="aa-repo" href="https://github.com/appautomaton/ltx-video-mlx">
+            <span class="aa-repo-name">ltx-video-mlx</span>
+            <p class="aa-repo-desc">LTX-2.3 22B text- and image-to-video with synchronized audio — 8-bit and 4-bit inference, plus on-device LoRA fine-tuning.</p>
+            <span class="aa-repo-tag">Python</span>
+          </a>
+          <a class="aa-repo" href="https://github.com/appautomaton/mlx-cv">
+            <span class="aa-repo-name">mlx-cv</span>
+            <p class="aa-repo-desc">MLX-native computer vision — object detection, segmentation, and open-vocabulary grounding with SAM 3 and LocateAnything.</p>
+            <span class="aa-repo-tag">Python</span>
+          </a>
+          <a class="aa-repo" href="https://github.com/appautomaton/digital-human">
+            <span class="aa-repo-name">digital-human</span>
+            <p class="aa-repo-desc">A talking-avatar workspace — InfiniteTalk, MuseTalk, and Qwen3-TTS orchestrated for audio-driven portrait video.</p>
+            <span class="aa-repo-tag">Python</span>
+          </a>
+        </div>
       </div>
-      <div class="aa-feature">
-        <div class="aa-feature-icon"><i data-lucide="layers"></i></div>
-        <div class="aa-feature-num">automaton</div>
-        <h3 class="aa-feature-title">A stage-gated harness.</h3>
-        <p class="aa-feature-body">frame → plan → review → execute → verify → resume. The npx installer drops the workflow into a project as plain markdown skills, with durable state under <code>.agent/</code>.</p>
-        <div class="aa-feature-foot">npx @appautomaton/automaton install --all .</div>
-      </div>
-      <div class="aa-feature">
-        <div class="aa-feature-icon"><i data-lucide="terminal"></i></div>
-        <div class="aa-feature-num">automux</div>
-        <h3 class="aa-feature-title">Multi-agent in tmux.</h3>
-        <p class="aa-feature-body">Spawn coders, planners, and reviewers in split panes. Each in its own git worktree. Coordination happens through files — never by scraping the terminal.</p>
-        <div class="aa-feature-foot">automux spawn login-page coder --provider claude</div>
-      </div>
-      <div class="aa-feature">
-        <div class="aa-feature-icon"><i data-lucide="audio-waveform"></i></div>
-        <div class="aa-feature-num">mlx-speech</div>
-        <h3 class="aa-feature-title">Local speech, on Apple Silicon.</h3>
-        <p class="aa-feature-body">Eight TTS and ASR models in pure MLX — Fish S2 Pro, VibeVoice, Step-Audio, Cohere ASR. Voice cloning and emotion tags. No cloud, no PyTorch.</p>
-        <div class="aa-feature-foot">mlx-speech tts --model fish-s2-pro --text "..."</div>
-      </div>
+
     </div>
   </div>
 </section>
@@ -404,13 +468,13 @@
         <a href="https://github.com/appautomaton/mlx-speech">mlx-speech</a>
         <a href="https://github.com/appautomaton/ltx-video-mlx">ltx-video-mlx</a>
         <a href="https://github.com/appautomaton/tnt-asr">tnt-asr</a>
-        <a href="https://github.com/appautomaton/mlx-spatial">mlx-spatial</a>
+        <a href="https://github.com/appautomaton/mlx-cv">mlx-cv</a>
       </div>
       <div class="aa-footer-col">
         <div class="aa-footer-head">Tools &amp; bridges</div>
         <a href="https://github.com/appautomaton/markmaton">markmaton</a>
         <a href="https://github.com/appautomaton/v0-chat-2api">v0-chat-2api</a>
-        <a href="https://github.com/appautomaton/ai-studio-ab-2api">ai-studio-ab-2api</a>
+        <a href="https://github.com/appautomaton/digital-human">digital-human</a>
         <a href="https://github.com/appautomaton">org page</a>
       </div>
     </div>

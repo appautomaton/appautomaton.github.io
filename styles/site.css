@@ -63,25 +63,6 @@ body { color: var(--fg-2); }
 .aa-nav-link:hover { color: var(--ac-amber); }
 
 .aa-header-right { display: flex; align-items: center; gap: 10px; }
-.aa-gh-pill {
-  display: inline-flex; align-items: stretch;
-  font-size: 12px; font-weight: 600;
-  border: 1px solid var(--border-2);
-  border-radius: var(--rad-md);
-  overflow: hidden;
-  background: var(--ac-white);
-  color: var(--ac-brown);
-}
-.aa-header.is-dark .aa-gh-pill {
-  background: rgba(255,255,255,0.04);
-  border-color: rgba(255,255,255,0.10);
-  color: var(--ac-cream);
-}
-.aa-gh-pill > span { padding: 6px 11px; display: inline-flex; align-items: center; gap: 6px; }
-.aa-gh-pill > span + span { border-left: 1px solid var(--border-1); }
-.aa-header.is-dark .aa-gh-pill > span + span { border-left-color: rgba(255,255,255,0.08); }
-.aa-gh-pill i { width: 13px; height: 13px; stroke-width: 2; }
-.aa-gh-stars { color: var(--ac-amber); }
 
 /* ───────────────────────────────── Buttons ─── */
 .aa-btn {
@@ -385,6 +366,68 @@ body { color: var(--fg-2); }
   background: var(--ac-cream);
   border-left: 3px solid var(--ac-amber);
 }
+
+/* ───────────────────────────────── Repo shelves ─── */
+.aa-shelves { display: flex; flex-direction: column; gap: 64px; }
+.aa-shelf { display: grid; grid-template-columns: 300px 1fr; gap: 48px; align-items: start; }
+.aa-shelf-num {
+  font-family: var(--font-mono);
+  font-size: 11px; font-weight: 600;
+  color: var(--ac-amber);
+  letter-spacing: 0.18em;
+}
+.aa-shelf-title {
+  font-size: 21px; font-weight: 700;
+  color: var(--ac-brown);
+  margin: 10px 0;
+  letter-spacing: -0.01em;
+}
+.aa-shelf-desc {
+  font-size: 13.5px; line-height: 1.65;
+  color: var(--ac-stone);
+  margin: 0;
+}
+.aa-shelf-hint {
+  margin-top: 18px;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--ac-brown);
+  background: var(--ac-white);
+  border: 1px dashed var(--border-2);
+  border-radius: var(--rad-sm);
+  padding: 8px 10px;
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+.aa-shelf-repos { border-top: 1px solid var(--border-2); }
+.aa-repo {
+  display: grid; grid-template-columns: 180px 1fr auto;
+  gap: 20px; align-items: baseline;
+  padding: 15px 10px;
+  border-bottom: 1px solid var(--border-1);
+  text-decoration: none;
+  transition: background 140ms var(--ease-out);
+}
+.aa-repo:hover { background: var(--ac-white); }
+.aa-repo-name {
+  font-family: var(--font-mono);
+  font-size: 13px; font-weight: 600;
+  color: var(--ac-brown);
+  transition: color 140ms var(--ease-out);
+}
+.aa-repo:hover .aa-repo-name { color: var(--ac-amber); }
+.aa-repo-desc {
+  font-size: 13px; line-height: 1.55;
+  color: var(--ac-stone);
+  margin: 0;
+}
+.aa-repo-tag {
+  font-family: var(--font-mono);
+  font-size: 10px; font-weight: 600;
+  letter-spacing: 0.14em; text-transform: uppercase;
+  color: var(--ac-stone); opacity: 0.7;
+  white-space: nowrap;
+}
+.aa-repo-tag.is-link { color: var(--ac-amber); opacity: 1; }
 
 /* ───────────────────────────────── Trace / terminal showcase ─── */
 .aa-stage {
@@ -791,6 +834,9 @@ body { color: var(--fg-2); }
   .aa-footer-inner { grid-template-columns: 1fr; }
   .aa-footer-cols { grid-template-columns: 1fr 1fr; }
   .aa-section-head { grid-template-columns: 1fr; }
+  .aa-shelf { grid-template-columns: 1fr; gap: 24px; }
+  .aa-repo { grid-template-columns: 1fr; gap: 4px; }
+  .aa-repo-tag { display: none; }
   .aa-strip-inner { grid-template-columns: 1fr 1fr 1fr; row-gap: 18px; }
   .aa-strip-cell:nth-child(4) { border-left: 0; padding-left: 0; }
   .aa-quickstart-grid { grid-template-columns: 1fr; }
