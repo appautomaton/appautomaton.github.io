@@ -77,13 +77,14 @@ body { color: var(--fg-2); }
 .aa-theme-dot[data-set-palette="blue"]      { background: #2f7ad9; }
 .aa-theme-dot[data-set-palette="graphite"]  { background: #7c5cff; }
 .aa-theme-dot[data-set-palette="verdigris"] { background: linear-gradient(135deg, #2e8c6e 55%, #c08552 55%); }
-.aa-theme-dot[data-set-palette="mono"]      { background: linear-gradient(135deg, #f2f2f2 50%, #1c1c1c 50%); }
+.aa-theme-dot[data-set-palette="mono"]      { background: radial-gradient(circle, #161616 0 52%, #f2f2f2 55% 100%); }
 html[data-palette="amber"]     .aa-theme-dot[data-set-palette="amber"],
 html[data-palette="blue"]      .aa-theme-dot[data-set-palette="blue"],
 html[data-palette="graphite"]  .aa-theme-dot[data-set-palette="graphite"],
 html[data-palette="verdigris"] .aa-theme-dot[data-set-palette="verdigris"],
 html[data-palette="mono"]      .aa-theme-dot[data-set-palette="mono"] {
-  box-shadow: 0 0 0 2px var(--ac-charcoal), 0 0 0 3.5px rgba(255,255,255,0.65);
+  outline: 1.5px solid rgba(255,255,255,0.6);
+  outline-offset: 2.5px;
 }
 .aa-theme-mode {
   width: 28px; height: 28px;
