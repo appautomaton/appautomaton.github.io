@@ -150,7 +150,44 @@
   /* ── Brand gradient (used sparingly) ──────────────── */
   --grad-amber: linear-gradient(135deg, var(--ac-amber), var(--ac-gold));
   --grad-rule:  linear-gradient(90deg, var(--ac-amber), var(--ac-gold), var(--ac-amber));
+
+  /* ── Mode-flippable surfaces (night overrides these) ─ */
+  --surf-1:           var(--ac-white);    /* cards, white sections */
+  --surf-2:           var(--ac-cream);    /* cream sections, accent cards */
+
+  /* ── Palette-scoped decoration tokens ─────────────── */
+  --ac-glass:         rgba(26, 23, 20, 0.82);   /* sticky header backdrop */
+  --ac-footer-bg:     #110e0c;
+  --ac-pill-ink:      #8f6b2a;                  /* text on amber-soft pills */
+  --hero-glow-a:      rgba(212, 160, 82, 0.10);
+  --hero-glow-b:      rgba(232, 200, 130, 0.06);
+  --hero-grid-line:   rgba(255, 255, 255, 0.025);
+  --section-glow:     rgba(212, 160, 82, 0.06);
+  --stage-dot:        rgba(212, 160, 82, 0.55);
+  --install-ring:     rgba(212, 160, 82, 0.05);
+
+  /* Dark-pane syntax + trace-tag tints */
+  --code-kw:          #c89cc7;
+  --code-str:         #b6c98a;
+  --code-num:         #d4a052;
+  --tag-tool-bg:      rgba(61, 107, 122, 0.18);
+  --tag-tool-fg:      #7fb6c8;
+  --tag-tool-bd:      rgba(61, 107, 122, 0.45);
+  --tag-ok-bg:        rgba(106, 143, 90, 0.16);
+  --tag-ok-fg:        #a8c898;
+  --tag-ok-bd:        rgba(106, 143, 90, 0.4);
+  --tag-llm-bg:       rgba(106, 143, 90, 0.16);
+  --tag-llm-fg:       #a8c898;
+  --tag-llm-bd:       rgba(106, 143, 90, 0.4);
+  --tag-plan-bg:      rgba(212, 160, 82, 0.14);
+  --tag-plan-bd:      rgba(212, 160, 82, 0.35);
+  --tag-mem-bg:       rgba(232, 200, 130, 0.10);
+  --tag-mem-bd:       rgba(232, 200, 130, 0.25);
 }
+
+/* Form controls / scrollbars follow the active mode */
+html { color-scheme: light; }
+html[data-mode="night"] { color-scheme: dark; }
 
 /* =========================================================
    Semantic element defaults
@@ -198,7 +235,7 @@ code {
   background: var(--bg-sunken);
   padding: 0.1em 0.35em;
   border-radius: var(--rad-xs);
-  color: var(--ac-brown);
+  color: var(--fg-1);
 }
 
 small, .caption {

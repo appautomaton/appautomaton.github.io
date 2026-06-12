@@ -1,0 +1,363 @@
+/* =========================================================
+   App Automaton — Theme system
+   =========================================================
+   Five palettes × two modes, driven by attributes on <html>:
+     data-palette: amber | blue | graphite | verdigris | mono
+     data-mode:    day | night
+
+   Day "amber" is the :root default in colors_and_type.css, so
+   it has no block here. Each palette overrides the raw --ac-*
+   tokens plus decoration tokens; night blocks flip the
+   surface/ink/border roles and brighten the accent. Dark panes
+   (hero, stage, install, footer) stay dark in both modes.
+   ========================================================= */
+
+/* ─────────────────────────────────────────── Blue (default) ── */
+[data-palette="blue"] {
+  --ac-charcoal:    #0c1726;
+  --ac-brown:       #18253a;
+  --ac-text:        #2a3a55;
+  --ac-stone:       #6a7a92;
+  --ac-smoke:       #b8c4d6;
+  --ac-light-stone: #d6deea;
+  --ac-cream:       #eaf1fa;
+  --ac-warm-bg:     #f3f7fc;
+  --ac-white:       #ffffff;
+
+  --ac-amber:       #2f7ad9;
+  --ac-gold:        #5fb0f5;
+  --ac-amber-soft:  rgba(47, 122, 217, 0.12);
+  --ac-amber-line:  rgba(47, 122, 217, 0.38);
+
+  --ac-success:     #2c8a6a;
+  --ac-warning:     #c98a2a;
+  --ac-danger:      #c1432e;
+  --ac-info:        #2f7ad9;
+
+  --border-1:       rgba(24, 37, 58, 0.08);
+  --border-2:       rgba(24, 37, 58, 0.14);
+
+  --shadow-1: 0 1px 2px rgba(12, 23, 38, 0.07);
+  --shadow-2: 0 2px 8px rgba(12, 23, 38, 0.10), 0 1px 2px rgba(12, 23, 38, 0.05);
+  --shadow-3: 0 8px 24px rgba(12, 23, 38, 0.12), 0 2px 6px rgba(12, 23, 38, 0.06);
+  --shadow-inset: inset 0 1px 2px rgba(12, 23, 38, 0.06);
+  --shadow-accent: 0 0 0 3px rgba(47, 122, 217, 0.22);
+
+  --ac-glass:       rgba(10, 17, 30, 0.82);
+  --ac-footer-bg:   #070d18;
+  --ac-pill-ink:    #1d5fa8;
+  --hero-glow-a:    rgba(47, 122, 217, 0.18);
+  --hero-glow-b:    rgba(95, 176, 245, 0.10);
+  --hero-grid-line: rgba(180, 210, 255, 0.05);
+  --section-glow:   rgba(47, 122, 217, 0.10);
+  --stage-dot:      rgba(95, 176, 245, 0.55);
+  --install-ring:   rgba(47, 122, 217, 0.06);
+
+  --code-kw:  #9bb6e8;
+  --code-str: #7fcfd0;
+  --code-num: #5fb0f5;
+  --tag-tool-bg: rgba(47, 122, 217, 0.16);
+  --tag-tool-fg: #8fc1f5;
+  --tag-tool-bd: rgba(47, 122, 217, 0.45);
+  --tag-llm-bg:  rgba(127, 207, 208, 0.14);
+  --tag-llm-fg:  #8fd4d5;
+  --tag-llm-bd:  rgba(127, 207, 208, 0.4);
+  --tag-ok-bg:   rgba(44, 138, 106, 0.16);
+  --tag-ok-fg:   #8fd4b6;
+  --tag-ok-bd:   rgba(44, 138, 106, 0.4);
+  --tag-plan-bg: rgba(47, 122, 217, 0.14);
+  --tag-plan-bd: rgba(47, 122, 217, 0.35);
+  --tag-mem-bg:  rgba(95, 176, 245, 0.10);
+  --tag-mem-bd:  rgba(95, 176, 245, 0.25);
+}
+
+/* ─────────────────────────────────────── Graphite & violet ── */
+[data-palette="graphite"] {
+  --ac-charcoal:    #131218;
+  --ac-brown:       #1d1c24;
+  --ac-text:        #34323f;
+  --ac-stone:       #787388;
+  --ac-smoke:       #c7c4d2;
+  --ac-light-stone: #dcdae3;
+  --ac-cream:       #efeef4;
+  --ac-warm-bg:     #f6f5f9;
+  --ac-white:       #ffffff;
+
+  --ac-amber:       #7c5cff;
+  --ac-gold:        #a78bfa;
+  --ac-amber-soft:  rgba(124, 92, 255, 0.12);
+  --ac-amber-line:  rgba(124, 92, 255, 0.38);
+
+  --ac-success:     #3f8f6b;
+  --ac-warning:     #c98a2a;
+  --ac-danger:      #c1432e;
+  --ac-info:        #7c5cff;
+
+  --border-1:       rgba(29, 28, 36, 0.08);
+  --border-2:       rgba(29, 28, 36, 0.14);
+
+  --shadow-1: 0 1px 2px rgba(19, 18, 24, 0.07);
+  --shadow-2: 0 2px 8px rgba(19, 18, 24, 0.10), 0 1px 2px rgba(19, 18, 24, 0.05);
+  --shadow-3: 0 8px 24px rgba(19, 18, 24, 0.12), 0 2px 6px rgba(19, 18, 24, 0.06);
+  --shadow-inset: inset 0 1px 2px rgba(19, 18, 24, 0.06);
+  --shadow-accent: 0 0 0 3px rgba(124, 92, 255, 0.22);
+
+  --ac-glass:       rgba(16, 15, 21, 0.82);
+  --ac-footer-bg:   #0b0a10;
+  --ac-pill-ink:    #5a3fd4;
+  --hero-glow-a:    rgba(124, 92, 255, 0.15);
+  --hero-glow-b:    rgba(167, 139, 250, 0.08);
+  --hero-grid-line: rgba(205, 195, 255, 0.04);
+  --section-glow:   rgba(124, 92, 255, 0.09);
+  --stage-dot:      rgba(167, 139, 250, 0.55);
+  --install-ring:   rgba(124, 92, 255, 0.06);
+
+  --code-kw:  #b8a8f8;
+  --code-str: #8fd4d5;
+  --code-num: #c4b5fd;
+  --tag-tool-bg: rgba(124, 92, 255, 0.16);
+  --tag-tool-fg: #b9a4ff;
+  --tag-tool-bd: rgba(124, 92, 255, 0.45);
+  --tag-llm-bg:  rgba(127, 207, 208, 0.14);
+  --tag-llm-fg:  #8fd4d5;
+  --tag-llm-bd:  rgba(127, 207, 208, 0.4);
+  --tag-ok-bg:   rgba(63, 143, 107, 0.16);
+  --tag-ok-fg:   #8fd4b6;
+  --tag-ok-bd:   rgba(63, 143, 107, 0.4);
+  --tag-plan-bg: rgba(124, 92, 255, 0.14);
+  --tag-plan-bd: rgba(124, 92, 255, 0.35);
+  --tag-mem-bg:  rgba(167, 139, 250, 0.10);
+  --tag-mem-bd:  rgba(167, 139, 250, 0.25);
+}
+
+/* ────────────────────────────────────── Verdigris & copper ── */
+[data-palette="verdigris"] {
+  --ac-charcoal:    #0f1a15;
+  --ac-brown:       #1b2b23;
+  --ac-text:        #2e4337;
+  --ac-stone:       #6f8378;
+  --ac-smoke:       #bfcdc3;
+  --ac-light-stone: #d5ded6;
+  --ac-cream:       #edefe3;
+  --ac-warm-bg:     #f5f6ec;
+  --ac-white:       #ffffff;
+
+  --ac-amber:       #2e8c6e;   /* verdigris */
+  --ac-gold:        #c08552;   /* copper — the gradient pair */
+  --ac-amber-soft:  rgba(46, 140, 110, 0.12);
+  --ac-amber-line:  rgba(46, 140, 110, 0.38);
+
+  --ac-success:     #2e8c6e;
+  --ac-warning:     #c98a2a;
+  --ac-danger:      #b04632;
+  --ac-info:        #3d6b7a;
+
+  --border-1:       rgba(27, 43, 35, 0.08);
+  --border-2:       rgba(27, 43, 35, 0.14);
+
+  --shadow-1: 0 1px 2px rgba(15, 26, 21, 0.07);
+  --shadow-2: 0 2px 8px rgba(15, 26, 21, 0.10), 0 1px 2px rgba(15, 26, 21, 0.05);
+  --shadow-3: 0 8px 24px rgba(15, 26, 21, 0.12), 0 2px 6px rgba(15, 26, 21, 0.06);
+  --shadow-inset: inset 0 1px 2px rgba(15, 26, 21, 0.06);
+  --shadow-accent: 0 0 0 3px rgba(46, 140, 110, 0.22);
+
+  --ac-glass:       rgba(12, 19, 15, 0.82);
+  --ac-footer-bg:   #0a110d;
+  --ac-pill-ink:    #1f6b52;
+  --hero-glow-a:    rgba(46, 140, 110, 0.14);
+  --hero-glow-b:    rgba(192, 133, 82, 0.10);
+  --hero-grid-line: rgba(190, 225, 205, 0.04);
+  --section-glow:   rgba(46, 140, 110, 0.08);
+  --stage-dot:      rgba(192, 133, 82, 0.55);
+  --install-ring:   rgba(46, 140, 110, 0.06);
+
+  --code-kw:  #a3cfbb;
+  --code-str: #d9b08a;
+  --code-num: #5fbf99;
+  --tag-tool-bg: rgba(46, 140, 110, 0.16);
+  --tag-tool-fg: #7fcbaf;
+  --tag-tool-bd: rgba(46, 140, 110, 0.45);
+  --tag-llm-bg:  rgba(192, 133, 82, 0.14);
+  --tag-llm-fg:  #d9b08a;
+  --tag-llm-bd:  rgba(192, 133, 82, 0.4);
+  --tag-ok-bg:   rgba(46, 140, 110, 0.16);
+  --tag-ok-fg:   #8fd4b6;
+  --tag-ok-bd:   rgba(46, 140, 110, 0.4);
+  --tag-plan-bg: rgba(192, 133, 82, 0.14);
+  --tag-plan-bd: rgba(192, 133, 82, 0.35);
+  --tag-mem-bg:  rgba(192, 133, 82, 0.10);
+  --tag-mem-bd:  rgba(192, 133, 82, 0.25);
+}
+
+/* ─────────────────────────────────────────────── Mono ink ── */
+[data-palette="mono"] {
+  --ac-charcoal:    #151515;
+  --ac-brown:       #1e1e1e;
+  --ac-text:        #363636;
+  --ac-stone:       #7a7a7a;
+  --ac-smoke:       #c9c9c9;
+  --ac-light-stone: #dedede;
+  --ac-cream:       #f0f0f0;
+  --ac-warm-bg:     #f7f7f7;
+  --ac-white:       #ffffff;
+
+  --ac-amber:       #6e6e6e;   /* ink-wash gray accent */
+  --ac-gold:        #b4b4b4;
+  --ac-amber-soft:  rgba(0, 0, 0, 0.06);
+  --ac-amber-line:  rgba(0, 0, 0, 0.28);
+
+  --ac-success:     #6e6e6e;
+  --ac-warning:     #8a8a8a;
+  --ac-danger:      #3a3a3a;
+  --ac-info:        #6e6e6e;
+
+  --border-1:       rgba(0, 0, 0, 0.09);
+  --border-2:       rgba(0, 0, 0, 0.15);
+
+  --shadow-1: 0 1px 2px rgba(0, 0, 0, 0.07);
+  --shadow-2: 0 2px 8px rgba(0, 0, 0, 0.10), 0 1px 2px rgba(0, 0, 0, 0.05);
+  --shadow-3: 0 8px 24px rgba(0, 0, 0, 0.12), 0 2px 6px rgba(0, 0, 0, 0.06);
+  --shadow-inset: inset 0 1px 2px rgba(0, 0, 0, 0.06);
+  --shadow-accent: 0 0 0 3px rgba(0, 0, 0, 0.18);
+
+  --ac-glass:       rgba(16, 16, 16, 0.84);
+  --ac-footer-bg:   #0c0c0c;
+  --ac-pill-ink:    #4a4a4a;
+  --hero-glow-a:    rgba(255, 255, 255, 0.04);
+  --hero-glow-b:    rgba(255, 255, 255, 0.03);
+  --hero-grid-line: rgba(255, 255, 255, 0.03);
+  --section-glow:   rgba(255, 255, 255, 0.04);
+  --stage-dot:      rgba(255, 255, 255, 0.4);
+  --install-ring:   rgba(255, 255, 255, 0.04);
+
+  --code-kw:  #d6d6d6;
+  --code-str: #ababab;
+  --code-num: #e6e6e6;
+  --tag-tool-bg: rgba(255, 255, 255, 0.08);
+  --tag-tool-fg: #cfcfcf;
+  --tag-tool-bd: rgba(255, 255, 255, 0.2);
+  --tag-llm-bg:  rgba(255, 255, 255, 0.08);
+  --tag-llm-fg:  #e0e0e0;
+  --tag-llm-bd:  rgba(255, 255, 255, 0.2);
+  --tag-ok-bg:   rgba(255, 255, 255, 0.08);
+  --tag-ok-fg:   #e0e0e0;
+  --tag-ok-bd:   rgba(255, 255, 255, 0.2);
+  --tag-plan-bg: rgba(255, 255, 255, 0.08);
+  --tag-plan-bd: rgba(255, 255, 255, 0.2);
+  --tag-mem-bg:  rgba(255, 255, 255, 0.06);
+  --tag-mem-bd:  rgba(255, 255, 255, 0.16);
+}
+
+/* =========================================================
+   Night mode — flips surfaces/ink/borders, brightens accents.
+   ========================================================= */
+
+[data-palette="amber"][data-mode="night"] {
+  --bg-page:   #16110d;
+  --surf-1:    #201913;
+  --surf-2:    #1a140f;
+  --bg-sunken: #241c15;
+  --fg-1:      #f1e9dc;
+  --fg-2:      #d8cdbd;
+  --fg-3:      #a08f7c;
+  --border-1:  rgba(255, 255, 255, 0.07);
+  --border-2:  rgba(255, 255, 255, 0.13);
+  --ac-amber:      #e0af63;
+  --ac-gold:       #eecf8f;
+  --ac-amber-soft: rgba(224, 175, 99, 0.13);
+  --ac-amber-line: rgba(224, 175, 99, 0.4);
+  --ac-pill-ink:   #eecf8f;
+  --ac-glass:      rgba(18, 14, 11, 0.8);
+  --ac-footer-bg:  #0d0a07;
+  --shadow-1: 0 1px 2px rgba(0, 0, 0, 0.4);
+  --shadow-2: 0 2px 8px rgba(0, 0, 0, 0.5), 0 1px 2px rgba(0, 0, 0, 0.3);
+  --shadow-3: 0 8px 24px rgba(0, 0, 0, 0.55), 0 2px 6px rgba(0, 0, 0, 0.35);
+}
+
+[data-palette="blue"][data-mode="night"] {
+  --bg-page:   #0a1322;
+  --surf-1:    #122033;
+  --surf-2:    #0e1929;
+  --bg-sunken: #16243a;
+  --fg-1:      #e9f1fb;
+  --fg-2:      #c7d5e8;
+  --fg-3:      #8195af;
+  --border-1:  rgba(255, 255, 255, 0.07);
+  --border-2:  rgba(255, 255, 255, 0.13);
+  --ac-amber:      #4f9bee;
+  --ac-gold:       #7cc0f8;
+  --ac-amber-soft: rgba(95, 176, 245, 0.13);
+  --ac-amber-line: rgba(95, 176, 245, 0.42);
+  --ac-pill-ink:   #9ccaf5;
+  --ac-glass:      rgba(7, 12, 22, 0.8);
+  --ac-footer-bg:  #050a12;
+  --shadow-1: 0 1px 2px rgba(0, 0, 0, 0.4);
+  --shadow-2: 0 2px 8px rgba(0, 0, 0, 0.5), 0 1px 2px rgba(0, 0, 0, 0.3);
+  --shadow-3: 0 8px 24px rgba(0, 0, 0, 0.55), 0 2px 6px rgba(0, 0, 0, 0.35);
+}
+
+[data-palette="graphite"][data-mode="night"] {
+  --bg-page:   #0f0e14;
+  --surf-1:    #18161f;
+  --surf-2:    #121118;
+  --bg-sunken: #1c1a24;
+  --fg-1:      #edecf3;
+  --fg-2:      #cfccdc;
+  --fg-3:      #908b9f;
+  --border-1:  rgba(255, 255, 255, 0.07);
+  --border-2:  rgba(255, 255, 255, 0.13);
+  --ac-amber:      #977dff;
+  --ac-gold:       #b9a4ff;
+  --ac-amber-soft: rgba(151, 125, 255, 0.14);
+  --ac-amber-line: rgba(151, 125, 255, 0.45);
+  --ac-pill-ink:   #c3b2ff;
+  --ac-glass:      rgba(12, 11, 16, 0.8);
+  --ac-footer-bg:  #08070c;
+  --shadow-1: 0 1px 2px rgba(0, 0, 0, 0.4);
+  --shadow-2: 0 2px 8px rgba(0, 0, 0, 0.5), 0 1px 2px rgba(0, 0, 0, 0.3);
+  --shadow-3: 0 8px 24px rgba(0, 0, 0, 0.55), 0 2px 6px rgba(0, 0, 0, 0.35);
+}
+
+[data-palette="verdigris"][data-mode="night"] {
+  --bg-page:   #0a120e;
+  --surf-1:    #131e17;
+  --surf-2:    #0e1711;
+  --bg-sunken: #172419;
+  --fg-1:      #e8efe9;
+  --fg-2:      #c8d5cb;
+  --fg-3:      #84988b;
+  --border-1:  rgba(255, 255, 255, 0.07);
+  --border-2:  rgba(255, 255, 255, 0.13);
+  --ac-amber:      #43ab86;
+  --ac-gold:       #d49a6a;
+  --ac-amber-soft: rgba(67, 171, 134, 0.14);
+  --ac-amber-line: rgba(67, 171, 134, 0.45);
+  --ac-pill-ink:   #9fd9c2;
+  --ac-glass:      rgba(8, 13, 10, 0.8);
+  --ac-footer-bg:  #060b08;
+  --shadow-1: 0 1px 2px rgba(0, 0, 0, 0.4);
+  --shadow-2: 0 2px 8px rgba(0, 0, 0, 0.5), 0 1px 2px rgba(0, 0, 0, 0.3);
+  --shadow-3: 0 8px 24px rgba(0, 0, 0, 0.55), 0 2px 6px rgba(0, 0, 0, 0.35);
+}
+
+[data-palette="mono"][data-mode="night"] {
+  --bg-page:   #0d0d0d;
+  --surf-1:    #171717;
+  --surf-2:    #111111;
+  --bg-sunken: #1c1c1c;
+  --fg-1:      #f1f1f1;
+  --fg-2:      #d1d1d1;
+  --fg-3:      #8f8f8f;
+  --border-1:  rgba(255, 255, 255, 0.08);
+  --border-2:  rgba(255, 255, 255, 0.14);
+  --ac-amber:      #b9b9b9;
+  --ac-gold:       #e3e3e3;
+  --ac-amber-soft: rgba(255, 255, 255, 0.08);
+  --ac-amber-line: rgba(255, 255, 255, 0.3);
+  --ac-pill-ink:   #d6d6d6;
+  --ac-glass:      rgba(10, 10, 10, 0.85);
+  --ac-footer-bg:  #070707;
+  --shadow-1: 0 1px 2px rgba(0, 0, 0, 0.4);
+  --shadow-2: 0 2px 8px rgba(0, 0, 0, 0.5), 0 1px 2px rgba(0, 0, 0, 0.3);
+  --shadow-3: 0 8px 24px rgba(0, 0, 0, 0.55), 0 2px 6px rgba(0, 0, 0, 0.35);
+}

@@ -32,8 +32,16 @@
 <link rel="icon" type="image/svg+xml" href="../favicon.svg" />
 <link rel="apple-touch-icon" sizes="180x180" href="../apple-touch-icon.png" />
 
+<!-- Apply saved palette/mode before first paint -->
+<script>
+(function(){var d=document.documentElement,q=new URLSearchParams(location.search),p=q.get('palette'),m=q.get('mode');
+try{p=p||localStorage.getItem('aa-palette');m=m||localStorage.getItem('aa-mode')}catch(e){}
+if(['amber','blue','graphite','verdigris','mono'].indexOf(p)<0)p='blue';
+d.setAttribute('data-palette',p);
+d.setAttribute('data-mode',m==='night'||m==='day'?m:(window.matchMedia&&matchMedia('(prefers-color-scheme: dark)').matches?'night':'day'));})();
+</script>
 <link rel="stylesheet" href="../styles/site.css" />
-<link rel="stylesheet" href="../styles/palette-blue.css" />
+<link rel="stylesheet" href="../styles/themes.css" />
 <style>
   @font-face {
     font-family: 'Cubic Sans';
@@ -58,16 +66,16 @@
     max-width: 760px;
     font-size: 16.5px;
     line-height: 1.72;
-    color: var(--ac-text);
+    color: var(--fg-2);
   }
   .ad-prose p { margin: 0 0 18px; }
   .ad-prose p:last-child { margin-bottom: 0; }
   .ad-prose em {
     font-style: italic;
-    color: var(--ac-charcoal);
+    color: var(--fg-1);
     font-weight: 500;
   }
-  .ad-prose strong { color: var(--ac-charcoal); font-weight: 600; }
+  .ad-prose strong { color: var(--fg-1); font-weight: 600; }
 
   /* ── Bridges visual ─────────────────────────────────────────── */
   .ad-bridges {
@@ -76,7 +84,7 @@
   }
   .ad-bridge {
     border: 1px solid var(--border-2);
-    background: var(--ac-white);
+    background: var(--surf-1);
     border-radius: var(--rad-md);
     padding: 26px 24px 22px;
     position: relative;
@@ -90,23 +98,23 @@
     display: inline-flex; align-items: center; gap: 8px;
     font-family: var(--font-mono);
     font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase;
-    color: var(--ac-stone); font-weight: 600;
+    color: var(--fg-3); font-weight: 600;
   }
   .ad-bridge-cli .ad-dot {
     width: 7px; height: 7px; border-radius: 50%;
     background: var(--ac-amber);
-    box-shadow: 0 0 0 3px rgba(212,160,82,0.15);
+    box-shadow: 0 0 0 3px var(--ac-amber-soft);
   }
   .ad-bridge-name {
     margin: 14px 0 8px;
     font-family: var(--font-mono);
     font-size: 14px; font-weight: 600;
-    color: var(--ac-charcoal);
+    color: var(--fg-1);
     letter-spacing: -0.005em;
   }
   .ad-bridge-desc {
     font-size: 13.5px; line-height: 1.55;
-    color: var(--ac-text);
+    color: var(--fg-2);
     margin: 0 0 18px;
   }
   .ad-bridge-foot {
@@ -114,10 +122,10 @@
     padding-top: 14px;
     border-top: 1px dashed var(--border-1);
     font-family: var(--font-mono);
-    font-size: 11px; color: var(--ac-stone);
+    font-size: 11px; color: var(--fg-3);
   }
-  .ad-bridge-foot .k { color: var(--ac-stone); letter-spacing: 0.06em; }
-  .ad-bridge-foot .v { color: var(--ac-charcoal); font-weight: 600; }
+  .ad-bridge-foot .k { color: var(--fg-3); letter-spacing: 0.06em; }
+  .ad-bridge-foot .v { color: var(--fg-1); font-weight: 600; }
 
   /* ── Session envelope ───────────────────────────────────────── */
   .ad-session {
@@ -171,20 +179,20 @@
     margin-top: 36px;
     border: 1px solid var(--border-2);
     border-radius: var(--rad-md);
-    background: var(--ac-white);
+    background: var(--surf-1);
     overflow: hidden;
   }
   .ad-csv-bar {
     display: flex; align-items: center; gap: 12px;
     padding: 12px 18px;
-    background: var(--ac-cream);
+    background: var(--surf-2);
     border-bottom: 1px solid var(--border-1);
     font-family: var(--font-mono);
     font-size: 11px; letter-spacing: 0.10em;
-    color: var(--ac-stone);
+    color: var(--fg-3);
   }
-  .ad-csv-bar .filename { color: var(--ac-charcoal); font-weight: 600; }
-  .ad-csv-bar .meta { margin-left: auto; color: var(--ac-stone); }
+  .ad-csv-bar .filename { color: var(--fg-1); font-weight: 600; }
+  .ad-csv-bar .meta { margin-left: auto; color: var(--fg-3); }
   .ad-csv-table {
     width: 100%;
     border-collapse: collapse;
@@ -200,15 +208,15 @@
     font-size: 10.5px;
     letter-spacing: 0.14em;
     text-transform: uppercase;
-    color: var(--ac-stone);
+    color: var(--fg-3);
     font-weight: 600;
-    background: var(--ac-cream);
+    background: var(--surf-2);
   }
   .ad-csv-table tr:last-child td { border-bottom: none; }
-  .ad-csv-table td { color: var(--ac-text); }
-  .ad-csv-table td.id { color: var(--ac-stone); width: 56px; }
-  .ad-csv-table td.task { color: var(--ac-charcoal); font-weight: 500; }
-  .ad-csv-table td.dep { color: var(--ac-stone); width: 96px; }
+  .ad-csv-table td { color: var(--fg-2); }
+  .ad-csv-table td.id { color: var(--fg-3); width: 56px; }
+  .ad-csv-table td.task { color: var(--fg-1); font-weight: 500; }
+  .ad-csv-table td.dep { color: var(--fg-3); width: 96px; }
   .ad-csv-status {
     display: inline-flex; align-items: center; gap: 6px;
     padding: 3px 9px;
@@ -225,16 +233,16 @@
   }
   .ad-csv-status.done .pip { background: #6ea25b; }
   .ad-csv-status.doing {
-    background: rgba(212,160,82,0.14);
-    color: #7d5a1f;
+    background: var(--ac-amber-soft);
+    color: var(--ac-pill-ink);
   }
   .ad-csv-status.doing .pip {
     background: var(--ac-amber);
-    box-shadow: 0 0 0 3px rgba(212,160,82,0.20);
+    box-shadow: 0 0 0 3px var(--ac-amber-soft);
   }
   .ad-csv-status.todo {
     background: rgba(0,0,0,0.04);
-    color: var(--ac-stone);
+    color: var(--fg-3);
   }
   .ad-csv-status.todo .pip { background: var(--ac-stone); opacity: 0.55; }
 
@@ -250,20 +258,20 @@
   .ad-principle-k {
     font-family: var(--font-mono);
     font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase;
-    color: var(--ac-stone); font-weight: 600;
+    color: var(--fg-3); font-weight: 600;
     margin-bottom: 8px;
   }
   .ad-principle-t {
     font-family: var(--font-display);
     font-size: 28px; font-weight: 400;
-    color: var(--ac-charcoal);
+    color: var(--fg-1);
     letter-spacing: -0.02em;
     line-height: 1.15;
     margin: 0 0 10px;
   }
   .ad-principle-b {
     font-size: 14px; line-height: 1.6;
-    color: var(--ac-text);
+    color: var(--fg-2);
     margin: 0;
   }
 
@@ -274,14 +282,14 @@
     padding: 16px 22px;
     border: 1px solid var(--border-2);
     border-radius: var(--rad-md);
-    background: var(--ac-white);
+    background: var(--surf-1);
     font-family: var(--font-mono);
     font-size: 14px;
     max-width: 760px;
   }
   .ad-clone .pr { color: var(--ac-amber); margin-right: 10px; }
-  .ad-clone .pkg { color: var(--ac-charcoal); font-weight: 600; }
-  .ad-clone .cmd { color: var(--ac-text); }
+  .ad-clone .pkg { color: var(--fg-1); font-weight: 600; }
+  .ad-clone .cmd { color: var(--fg-2); }
 
   /* ── Layered "L1 / L2 / L3" rail under hero ─────────────────── */
   .ad-hero-rail {
@@ -298,6 +306,10 @@
   .ad-hero-rail span { color: rgba(245,240,232,0.55); }
   .ad-hero-rail strong { color: var(--ac-cream); font-weight: 600; }
   .ad-hero-rail .sep { color: rgba(245,240,232,0.18); }
+
+  /* Night-mode adjustments for hardcoded status tints */
+  [data-mode="night"] .ad-csv-status.done { color: #9cc88c; }
+  [data-mode="night"] .ad-csv-status.todo { background: rgba(255,255,255,0.06); }
 </style>
 
 <script src="https://unpkg.com/lucide@1.17.0/dist/umd/lucide.min.js"></script>
@@ -337,6 +349,17 @@
       <a class="aa-nav-link" href="../#repos">All repos</a>
     </nav>
     <div class="aa-header-right">
+      <div class="aa-theme" role="group" aria-label="Appearance">
+        <button type="button" class="aa-theme-dot" data-set-palette="amber" title="Amber" aria-label="Amber palette"></button>
+        <button type="button" class="aa-theme-dot" data-set-palette="blue" title="Blue" aria-label="Blue palette"></button>
+        <button type="button" class="aa-theme-dot" data-set-palette="graphite" title="Graphite &amp; violet" aria-label="Graphite and violet palette"></button>
+        <button type="button" class="aa-theme-dot" data-set-palette="verdigris" title="Verdigris &amp; copper" aria-label="Verdigris and copper palette"></button>
+        <button type="button" class="aa-theme-dot" data-set-palette="mono" title="Mono ink" aria-label="Mono ink palette"></button>
+        <button type="button" class="aa-theme-mode" aria-label="Toggle day or night mode" title="Day / night">
+          <svg class="ico-moon" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg>
+          <svg class="ico-sun" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/></svg>
+        </button>
+      </div>
       <a class="aa-btn aa-btn-sm aa-btn-primary" href="https://github.com/appautomaton/agent-designer">
         <svg viewBox="0 0 16 16" width="14" height="14" fill="currentColor" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27s1.36.09 2 .27c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8z"/></svg> View on GitHub
       </a>
@@ -706,5 +729,6 @@
   if (document.readyState === 'complete') initIcons();
   else window.addEventListener('load', () => setTimeout(initIcons, 50));
 </script>
+<script src="../theme.js" defer></script>
 </body>
 </html>

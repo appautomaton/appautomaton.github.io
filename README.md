@@ -9,8 +9,9 @@ A static HTML/CSS/JS site — no build step, no framework. The page introduces t
 ## Stack
 
 - Plain HTML, CSS, and a small vanilla `app.js` for the install-tab and clipboard-copy interactions.
-- [Lucide](https://lucide.dev) icons loaded from unpkg.
-- Design tokens in `styles/colors_and_type.css`; the blue palette override in `styles/palette-blue.css`.
+- [Lucide](https://lucide.dev) icons (pinned version) for small functional icons; the GitHub mark is inline SVG.
+- Theme system: five palettes (amber, blue, graphite & violet, verdigris & copper, mono ink) × day/night mode. Driven by `data-palette` / `data-mode` attributes on `<html>`, persisted in localStorage, defaulting to the OS color scheme. Switch via the header control or URL params (`?palette=verdigris&mode=night`).
+- Design tokens in `styles/colors_and_type.css` (amber day is the base); all other palette and night overrides in `styles/themes.css`.
 
 ## Develop locally
 
@@ -25,11 +26,13 @@ Any static server will do — there is nothing to compile.
 
 ```
 index.html               page markup
+agent-designer/          deep-dive page for the agent-designer repo
 app.js                   install-tab switching, clipboard copy
+theme.js                 palette/mode switcher logic
 styles/
 ├── site.css             component styles
 ├── colors_and_type.css  design tokens (typography, spacing, motion)
-├── palette-blue.css     blue palette override
+├── themes.css           palette + night-mode overrides
 └── fonts/
     └── Quicksand-wght.ttf
 ```
