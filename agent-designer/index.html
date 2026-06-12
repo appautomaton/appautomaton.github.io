@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=1200" />
-<title>agent-designer — App Automaton</title>
-<meta name="description" content="A portable skills workspace for AI coding agents — Codex, Claude Code, and Gemini. Issue-driven workflows and cross-agent collaboration via bridge scripts with session continuity." />
+<title>agent-designer · App Automaton</title>
+<meta name="description" content="A portable skills workspace for AI coding agents: Codex, Claude Code, and Gemini. Issue-driven workflows and cross-agent collaboration through bridge scripts with session continuity." />
 <meta name="keywords" content="agent designer, claude code, codex, gemini cli, agent skills, SKILL.md, bridge scripts, session continuity, issue-driven workflow, multi-agent collaboration" />
 <meta name="author" content="App Automaton" />
 <meta name="theme-color" content="#0c1726" />
@@ -13,18 +13,18 @@
 <!-- Open Graph -->
 <meta property="og:type" content="website" />
 <meta property="og:site_name" content="App Automaton" />
-<meta property="og:title" content="agent-designer — a portable skills workspace for coding agents" />
+<meta property="og:title" content="agent-designer · a portable skills workspace for coding agents" />
 <meta property="og:description" content="Issue-driven workflows and cross-agent collaboration via bridge scripts with session continuity. Portable across Codex, Claude Code, and Gemini." />
 <meta property="og:url" content="https://appautomaton.github.io/agent-designer/" />
 <meta property="og:image" content="https://appautomaton.github.io/assets/og.png" />
 <meta property="og:image:width" content="1200" />
 <meta property="og:image:height" content="630" />
-<meta property="og:image:alt" content="App Automaton — Skills, harnesses, and on-device tools." />
+<meta property="og:image:alt" content="App Automaton: skills, harnesses, and on-device tools." />
 <meta property="og:locale" content="en_US" />
 
 <!-- Twitter -->
 <meta name="twitter:card" content="summary_large_image" />
-<meta name="twitter:title" content="agent-designer — a portable skills workspace for coding agents" />
+<meta name="twitter:title" content="agent-designer · a portable skills workspace for coding agents" />
 <meta name="twitter:description" content="Issue-driven workflows and cross-agent collaboration via bridge scripts with session continuity." />
 <meta name="twitter:image" content="https://appautomaton.github.io/assets/og.png" />
 
@@ -319,7 +319,7 @@ d.setAttribute('data-mode',m==='night'||m==='day'?m:(window.matchMedia&&matchMed
   "@context": "https://schema.org",
   "@type": "SoftwareSourceCode",
   "name": "agent-designer",
-  "description": "A portable skills workspace for AI coding agents — Codex, Claude Code, and Gemini. Issue-driven workflows and cross-agent collaboration via bridge scripts with session continuity.",
+  "description": "A portable skills workspace for AI coding agents: Codex, Claude Code, and Gemini. Issue-driven workflows and cross-agent collaboration through bridge scripts with session continuity.",
   "url": "https://appautomaton.github.io/agent-designer/",
   "codeRepository": "https://github.com/appautomaton/agent-designer",
   "programmingLanguage": "Python, Markdown",
@@ -384,7 +384,7 @@ d.setAttribute('data-mode',m==='night'||m==='day'?m:(window.matchMedia&&matchMed
         by <em>design.</em>
       </h1>
       <p class="aa-hero-sub">
-        A portable skills workspace for AI coding agents — the kind that gives Claude Code, Codex, and Gemini clear workflows, safe defaults, and the ability to delegate to one another with session continuity. Clone it as a starting point for any project where you want agents to work deliberately rather than freestyle.
+        A portable skills workspace for AI coding agents, the kind that gives Claude Code, Codex, and Gemini clear workflows, safe defaults, and the ability to delegate to one another with session continuity. Clone it as a starting point for any project where you want agents to work deliberately rather than freestyle.
       </p>
       <div class="aa-hero-ctas">
         <a class="aa-btn aa-btn-accent" href="https://github.com/appautomaton/agent-designer">
@@ -424,19 +424,19 @@ d.setAttribute('data-mode',m==='night'||m==='day'?m:(window.matchMedia&&matchMed
         </h2>
       </div>
       <p class="aa-section-lede">
-        Models are good at the next token. They are less good at the next hour — keeping the work coherent across long sessions, multiple files, and the moments where one agent hands off to another.
+        Models are good at the next token. They are less good at the next hour: keeping the work coherent across long sessions, multiple files, and the moments where one agent hands off to another.
       </p>
     </div>
 
     <div class="ad-prose">
       <p>
-        agent-designer is built around that gap. Rather than another tool, it is a small workspace of disciplines you bring with you into a project — a folder of <em>skills</em> in plain markdown, a few bridge scripts, and a way to break large work down so an agent can drive it on its own.
+        agent-designer is built around that gap. Rather than another tool, it is a small workspace of disciplines you bring with you into a project: a folder of <em>skills</em> in plain markdown, a few bridge scripts, and a way to break large work down so an agent can drive it on its own.
       </p>
       <p>
-        Each skill follows the same shape — frontmatter the agent always sees, a workflow body it loads on invocation, and references it pulls only when the path narrows. That shape is portable: the same skills work under Codex, under Claude Code, under Gemini, with minimal adaptation. Most changes here are <em>text, not code</em>. The repository is workflow-first.
+        Each skill follows the same shape, with frontmatter the agent always sees, a workflow body it loads on invocation, and references it pulls only when the path narrows. That shape is portable: the same skills work under Codex, under Claude Code, under Gemini, with minimal adaptation. Most changes here are <em>text, not code</em>. The repository is workflow-first.
       </p>
       <p>
-        Out of the box you get two complementary disciplines. <strong>Cross-agent collaboration</strong> — three bridge scripts that let one agent consult another with full session continuity, returning the same JSON envelope on every turn. And an <strong>issue-driven workflow</strong> — plan once, then hand the agent a CSV it can execute end-to-end, every row a granular, testable, markable unit of work.
+        Out of the box you get two complementary disciplines. <strong>Cross-agent collaboration</strong> gives you three bridge scripts that let one agent consult another with full session continuity, returning the same JSON envelope on every turn. The <strong>issue-driven workflow</strong> lets you plan once, then hand the agent a CSV it can execute end to end, every row a granular, testable, markable unit of work.
       </p>
     </div>
   </div>
@@ -454,7 +454,7 @@ d.setAttribute('data-mode',m==='night'||m==='day'?m:(window.matchMedia&&matchMed
         </h2>
       </div>
       <p class="aa-section-lede">
-        When Codex hits a problem it wants a second opinion on, it can ask Claude — and stay in the same conversation through five turns. When Claude needs the web, it can hand the question to Gemini and read what comes back. Each bridge wraps a CLI and returns the same shape: a JSON envelope with a <code>SESSION_ID</code> you pass back to resume.
+        When Codex hits a problem it wants a second opinion on, it can ask Claude and stay in the same conversation through five turns. When Claude needs the web, it can hand the question to Gemini and read what comes back. Each bridge wraps a CLI and returns the same shape: a JSON envelope with a <code>SESSION_ID</code> you pass back to resume.
       </p>
     </div>
 
@@ -463,7 +463,7 @@ d.setAttribute('data-mode',m==='night'||m==='day'?m:(window.matchMedia&&matchMed
         <div class="ad-bridge-cli"><span class="ad-dot"></span> Claude Code</div>
         <div class="ad-bridge-name">collaborating-with-claude</div>
         <p class="ad-bridge-desc">
-          Delegate review, diff, and design consultation. Multi-turn back-and-forth while you implement locally — second opinions, edge-case checks, test gaps.
+          Delegate review, diff, and design consultation. Multi-turn back-and-forth while you implement locally, with second opinions, edge-case checks, and test gaps.
         </p>
         <div class="ad-bridge-foot">
           <span class="k">SAFETY</span>
@@ -475,7 +475,7 @@ d.setAttribute('data-mode',m==='night'||m==='day'?m:(window.matchMedia&&matchMed
         <div class="ad-bridge-cli"><span class="ad-dot"></span> Codex</div>
         <div class="ad-bridge-name">collaborating-with-codex</div>
         <p class="ad-bridge-desc">
-          Delegate implementation, diagnosis, or adversarial review. Sandboxed by default — read-only unless you explicitly grant workspace writes.
+          Delegate implementation, diagnosis, or adversarial review. Sandboxed by default, read-only unless you explicitly grant workspace writes.
         </p>
         <div class="ad-bridge-foot">
           <span class="k">SAFETY</span>
@@ -546,7 +546,7 @@ d.setAttribute('data-mode',m==='night'||m==='day'?m:(window.matchMedia&&matchMed
         </h2>
       </div>
       <p class="aa-section-lede">
-        Front-load the thinking and the agent has a full plate of useful work per run. The plan and Issue CSV are a <em>work amplifier</em> — every row a granular, testable, markable unit. The agent reads, sets <code>Dev_Status = DOING</code>, completes the row, and immediately moves to the next.
+        Front-load the thinking and the agent has a full plate of useful work per run. The plan and Issue CSV act as a <em>work amplifier</em>, every row a granular, testable, markable unit. The agent reads, sets <code>Dev_Status = DOING</code>, completes the row, and immediately moves to the next.
       </p>
     </div>
 
@@ -596,7 +596,7 @@ d.setAttribute('data-mode',m==='night'||m==='day'?m:(window.matchMedia&&matchMed
           </tr>
           <tr>
             <td class="id">005</td>
-            <td class="task">Add latency benchmark — assert p95 &lt; 80ms</td>
+            <td class="task">Add latency benchmark, assert p95 &lt; 80ms</td>
             <td class="dep">004</td>
             <td><span class="ad-csv-status todo"><span class="pip"></span>Todo</span></td>
             <td><span class="ad-csv-status todo"><span class="pip"></span>Todo</span></td>
@@ -621,7 +621,7 @@ d.setAttribute('data-mode',m==='night'||m==='day'?m:(window.matchMedia&&matchMed
 
     <div class="ad-prose" style="margin-top: 32px;">
       <p>
-        The CSV is the agent's state. It reads to know where it is, updates as it works, keeps driving forward. Only stops for genuinely blocking unknowns — anything routine, it decides itself. Loop: <em>plan → issues → implement → test → review.</em>
+        The CSV is the agent's state. It reads to know where it is, updates as it works, and keeps driving forward. It stops only for genuinely blocking unknowns and decides anything routine itself. Loop: <em>plan → issues → implement → test → review.</em>
       </p>
     </div>
   </div>
@@ -678,7 +678,7 @@ d.setAttribute('data-mode',m==='night'||m==='day'?m:(window.matchMedia&&matchMed
         <span class="aa-brand-mark" aria-hidden="true"></span>
         App Automaton
       </div>
-      <p class="aa-footer-tag">An open-source workshop for engineering with coding agents — Claude Code, Codex, Gemini, OpenCode. SKILLs, runtimes, and pure-MLX models for Apple Silicon.</p>
+      <p class="aa-footer-tag">An open-source workshop for engineering with coding agents. SKILLs, runtimes, and pure-MLX models for Apple Silicon, made for Claude Code, Codex, Gemini, and OpenCode.</p>
     </div>
     <div class="aa-footer-cols">
       <div class="aa-footer-col">

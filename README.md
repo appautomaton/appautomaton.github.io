@@ -4,7 +4,7 @@ Landing page for the App Automaton GitHub org. Published at <https://appautomato
 
 ## What's here
 
-A static HTML/CSS/JS site — no build step, no framework. The page introduces the org's open-source work: SKILLs for coding agents (Claude Code, Codex, Gemini, OpenCode), the runtimes that hold them together, and a small constellation of pure-MLX models for Apple Silicon.
+A static HTML/CSS/JS site with no build step and no framework. The page introduces the org's open-source work: SKILLs for coding agents (Claude Code, Codex, Gemini, OpenCode), the runtimes that hold them together, and a small constellation of pure-MLX models for Apple Silicon.
 
 ## Stack
 
@@ -20,7 +20,7 @@ python3 -m http.server 8080
 # then open http://localhost:8080
 ```
 
-Any static server will do — there is nothing to compile.
+Any static server will do. There is nothing to compile.
 
 ## File layout
 
