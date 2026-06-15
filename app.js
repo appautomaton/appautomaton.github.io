@@ -98,3 +98,48 @@
     }
   }
 })();
+
+/* Mobile header dropdown — toggles the #aa-menu sheet under the bar.
+   Theme controls live inside the sheet and keep working via the
+   document-level delegation in theme.js. */
+(function () {
+  var toggle = document.querySelector('.aa-menu-toggle');
+  var menu = document.getElementById('aa-menu');
+  if (!toggle || !menu) return;
+
+  function setOpen(open) {
+    menu.classList.toggle('is-open', open);
+    toggle.setAttribute('aria-expanded', String(open));
+  }
+
+  toggle.addEventListener('click', function (e) {
+    e.stopPropagation();
+    setOpen(toggle.getAttribute('aria-expanded') !== 'true');
+  });
+
+  // Close after picking a nav destination.
+  menu.querySelectorAll('.aa-nav-link').forEach(function (link) {
+    link.addEventListener('click', function () { setOpen(false); });
+  });
+
+  // Close on outside tap (theme dots are inside the sheet, so they don't close it).
+  document.addEventListener('click', function (e) {
+    if (menu.classList.contains('is-open') &&
+        !menu.contains(e.target) && !toggle.contains(e.target)) {
+      setOpen(false);
+    }
+  });
+
+  // Close on Escape.
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape') setOpen(false);
+  });
+
+  // Reset when the viewport grows back to desktop so the state can't get stuck.
+  if (window.matchMedia) {
+    var mq = matchMedia('(min-width: 901px)');
+    var reset = function (ev) { if (ev.matches) setOpen(false); };
+    if (mq.addEventListener) mq.addEventListener('change', reset);
+    else if (mq.addListener) mq.addListener(reset);
+  }
+})();

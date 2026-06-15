@@ -2,15 +2,15 @@
 @import url('./colors_and_type.css');
 
 * { box-sizing: border-box; }
-html, body { margin: 0; padding: 0; background: var(--bg-page); }
+html, body { margin: 0; padding: 0; background: var(--bg-page); overflow-x: hidden; }
 a { cursor: pointer; text-decoration: none; color: inherit; }
 button { font-family: inherit; cursor: pointer; }
 
 body { color: var(--fg-2); }
 
 /* ───────────────────────────────── Layout ─── */
-.aa-wrap { max-width: 1240px; margin: 0 auto; padding: 0 56px; }
-.aa-wrap-narrow { max-width: 960px; margin: 0 auto; padding: 0 56px; }
+.aa-wrap { max-width: 1240px; margin: 0 auto; padding: 0 var(--gutter, clamp(20px, 5vw, 56px)); }
+.aa-wrap-narrow { max-width: 960px; margin: 0 auto; padding: 0 var(--gutter, clamp(20px, 5vw, 56px)); }
 
 /* ───────────────────────────────── Header ─── */
 .aa-header {
@@ -63,6 +63,27 @@ body { color: var(--fg-2); }
 .aa-nav-link:hover { color: var(--ac-amber); }
 
 .aa-header-right { display: flex; align-items: center; gap: 10px; }
+
+/* Menu wrapper: an inline row on desktop, a dropdown sheet on mobile.
+   Holds the nav links + theme switcher + GitHub button. */
+.aa-menu { display: flex; align-items: center; gap: 32px; }
+
+/* Hamburger toggle — hidden on desktop, shown at the dropdown breakpoint. */
+.aa-menu-toggle {
+  display: none;
+  width: 40px; height: 40px;
+  place-items: center;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.14);
+  border-radius: var(--rad-sm);
+  color: var(--ac-cream);
+  transition: color 120ms var(--ease-out), border-color 120ms var(--ease-out);
+}
+.aa-menu-toggle:hover { color: var(--ac-gold); border-color: var(--ac-amber-line); }
+.aa-menu-toggle svg { width: 22px; height: 22px; }
+.aa-menu-toggle .ico-close,
+.aa-menu-toggle[aria-expanded="true"] .ico-menu { display: none; }
+.aa-menu-toggle[aria-expanded="true"] .ico-close { display: block; }
 
 /* ───────────────────────────────── Theme switcher ─── */
 .aa-theme { display: flex; align-items: center; gap: 8px; margin-right: 6px; }
@@ -168,11 +189,12 @@ html[data-mode="night"] .aa-theme-mode .ico-moon { display: none; }
 .aa-hero-inner {
   position: relative; z-index: 1;
   display: grid; grid-template-columns: 1.15fr 1fr; gap: 64px;
-  padding: 96px 56px 110px; max-width: 1240px; margin: 0 auto;
+  padding: clamp(64px, 9vw, 96px) var(--gutter) clamp(72px, 9vw, 110px);
+  max-width: 1240px; margin: 0 auto;
   align-items: center;
 }
 .aa-hero-meta {
-  display: flex; gap: 14px; align-items: center;
+  display: flex; flex-wrap: wrap; gap: 10px 14px; align-items: center;
   font-size: 10px; letter-spacing: 0.18em;
   color: rgba(245,240,232,0.45);
   text-transform: uppercase; font-weight: 600;
@@ -180,7 +202,7 @@ html[data-mode="night"] .aa-theme-mode .ico-moon { display: none; }
 .aa-hero-meta .dot { width: 4px; height: 4px; border-radius: 50%; background: var(--ac-amber); }
 .aa-hero-title {
   font-family: var(--font-display);
-  font-size: 84px; font-weight: 300;
+  font-size: var(--fs-hero); font-weight: 300;
   letter-spacing: -0.03em; line-height: 0.96;
   color: var(--ac-white);
   margin: 18px 0 0;
@@ -220,11 +242,15 @@ html[data-mode="night"] .aa-theme-mode .ico-moon { display: none; }
   display: flex; gap: 0; border-bottom: 1px solid rgba(255,255,255,0.08);
   margin: -16px -16px 16px;
   padding: 0 4px;
+  overflow-x: auto;
+  scrollbar-width: none;            /* tabs swipe horizontally on narrow screens */
 }
+.aa-install-tabs::-webkit-scrollbar { display: none; }
 .aa-install-tab {
   font-family: var(--font-mono);
   font-size: 11px; font-weight: 500;
   padding: 10px 14px;
+  flex: none;
   background: transparent; border: 0;
   color: rgba(245,240,232,0.45);
   letter-spacing: 0.04em;
@@ -275,8 +301,9 @@ html[data-mode="night"] .aa-theme-mode .ico-moon { display: none; }
   border-bottom: 1px solid var(--border-1);
 }
 .aa-strip-inner {
-  display: grid; grid-template-columns: repeat(5, 1fr);
-  padding: 22px 56px; max-width: 1240px; margin: 0 auto;
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  row-gap: 16px;
+  padding: 22px var(--gutter); max-width: 1240px; margin: 0 auto;
 }
 .aa-strip-cell {
   display: flex; flex-direction: column; gap: 4px;
@@ -298,8 +325,8 @@ html[data-mode="night"] .aa-theme-mode .ico-moon { display: none; }
 }
 
 /* ───────────────────────────────── Sections ─── */
-.aa-section { padding: 104px 0; }
-.aa-section.tight { padding: 88px 0; }
+.aa-section { padding: clamp(56px, 10vw, 104px) 0; }
+.aa-section.tight { padding: clamp(52px, 8vw, 88px) 0; }
 .aa-section-cream { background: var(--surf-2); }
 .aa-section-white { background: var(--surf-1); }
 .aa-section-dark { background: var(--ac-charcoal); color: var(--ac-cream); position: relative; }
@@ -316,7 +343,7 @@ html[data-mode="night"] .aa-theme-mode .ico-moon { display: none; }
 .aa-section-head.center { grid-template-columns: 1fr; text-align: left; }
 .aa-section-title {
   font-family: var(--font-display);
-  font-size: 44px; font-weight: 700;
+  font-size: var(--fs-section); font-weight: 700;
   letter-spacing: -0.02em; line-height: 1.05;
   color: var(--fg-1);
   margin: 0;
@@ -339,13 +366,13 @@ html[data-mode="night"] .aa-theme-mode .ico-moon { display: none; }
 
 /* Density modifier — controlled via Tweaks */
 .density-compact .aa-section { padding: 72px 0; }
-.density-compact .aa-strip-inner { padding: 18px 56px; }
+.density-compact .aa-strip-inner { padding: 18px var(--gutter); }
 .density-roomy .aa-section { padding: 128px 0; }
 
 /* ───────────────────────────────── Principle / feature cards ─── */
-.aa-grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
-.aa-grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
-.aa-grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+.aa-grid-3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 18px; }
+.aa-grid-4 { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; }
+.aa-grid-2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 24px; }
 
 .aa-feature {
   background: var(--surf-1);
@@ -504,6 +531,7 @@ html[data-mode="night"] .aa-theme-mode .ico-moon { display: none; }
   font-family: var(--font-mono);
   font-size: 12.5px;
   line-height: 1.7;
+  overflow-x: auto;   /* long code lines scroll instead of breaking layout */
 }
 .aa-pane + .aa-pane { border-left: 1px solid rgba(255,255,255,0.06); }
 .aa-pane-head {
@@ -768,12 +796,12 @@ html[data-mode="night"] .aa-theme-mode .ico-moon { display: none; }
   position: relative; z-index: 1;
   display: grid; grid-template-columns: 1.2fr 1fr;
   gap: 56px; align-items: center;
-  padding: 96px 56px;
+  padding: clamp(64px, 9vw, 96px) var(--gutter);
   max-width: 1240px; margin: 0 auto;
 }
 .aa-cta-title {
   font-family: var(--font-display);
-  font-size: 56px; font-weight: 300;
+  font-size: var(--fs-cta); font-weight: 300;
   letter-spacing: -0.025em; line-height: 1.0;
   color: var(--ac-cream);
   margin: 18px 0 0;
@@ -794,7 +822,7 @@ html[data-mode="night"] .aa-theme-mode .ico-moon { display: none; }
 .aa-cta-glyph {
   display: grid; place-items: center;
   font-family: var(--font-display);
-  font-size: 220px; font-weight: 300;
+  font-size: var(--fs-cta-glyph); font-weight: 300;
   line-height: 0.9;
   letter-spacing: -0.06em;
   background: var(--grad-amber);
@@ -825,7 +853,7 @@ html[data-mode="night"] .aa-theme-mode .ico-moon { display: none; }
   color: var(--ac-cream);
 }
 .aa-footer-cols {
-  display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px;
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 24px;
 }
 .aa-footer-head {
   font-size: 10px; font-weight: 700;
@@ -843,7 +871,7 @@ html[data-mode="night"] .aa-theme-mode .ico-moon { display: none; }
 .aa-footer-col a:hover { color: var(--ac-gold); }
 .aa-footer-bottom {
   max-width: 1240px; margin: 56px auto 0;
-  padding: 18px 56px 0;
+  padding: 18px var(--gutter) 0;
   border-top: 1px solid rgba(255,255,255,0.04);
   display: flex; justify-content: space-between; gap: 12px;
   font-size: 10px; color: var(--fg-3);
@@ -858,24 +886,70 @@ html[data-mode="night"] .aa-theme-mode .ico-moon { display: none; }
   *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
 }
 
-/* Reasonable small-viewport fallback (page is desktop-first) */
-@media (max-width: 980px) {
-  .aa-hero-inner { grid-template-columns: 1fr; padding: 80px 32px 96px; gap: 40px; }
-  .aa-hero-title { font-size: 56px; }
-  .aa-wrap, .aa-wrap-narrow { padding: 0 32px; }
-  .aa-grid-3, .aa-grid-4 { grid-template-columns: 1fr 1fr; }
+/* ─────────────────────────────────────────────────────────────
+   Responsive — the layout itself is fluid (clamp() type & spacing,
+   auto-fit grids), so these breakpoints carry ONLY true structural
+   changes: the header dropdown and asymmetric 2-col → 1-col stacks.
+   ───────────────────────────────────────────────────────────── */
+
+/* Tablet & below — structural collapse + header dropdown */
+@media (max-width: 900px) {
+  /* Header → collapsible dropdown sheet under the bar */
+  .aa-menu-toggle { display: grid; }
+  .aa-menu {
+    position: absolute; top: 100%; left: 0; right: 0;
+    display: none;
+    flex-direction: column; align-items: stretch; gap: 0;
+    padding: 6px var(--gutter) 16px;
+    background: var(--ac-glass);
+    -webkit-backdrop-filter: saturate(140%) blur(10px);
+    backdrop-filter: saturate(140%) blur(10px);
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+    box-shadow: var(--shadow-3);
+  }
+  .aa-menu.is-open { display: flex; }
+  .aa-nav { flex-direction: column; align-items: stretch; gap: 0; }
+  .aa-nav-link,
+  .aa-header.is-dark .aa-nav-link {
+    color: var(--ac-cream);
+    padding: 14px 4px; font-size: 15px;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+  }
+  .aa-header-right { flex-direction: column; align-items: stretch; gap: 16px; padding-top: 16px; }
+  .aa-theme { justify-content: space-between; margin: 0; }
+  .aa-theme-dot { width: 24px; height: 24px; }
+  .aa-theme-mode { width: 40px; height: 40px; }
+  .aa-header-right .aa-btn-sm { justify-content: center; padding: 13px 16px; font-size: 14px; }
+
+  /* Asymmetric two-column layouts → single column.
+     min-width:0 stops grid items from forcing their track wider than the
+     viewport (the default min-width:auto causes horizontal blowout). */
+  .aa-hero-inner, .aa-section-head, .aa-shelf, .aa-stage-body,
+  .aa-footer-inner, .aa-cta-inner { min-width: 0; }
+  .aa-hero-inner > *, .aa-section-head > *, .aa-shelf > *,
+  .aa-stage-body > *, .aa-footer-inner > *, .aa-repo > * { min-width: 0; }
+  .aa-hero-inner { grid-template-columns: 1fr; gap: 40px; }
+  .aa-hero-corner { display: none; }   /* decorative; org info already shown above */
+  .aa-section-head { grid-template-columns: 1fr; gap: 16px; margin-bottom: 40px; }
+  .aa-section-lede { justify-self: start; max-width: none; }
+  .aa-shelf { grid-template-columns: 1fr; gap: 24px; }
   .aa-stage-body { grid-template-columns: 1fr; }
   .aa-pane + .aa-pane { border-left: 0; border-top: 1px solid rgba(255,255,255,0.06); }
-  .aa-arch-grid { grid-template-columns: 1fr 1fr; }
-  .aa-cta-inner { grid-template-columns: 1fr; padding: 72px 32px; }
-  .aa-cta-glyph { font-size: 140px; }
-  .aa-footer-inner { grid-template-columns: 1fr; }
-  .aa-footer-cols { grid-template-columns: 1fr 1fr; }
-  .aa-section-head { grid-template-columns: 1fr; }
-  .aa-shelf { grid-template-columns: 1fr; gap: 24px; }
-  .aa-repo { grid-template-columns: 1fr; gap: 4px; }
-  .aa-repo-tag { display: none; }
-  .aa-strip-inner { grid-template-columns: 1fr 1fr 1fr; row-gap: 18px; }
-  .aa-strip-cell:nth-child(4) { border-left: 0; padding-left: 0; }
-  .aa-quickstart-grid { grid-template-columns: 1fr; }
+  .aa-footer-inner { grid-template-columns: 1fr; gap: 40px; }
+  .aa-cta-inner { grid-template-columns: 1fr; }
+  .aa-arch-grid, .aa-quickstart-grid { grid-template-columns: 1fr; }
+}
+
+/* Phone polish */
+@media (max-width: 560px) {
+  /* Free up header room for the hamburger; keep the wordmark on one line */
+  .aa-brand-slash, .aa-brand-org { display: none; }
+  .aa-brand-name { white-space: nowrap; }
+  .aa-repo { grid-template-columns: 1fr; gap: 6px; }
+  .aa-strip-cell { border-left: 0; padding-left: 0; padding-right: 12px; }
+  .aa-trace-line { grid-template-columns: 38px 56px 1fr; gap: 6px; font-size: 10.5px; }
+  .aa-trace-msg { line-height: 1.4; }
+  .aa-stage-foot { flex-wrap: wrap; gap: 8px 18px; }
+  .aa-hero-ctas .aa-btn { flex: 1 1 auto; justify-content: center; }
+  .aa-footer-bottom { flex-direction: column; align-items: flex-start; gap: 8px; }
 }

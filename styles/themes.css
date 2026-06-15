@@ -389,11 +389,10 @@ html[data-palette="verdigris"] .aa-hero-title {
   letter-spacing: -0.015em;
 }
 
-/* Mono palette: monospace takes no negative tracking and runs wide */
+/* Mono palette: monospace takes no negative tracking and runs wide.
+   Fluid clamps keep mono's slightly smaller display sizes scaling with
+   the rest of the page — no separate breakpoint needed. */
 html[data-palette="mono"] { --tr-display: 0; --tr-heading: 0; }
-html[data-palette="mono"] .aa-hero-title { font-size: 70px; letter-spacing: -0.01em; }
-html[data-palette="mono"] .aa-section-title { font-size: 38px; letter-spacing: -0.005em; }
+html[data-palette="mono"] .aa-hero-title { font-size: clamp(2.25rem, 7.2vw, 70px); letter-spacing: -0.01em; }
+html[data-palette="mono"] .aa-section-title { font-size: clamp(1.7rem, 4.4vw, 38px); letter-spacing: -0.005em; }
 html[data-palette="mono"] .aa-shelf-title { letter-spacing: 0; }
-@media (max-width: 980px) {
-  html[data-palette="mono"] .aa-hero-title { font-size: 46px; }
-}

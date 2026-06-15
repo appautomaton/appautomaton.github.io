@@ -91,6 +91,14 @@
   --fs-caption:       11px;
   --fs-micro:         9px;    /* kickers, legal */
 
+  /* ── Fluid display sizes (phone → desktop) ────────── */
+  /* clamp(min, viewport, max); each max equals the current desktop size,
+     so the desktop layout is unchanged while phones scale down smoothly. */
+  --fs-hero:          clamp(2.5rem, 8.5vw, 84px);   /* .aa-hero-title (84px) */
+  --fs-section:       clamp(1.85rem, 5vw, 44px);    /* .aa-section-title (44px) */
+  --fs-cta:           clamp(2rem, 6vw, 56px);       /* .aa-cta-title (56px) */
+  --fs-cta-glyph:     clamp(120px, 26vw, 220px);    /* .aa-cta-glyph (220px) */
+
   /* ── Weights ──────────────────────────────────────── */
   --fw-light:         300;
   --fw-regular:       400;
@@ -123,6 +131,9 @@
   --sp-7:  48px;
   --sp-8:  64px;
   --sp-9:  96px;
+
+  /* Fluid page gutter — shrinks from 56px (desktop) to 20px (phone) */
+  --gutter: clamp(20px, 5vw, 56px);
 
   /* ── Radius (restrained; brand is structural) ─────── */
   --rad-xs:  2px;
