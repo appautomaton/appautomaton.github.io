@@ -2,3 +2,4 @@ User-agent: *
 Allow: /
 
 Sitemap: https://appautomaton.github.io/sitemap.xml
+Sitemap: https://appautomaton.github.io/mlx-atomistic/sitemap-index.xml
