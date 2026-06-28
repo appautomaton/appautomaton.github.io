@@ -182,48 +182,44 @@ html[data-mode="night"] .aa-theme-mode .ico-moon { display: none; }
 }
 .aa-hero.is-cursor::before { opacity: 1; }
 .aa-hero-bg {
-  position: absolute; inset: 0; pointer-events: none;
-  background:
-    radial-gradient(ellipse 70% 50% at 25% 75%, var(--hero-glow-a) 0%, transparent 60%),
-    radial-gradient(ellipse 50% 50% at 80% 20%, var(--hero-glow-b) 0%, transparent 55%);
+  position: absolute; inset: 0; pointer-events: none; overflow: hidden;
 }
-/* Slowly rotating conic sheen — a soft "light source" turning behind the
-   content. Both lobes are painted from the palette's own glow tokens, so the
-   aura adapts to every palette and to day/night with no hardcoded color. The
-   radial mask keeps it a soft turning glow rather than a hard pinwheel. */
-.aa-hero-bg::before {
-  content: '';
-  position: absolute;
-  top: 50%; left: 42%;
-  width: 150%; aspect-ratio: 1 / 1;
-  transform: translate(-50%, -50%) rotate(0deg);
-  background: conic-gradient(from 0deg at 50% 50%,
-    transparent 12deg,
-    var(--hero-glow-a) 78deg,
-    transparent 150deg,
-    transparent 215deg,
-    var(--hero-glow-b) 288deg,
-    transparent 350deg);
-  -webkit-mask-image: radial-gradient(closest-side, #000 16%, transparent 78%);
-  mask-image: radial-gradient(closest-side, #000 16%, transparent 78%);
-  animation: aa-hero-sheen 40s linear infinite;
+/* Dot aura — a soft field of palette-tinted dots drifting slowly behind the
+   content. Two layers at different sizes and opposite directions give gentle
+   parallax, and the radial mask concentrates them into an aura that fades out
+   at the edges (no full-bleed grid). The dot color is a palette token, so it
+   follows every palette and day/night. Each layer drifts by exactly one tile,
+   so the loop is seamless. */
+.aa-hero-bg::before,
+.aa-hero-bg::after {
+  content: ''; position: absolute; inset: -25%;
+  -webkit-mask-image: radial-gradient(ellipse 58% 62% at 38% 44%, #000 0%, transparent 72%);
+  mask-image: radial-gradient(ellipse 58% 62% at 38% 44%, #000 0%, transparent 72%);
   will-change: transform;
 }
-@keyframes aa-hero-sheen {
-  from { transform: translate(-50%, -50%) rotate(0deg); }
-  to   { transform: translate(-50%, -50%) rotate(360deg); }
+.aa-hero-bg::before {
+  background-image: radial-gradient(circle, var(--ac-gold) 1.1px, transparent 1.7px);
+  background-size: 26px 26px;
+  opacity: 0.22;
+  animation: aa-dots-a 30s linear infinite;
+}
+.aa-hero-bg::after {
+  background-image: radial-gradient(circle, var(--ac-gold) 1px, transparent 1.6px);
+  background-size: 42px 42px;
+  opacity: 0.13;
+  animation: aa-dots-b 46s linear infinite;
+}
+@keyframes aa-dots-a {
+  from { transform: translate3d(0, 0, 0); }
+  to   { transform: translate3d(26px, -26px, 0); }
+}
+@keyframes aa-dots-b {
+  from { transform: translate3d(0, 0, 0); }
+  to   { transform: translate3d(-42px, 42px, 0); }
 }
 @media (prefers-reduced-motion: reduce) {
-  .aa-hero-bg::before { animation: none; }
-}
-.aa-hero-grid {
-  position: absolute; inset: 0; pointer-events: none;
-  background-image:
-    linear-gradient(var(--hero-grid-line) 1px, transparent 1px),
-    linear-gradient(90deg, var(--hero-grid-line) 1px, transparent 1px);
-  background-size: 64px 64px;
-  mask-image: radial-gradient(ellipse at center, black 30%, transparent 75%);
-  -webkit-mask-image: radial-gradient(ellipse at center, black 30%, transparent 75%);
+  .aa-hero-bg::before,
+  .aa-hero-bg::after { animation: none; }
 }
 .aa-hero-inner {
   position: relative; z-index: 1;
