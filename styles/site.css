@@ -198,15 +198,15 @@ html[data-mode="night"] .aa-theme-mode .ico-moon { display: none; }
   will-change: transform;
 }
 .aa-hero-bg::before {
-  background-image: radial-gradient(circle, var(--ac-gold) 1.5px, transparent 2px);
+  background-image: radial-gradient(circle, var(--ac-gold) 1.3px, transparent 1.9px);
   background-size: 24px 24px;
-  opacity: 0.42;
+  opacity: 0.26;
   animation: aa-dots-a 30s linear infinite;
 }
 .aa-hero-bg::after {
-  background-image: radial-gradient(circle, var(--ac-gold) 1.2px, transparent 1.8px);
+  background-image: radial-gradient(circle, var(--ac-gold) 1.1px, transparent 1.7px);
   background-size: 38px 38px;
-  opacity: 0.26;
+  opacity: 0.15;
   animation: aa-dots-b 46s linear infinite;
 }
 @keyframes aa-dots-a {
