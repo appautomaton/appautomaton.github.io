@@ -12,6 +12,7 @@ App Automaton is the open-source workshop of AppCubic. Everything public sorts o
 - [presentation](https://github.com/appautomaton/presentation): consulting-quality decks, from strategy storyboarding to pixel-perfect PDF or editable PPTX.
 - [webmaton](https://github.com/appautomaton/webmaton): grounded web research. Citations, deterministic HTML-to-Markdown, and persistent sessions over Playwright, nodriver, and Chrome DevTools.
 - [playwright-skill](https://github.com/appautomaton/playwright-skill): browser automation that also runs on Android via a Termux launcher patch and headless Chromium.
+- [latex-arxiv-SKILL](https://appautomaton.github.io/latex-arxiv-SKILL/): an agentic harness, as a portable Agent Skill, that turns a topic into an arXiv-ready ML review paper. Gated literature discovery, an issue-by-issue writing loop, every citation verified, compiled to a two-column IEEEtran PDF.
 
 ## Harnesses, runtimes, and tools
 
