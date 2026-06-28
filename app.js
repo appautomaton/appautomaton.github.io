@@ -143,3 +143,29 @@
     else if (mq.addListener) mq.addListener(reset);
   }
 })();
+
+/* Hero cursor spotlight — a soft accent glow that tracks the pointer, layered
+   over the ambient rotating sheen. Pointer (fine-hover) devices only, and never
+   under reduced motion. mousemove only stashes coordinates; a rAF tick writes
+   the CSS vars, so pointer handling stays cheap. */
+(function () {
+  var hero = document.querySelector('.aa-hero');
+  if (!hero || !window.matchMedia) return;
+  if (!matchMedia('(hover: hover) and (pointer: fine)').matches) return;
+  if (matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+  var raf = null, px = 0, py = 0;
+  function apply() {
+    raf = null;
+    hero.style.setProperty('--hero-mx', px + 'px');
+    hero.style.setProperty('--hero-my', py + 'px');
+  }
+  hero.addEventListener('pointermove', function (e) {
+    var r = hero.getBoundingClientRect();
+    px = e.clientX - r.left;
+    py = e.clientY - r.top;
+    if (raf == null) raf = requestAnimationFrame(apply);
+  });
+  hero.addEventListener('pointerenter', function () { hero.classList.add('is-cursor'); });
+  hero.addEventListener('pointerleave', function () { hero.classList.remove('is-cursor'); });
+})();

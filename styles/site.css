@@ -171,11 +171,50 @@ html[data-mode="night"] .aa-theme-mode .ico-moon { display: none; }
   content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
   background: linear-gradient(90deg, var(--ac-amber), var(--ac-gold), var(--ac-amber));
 }
+/* Cursor-tracking spotlight — a soft accent glow that follows the pointer,
+   sitting above the ambient sheen but below the content. JS sets --hero-mx /
+   --hero-my and toggles .is-cursor; pointer devices only (see app.js). */
+.aa-hero::before {
+  content: ''; position: absolute; inset: 0; z-index: 1; pointer-events: none;
+  background: radial-gradient(circle 360px at var(--hero-mx, 50%) var(--hero-my, 32%),
+    var(--hero-glow-a) 0%, transparent 62%);
+  opacity: 0; transition: opacity 0.5s ease;
+}
+.aa-hero.is-cursor::before { opacity: 1; }
 .aa-hero-bg {
   position: absolute; inset: 0; pointer-events: none;
   background:
     radial-gradient(ellipse 70% 50% at 25% 75%, var(--hero-glow-a) 0%, transparent 60%),
     radial-gradient(ellipse 50% 50% at 80% 20%, var(--hero-glow-b) 0%, transparent 55%);
+}
+/* Slowly rotating conic sheen — a soft "light source" turning behind the
+   content. Both lobes are painted from the palette's own glow tokens, so the
+   aura adapts to every palette and to day/night with no hardcoded color. The
+   radial mask keeps it a soft turning glow rather than a hard pinwheel. */
+.aa-hero-bg::before {
+  content: '';
+  position: absolute;
+  top: 50%; left: 42%;
+  width: 150%; aspect-ratio: 1 / 1;
+  transform: translate(-50%, -50%) rotate(0deg);
+  background: conic-gradient(from 0deg at 50% 50%,
+    transparent 12deg,
+    var(--hero-glow-a) 78deg,
+    transparent 150deg,
+    transparent 215deg,
+    var(--hero-glow-b) 288deg,
+    transparent 350deg);
+  -webkit-mask-image: radial-gradient(closest-side, #000 16%, transparent 78%);
+  mask-image: radial-gradient(closest-side, #000 16%, transparent 78%);
+  animation: aa-hero-sheen 40s linear infinite;
+  will-change: transform;
+}
+@keyframes aa-hero-sheen {
+  from { transform: translate(-50%, -50%) rotate(0deg); }
+  to   { transform: translate(-50%, -50%) rotate(360deg); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .aa-hero-bg::before { animation: none; }
 }
 .aa-hero-grid {
   position: absolute; inset: 0; pointer-events: none;
