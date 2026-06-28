@@ -79,6 +79,21 @@ d.setAttribute('data-mode',m==='night'||m==='day'?m:(window.matchMedia&&matchMed
   "@context": "https://schema.org",
   "@graph": [
     {
+      "@type": "Person",
+      "@id": "https://benjipeng.github.io/#person",
+      "name": "Benji Peng",
+      "url": "https://benjipeng.github.io/",
+      "sameAs": [ "https://github.com/benjipeng" ]
+    },
+    {
+      "@type": "Organization",
+      "@id": "https://appcubic.com/#org",
+      "name": "AppCubic",
+      "url": "https://appcubic.com",
+      "description": "An applied-AI venture studio.",
+      "founder": { "@id": "https://benjipeng.github.io/#person" }
+    },
+    {
       "@type": "Organization",
       "@id": "https://appautomaton.github.io/#org",
       "name": "App Automaton",
@@ -89,11 +104,8 @@ d.setAttribute('data-mode',m==='night'||m==='day'?m:(window.matchMedia&&matchMed
       "sameAs": [
         "https://github.com/appautomaton"
       ],
-      "parentOrganization": {
-        "@type": "Organization",
-        "name": "AppCubic",
-        "url": "https://appcubic.com"
-      }
+      "parentOrganization": { "@id": "https://appcubic.com/#org" },
+      "founder": { "@id": "https://benjipeng.github.io/#person" }
     },
     {
       "@type": "WebSite",
@@ -103,6 +115,40 @@ d.setAttribute('data-mode',m==='night'||m==='day'?m:(window.matchMedia&&matchMed
       "description": "Open-source skills for Claude Code, Codex, Gemini, and OpenCode, plus a quiet streak of pure-MLX work for Apple Silicon.",
       "publisher": { "@id": "https://appautomaton.github.io/#org" },
       "inLanguage": "en-US"
+    },
+    {
+      "@type": "CollectionPage",
+      "@id": "https://appautomaton.github.io/#webpage",
+      "url": "https://appautomaton.github.io/",
+      "name": "App Automaton · open skills and tools for coding agents",
+      "isPartOf": { "@id": "https://appautomaton.github.io/#website" },
+      "about": { "@id": "https://appautomaton.github.io/#org" },
+      "mainEntity": { "@id": "https://appautomaton.github.io/#projects" },
+      "inLanguage": "en-US"
+    },
+    {
+      "@type": "ItemList",
+      "@id": "https://appautomaton.github.io/#projects",
+      "name": "App Automaton open-source projects",
+      "itemListOrder": "https://schema.org/ItemListUnordered",
+      "numberOfItems": 15,
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "item": { "@type": "SoftwareSourceCode", "name": "agent-designer", "codeRepository": "https://github.com/appautomaton/agent-designer", "url": "https://appautomaton.github.io/agent-designer/", "description": "The skills workspace: issue-driven workflows, an MCP tool catalog, and bridge skills that let one agent delegate to another with session continuity.", "isPartOf": { "@id": "https://appautomaton.github.io/#org" } } },
+        { "@type": "ListItem", "position": 2, "item": { "@type": "SoftwareSourceCode", "name": "document-SKILLs", "codeRepository": "https://github.com/appautomaton/document-SKILLs", "programmingLanguage": "Python", "description": "Skills for docx, xlsx, pptx, and pdf: extraction, forms, formulas, and tracked changes. Runs on uv with PEP 723 metadata.", "isPartOf": { "@id": "https://appautomaton.github.io/#org" } } },
+        { "@type": "ListItem", "position": 3, "item": { "@type": "SoftwareSourceCode", "name": "presentation", "codeRepository": "https://github.com/appautomaton/presentation", "programmingLanguage": "JavaScript", "description": "Consulting-quality decks, from strategy storyboarding and brand identity to pixel-perfect PDF or editable PPTX.", "isPartOf": { "@id": "https://appautomaton.github.io/#org" } } },
+        { "@type": "ListItem", "position": 4, "item": { "@type": "SoftwareSourceCode", "name": "webmaton", "codeRepository": "https://github.com/appautomaton/webmaton", "programmingLanguage": "Python", "description": "Grounded web research: citations, deterministic HTML-to-Markdown, and persistent sessions over Playwright, nodriver, and Chrome DevTools.", "isPartOf": { "@id": "https://appautomaton.github.io/#org" } } },
+        { "@type": "ListItem", "position": 5, "item": { "@type": "SoftwareSourceCode", "name": "playwright-skill", "codeRepository": "https://github.com/appautomaton/playwright-skill", "programmingLanguage": "JavaScript", "description": "Browser automation that also runs on Android, with a Termux launcher patch and headless Chromium.", "isPartOf": { "@id": "https://appautomaton.github.io/#org" } } },
+        { "@type": "ListItem", "position": 6, "item": { "@type": "SoftwareSourceCode", "name": "automaton", "codeRepository": "https://github.com/appautomaton/automaton", "programmingLanguage": "JavaScript", "description": "A stage-gated harness: frame, plan, review, execute, verify, resume. Installs into any project as plain markdown and keeps durable state under .agent/.", "isPartOf": { "@id": "https://appautomaton.github.io/#org" } } },
+        { "@type": "ListItem", "position": 7, "item": { "@type": "SoftwareSourceCode", "name": "automux", "codeRepository": "https://github.com/appautomaton/automux", "programmingLanguage": "TypeScript", "description": "Multi-agent orchestration in tmux or kitty. Coders, planners, and reviewers work in parallel git worktrees and coordinate through files.", "isPartOf": { "@id": "https://appautomaton.github.io/#org" } } },
+        { "@type": "ListItem", "position": 8, "item": { "@type": "SoftwareSourceCode", "name": "openclaw-monorepo", "codeRepository": "https://github.com/appautomaton/openclaw-monorepo", "programmingLanguage": "JavaScript", "description": "A repo-local OpenClaw workspace with modular JSON5 config, plugins, and Docker sandboxes. Runs coding-agent CLIs on desktop or in Android Termux.", "isPartOf": { "@id": "https://appautomaton.github.io/#org" } } },
+        { "@type": "ListItem", "position": 9, "item": { "@type": "SoftwareSourceCode", "name": "markmaton", "codeRepository": "https://github.com/appautomaton/markmaton", "programmingLanguage": "Go", "description": "HTML to Markdown for agent pipelines: a fast Go engine wrapped in a Python CLI and API, published on PyPI.", "isPartOf": { "@id": "https://appautomaton.github.io/#org" } } },
+        { "@type": "ListItem", "position": 10, "item": { "@type": "SoftwareSourceCode", "name": "mlx-speech", "codeRepository": "https://github.com/appautomaton/mlx-speech", "programmingLanguage": "Python", "description": "Speech synthesis, voice cloning, dialogue, sound effects, and recognition, MLX-native on the Apple GPU.", "isPartOf": { "@id": "https://appautomaton.github.io/#org" } } },
+        { "@type": "ListItem", "position": 11, "item": { "@type": "SoftwareSourceCode", "name": "tnt-asr", "codeRepository": "https://github.com/appautomaton/tnt-asr", "programmingLanguage": "Python", "description": "A terminal voice-to-text TUI. Qwen3-ASR runs on the Apple GPU and transcribes in about a second, fully local.", "isPartOf": { "@id": "https://appautomaton.github.io/#org" } } },
+        { "@type": "ListItem", "position": 12, "item": { "@type": "SoftwareSourceCode", "name": "ltx-video-mlx", "codeRepository": "https://github.com/appautomaton/ltx-video-mlx", "programmingLanguage": "Python", "description": "Text- and image-to-video with synchronized audio on LTX-2.3 22B. Runs 8-bit and 4-bit inference and fine-tunes LoRAs on device.", "isPartOf": { "@id": "https://appautomaton.github.io/#org" } } },
+        { "@type": "ListItem", "position": 13, "item": { "@type": "SoftwareSourceCode", "name": "mlx-cv", "codeRepository": "https://github.com/appautomaton/mlx-cv", "programmingLanguage": "Python", "description": "MLX-native computer vision: object detection, segmentation, and open-vocabulary grounding with SAM 3 and LocateAnything.", "isPartOf": { "@id": "https://appautomaton.github.io/#org" } } },
+        { "@type": "ListItem", "position": 14, "item": { "@type": "SoftwareSourceCode", "name": "mlx-spatial", "codeRepository": "https://github.com/appautomaton/mlx-spatial", "programmingLanguage": "Python", "description": "3D and spatial inference on device with SAM 3D Objects, TRELLIS.2, WorldMirror, and MapAnything.", "isPartOf": { "@id": "https://appautomaton.github.io/#org" } } },
+        { "@type": "ListItem", "position": 15, "item": { "@type": "SoftwareSourceCode", "name": "setloom", "codeRepository": "https://github.com/appautomaton/setloom", "programmingLanguage": "Python", "description": "Producer-first co-production for club music: musical intent into editable tracks, stems, renders, and listening notes.", "isPartOf": { "@id": "https://appautomaton.github.io/#org" } } }
+      ]
     }
   ]
 }

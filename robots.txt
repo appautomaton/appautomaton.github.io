@@ -3,3 +3,4 @@ Allow: /
 
 Sitemap: https://appautomaton.github.io/sitemap.xml
 Sitemap: https://appautomaton.github.io/mlx-atomistic/sitemap-index.xml
+Sitemap: https://appautomaton.github.io/docker-for-apple-container/sitemap.xml

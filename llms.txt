@@ -1,0 +1,43 @@
+# App Automaton
+
+> An open-source workshop for engineering with coding agents.
+> Portable SKILLs, stage-gated runtimes, and a quiet streak of pure-MLX work for Apple Silicon. Made for Claude Code, Codex, Gemini, and OpenCode.
+
+App Automaton is the open-source workshop of AppCubic. Everything public sorts onto four shelves: SKILLs that teach agents workflows, harnesses that keep them honest, models that run on the laptop's own silicon, and a creative harness that points the same method at club music. SKILLs are portable SKILL.md packs with three layers of disclosure (frontmatter the agent always sees, a workflow body loaded on invocation, references pulled on demand), and the same folder works unchanged under Claude Code, Codex, Gemini, and OpenCode.
+
+## SKILLs for coding agents
+
+- [agent-designer](https://github.com/appautomaton/agent-designer): the skills workspace. Issue-driven workflows, an MCP tool catalog, and bridge skills for agent-to-agent delegation with session continuity. [Deep dive](https://appautomaton.github.io/agent-designer/).
+- [document-SKILLs](https://github.com/appautomaton/document-SKILLs): docx, xlsx, pptx, and pdf. Extraction, forms, formulas, and tracked changes. Runs on uv with PEP 723, no virtualenv.
+- [presentation](https://github.com/appautomaton/presentation): consulting-quality decks, from strategy storyboarding to pixel-perfect PDF or editable PPTX.
+- [webmaton](https://github.com/appautomaton/webmaton): grounded web research. Citations, deterministic HTML-to-Markdown, and persistent sessions over Playwright, nodriver, and Chrome DevTools.
+- [playwright-skill](https://github.com/appautomaton/playwright-skill): browser automation that also runs on Android via a Termux launcher patch and headless Chromium.
+
+## Harnesses, runtimes, and tools
+
+- [automaton](https://github.com/appautomaton/automaton): a stage-gated harness. Frame, plan, review, execute, verify, resume. Installs as plain markdown.
+- [automux](https://github.com/appautomaton/automux): multi-agent orchestration in tmux or kitty, coordinating through files across parallel git worktrees.
+- [openclaw-monorepo](https://github.com/appautomaton/openclaw-monorepo): a repo-local OpenClaw workspace with JSON5 config, plugins, and Docker sandboxes.
+- [markmaton](https://github.com/appautomaton/markmaton): HTML to Markdown for agent pipelines. A Go engine wrapped in a Python CLI and API, on PyPI.
+- [docker-for-apple-container](https://appautomaton.github.io/docker-for-apple-container/): a stateless `docker` shim over Apple's native `container` CLI on macOS, with no Docker Desktop.
+
+## On-device, in pure MLX
+
+- [mlx-speech](https://github.com/appautomaton/mlx-speech): speech synthesis, voice cloning, dialogue, sound effects, and recognition, MLX-native on the Apple GPU.
+- [tnt-asr](https://github.com/appautomaton/tnt-asr): a terminal voice-to-text TUI. Qwen3-ASR transcribes in about a second, fully local.
+- [ltx-video-mlx](https://github.com/appautomaton/ltx-video-mlx): text- and image-to-video with synchronized audio on LTX-2.3 22B. On-device LoRA fine-tuning.
+- [mlx-cv](https://github.com/appautomaton/mlx-cv): MLX-native computer vision. Detection, segmentation, and open-vocabulary grounding with SAM 3 and LocateAnything.
+- [mlx-spatial](https://github.com/appautomaton/mlx-spatial): 3D and spatial inference on device with SAM 3D Objects, TRELLIS.2, WorldMirror, and MapAnything.
+
+## Creative harnesses
+
+- [setloom](https://github.com/appautomaton/setloom): producer-first co-production for club music. Musical intent into editable tracks, stems, renders, and listening notes, with the human keeping the taste gate.
+
+## Links
+
+- [GitHub org](https://github.com/appautomaton): every public repo.
+- [AppCubic](https://appcubic.com): the applied-AI venture studio behind App Automaton.
+
+## Optional
+
+- Sitemap: /sitemap.xml
