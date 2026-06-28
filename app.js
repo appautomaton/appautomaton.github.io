@@ -144,28 +144,63 @@
   }
 })();
 
-/* Hero cursor spotlight — a soft accent glow that tracks the pointer, layered
-   over the ambient rotating sheen. Pointer (fine-hover) devices only, and never
-   under reduced motion. mousemove only stashes coordinates; a rAF tick writes
-   the CSS vars, so pointer handling stays cheap. */
+/* Hero cursor spotlight — a soft accent glow that tracks the pointer and reacts
+   to how it moves. A rAF loop eases the glow toward the cursor (so it trails),
+   stretches it along the axis of motion, and brightens it with speed; when the
+   pointer rests it settles to a calm circle with a faint breathing pulse, and
+   it fades out on leave. Pointer (fine-hover) devices only, never under reduced
+   motion. */
 (function () {
   var hero = document.querySelector('.aa-hero');
   if (!hero || !window.matchMedia) return;
   if (!matchMedia('(hover: hover) and (pointer: fine)').matches) return;
   if (matchMedia('(prefers-reduced-motion: reduce)').matches) return;
 
-  var raf = null, px = 0, py = 0;
-  function apply() {
-    raf = null;
-    hero.style.setProperty('--hero-mx', px + 'px');
-    hero.style.setProperty('--hero-my', py + 'px');
-  }
-  hero.addEventListener('pointermove', function (e) {
+  var BASE = 300, MAX_ADD = 240;            // glow radius range, px
+  var tx = 0, ty = 0, cx = 0, cy = 0;       // target + eased position
+  var lpx = 0, lpy = 0, vx = 0, vy = 0;     // last pointer pos + velocity
+  var rx = BASE, ry = BASE, o = 0;          // eased radii + opacity
+  var inside = false, raf = null, t = 0;
+
+  function lerp(a, b, n) { return a + (b - a) * n; }
+  function clamp01(n) { return n < 0 ? 0 : n > 1 ? 1 : n; }
+
+  function onMove(e) {
     var r = hero.getBoundingClientRect();
-    px = e.clientX - r.left;
-    py = e.clientY - r.top;
-    if (raf == null) raf = requestAnimationFrame(apply);
+    var nx = e.clientX - r.left, ny = e.clientY - r.top;
+    vx = nx - lpx; vy = ny - lpy;
+    lpx = nx; lpy = ny; tx = nx; ty = ny;
+  }
+
+  function frame() {
+    t += 1;
+    cx = lerp(cx, tx, 0.14);
+    cy = lerp(cy, ty, 0.14);
+    var speed = clamp01(Math.hypot(vx, vy) / 38);
+    vx *= 0.82; vy *= 0.82;                  // velocity decays so it settles
+    var breathe = Math.sin(t * 0.028) * 9;   // gentle idle pulse
+    rx = lerp(rx, BASE + Math.min(MAX_ADD, Math.abs(vx) * 9) + breathe, 0.1);
+    ry = lerp(ry, BASE + Math.min(MAX_ADD, Math.abs(vy) * 9) + breathe, 0.1);
+    var targetO = inside ? 0.5 + speed * 0.85 : 0;
+    o = lerp(o, targetO, inside ? 0.14 : 0.07);
+
+    hero.style.setProperty('--hero-mx', cx + 'px');
+    hero.style.setProperty('--hero-my', cy + 'px');
+    hero.style.setProperty('--hero-rx', rx + 'px');
+    hero.style.setProperty('--hero-ry', ry + 'px');
+    hero.style.setProperty('--hero-o', o.toFixed(3));
+
+    if (inside || o > 0.01) raf = requestAnimationFrame(frame);
+    else raf = null;
+  }
+  function start() { if (raf == null) raf = requestAnimationFrame(frame); }
+
+  hero.addEventListener('pointerenter', function (e) {
+    var r = hero.getBoundingClientRect();
+    lpx = e.clientX - r.left; lpy = e.clientY - r.top;
+    tx = cx = lpx; ty = cy = lpy;
+    inside = true; start();
   });
-  hero.addEventListener('pointerenter', function () { hero.classList.add('is-cursor'); });
-  hero.addEventListener('pointerleave', function () { hero.classList.remove('is-cursor'); });
+  hero.addEventListener('pointermove', onMove);
+  hero.addEventListener('pointerleave', function () { inside = false; start(); });
 })();

@@ -176,11 +176,11 @@ html[data-mode="night"] .aa-theme-mode .ico-moon { display: none; }
    --hero-my and toggles .is-cursor; pointer devices only (see app.js). */
 .aa-hero::before {
   content: ''; position: absolute; inset: 0; z-index: 1; pointer-events: none;
-  background: radial-gradient(circle 360px at var(--hero-mx, 50%) var(--hero-my, 32%),
-    var(--hero-glow-a) 0%, transparent 62%);
-  opacity: 0; transition: opacity 0.5s ease;
+  background: radial-gradient(ellipse var(--hero-rx, 320px) var(--hero-ry, 320px)
+    at var(--hero-mx, 50%) var(--hero-my, 30%),
+    var(--hero-glow-a) 0%, transparent 60%);
+  opacity: var(--hero-o, 0);
 }
-.aa-hero.is-cursor::before { opacity: 1; }
 .aa-hero-bg {
   position: absolute; inset: 0; pointer-events: none; overflow: hidden;
 }
