@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
-import { TextInput, EmptyState, Button, Text, Kbd } from '@astryxdesign/core'
+import { HStack, TextInput, EmptyState, Button, Text, Kbd } from '@astryxdesign/core'
 import { catalog, unitCount } from '../data/catalog'
 import { Shelf } from './Shelf'
 
@@ -35,17 +35,14 @@ export function Workbench() {
       id="catalog"
       style={{ maxWidth: 1040, margin: '0 auto', padding: '0 1.5rem 3rem' }}
     >
-      <div
-        style={{
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'space-between',
-          gap: '1rem',
-          flexWrap: 'wrap',
-          margin: '0 0 2.2rem',
-        }}
+      <HStack
+        align="center"
+        justify="between"
+        gap={4}
+        wrap="wrap"
+        style={{ margin: '0 0 2.2rem' }}
       >
-        <div style={{ display: 'flex', alignItems: 'center', gap: '0.7rem' }}>
+        <HStack align="center" gap={3}>
           <TextInput
             ref={inputRef}
             label="Filter the catalog"
@@ -73,7 +70,7 @@ export function Workbench() {
               to filter
             </Text>
           </div>
-        </div>
+        </HStack>
         <Text
           as="div"
           type="label"
@@ -88,7 +85,7 @@ export function Workbench() {
         >
           {shown} / {unitCount} units
         </Text>
-      </div>
+      </HStack>
 
       {shown === 0 ? (
         <EmptyState

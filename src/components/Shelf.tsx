@@ -1,4 +1,4 @@
-import { Card, Stack, Text, Link } from '@astryxdesign/core'
+import { Card, Stack, HStack, Text, Link } from '@astryxdesign/core'
 import type { ShelfData } from '../data/catalog'
 
 export function Shelf({ shelf }: { shelf: ShelfData }) {
@@ -9,7 +9,7 @@ export function Shelf({ shelf }: { shelf: ShelfData }) {
       style={{ margin: '0 0 3.5rem' }}
     >
       {/* Shelf plate: index letter, label, rail, unit count */}
-      <div style={{ display: 'flex', alignItems: 'center', gap: '0.9rem' }}>
+      <HStack align="center" gap={4}>
         <div
           aria-hidden="true"
           style={{
@@ -57,7 +57,7 @@ export function Shelf({ shelf }: { shelf: ShelfData }) {
         >
           {String(shelf.items.length).padStart(2, '0')}
         </Text>
-      </div>
+      </HStack>
 
       <Text
         as="p"
@@ -96,13 +96,10 @@ export function Shelf({ shelf }: { shelf: ShelfData }) {
                 }}
               >
                 <Stack gap={2} style={{ height: '100%' }}>
-                  <div
-                    style={{
-                      display: 'flex',
-                      justifyContent: 'space-between',
-                      alignItems: 'baseline',
-                      gap: '0.5rem',
-                    }}
+                  <HStack
+                    justify="between"
+                    gap={2}
+                    style={{ alignItems: 'baseline' }}
                   >
                     <Text
                       as="div"
@@ -130,7 +127,7 @@ export function Shelf({ shelf }: { shelf: ShelfData }) {
                     >
                       {p.tag}
                     </Text>
-                  </div>
+                  </HStack>
 
                   {/* spec line: plain stamped type, no chrome */}
                   <Text

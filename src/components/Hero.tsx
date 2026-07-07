@@ -1,4 +1,4 @@
-import { Text, Stack, Link } from '@astryxdesign/core'
+import { Text, Stack, HStack, Link } from '@astryxdesign/core'
 import { unitCount, shelfCount } from '../data/catalog'
 import { MarkSchematic } from './Logo'
 
@@ -40,14 +40,7 @@ export function Hero() {
         padding: '4.5rem 1.5rem 3.5rem',
       }}
     >
-      <div
-        style={{
-          display: 'flex',
-          gap: '2.5rem',
-          alignItems: 'stretch',
-          flexWrap: 'wrap',
-        }}
-      >
+      <HStack align="stretch" gap={10} wrap="wrap">
         <Stack gap={4} style={{ flex: '1 1 26rem', minWidth: 0 }}>
           <Text
             as="div"
@@ -113,16 +106,14 @@ export function Hero() {
         </Stack>
 
         {/* The mark's own drawing, floated on the wall */}
-        <div
+        <Stack
+          align="center"
+          justify="center"
+          gap={4}
           className="aa-hero-after"
           style={{
             flex: '0 1 17rem',
             minWidth: '13rem',
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
-            justifyContent: 'center',
-            gap: '1.1rem',
             padding: '1.6rem 1.2rem 1.1rem',
           }}
         >
@@ -141,8 +132,8 @@ export function Hero() {
           >
             Fig. 1 · Unit mark · 5:1
           </Text>
-        </div>
-      </div>
+        </Stack>
+      </HStack>
     </header>
   )
 }

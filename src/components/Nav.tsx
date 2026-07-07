@@ -1,4 +1,4 @@
-import { Switch, Link, Text } from '@astryxdesign/core'
+import { HStack, Switch, Link, Text } from '@astryxdesign/core'
 import { BrandMark } from './Logo'
 
 export function Nav({
@@ -18,18 +18,17 @@ export function Nav({
         borderBottom: '1px solid var(--color-border)',
       }}
     >
-      <div
+      <HStack
+        align="center"
+        justify="between"
+        gap={4}
         style={{
           maxWidth: 1040,
           margin: '0 auto',
           padding: '0.7rem 1.5rem',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'space-between',
-          gap: '1rem',
         }}
       >
-        <div style={{ display: 'flex', alignItems: 'center', gap: '0.55rem' }}>
+        <HStack align="center" gap={2}>
           <BrandMark size={22} />
           <Text
             as="div"
@@ -43,8 +42,8 @@ export function Nav({
           >
             App Automaton
           </Text>
-        </div>
-        <div style={{ display: 'flex', alignItems: 'center', gap: '1.4rem' }}>
+        </HStack>
+        <HStack align="center" gap={6}>
           <Link
             href="https://github.com/appautomaton"
             style={{
@@ -62,8 +61,8 @@ export function Nav({
             value={mode === 'dark'}
             onChange={(checked) => onModeChange(checked ? 'dark' : 'light')}
           />
-        </div>
-      </div>
+        </HStack>
+      </HStack>
     </nav>
   )
 }
