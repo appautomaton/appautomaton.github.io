@@ -1,9 +1,17 @@
-import { Card, Button, Stack, Grid, Text } from '@astryxdesign/core'
+import { Card, Button, Stack, Text, Badge } from '@astryxdesign/core'
 import type { ShelfData } from '../data/catalog'
 
 export function Shelf({ shelf }: { shelf: ShelfData }) {
   return (
-    <section id={`shelf-${shelf.key}`} style={{ margin: '0 0 3.5rem' }}>
+    <section
+      id={`shelf-${shelf.key}`}
+      className="aa-shelf"
+      style={{ margin: '0 0 3.5rem' }}
+    >
+      <div className="aa-ghost" aria-hidden="true">
+        {shelf.letter}
+      </div>
+
       {/* Shelf plate: index letter, label, rail, unit count */}
       <div style={{ display: 'flex', alignItems: 'center', gap: '0.9rem' }}>
         <div
@@ -38,6 +46,7 @@ export function Shelf({ shelf }: { shelf: ShelfData }) {
         </Text>
         <div
           aria-hidden="true"
+          className="aa-plate-rail"
           style={{ flex: 1, borderTop: '1px solid var(--color-border)' }}
         />
         <Text
@@ -67,66 +76,101 @@ export function Shelf({ shelf }: { shelf: ShelfData }) {
         {shelf.blurb}
       </Text>
 
-      <Grid columns={{ minWidth: 260, repeat: 'fit' }} gap={3}>
-        {shelf.items.map((p) => (
-          <Card
-            key={p.repo}
-            className="aa-card"
-            style={{
-              padding: '1.2rem 1.25rem 1.35rem',
-              border: '1px solid var(--color-border)',
-              borderRadius: 0,
-            }}
-          >
-            <Stack gap={3} style={{ height: '100%' }}>
-              <div
+      <div className="aa-bento">
+        {shelf.items.map((p) => {
+          const featured = p.span >= 7
+          return (
+            <div
+              key={p.repo}
+              className={p.span >= 7 ? 'aa-cell aa-cell-wide' : 'aa-cell'}
+              style={{ ['--aa-span' as string]: p.span }}
+            >
+              <Card
+                className="aa-card"
                 style={{
-                  display: 'flex',
-                  justifyContent: 'space-between',
-                  alignItems: 'baseline',
-                  gap: '0.5rem',
+                  height: '100%',
+                  padding: featured
+                    ? '1.5rem 1.5rem 1.5rem'
+                    : '1.2rem 1.25rem 1.35rem',
+                  border: '1px solid var(--color-border)',
+                  borderRadius: 0,
                 }}
               >
-                <Text
-                  as="div"
-                  type="body"
-                  className="aa-card-name"
-                  style={{
-                    fontFamily: 'var(--aa-font-mono)',
-                    color: 'var(--aa-brass)',
-                    fontSize: '1.08rem',
-                    wordBreak: 'break-word',
-                  }}
-                >
-                  {p.repo}
-                </Text>
-                <Text
-                  as="div"
-                  type="label"
-                  style={{
-                    fontFamily: 'var(--aa-font-mono)',
-                    fontSize: '0.68rem',
-                    letterSpacing: '0.12em',
-                    color: 'var(--color-text-secondary)',
-                    flexShrink: 0,
-                  }}
-                >
-                  {p.tag}
-                </Text>
-              </div>
-              <Text as="p" type="body" style={{ flex: 1 }}>
-                {p.description}
-              </Text>
-              <Button
-                label="View"
-                onClick={() => window.open(p.href, '_blank', 'noopener')}
-                size="sm"
-                style={{ alignSelf: 'flex-start', borderRadius: 0 }}
-              />
-            </Stack>
-          </Card>
-        ))}
-      </Grid>
+                <Stack gap={3} style={{ height: '100%' }}>
+                  <div
+                    style={{
+                      display: 'flex',
+                      justifyContent: 'space-between',
+                      alignItems: 'baseline',
+                      gap: '0.5rem',
+                    }}
+                  >
+                    <Text
+                      as="div"
+                      type="body"
+                      className="aa-card-name"
+                      style={{
+                        fontFamily: 'var(--aa-font-mono)',
+                        color: 'var(--aa-brass)',
+                        fontSize: featured ? '1.3rem' : '1.08rem',
+                        wordBreak: 'break-word',
+                      }}
+                    >
+                      {p.repo}
+                    </Text>
+                    <Text
+                      as="div"
+                      type="label"
+                      style={{
+                        fontFamily: 'var(--aa-font-mono)',
+                        fontSize: '0.68rem',
+                        letterSpacing: '0.12em',
+                        color: 'var(--color-text-secondary)',
+                        flexShrink: 0,
+                      }}
+                    >
+                      {p.tag}
+                    </Text>
+                  </div>
+                  <Text as="p" type="body" style={{ flex: 1 }}>
+                    {p.description}
+                  </Text>
+                  <div
+                    style={{
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'space-between',
+                      gap: '0.6rem',
+                      flexWrap: 'wrap',
+                    }}
+                  >
+                    <Button
+                      label="View"
+                      onClick={() => window.open(p.href, '_blank', 'noopener')}
+                      size="sm"
+                      style={{ borderRadius: 0 }}
+                    />
+                    <div style={{ display: 'flex', gap: '0.35rem', flexWrap: 'wrap' }}>
+                      {p.chips.map((c) => (
+                        <Badge
+                          key={c}
+                          label={c}
+                          variant="neutral"
+                          style={{
+                            borderRadius: 0,
+                            fontFamily: 'var(--aa-font-mono)',
+                            letterSpacing: '0.05em',
+                          }}
+                        />
+                      ))}
+                    </div>
+                  </div>
+                </Stack>
+              </Card>
+            </div>
+          )
+        })}
+      </div>
     </section>
   )
 }

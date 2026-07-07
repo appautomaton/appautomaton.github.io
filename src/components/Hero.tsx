@@ -1,5 +1,6 @@
 import { Text, Stack, Link } from '@astryxdesign/core'
 import { unitCount, shelfCount } from '../data/catalog'
+import { Logo } from './Logo'
 
 const WORDMARK = ['App', 'Automaton']
 
@@ -36,7 +37,7 @@ export function Hero() {
         position: 'relative',
         maxWidth: 1040,
         margin: '0 auto',
-        padding: '5.5rem 1.5rem 4rem',
+        padding: '4.5rem 1.5rem 3.5rem',
       }}
     >
       <span className="aa-reg aa-reg-tl" aria-hidden="true" />
@@ -44,69 +45,117 @@ export function Hero() {
       <span className="aa-reg aa-reg-bl" aria-hidden="true" />
       <span className="aa-reg aa-reg-br" aria-hidden="true" />
 
-      <Stack gap={4}>
-        <Text
-          as="div"
-          type="label"
+      <div
+        style={{
+          display: 'flex',
+          gap: '2.5rem',
+          alignItems: 'stretch',
+          flexWrap: 'wrap',
+        }}
+      >
+        <Stack gap={4} style={{ flex: '1 1 26rem', minWidth: 0 }}>
+          <Text
+            as="div"
+            type="label"
+            className="aa-hero-after"
+            style={{
+              fontFamily: 'var(--aa-font-mono)',
+              textTransform: 'uppercase',
+              letterSpacing: '0.14em',
+              fontSize: '0.72rem',
+              color: 'var(--color-text-secondary)',
+            }}
+          >
+            An AppCubic workshop · {unitCount} units · {shelfCount} shelves
+          </Text>
+
+          <Text
+            as="h1"
+            type="display-1"
+            style={{
+              fontFamily: "'Sirin Stencil', sans-serif",
+              fontSize: 'clamp(2.9rem, 7.5vw, 5.25rem)',
+              color: 'var(--color-accent)',
+              letterSpacing: '0.01em',
+              lineHeight: 1.04,
+            }}
+          >
+            <StampedWordmark />
+          </Text>
+
+          <div className="aa-hero-rule" aria-hidden="true" />
+
+          <Text as="p" type="large" className="aa-hero-after">
+            An open-source workshop for engineering with coding agents.
+          </Text>
+
+          <Text
+            as="p"
+            type="supporting"
+            className="aa-hero-after-2"
+            style={{ maxWidth: '54ch', fontSize: '0.98rem', lineHeight: 1.55 }}
+          >
+            Portable SKILLs, stage-gated harnesses, and pure-MLX work that runs
+            on the laptop's own silicon. Built for Claude Code, Codex, Gemini,
+            and OpenCode.
+          </Text>
+
+          <Link
+            href="#catalog"
+            className="aa-hero-after-2"
+            style={{
+              marginTop: '0.5rem',
+              alignSelf: 'flex-start',
+              fontFamily: 'var(--aa-font-mono)',
+              fontSize: '0.85rem',
+              textTransform: 'uppercase',
+              letterSpacing: '0.08em',
+              color: 'var(--aa-brass)',
+            }}
+          >
+            ↓ Browse the shelves
+          </Link>
+        </Stack>
+
+        {/* The mark's own drawing sheet */}
+        <div
           className="aa-hero-after"
           style={{
-            fontFamily: 'var(--aa-font-mono)',
-            textTransform: 'uppercase',
-            letterSpacing: '0.14em',
-            fontSize: '0.72rem',
-            color: 'var(--color-text-secondary)',
+            flex: '0 1 17rem',
+            minWidth: '13rem',
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+            justifyContent: 'center',
+            gap: '0.9rem',
+            border: '1px solid var(--color-border)',
+            padding: '1.6rem 1.2rem 1.1rem',
           }}
         >
-          An AppCubic workshop · {unitCount} units · {shelfCount} shelves
-        </Text>
-
-        <Text
-          as="h1"
-          type="display-1"
-          style={{
-            fontFamily: "'Sirin Stencil', sans-serif",
-            fontSize: 'clamp(2.9rem, 7.5vw, 5.25rem)',
-            color: 'var(--color-accent)',
-            letterSpacing: '0.01em',
-            lineHeight: 1.04,
-          }}
-        >
-          <StampedWordmark />
-        </Text>
-
-        <div className="aa-hero-rule" aria-hidden="true" />
-
-        <Text as="p" type="large" className="aa-hero-after">
-          An open-source workshop for engineering with coding agents.
-        </Text>
-
-        <Text
-          as="p"
-          type="supporting"
-          className="aa-hero-after-2"
-          style={{ maxWidth: '54ch', fontSize: '0.98rem', lineHeight: 1.55 }}
-        >
-          Portable SKILLs, stage-gated harnesses, and pure-MLX work that runs
-          on the laptop's own silicon. Built for Claude Code, Codex, Gemini,
-          and OpenCode.
-        </Text>
-
-        <Link
-          href="#catalog"
-          className="aa-hero-after-2"
-          style={{
-            marginTop: '0.5rem',
-            alignSelf: 'flex-start',
-            fontFamily: 'var(--aa-font-mono)',
-            fontSize: '0.85rem',
-            textTransform: 'uppercase',
-            letterSpacing: '0.08em',
-            color: 'var(--aa-brass)',
-          }}
-        >
-          ↓ Browse the shelves
-        </Link>
-      </Stack>
+          <Logo size={168} animated />
+          <div
+            aria-hidden="true"
+            style={{
+              width: '52%',
+              borderTop: '1px solid var(--color-border)',
+            }}
+          />
+          <Text
+            as="div"
+            type="label"
+            style={{
+              fontFamily: 'var(--aa-font-mono)',
+              fontSize: '0.66rem',
+              letterSpacing: '0.14em',
+              textTransform: 'uppercase',
+              color: 'var(--color-text-secondary)',
+              textAlign: 'center',
+            }}
+          >
+            Fig. 1 · The unit core
+          </Text>
+        </div>
+      </div>
     </header>
   )
 }

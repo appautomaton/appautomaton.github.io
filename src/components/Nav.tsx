@@ -1,4 +1,5 @@
 import { Switch, Link, Text } from '@astryxdesign/core'
+import { Logo } from './Logo'
 
 export function Nav({
   mode,
@@ -28,18 +29,21 @@ export function Nav({
           gap: '1rem',
         }}
       >
-        <Text
-          as="div"
-          type="body"
-          style={{
-            fontFamily: "'Sirin Stencil', sans-serif",
-            fontSize: '1.15rem',
-            color: 'var(--color-accent)',
-            letterSpacing: '0.02em',
-          }}
-        >
-          App Automaton
-        </Text>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '0.55rem' }}>
+          <Logo size={22} />
+          <Text
+            as="div"
+            type="body"
+            style={{
+              fontFamily: "'Sirin Stencil', sans-serif",
+              fontSize: '1.15rem',
+              color: 'var(--color-accent)',
+              letterSpacing: '0.02em',
+            }}
+          >
+            App Automaton
+          </Text>
+        </div>
         <div style={{ display: 'flex', alignItems: 'center', gap: '1.4rem' }}>
           <Link
             href="https://github.com/appautomaton"

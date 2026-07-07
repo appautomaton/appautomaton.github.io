@@ -1,17 +1,30 @@
-import { useState } from 'react'
-import { TextInput, EmptyState, Button, Text } from '@astryxdesign/core'
+import { useEffect, useRef, useState } from 'react'
+import { TextInput, EmptyState, Button, Text, Kbd } from '@astryxdesign/core'
 import { catalog, unitCount } from '../data/catalog'
 import { Shelf } from './Shelf'
 
 export function Workbench() {
   const [query, setQuery] = useState('')
+  const inputRef = useRef<HTMLInputElement>(null)
   const q = query.trim().toLowerCase()
+
+  useEffect(() => {
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key !== '/' || e.metaKey || e.ctrlKey || e.altKey) return
+      const t = e.target as HTMLElement
+      if (t.tagName === 'INPUT' || t.tagName === 'TEXTAREA' || t.isContentEditable) return
+      e.preventDefault()
+      inputRef.current?.focus()
+    }
+    window.addEventListener('keydown', onKey)
+    return () => window.removeEventListener('keydown', onKey)
+  }, [])
 
   const shelves = catalog.map((shelf) => ({
     ...shelf,
     items: q
       ? shelf.items.filter((p) =>
-          `${p.repo} ${p.description}`.toLowerCase().includes(q),
+          `${p.repo} ${p.description} ${p.chips.join(' ')}`.toLowerCase().includes(q),
         )
       : shelf.items,
   }))
@@ -32,17 +45,35 @@ export function Workbench() {
           margin: '0 0 2.2rem',
         }}
       >
-        <TextInput
-          label="Filter the catalog"
-          isLabelHidden
-          placeholder="Filter by name or capability"
-          value={query}
-          onChange={(value) => setQuery(value)}
-          startIcon="search"
-          hasClear
-          size="sm"
-          width={300}
-        />
+        <div style={{ display: 'flex', alignItems: 'center', gap: '0.7rem' }}>
+          <TextInput
+            ref={inputRef}
+            label="Filter the catalog"
+            isLabelHidden
+            placeholder="Filter by name or capability"
+            value={query}
+            onChange={(value) => setQuery(value)}
+            startIcon="search"
+            hasClear
+            size="sm"
+            width={300}
+          />
+          <div className="aa-kbd-hint">
+            <Kbd keys="/" />
+            <Text
+              as="span"
+              type="label"
+              style={{
+                fontFamily: 'var(--aa-font-mono)',
+                fontSize: '0.7rem',
+                letterSpacing: '0.08em',
+                color: 'var(--color-text-secondary)',
+              }}
+            >
+              to filter
+            </Text>
+          </div>
+        </div>
         <Text
           as="div"
           type="label"

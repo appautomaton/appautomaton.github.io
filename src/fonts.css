@@ -1,3 +1,7 @@
+/* Self-hosted OFL fonts. The .subset.woff2 files are Latin subsets built
+   with pyftsubset from the untouched originals kept in this folder; see
+   src/fonts/LICENSES/ for each face's license. */
+
 @font-face {
   font-family: 'Sirin Stencil';
   src: url('./fonts/SirinStencil-Regular.woff2') format('woff2');
@@ -7,20 +11,20 @@
 
 @font-face {
   font-family: 'Secuela';
-  src: url('./fonts/Secuela-Regular.woff') format('woff');
+  src: url('./fonts/Secuela-Regular.subset.woff2') format('woff2');
   font-weight: 400;
   font-display: swap;
 }
 
 @font-face {
   font-family: 'Secuela';
-  src: url('./fonts/Secuela-Medium.woff') format('woff');
+  src: url('./fonts/Secuela-Medium.subset.woff2') format('woff2');
   font-weight: 500;
   font-display: swap;
 }
 
 @font-face {
   font-family: 'Routed Gothic';
-  src: url('./fonts/RoutedGothic.ttf') format('truetype');
+  src: url('./fonts/RoutedGothic.subset.woff2') format('woff2');
   font-display: swap;
 }
