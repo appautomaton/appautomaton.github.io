@@ -4,14 +4,6 @@
    to day/night without any JS restyling.
 --------------------------------------------------------------------------- */
 
-/* Drafting paper: a near-invisible grid over the page ground. */
-.aa-paper {
-  background-image:
-    linear-gradient(var(--aa-grid-line) 1px, transparent 1px),
-    linear-gradient(90deg, var(--aa-grid-line) 1px, transparent 1px);
-  background-size: 32px 32px;
-}
-
 /* --- Hero: the wordmark is stamped in, letter by letter ------------------ */
 
 @keyframes aa-letter-set {

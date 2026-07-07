@@ -11,9 +11,6 @@ import { defineTheme } from '@astryxdesign/core/theme'
 
 export type Vibe = {
   fontMono: string
-  /* faint construction grid. A whisper in day, gone at night so the dark
-     ground reads as a plain gallery wall. */
-  gridLine: string
   /* cool pool of light for the night cursor spotlight */
   lamp: string
   /* faint accent wash under a wall-label on hover, like a spotlight settling */
@@ -22,14 +19,12 @@ export type Vibe = {
 
 export const GALLERY_VIBE_DAY: Vibe = {
   fontMono: "'Routed Gothic', ui-monospace, monospace",
-  gridLine: 'rgba(26, 28, 31, 0.035)',
   lamp: 'rgba(0, 0, 0, 0)',
   cardHover: 'rgba(36, 69, 180, 0.05)',
 }
 
 export const GALLERY_VIBE_NIGHT: Vibe = {
   fontMono: "'Routed Gothic', ui-monospace, monospace",
-  gridLine: 'transparent',
   lamp: 'rgba(122, 160, 255, 0.06)',
   cardHover: 'rgba(122, 160, 255, 0.05)',
 }

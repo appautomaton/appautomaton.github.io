@@ -54,16 +54,12 @@ function App() {
         display: 'contents',
         // @ts-expect-error -- custom properties aren't in CSSProperties
         '--aa-font-mono': vibe.fontMono,
-        '--aa-grid-line': vibe.gridLine,
         '--aa-lamp': vibe.lamp,
         '--aa-card-hover': vibe.cardHover,
       }}
     >
       <Theme theme={galleryTheme} mode={mode}>
-        <div
-          className="aa-paper"
-          style={{ backgroundColor: 'var(--color-background-body)', minHeight: '100vh' }}
-        >
+        <div style={{ backgroundColor: 'var(--color-background-body)', minHeight: '100vh' }}>
           <Nav mode={mode} onModeChange={changeMode} />
           <Hero />
           <Workbench />
