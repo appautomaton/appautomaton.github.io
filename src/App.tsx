@@ -8,7 +8,7 @@ import { Footer } from './components/Footer'
 import { Spotlight } from './components/Spotlight'
 import { StructuredData } from './components/StructuredData'
 import './fonts.css'
-import './app.css'
+import './workshop.css'
 
 function App() {
   const [mode, setMode] = useState<'light' | 'dark'>('light')
