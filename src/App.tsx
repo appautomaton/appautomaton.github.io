@@ -57,6 +57,7 @@ function App() {
         '--aa-font-mono': vibe.fontMono,
         '--aa-grid-line': vibe.gridLine,
         '--aa-lamp': vibe.lamp,
+        '--aa-card-sheen': vibe.cardSheen,
       }}
     >
       <Theme theme={workshopTheme} mode={mode}>

@@ -16,6 +16,8 @@ export type Vibe = {
   gridLine: string
   /* workbench lamp glow for the night cursor spotlight */
   lamp: string
+  /* machined top-edge highlight on cards, like metal catching lamplight */
+  cardSheen: string
 }
 
 export const WORKSHOP_VIBE_DAY: Vibe = {
@@ -23,6 +25,7 @@ export const WORKSHOP_VIBE_DAY: Vibe = {
   fontMono: "'Routed Gothic', ui-monospace, monospace",
   gridLine: 'rgba(96, 74, 42, 0.055)',
   lamp: 'rgba(0, 0, 0, 0)',
+  cardSheen: 'rgba(255, 253, 246, 0.5)',
 }
 
 export const WORKSHOP_VIBE_NIGHT: Vibe = {
@@ -30,6 +33,7 @@ export const WORKSHOP_VIBE_NIGHT: Vibe = {
   fontMono: "'Routed Gothic', ui-monospace, monospace",
   gridLine: 'rgba(214, 158, 84, 0.05)',
   lamp: 'rgba(216, 160, 88, 0.09)',
+  cardSheen: 'rgba(216, 160, 88, 0.09)',
 }
 
 export const workshopTheme = defineTheme({
@@ -45,11 +49,13 @@ export const workshopTheme = defineTheme({
   radius: { base: 2, multiplier: 0 },
   motion: { fast: 120, medium: 260, ratio: 0.85 },
   tokens: {
-    '--color-background-body': ['#F3EEE3', '#241C15'],
-    '--color-background-surface': ['#E8E0CE', '#2F251C'],
-    '--color-background-card': ['#E8E0CE', '#2F251C'],
-    '--color-background-popover': ['#E8E0CE', '#2F251C'],
-    '--color-border': ['#c9bea3', '#493a29'],
+    // Night runs a full value scale: deep ground, lifted cards. Keeping the
+    // two close together read as brown-on-brown mud.
+    '--color-background-body': ['#F3EEE3', '#1C1510'],
+    '--color-background-surface': ['#E8E0CE', '#2B211A'],
+    '--color-background-card': ['#E8E0CE', '#2B211A'],
+    '--color-background-popover': ['#E8E0CE', '#2B211A'],
+    '--color-border': ['#c9bea3', '#4A3A28'],
     '--color-border-emphasized': ['#9C6B2E', '#C08A3E'],
     '--color-accent': ['#3F6E60', '#5B8A7C'],
   },

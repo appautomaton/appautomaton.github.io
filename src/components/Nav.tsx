@@ -1,5 +1,5 @@
 import { Switch, Link, Text } from '@astryxdesign/core'
-import { Logo } from './Logo'
+import { BrandMark } from './Logo'
 
 export function Nav({
   mode,
@@ -30,7 +30,7 @@ export function Nav({
         }}
       >
         <div style={{ display: 'flex', alignItems: 'center', gap: '0.55rem' }}>
-          <Logo size={22} />
+          <BrandMark size={22} />
           <Text
             as="div"
             type="body"

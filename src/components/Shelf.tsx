@@ -1,4 +1,4 @@
-import { Card, Button, Stack, Text, Badge } from '@astryxdesign/core'
+import { Card, Stack, Text, Link } from '@astryxdesign/core'
 import type { ShelfData } from '../data/catalog'
 
 export function Shelf({ shelf }: { shelf: ShelfData }) {
@@ -82,7 +82,7 @@ export function Shelf({ shelf }: { shelf: ShelfData }) {
           return (
             <div
               key={p.repo}
-              className={p.span >= 7 ? 'aa-cell aa-cell-wide' : 'aa-cell'}
+              className={featured ? 'aa-cell aa-cell-wide' : 'aa-cell'}
               style={{ ['--aa-span' as string]: p.span }}
             >
               <Card
@@ -90,13 +90,14 @@ export function Shelf({ shelf }: { shelf: ShelfData }) {
                 style={{
                   height: '100%',
                   padding: featured
-                    ? '1.5rem 1.5rem 1.5rem'
-                    : '1.2rem 1.25rem 1.35rem',
+                    ? '1.5rem 1.5rem 1.35rem'
+                    : '1.2rem 1.25rem 1.15rem',
                   border: '1px solid var(--color-border)',
                   borderRadius: 0,
+                  boxShadow: 'inset 0 1px 0 var(--aa-card-sheen)',
                 }}
               >
-                <Stack gap={3} style={{ height: '100%' }}>
+                <Stack gap={2} style={{ height: '100%' }}>
                   <div
                     style={{
                       display: 'flex',
@@ -132,39 +133,49 @@ export function Shelf({ shelf }: { shelf: ShelfData }) {
                       {p.tag}
                     </Text>
                   </div>
-                  <Text as="p" type="body" style={{ flex: 1 }}>
-                    {p.description}
-                  </Text>
-                  <div
+
+                  {/* spec line: plain stamped type, no chrome */}
+                  <Text
+                    as="div"
+                    type="label"
                     style={{
-                      display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'space-between',
-                      gap: '0.6rem',
-                      flexWrap: 'wrap',
+                      fontFamily: 'var(--aa-font-mono)',
+                      fontSize: '0.64rem',
+                      letterSpacing: '0.14em',
+                      textTransform: 'uppercase',
+                      color: 'var(--color-text-secondary)',
                     }}
                   >
-                    <Button
-                      label="View"
-                      onClick={() => window.open(p.href, '_blank', 'noopener')}
-                      size="sm"
-                      style={{ borderRadius: 0 }}
-                    />
-                    <div style={{ display: 'flex', gap: '0.35rem', flexWrap: 'wrap' }}>
-                      {p.chips.map((c) => (
-                        <Badge
-                          key={c}
-                          label={c}
-                          variant="neutral"
-                          style={{
-                            borderRadius: 0,
-                            fontFamily: 'var(--aa-font-mono)',
-                            letterSpacing: '0.05em',
-                          }}
-                        />
-                      ))}
-                    </div>
-                  </div>
+                    {p.chips.join(' · ')}
+                  </Text>
+
+                  <Text
+                    as="p"
+                    type="body"
+                    style={{ flex: 1, marginTop: '0.35rem' }}
+                  >
+                    {p.description}
+                  </Text>
+
+                  <Link
+                    href={p.href}
+                    target="_blank"
+                    rel="noopener"
+                    hasUnderline={false}
+                    className="aa-view"
+                    style={{
+                      alignSelf: 'flex-start',
+                      marginTop: '0.55rem',
+                      fontFamily: 'var(--aa-font-mono)',
+                      fontSize: '0.74rem',
+                      letterSpacing: '0.12em',
+                      textTransform: 'uppercase',
+                      color: 'var(--aa-brass)',
+                      textDecoration: 'none',
+                    }}
+                  >
+                    View →
+                  </Link>
                 </Stack>
               </Card>
             </div>

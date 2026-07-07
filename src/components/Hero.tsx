@@ -1,6 +1,6 @@
 import { Text, Stack, Link } from '@astryxdesign/core'
 import { unitCount, shelfCount } from '../data/catalog'
-import { Logo } from './Logo'
+import { MarkSchematic } from './Logo'
 
 const WORDMARK = ['App', 'Automaton']
 
@@ -132,14 +132,7 @@ export function Hero() {
             padding: '1.6rem 1.2rem 1.1rem',
           }}
         >
-          <Logo size={168} animated />
-          <div
-            aria-hidden="true"
-            style={{
-              width: '52%',
-              borderTop: '1px solid var(--color-border)',
-            }}
-          />
+          <MarkSchematic />
           <Text
             as="div"
             type="label"
@@ -152,7 +145,7 @@ export function Hero() {
               textAlign: 'center',
             }}
           >
-            Fig. 1 · The unit core
+            Fig. 1 · Unit mark · 5:1
           </Text>
         </div>
       </div>
