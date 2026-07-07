@@ -83,58 +83,21 @@
   animation: aa-fade-up 480ms ease 1020ms forwards;
 }
 
-/* Registration marks: the drawing is signed off last. */
-@keyframes aa-reg-in {
-  to {
-    opacity: 0.55;
-  }
-}
-
-.aa-reg {
-  position: absolute;
-  width: 14px;
-  height: 14px;
-  opacity: 0;
-  border: 0 solid var(--aa-brass);
-  animation: aa-reg-in 420ms ease 1180ms forwards;
-  pointer-events: none;
-}
-
-.aa-reg-tl { top: 0; left: 0; border-top-width: 1px; border-left-width: 1px; }
-.aa-reg-tr { top: 0; right: 0; border-top-width: 1px; border-right-width: 1px; }
-.aa-reg-bl { bottom: 0; left: 0; border-bottom-width: 1px; border-left-width: 1px; }
-.aa-reg-br { bottom: 0; right: 0; border-bottom-width: 1px; border-right-width: 1px; }
-
-/* --- Catalog cards: quiet at rest, precise on approach ------------------- */
+/* --- Catalog: each project is a museum wall-label ------------------------
+   No box, no fill. A single hairline top rule, generous space, and a quiet
+   spotlight wash that settles in on hover. */
 
 .aa-card {
-  transition: transform 180ms ease, border-color 180ms ease;
+  transition: background-color 220ms ease, border-top-color 220ms ease;
 }
 
 .aa-card:hover {
-  transform: translateY(-3px);
-  border-color: var(--aa-brass) !important;
+  background-color: var(--aa-card-hover);
+  border-top-color: var(--aa-brass) !important;
 }
 
 .aa-card-name {
   position: relative;
-}
-
-.aa-card-name::after {
-  content: '';
-  position: absolute;
-  left: 0;
-  bottom: -3px;
-  height: 1px;
-  width: 100%;
-  background: var(--color-accent);
-  transform: scaleX(0);
-  transform-origin: left;
-  transition: transform 220ms ease;
-}
-
-.aa-card:hover .aa-card-name::after {
-  transform: scaleX(1);
 }
 
 /* --- Night workbench lamp: a warm pool of light follows the cursor ------- */
@@ -169,13 +132,7 @@
     transform: none;
   }
 
-  .aa-reg {
-    animation: none;
-    opacity: 0.55;
-  }
-
-  .aa-card,
-  .aa-card-name::after {
+  .aa-card {
     transition: none;
   }
 
@@ -283,18 +240,21 @@
   position: relative;
   z-index: 1;
   display: grid;
-  gap: 14px;
-  grid-template-columns: repeat(12, 1fr);
+  column-gap: 2rem;
+  row-gap: 2.75rem;
+  /* Single column on phones. A 12-track grid here would force eleven
+     column-gaps to exist even when every label spans the full width,
+     overflowing the viewport. */
+  grid-template-columns: 1fr;
 }
 
 .aa-cell {
-  grid-column: 1 / -1;
   min-width: 0;
 }
 
 @media (min-width: 620px) and (max-width: 899px) {
-  .aa-cell {
-    grid-column: span 6;
+  .aa-bento {
+    grid-template-columns: repeat(2, 1fr);
   }
 
   .aa-cell-wide {
@@ -303,29 +263,17 @@
 }
 
 @media (min-width: 900px) {
+  .aa-bento {
+    grid-template-columns: repeat(12, 1fr);
+  }
+
   .aa-cell {
     grid-column: span var(--aa-span, 4);
   }
 }
 
-/* --- Ghost letters: each shelf sheet is stamped with its index ----------- */
-
 .aa-shelf {
   position: relative;
-}
-
-.aa-ghost {
-  position: absolute;
-  top: -2.5rem;
-  right: 0;
-  font-family: 'Sirin Stencil', sans-serif;
-  font-size: clamp(9rem, 18vw, 15rem);
-  line-height: 1;
-  color: var(--color-accent);
-  opacity: 0.06;
-  pointer-events: none;
-  user-select: none;
-  z-index: 0;
 }
 
 /* --- Scroll choreography: shelves assemble as they enter the viewport --- */
@@ -350,15 +298,6 @@
   }
 }
 
-@keyframes aa-ghost-drift {
-  from {
-    transform: translateY(2.5rem);
-  }
-  to {
-    transform: translateY(-2.5rem);
-  }
-}
-
 @supports (animation-timeline: view()) {
   @media (prefers-reduced-motion: no-preference) {
     .aa-cell {
@@ -372,12 +311,6 @@
       animation: aa-rail-grow linear both;
       animation-timeline: view();
       animation-range: entry 0% entry 60%;
-    }
-
-    .aa-ghost {
-      animation: aa-ghost-drift linear both;
-      animation-timeline: view();
-      animation-range: entry 0% exit 100%;
     }
   }
 }

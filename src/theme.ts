@@ -12,28 +12,29 @@ import { defineTheme } from '@astryxdesign/core/theme'
 export type Vibe = {
   brass: string
   fontMono: string
-  /* drafting-paper grid line, kept near-invisible */
+  /* drafting-paper grid line. Whisper-faint in day, gone at night so the
+     dark ground reads as a plain gallery wall. */
   gridLine: string
   /* workbench lamp glow for the night cursor spotlight */
   lamp: string
-  /* machined top-edge highlight on cards, like metal catching lamplight */
-  cardSheen: string
+  /* faint warm wash under a wall-label on hover, like a spotlight settling */
+  cardHover: string
 }
 
 export const WORKSHOP_VIBE_DAY: Vibe = {
   brass: '#9C6B2E',
   fontMono: "'Routed Gothic', ui-monospace, monospace",
-  gridLine: 'rgba(96, 74, 42, 0.055)',
+  gridLine: 'rgba(96, 74, 42, 0.04)',
   lamp: 'rgba(0, 0, 0, 0)',
-  cardSheen: 'rgba(255, 253, 246, 0.5)',
+  cardHover: 'rgba(156, 107, 46, 0.05)',
 }
 
 export const WORKSHOP_VIBE_NIGHT: Vibe = {
   brass: '#C08A3E',
   fontMono: "'Routed Gothic', ui-monospace, monospace",
-  gridLine: 'rgba(214, 158, 84, 0.05)',
-  lamp: 'rgba(216, 160, 88, 0.09)',
-  cardSheen: 'rgba(216, 160, 88, 0.09)',
+  gridLine: 'transparent',
+  lamp: 'rgba(216, 160, 88, 0.07)',
+  cardHover: 'rgba(216, 160, 88, 0.05)',
 }
 
 export const workshopTheme = defineTheme({

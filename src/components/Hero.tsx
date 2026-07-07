@@ -40,11 +40,6 @@ export function Hero() {
         padding: '4.5rem 1.5rem 3.5rem',
       }}
     >
-      <span className="aa-reg aa-reg-tl" aria-hidden="true" />
-      <span className="aa-reg aa-reg-tr" aria-hidden="true" />
-      <span className="aa-reg aa-reg-bl" aria-hidden="true" />
-      <span className="aa-reg aa-reg-br" aria-hidden="true" />
-
       <div
         style={{
           display: 'flex',
@@ -117,7 +112,7 @@ export function Hero() {
           </Link>
         </Stack>
 
-        {/* The mark's own drawing sheet */}
+        {/* The mark's own drawing, floated on the wall */}
         <div
           className="aa-hero-after"
           style={{
@@ -127,8 +122,7 @@ export function Hero() {
             flexDirection: 'column',
             alignItems: 'center',
             justifyContent: 'center',
-            gap: '0.9rem',
-            border: '1px solid var(--color-border)',
+            gap: '1.1rem',
             padding: '1.6rem 1.2rem 1.1rem',
           }}
         >

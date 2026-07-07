@@ -8,10 +8,6 @@ export function Shelf({ shelf }: { shelf: ShelfData }) {
       className="aa-shelf"
       style={{ margin: '0 0 3.5rem' }}
     >
-      <div className="aa-ghost" aria-hidden="true">
-        {shelf.letter}
-      </div>
-
       {/* Shelf plate: index letter, label, rail, unit count */}
       <div style={{ display: 'flex', alignItems: 'center', gap: '0.9rem' }}>
         <div
@@ -90,11 +86,13 @@ export function Shelf({ shelf }: { shelf: ShelfData }) {
                 style={{
                   height: '100%',
                   padding: featured
-                    ? '1.5rem 1.5rem 1.35rem'
-                    : '1.2rem 1.25rem 1.15rem',
-                  border: '1px solid var(--color-border)',
+                    ? '1.4rem 1.4rem 1.5rem 0'
+                    : '1.15rem 1.15rem 1.35rem 0',
+                  background: 'transparent',
+                  border: 'none',
+                  borderTop: '1px solid var(--color-border)',
                   borderRadius: 0,
-                  boxShadow: 'inset 0 1px 0 var(--aa-card-sheen)',
+                  boxShadow: 'none',
                 }}
               >
                 <Stack gap={2} style={{ height: '100%' }}>
