@@ -1,46 +1,38 @@
 # appautomaton.github.io
 
-Landing page for the App Automaton GitHub org. Published at <https://appautomaton.github.io>.
-
-## What's here
-
-A static HTML/CSS/JS site with no build step and no framework. The page introduces the org's open-source work: SKILLs for coding agents (Claude Code, Codex, Gemini, OpenCode), the runtimes that hold them together, and a small constellation of pure-MLX models for Apple Silicon.
+The landing page for [App Automaton](https://appautomaton.github.io/), the open-source workshop of AppCubic. It catalogs everything public on four shelves: SKILLs for coding agents, harnesses and runtimes, pure-MLX work for Apple silicon, and creative harnesses.
 
 ## Stack
 
-- Plain HTML, CSS, and a small vanilla `app.js` for the install-tab and clipboard-copy interactions.
-- [Lucide](https://lucide.dev) icons (pinned version) for small functional icons; the GitHub mark is inline SVG.
-- Theme system: five palettes (amber, blue, graphite & violet, verdigris & copper, mono ink) × day/night mode. Driven by `data-palette` / `data-mode` attributes on `<html>`, persisted in localStorage, defaulting to the OS color scheme. Switch via the header control or URL params (`?palette=verdigris&mode=night`).
-- Design tokens in `styles/colors_and_type.css` (amber day is the base); all other palette and night overrides in `styles/themes.css`.
+- [Vite](https://vite.dev) + React 19, TypeScript
+- [Astryx](https://github.com/facebook/astryx), Meta's open design system, as the component and token layer. The whole visual identity is a single `defineTheme()` call in `src/theme.ts` plus a small set of vibe variables.
+- Self-hosted OFL fonts: Sirin Stencil (display), Secuela (body), Routed Gothic (mono). Each font's license ships in `src/fonts/LICENSES/`.
 
-## Develop locally
+## Develop
 
-```bash
-python3 -m http.server 8080
-# then open http://localhost:8080
+```sh
+npm install
+npm run dev
 ```
 
-Any static server will do. There is nothing to compile.
+## Build
 
-## File layout
-
-```
-index.html               page markup
-agent-designer/          deep-dive page for the agent-designer repo
-app.js                   install-tab switching, clipboard copy
-theme.js                 palette/mode switcher logic
-styles/
-├── site.css             component styles
-├── colors_and_type.css  design tokens (typography, spacing, motion)
-├── themes.css           palette + night-mode overrides
-└── fonts/
-    └── Quicksand-wght.ttf
+```sh
+npm run build
 ```
 
-## Deployment
+The build typechecks, bundles, then runs `scripts/prerender.mjs`, which renders the page in headless Chromium and writes the result back to `dist/index.html`. Crawlers that skip JavaScript still see the full catalog as static HTML. The prerender needs a Playwright Chromium: `npx playwright install chromium`.
 
-GitHub Pages publishes from `main` automatically. Each push to `main` triggers a rebuild; typically live within a minute.
+## Deploy
+
+Pushes to `main` deploy through `.github/workflows/deploy.yml` (GitHub Pages, workflow build type).
+
+## Content
+
+The catalog lives in `src/data/catalog.ts` and is the single source of truth: the shelves, the cards, the unit counts, and the JSON-LD structured data all render from it. Agent-facing copy is mirrored in `public/llms.txt`.
+
+One structural rule for this org: this site never owns a bare one-segment path like `/some-project/`, because project repos' own GitHub Pages resolve there and would silently shadow it. Any future page on this site lives under a two-segment path such as `/projects/<slug>/`.
 
 ## License
 
-MIT.
+MIT for everything in this repo except the fonts, which keep their own OFL licenses. See `LICENSE`.

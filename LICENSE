@@ -19,3 +19,12 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
+
+---
+
+This project embeds third-party font files under their own licenses,
+independent of the MIT license above:
+
+- Secuela         — SIL Open Font License 1.1 (see src/fonts/LICENSES/Secuela-OFL.txt)
+- Routed Gothic    — SIL Open Font License 1.1 (see src/fonts/LICENSES/RoutedGothic-LICENSE.md)
+- Sirin Stencil    — SIL Open Font License 1.1 (see src/fonts/LICENSES/SirinStencil-OFL.txt)

@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 48 48">
+  <rect width="48" height="48" fill="#3F6E60"/>
+  <!-- stencil A: the crossbar never touches the legs -->
+  <path d="M13.5 38 L24 11 L34.5 38" fill="none" stroke="#D8A058" stroke-width="4.5" stroke-linecap="square"/>
+  <path d="M19.75 28.5 H28.25" fill="none" stroke="#D8A058" stroke-width="4" stroke-linecap="butt"/>
+  <!-- registration corners -->
+  <path d="M4 9 V4 H9" fill="none" stroke="#F3EEE3" stroke-width="1.6" opacity="0.65"/>
+  <path d="M39 4 H44 V9" fill="none" stroke="#F3EEE3" stroke-width="1.6" opacity="0.65"/>
+  <path d="M44 39 V44 H39" fill="none" stroke="#F3EEE3" stroke-width="1.6" opacity="0.65"/>
+  <path d="M9 44 H4 V39" fill="none" stroke="#F3EEE3" stroke-width="1.6" opacity="0.65"/>
+</svg>

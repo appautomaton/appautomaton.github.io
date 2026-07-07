@@ -1,0 +1,185 @@
+/* ---------------------------------------------------------------------------
+   App Automaton — workshop motion and finish.
+   Everything here reads Theme/vibe custom properties, so it stays reactive
+   to day/night without any JS restyling.
+--------------------------------------------------------------------------- */
+
+/* Drafting paper: a near-invisible grid over the page ground. */
+.aa-paper {
+  background-image:
+    linear-gradient(var(--aa-grid-line) 1px, transparent 1px),
+    linear-gradient(90deg, var(--aa-grid-line) 1px, transparent 1px);
+  background-size: 32px 32px;
+}
+
+/* --- Hero: the wordmark is stamped in, letter by letter ------------------ */
+
+@keyframes aa-letter-set {
+  0% {
+    opacity: 0;
+    transform: translateY(-0.4em) scale(1.14);
+  }
+  62% {
+    opacity: 1;
+    transform: translateY(0.03em) scale(0.995);
+  }
+  100% {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.aa-hero-word {
+  display: inline-block;
+  white-space: nowrap;
+}
+
+.aa-hero-letter {
+  display: inline-block;
+  opacity: 0;
+  animation: aa-letter-set 460ms cubic-bezier(0.2, 0.7, 0.2, 1) forwards;
+  animation-delay: calc(var(--aa-i) * 42ms);
+}
+
+/* A brass rule draws itself under the wordmark once the letters land. */
+@keyframes aa-rule-draw {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
+
+.aa-hero-rule {
+  height: 2px;
+  width: 100%;
+  max-width: 21rem;
+  background: var(--aa-brass);
+  transform: scaleX(0);
+  transform-origin: left;
+  animation: aa-rule-draw 650ms cubic-bezier(0.2, 0.7, 0.2, 1) 620ms forwards;
+}
+
+/* Supporting copy and plate data settle in after the stamp. */
+@keyframes aa-fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(7px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.aa-hero-after {
+  opacity: 0;
+  animation: aa-fade-up 480ms ease 860ms forwards;
+}
+
+.aa-hero-after-2 {
+  opacity: 0;
+  animation: aa-fade-up 480ms ease 1020ms forwards;
+}
+
+/* Registration marks: the drawing is signed off last. */
+@keyframes aa-reg-in {
+  to {
+    opacity: 0.55;
+  }
+}
+
+.aa-reg {
+  position: absolute;
+  width: 14px;
+  height: 14px;
+  opacity: 0;
+  border: 0 solid var(--aa-brass);
+  animation: aa-reg-in 420ms ease 1180ms forwards;
+  pointer-events: none;
+}
+
+.aa-reg-tl { top: 0; left: 0; border-top-width: 1px; border-left-width: 1px; }
+.aa-reg-tr { top: 0; right: 0; border-top-width: 1px; border-right-width: 1px; }
+.aa-reg-bl { bottom: 0; left: 0; border-bottom-width: 1px; border-left-width: 1px; }
+.aa-reg-br { bottom: 0; right: 0; border-bottom-width: 1px; border-right-width: 1px; }
+
+/* --- Catalog cards: quiet at rest, precise on approach ------------------- */
+
+.aa-card {
+  transition: transform 180ms ease, border-color 180ms ease;
+}
+
+.aa-card:hover {
+  transform: translateY(-3px);
+  border-color: var(--aa-brass) !important;
+}
+
+.aa-card-name {
+  position: relative;
+}
+
+.aa-card-name::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: -3px;
+  height: 1px;
+  width: 100%;
+  background: var(--color-accent);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 220ms ease;
+}
+
+.aa-card:hover .aa-card-name::after {
+  transform: scaleX(1);
+}
+
+/* --- Night workbench lamp: a warm pool of light follows the cursor ------- */
+
+.aa-lamp {
+  position: fixed;
+  inset: 0;
+  z-index: 40;
+  pointer-events: none;
+  background: radial-gradient(
+    480px circle at var(--aa-lx, 50%) var(--aa-ly, 35%),
+    var(--aa-lamp),
+    transparent 65%
+  );
+}
+
+@media (pointer: coarse) {
+  .aa-lamp {
+    display: none;
+  }
+}
+
+/* --- Reduced motion: everything lands already assembled ------------------ */
+
+@media (prefers-reduced-motion: reduce) {
+  .aa-hero-letter,
+  .aa-hero-rule,
+  .aa-hero-after,
+  .aa-hero-after-2 {
+    animation: none;
+    opacity: 1;
+    transform: none;
+  }
+
+  .aa-reg {
+    animation: none;
+    opacity: 0.55;
+  }
+
+  .aa-card,
+  .aa-card-name::after {
+    transition: none;
+  }
+
+  .aa-lamp {
+    display: none;
+  }
+}
