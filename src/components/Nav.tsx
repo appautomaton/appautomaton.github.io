@@ -51,7 +51,7 @@ export function Nav({
               fontSize: '0.78rem',
               textTransform: 'uppercase',
               letterSpacing: '0.1em',
-              color: 'var(--aa-brass)',
+              color: 'var(--color-accent)',
             }}
           >
             GitHub

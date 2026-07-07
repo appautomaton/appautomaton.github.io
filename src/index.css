@@ -14,12 +14,12 @@ body {
      tokens on its own subtree, which body sits outside of (an ancestor
      can't see a descendant's CSS custom properties). The live, reactive
      background lives on a wrapper inside <Theme> instead. */
-  background: #f3eee3;
+  background: #f4f5f6;
 }
 
 @media (prefers-color-scheme: dark) {
   body {
-    background: #1c1510;
+    background: #15171a;
   }
 }
 

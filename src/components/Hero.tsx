@@ -98,7 +98,7 @@ export function Hero() {
               fontSize: '0.85rem',
               textTransform: 'uppercase',
               letterSpacing: '0.08em',
-              color: 'var(--aa-brass)',
+              color: 'var(--color-accent)',
             }}
           >
             ↓ Browse the shelves

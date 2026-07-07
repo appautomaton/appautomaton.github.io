@@ -41,7 +41,7 @@
   animation-delay: calc(var(--aa-i) * 42ms);
 }
 
-/* A brass rule draws itself under the wordmark once the letters land. */
+/* An accent rule draws itself under the wordmark once the letters land. */
 @keyframes aa-rule-draw {
   from {
     transform: scaleX(0);
@@ -55,7 +55,7 @@
   height: 2px;
   width: 100%;
   max-width: 21rem;
-  background: var(--aa-brass);
+  background: var(--color-accent);
   transform: scaleX(0);
   transform-origin: left;
   animation: aa-rule-draw 650ms cubic-bezier(0.2, 0.7, 0.2, 1) 620ms forwards;
@@ -93,14 +93,14 @@
 
 .aa-card:hover {
   background-color: var(--aa-card-hover);
-  border-top-color: var(--aa-brass) !important;
+  border-top-color: var(--color-accent) !important;
 }
 
 .aa-card-name {
   position: relative;
 }
 
-/* --- Night workbench lamp: a warm pool of light follows the cursor ------- */
+/* --- Night gallery lamp: a cool pool of light follows the cursor -------- */
 
 .aa-lamp {
   position: fixed;
@@ -169,7 +169,7 @@
 }
 
 .aa-schem-core {
-  fill: var(--aa-brass);
+  fill: var(--color-accent);
   transform-box: fill-box;
   transform-origin: center;
   transform: scale(0);
@@ -231,7 +231,7 @@
 }
 
 .aa-card:hover .aa-view {
-  border-bottom-color: var(--aa-brass);
+  border-bottom-color: var(--color-accent);
 }
 
 /* --- Bento: a letterpress type case, compartments of deliberate sizes --- */

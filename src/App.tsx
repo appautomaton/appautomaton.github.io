@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { flushSync } from 'react-dom'
 import { Theme } from '@astryxdesign/core'
-import { workshopTheme, WORKSHOP_VIBE_DAY, WORKSHOP_VIBE_NIGHT } from './theme'
+import { galleryTheme, GALLERY_VIBE_DAY, GALLERY_VIBE_NIGHT } from './theme'
 import { Nav } from './components/Nav'
 import { Hero } from './components/Hero'
 import { Workbench } from './components/Workbench'
@@ -27,7 +27,7 @@ function initialMode(): Mode {
 
 function App() {
   const [mode, setMode] = useState<Mode>(initialMode)
-  const vibe = mode === 'light' ? WORKSHOP_VIBE_DAY : WORKSHOP_VIBE_NIGHT
+  const vibe = mode === 'light' ? GALLERY_VIBE_DAY : GALLERY_VIBE_NIGHT
 
   const changeMode = (next: Mode) => {
     try {
@@ -53,14 +53,13 @@ function App() {
       style={{
         display: 'contents',
         // @ts-expect-error -- custom properties aren't in CSSProperties
-        '--aa-brass': vibe.brass,
         '--aa-font-mono': vibe.fontMono,
         '--aa-grid-line': vibe.gridLine,
         '--aa-lamp': vibe.lamp,
         '--aa-card-hover': vibe.cardHover,
       }}
     >
-      <Theme theme={workshopTheme} mode={mode}>
+      <Theme theme={galleryTheme} mode={mode}>
         <div
           className="aa-paper"
           style={{ backgroundColor: 'var(--color-background-body)', minHeight: '100vh' }}

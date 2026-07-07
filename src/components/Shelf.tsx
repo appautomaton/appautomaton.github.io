@@ -18,11 +18,11 @@ export function Shelf({ shelf }: { shelf: ShelfData }) {
             flexShrink: 0,
             display: 'grid',
             placeItems: 'center',
-            border: '1px solid var(--aa-brass)',
+            border: '1px solid var(--color-accent)',
             fontFamily: "'Sirin Stencil', sans-serif",
             fontSize: '1.2rem',
             lineHeight: 1,
-            color: 'var(--aa-brass)',
+            color: 'var(--color-accent)',
           }}
         >
           {shelf.letter}
@@ -107,7 +107,7 @@ export function Shelf({ shelf }: { shelf: ShelfData }) {
                       className="aa-card-name"
                       style={{
                         fontFamily: 'var(--aa-font-mono)',
-                        color: 'var(--aa-brass)',
+                        color: 'var(--color-accent)',
                         fontSize: featured ? '1.3rem' : '1.08rem',
                         wordBreak: 'break-word',
                       }}
@@ -165,7 +165,7 @@ export function Shelf({ shelf }: { shelf: ShelfData }) {
                       fontSize: '0.74rem',
                       letterSpacing: '0.12em',
                       textTransform: 'uppercase',
-                      color: 'var(--aa-brass)',
+                      color: 'var(--color-accent)',
                       textDecoration: 'none',
                     }}
                   >

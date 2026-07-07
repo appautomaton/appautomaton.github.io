@@ -23,7 +23,7 @@ export function Footer() {
               fontSize: '0.78rem',
               textTransform: 'uppercase',
               letterSpacing: '0.1em',
-              color: 'var(--aa-brass)',
+              color: 'var(--color-accent)',
             }}
           >
             GitHub org
@@ -35,7 +35,7 @@ export function Footer() {
               fontSize: '0.78rem',
               textTransform: 'uppercase',
               letterSpacing: '0.1em',
-              color: 'var(--aa-brass)',
+              color: 'var(--color-accent)',
             }}
           >
             AppCubic
