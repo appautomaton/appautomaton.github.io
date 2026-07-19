@@ -1,8 +1,8 @@
-Copyright (c) 2018 The Secuela Project Authors (https://github.com/defharo/secuela-variable).
+Copyright 2010 The League Gothic Project Authors (https://github.com/theleagueof/league-gothic)
 
 This Font Software is licensed under the SIL Open Font License, Version 1.1.
 This license is copied below, and is also available with a FAQ at:
-http://scripts.sil.org/OFL
+https://scripts.sil.org/OFL
 
 
 -----------------------------------------------------------

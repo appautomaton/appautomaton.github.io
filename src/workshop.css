@@ -1,98 +1,688 @@
 /* ---------------------------------------------------------------------------
-   App Automaton — workshop motion and finish.
+   App Automaton — Cabinet Theater motion and finish.
    Everything here reads Theme/vibe custom properties, so it stays reactive
-   to day/night without any JS restyling.
+   to day/night without any JS restyling. Day is the rehearsal: ink on
+   celadon paper. Night is the performance: limelight lines on the dark
+   house. The engravings are recolored live by one filter stack per mode.
 --------------------------------------------------------------------------- */
 
-/* --- Hero: the wordmark is stamped in, letter by letter ------------------ */
+/* --- Engravings: one treatment for every plate --------------------------- */
 
-@keyframes aa-letter-set {
-  0% {
+.aa-plate-img {
+  filter: var(--aa-plate-filter);
+  mix-blend-mode: var(--aa-plate-blend);
+  transition: filter 500ms ease;
+}
+
+.aa-bloom:hover .aa-plate-img {
+  filter: var(--aa-plate-bloom);
+}
+
+/* --- The stage: full-bleed 1738 hero ------------------------------------- */
+
+.aa-stage {
+  position: relative;
+  height: 92svh;
+  min-height: 34rem;
+  overflow: hidden;
+}
+
+.aa-stage-bg {
+  position: absolute;
+  inset: -3.5%;
+  background-size: cover;
+  background-position: center 27%;
+  filter: var(--aa-plate-filter);
+  mix-blend-mode: var(--aa-plate-blend);
+  animation: aa-kenburns 30s ease-in-out infinite alternate;
+  will-change: transform;
+  transition: filter 500ms ease;
+}
+
+@keyframes aa-kenburns {
+  from {
+    transform: scale(1);
+  }
+  to {
+    transform: scale(1.055);
+  }
+}
+
+/* The house fades into the page at the edges, in the page's own paper. */
+.aa-stage-vig {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(115% 88% at 50% 40%, transparent 44%, var(--color-background-body) 108%),
+    linear-gradient(
+      180deg,
+      var(--color-background-body),
+      transparent 18% 78%,
+      var(--color-background-body)
+    );
+}
+
+/* --- The plaque: title mounted over a rocaille cartouche ------------------ */
+
+.aa-plaque {
+  position: absolute;
+  left: 33%;
+  top: 56%;
+  transform: translate(-50%, -50%);
+  width: min(92vw, 37rem);
+}
+
+@media (max-width: 860px) {
+  .aa-plaque {
+    left: 50%;
+    top: auto;
+    bottom: 6%;
+    transform: translateX(-50%);
+  }
+
+  .aa-stage-bg {
+    background-position: center 38%;
+  }
+}
+
+.aa-plaque-frame {
+  width: 100%;
+  transform: scale(1.06);
+  -webkit-mask-image: radial-gradient(72% 66% at 50% 48%, #000 56%, transparent 83%);
+  mask-image: radial-gradient(72% 66% at 50% 48%, #000 56%, transparent 83%);
+}
+
+.aa-plaque-panel {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 66%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: var(--color-background-surface);
+  border: 1px solid var(--color-text-primary);
+  outline: 1px solid var(--color-text-primary);
+  outline-offset: 3px;
+  padding: 1.6rem 1.8rem 1.4rem;
+  text-align: center;
+}
+
+@media (max-width: 860px) {
+  .aa-plaque-panel {
+    width: 80%;
+    padding: 1.2rem 1.1rem 1rem;
+  }
+}
+
+/* Load choreography: the plaque settles like a label being hung. */
+@keyframes aa-settle {
+  from {
     opacity: 0;
-    transform: translateY(-0.4em) scale(1.14);
+    transform: translate(-50%, -50%) scale(1.015);
   }
-  62% {
+  to {
     opacity: 1;
-    transform: translateY(0.03em) scale(0.995);
+    transform: translate(-50%, -50%);
   }
+}
+
+.aa-plaque-panel {
+  opacity: 0;
+  animation: aa-settle 700ms ease 350ms forwards;
+}
+
+@keyframes aa-fade-in {
+  to {
+    opacity: 1;
+  }
+}
+
+.aa-plaque-frame {
+  opacity: 0;
+  animation: aa-fade-in 900ms ease 150ms forwards;
+}
+
+/* --- Masthead: ticket-stub controls --------------------------------------- */
+
+.aa-ticket,
+.aa-mode-toggle {
+  font-family: var(--aa-font-mono);
+  font-size: 0.6rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  border: 1px solid var(--color-border);
+  background: none;
+  color: var(--color-accent);
+  text-decoration: none;
+  cursor: pointer;
+  transition: border-color 180ms ease;
+}
+
+.aa-ticket {
+  padding: 0.45rem 0.85rem;
+  display: inline-block;
+}
+
+.aa-ticket:hover,
+.aa-ticket:focus-visible {
+  background: var(--aa-flood-bg);
+  color: var(--aa-flood-accent);
+  border-color: var(--aa-flood-bg);
+}
+
+.aa-mode-toggle {
+  display: inline-flex;
+  padding: 0;
+  color: var(--color-text-secondary);
+}
+
+.aa-mode-toggle span {
+  padding: 0.45rem 0.7rem;
+  transition: background-color 180ms ease, color 180ms ease;
+}
+
+.aa-mode-toggle span + span {
+  border-left: 1px solid var(--color-border);
+}
+
+/* The active side is printed. */
+.aa-mode-toggle .aa-on {
+  background: var(--aa-flood-bg);
+  color: var(--aa-flood-text);
+}
+
+.aa-mode-toggle:hover,
+.aa-mode-toggle:focus-visible,
+.aa-ticket:focus-visible {
+  border-color: var(--color-accent);
+}
+
+.aa-mode-toggle:focus-visible,
+.aa-ticket:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
+}
+
+/* The mark's core breathes, like a held note. */
+@keyframes aa-core-breathe {
+  0%,
   100% {
     opacity: 1;
-    transform: none;
+  }
+  50% {
+    opacity: 0.5;
   }
 }
 
-.aa-hero-word {
-  display: inline-block;
-  white-space: nowrap;
+.aa-mark-core {
+  animation: aa-core-breathe 4200ms ease-in-out infinite;
 }
 
-.aa-hero-letter {
-  display: inline-block;
-  opacity: 0;
-  animation: aa-letter-set 460ms cubic-bezier(0.2, 0.7, 0.2, 1) forwards;
-  animation-delay: calc(var(--aa-i) * 42ms);
+/* --- The playbill: acts strip -------------------------------------------- */
+
+.aa-playbill {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  border-block: 1px solid var(--color-border);
 }
 
-/* An accent rule draws itself under the wordmark once the letters land. */
-@keyframes aa-rule-draw {
-  from {
-    transform: scaleX(0);
+.aa-playbill a {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  padding: 1.2rem 1.4rem 1.3rem;
+  text-decoration: none;
+  color: var(--color-text-primary);
+  border-left: 1px solid var(--color-border);
+  transition: background-color 180ms ease;
+}
+
+.aa-playbill a:first-child {
+  border-left: none;
+}
+
+.aa-playbill a:hover,
+.aa-playbill a:focus-visible {
+  background: var(--color-background-surface);
+}
+
+.aa-playbill .aa-roman {
+  font-family: var(--aa-font-mono);
+  font-size: 0.6rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--aa-patina);
+}
+
+.aa-playbill .aa-play-nm {
+  font-family: 'League Gothic', 'Arial Narrow', sans-serif;
+  font-size: 1.45rem;
+  line-height: 0.95;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  /* labels may wrap; the count row below stays on one shared line */
+  flex: 1;
+}
+
+.aa-playbill .aa-play-ct {
+  font-family: var(--aa-font-mono);
+  font-size: 0.6rem;
+  letter-spacing: 0.14em;
+  color: var(--color-text-secondary);
+}
+
+@media (max-width: 860px) {
+  .aa-playbill {
+    grid-template-columns: repeat(2, 1fr);
   }
-  to {
-    transform: scaleX(1);
+
+  .aa-playbill a:nth-child(3) {
+    border-left: none;
+  }
+
+  .aa-playbill a:nth-child(n + 3) {
+    border-top: 1px solid var(--color-border);
   }
 }
 
-.aa-hero-rule {
-  height: 2px;
-  width: 100%;
-  max-width: 21rem;
-  background: var(--color-accent);
-  transform: scaleX(0);
-  transform-origin: left;
-  animation: aa-rule-draw 650ms cubic-bezier(0.2, 0.7, 0.2, 1) 620ms forwards;
+/* --- Acts ----------------------------------------------------------------- */
+
+.aa-shelf {
+  position: relative;
+  margin: 0 0 4rem;
 }
 
-/* Supporting copy and plate data settle in after the stamp. */
-@keyframes aa-fade-up {
-  from {
-    opacity: 0;
-    transform: translateY(7px);
+.aa-act-roman {
+  font-family: 'League Gothic', 'Arial Narrow', sans-serif;
+  font-size: 2.6rem;
+  line-height: 0.8;
+  color: var(--aa-patina);
+  flex-shrink: 0;
+}
+
+.aa-act-label {
+  font-family: 'League Gothic', 'Arial Narrow', sans-serif;
+  font-size: 1.75rem;
+  line-height: 0.9;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  color: var(--color-text-primary);
+}
+
+.aa-act-count {
+  font-family: var(--aa-font-mono);
+  font-size: 0.66rem;
+  letter-spacing: 0.12em;
+  color: var(--aa-patina);
+  font-variant-numeric: tabular-nums;
+}
+
+/* --- Bento: a tiled exhibit case, packed to its own width ----------------
+   The grid answers to its container, not the viewport: four regimes, dense
+   packing throughout, and at full width the featured cases stand two rows
+   tall so the small ones stack beside them. Size classes come from the
+   catalog's own span data: l ≥ 7 columns, m 5–6, s ≤ 4. */
+
+.aa-shelf {
+  container-type: inline-size;
+}
+
+.aa-bento {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  gap: 1.25rem;
+  grid-auto-flow: dense;
+  /* Single column on phones. A 12-track grid here would force eleven
+     column-gaps to exist even when every card spans the full width,
+     overflowing the viewport. */
+  grid-template-columns: 1fr;
+}
+
+.aa-cell {
+  min-width: 0;
+}
+
+@container (min-width: 30rem) and (max-width: 43.99rem) {
+  .aa-bento {
+    grid-template-columns: repeat(2, 1fr);
   }
-  to {
-    opacity: 1;
-    transform: none;
+
+  .aa-cell-l,
+  .aa-cell-m {
+    grid-column: 1 / -1;
   }
 }
 
-.aa-hero-after {
-  opacity: 0;
-  animation: aa-fade-up 480ms ease 860ms forwards;
+@container (min-width: 44rem) and (max-width: 59.99rem) {
+  .aa-bento {
+    grid-template-columns: repeat(6, 1fr);
+  }
+
+  .aa-cell-s,
+  .aa-cell-m {
+    grid-column: span 3;
+  }
+
+  .aa-cell-l {
+    grid-column: span 6;
+  }
 }
 
-.aa-hero-after-2 {
-  opacity: 0;
-  animation: aa-fade-up 480ms ease 1020ms forwards;
+@container (min-width: 60rem) {
+  .aa-bento {
+    grid-template-columns: repeat(12, 1fr);
+  }
+
+  .aa-cell {
+    grid-column: span var(--aa-span, 4);
+  }
+
+  /* Featured cases stand two rows tall; dense flow stacks the rest beside. */
+  .aa-cell-l {
+    grid-row: span 2;
+  }
 }
 
-/* --- Catalog: each project is a museum wall-label ------------------------
-   No box, no fill. A single hairline top rule, generous space, and a quiet
-   spotlight wash that settles in on hover. */
+/* --- Exhibit cards: paper labels until they are pressed ------------------
+   At rest: a mounted paper panel with a double hairline. On hover or focus
+   the label is printed — flooded with the opposite mode's palette, fast in
+   like a stamp, slow out like ink lifting. */
 
 .aa-card {
-  transition: background-color 220ms ease, border-top-color 220ms ease;
+  background: var(--color-background-card) !important;
+  transition: background-color 360ms ease;
 }
 
-.aa-card:hover {
-  background-color: var(--aa-card-hover);
-  border-top-color: var(--color-accent) !important;
+.aa-card:hover,
+.aa-card:focus-within {
+  background: var(--aa-flood-bg) !important;
+  transition-duration: 130ms;
 }
 
-.aa-card-name {
+.aa-bento .aa-card-name {
+  font-family: 'League Gothic', 'Arial Narrow', sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  line-height: 0.95;
+  color: var(--color-text-primary);
+  word-break: break-word;
+  transition: color 360ms ease;
+}
+
+.aa-bento .aa-card-tag {
+  font-family: var(--aa-font-mono);
+  letter-spacing: 0.14em;
+  color: var(--aa-patina);
+  flex-shrink: 0;
+  transition: color 360ms ease;
+}
+
+.aa-bento .aa-card-chips {
+  font-family: var(--aa-font-mono);
+  font-size: 0.58rem;
+  font-stretch: 87.5%;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--color-text-secondary);
+  transition: color 360ms ease;
+}
+
+.aa-bento .aa-card-desc {
+  color: var(--color-text-primary);
+  transition: color 360ms ease;
+}
+
+.aa-bento .aa-view {
+  font-family: var(--aa-font-mono);
+  font-size: 0.64rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--color-accent);
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+  transition: color 360ms ease, border-color 360ms ease;
+}
+
+.aa-card:hover .aa-card-name,
+.aa-card:focus-within .aa-card-name,
+.aa-card:hover .aa-card-desc,
+.aa-card:focus-within .aa-card-desc {
+  color: var(--aa-flood-text);
+  transition-duration: 130ms;
+}
+
+.aa-card:hover .aa-card-tag,
+.aa-card:focus-within .aa-card-tag {
+  color: var(--aa-flood-patina);
+  transition-duration: 130ms;
+}
+
+.aa-card:hover .aa-card-chips,
+.aa-card:focus-within .aa-card-chips {
+  color: var(--aa-flood-muted);
+  transition-duration: 130ms;
+}
+
+.aa-card:hover .aa-view,
+.aa-card:focus-within .aa-view {
+  color: var(--aa-flood-accent);
+  border-bottom-color: var(--aa-flood-accent);
+  transition-duration: 130ms;
+}
+
+/* --- Card species --------------------------------------------------------
+   Five shapes, hand-distributed across each shelf: plate on top, plate
+   below the text, a tall side strip, an image-led split, and pure type.
+   The card is a flex shell; padding lives on the body so plates can run
+   edge to edge. */
+
+.aa-card {
+  display: flex !important;
+  flex-direction: column;
+}
+
+.aa-card-body {
+  flex: 1;
+  padding: 1.25rem 1.4rem 1.4rem;
+}
+
+.aa-cell-l .aa-card-body {
+  padding: 1.5rem 1.6rem 1.6rem;
+}
+
+.aa-thumb {
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.aa-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* top: the plate is the case's lid */
+.aa-card-top .aa-thumb {
+  aspect-ratio: 5 / 2.3;
+  max-height: 15rem;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.aa-cell-l.aa-cell-l .aa-card-top .aa-thumb {
+  aspect-ratio: 16 / 10;
+  max-height: 22rem;
+}
+
+/* bottom: the plate sits under the label like a mounted specimen */
+.aa-card-bottom .aa-thumb {
+  aspect-ratio: 5 / 1.9;
+  max-height: 11rem;
+  border-top: 1px solid var(--color-border);
+}
+
+.aa-card-viewbar {
+  padding: 0.85rem 1.4rem 1.4rem;
+  border-top: 1px solid var(--color-border);
+}
+
+/* the body above a mounted plate doesn't reserve the view's slot */
+.aa-card-bottom .aa-card-body {
+  padding-bottom: 1.1rem;
+}
+
+/* side: a tall strip of engraving on the case's right edge */
+.aa-card-side {
+  flex-direction: row !important;
+}
+
+.aa-card-side .aa-thumb {
+  order: 2;
+  width: 34%;
+  min-height: 100%;
+  border-left: 1px solid var(--color-border);
+}
+
+/* split: the image leads, text follows — the marquee case */
+.aa-card-split {
+  flex-direction: row !important;
+}
+
+.aa-card-split .aa-thumb {
+  width: 40%;
+  min-height: 15rem;
+  max-height: 24rem;
+  border-right: 1px solid var(--color-border);
+}
+
+/* When the label is pressed, its plate re-prints in the opposite ink. */
+.aa-card:hover .aa-thumb .aa-plate-img,
+.aa-card:focus-within .aa-thumb .aa-plate-img {
+  filter: var(--aa-flood-plate-filter);
+  mix-blend-mode: var(--aa-flood-plate-blend);
+  transition-duration: 130ms;
+}
+
+/* On the narrowest layouts the art withdraws: only the featured cases and
+   the marquee keep their plates, and side strips fold back to lids. */
+@container (max-width: 29.99rem) {
+  .aa-cell-s .aa-thumb,
+  .aa-cell-m .aa-thumb {
+    display: none;
+  }
+}
+
+@container (max-width: 43.99rem) {
+  .aa-card-side {
+    flex-direction: column !important;
+  }
+
+  .aa-card-side .aa-thumb {
+    order: 0;
+    width: 100%;
+    min-height: 0;
+    aspect-ratio: 5 / 2.3;
+    border-left: none;
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .aa-card-split {
+    flex-direction: column !important;
+  }
+
+  .aa-card-split .aa-thumb {
+    width: 100%;
+    min-height: 0;
+    aspect-ratio: 5 / 2.6;
+    border-right: none;
+    border-bottom: 1px solid var(--color-border);
+  }
+}
+
+/* --- Interlude plates ----------------------------------------------------- */
+
+.aa-interm {
+  border-block: 1px solid var(--color-border);
+  padding: 3rem 0;
+  margin: 0 0 4rem;
+}
+
+.aa-plate-cap {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-top: 0.8rem;
+  font-family: var(--aa-font-mono);
+  font-size: 0.6rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--color-text-secondary);
+}
+
+.aa-plate-cap b {
+  color: var(--aa-patina);
+  font-weight: 500;
+}
+
+.aa-apparatus {
   position: relative;
+  overflow: hidden;
 }
 
-/* --- Night gallery lamp: a cool pool of light follows the cursor -------- */
+.aa-apparatus img {
+  width: 100%;
+  display: block;
+}
+
+.aa-apparatus .aa-apparatus-cap {
+  position: absolute;
+  left: 4vw;
+  bottom: 1.1rem;
+  font-family: var(--aa-font-mono);
+  font-size: 0.6rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--color-text-secondary);
+  background: var(--color-background-body);
+  border: 1px solid var(--color-border);
+  padding: 0.45rem 0.7rem;
+}
+
+/* --- Colophon ------------------------------------------------------------- */
+
+.aa-colophon-frame {
+  border: 1px solid var(--color-border);
+}
+
+.aa-colophon-frame figcaption {
+  padding: 0.5rem 0.7rem;
+  border-top: 1px solid var(--color-border);
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  font-family: var(--aa-font-mono);
+  font-size: 0.56rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--color-text-secondary);
+}
+
+.aa-colophon-frame b {
+  color: var(--aa-patina);
+  font-weight: 500;
+}
+
+/* --- Empty state: the duck waits on its pedestal -------------------------- */
+
+.aa-empty-duck {
+  width: min(46vw, 200px);
+  margin: 0 auto;
+}
+
+/* --- Night follow spot: a faint pool of light on the cursor --------------- */
 
 .aa-lamp {
   position: fixed;
@@ -112,163 +702,7 @@
   }
 }
 
-/* --- Reduced motion: everything lands already assembled ------------------ */
-
-@media (prefers-reduced-motion: reduce) {
-  .aa-hero-letter,
-  .aa-hero-rule,
-  .aa-hero-after,
-  .aa-hero-after-2 {
-    animation: none;
-    opacity: 1;
-    transform: none;
-  }
-
-  .aa-card {
-    transition: none;
-  }
-
-  .aa-lamp {
-    display: none;
-  }
-}
-
-/* --- Mark schematic: the logo drawn on the drafting table ---------------- */
-
-.aa-schem-center {
-  stroke: var(--color-border);
-  stroke-width: 1;
-  stroke-dasharray: 5 4;
-  opacity: 0;
-  animation: aa-schem-fade 450ms ease 300ms forwards;
-}
-
-.aa-schem-plate,
-.aa-schem-frame {
-  fill: none;
-  stroke: var(--color-accent);
-  stroke-width: 1.4;
-  stroke-dasharray: 1;
-  stroke-dashoffset: 1;
-}
-
-.aa-schem-plate {
-  animation: aa-schem-draw 850ms cubic-bezier(0.4, 0, 0.2, 1) 650ms forwards;
-}
-
-.aa-schem-frame {
-  animation: aa-schem-draw 700ms cubic-bezier(0.4, 0, 0.2, 1) 1250ms forwards;
-}
-
-.aa-schem-core {
-  fill: var(--color-accent);
-  transform-box: fill-box;
-  transform-origin: center;
-  transform: scale(0);
-  animation:
-    aa-core-in 500ms cubic-bezier(0.2, 0.9, 0.3, 1.3) 1850ms forwards,
-    aa-core-breathe 4200ms ease-in-out 2500ms infinite;
-}
-
-.aa-schem-dim {
-  opacity: 0;
-  animation: aa-schem-fade 500ms ease 2350ms forwards;
-}
-
-.aa-schem-dim line {
-  stroke: var(--color-text-secondary);
-  stroke-width: 0.8;
-}
-
-.aa-schem-dim text {
-  fill: var(--color-text-secondary);
-  font-family: var(--aa-font-mono);
-  font-size: 9px;
-  letter-spacing: 0.08em;
-}
-
-@keyframes aa-schem-draw {
-  to {
-    stroke-dashoffset: 0;
-  }
-}
-
-@keyframes aa-schem-fade {
-  to {
-    opacity: 1;
-  }
-}
-
-@keyframes aa-core-in {
-  to {
-    transform: scale(1);
-  }
-}
-
-@keyframes aa-core-breathe {
-  0%,
-  100% {
-    opacity: 1;
-  }
-  50% {
-    opacity: 0.55;
-  }
-}
-
-/* --- View link: quiet at rest, the arrow leans in on hover --------------- */
-
-.aa-view {
-  border-bottom: 1px solid transparent;
-  transition: border-color 180ms ease;
-}
-
-.aa-card:hover .aa-view {
-  border-bottom-color: var(--color-accent);
-}
-
-/* --- Bento: a letterpress type case, compartments of deliberate sizes --- */
-
-.aa-bento {
-  position: relative;
-  z-index: 1;
-  display: grid;
-  column-gap: 2rem;
-  row-gap: 2.75rem;
-  /* Single column on phones. A 12-track grid here would force eleven
-     column-gaps to exist even when every label spans the full width,
-     overflowing the viewport. */
-  grid-template-columns: 1fr;
-}
-
-.aa-cell {
-  min-width: 0;
-}
-
-@media (min-width: 620px) and (max-width: 899px) {
-  .aa-bento {
-    grid-template-columns: repeat(2, 1fr);
-  }
-
-  .aa-cell-wide {
-    grid-column: 1 / -1;
-  }
-}
-
-@media (min-width: 900px) {
-  .aa-bento {
-    grid-template-columns: repeat(12, 1fr);
-  }
-
-  .aa-cell {
-    grid-column: span var(--aa-span, 4);
-  }
-}
-
-.aa-shelf {
-  position: relative;
-}
-
-/* --- Scroll choreography: shelves assemble as they enter the viewport --- */
+/* --- Scroll choreography: exhibits assemble as they enter ----------------- */
 
 @keyframes aa-cell-rise {
   from {
@@ -307,7 +741,7 @@
   }
 }
 
-/* --- Day/night flip rides the View Transition API ------------------------ */
+/* --- Day/night flip rides the View Transition API ------------------------- */
 
 ::view-transition-old(root),
 ::view-transition-new(root) {
@@ -315,7 +749,7 @@
   animation-timing-function: ease;
 }
 
-/* --- Filter row: the slash hint --------------------------------------- */
+/* --- Filter row: the slash hint ------------------------------------------- */
 
 .aa-kbd-hint {
   display: none;
@@ -329,19 +763,39 @@
   }
 }
 
+/* --- Reduced motion: the house lights come up all at once ------------------ */
+
 @media (prefers-reduced-motion: reduce) {
-  .aa-schem-center,
-  .aa-schem-plate,
-  .aa-schem-frame,
-  .aa-schem-core,
-  .aa-schem-dim {
+  .aa-stage-bg {
     animation: none;
-    stroke-dashoffset: 0;
-    opacity: 1;
-    transform: none;
   }
 
-  .aa-view {
+  .aa-plaque-panel,
+  .aa-plaque-frame {
+    animation: none;
+    opacity: 1;
+  }
+
+  .aa-plate-img,
+  .aa-stage-bg,
+  .aa-card,
+  .aa-bento .aa-card-name,
+  .aa-bento .aa-card-tag,
+  .aa-bento .aa-card-chips,
+  .aa-bento .aa-card-desc,
+  .aa-bento .aa-view,
+  .aa-playbill a,
+  .aa-ticket,
+  .aa-mode-toggle,
+  .aa-mode-toggle span {
     transition: none;
+  }
+
+  .aa-mark-core {
+    animation: none;
+  }
+
+  .aa-lamp {
+    display: none;
   }
 }

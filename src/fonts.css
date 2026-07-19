@@ -1,30 +1,51 @@
-/* Self-hosted OFL fonts. The .subset.woff2 files are Latin subsets built
-   with pyftsubset from the untouched originals kept in this folder; see
-   src/fonts/LICENSES/ for each face's license. */
+/* Self-hosted fonts. The .subset.woff2 files are Latin subsets built with
+   pyftsubset from the untouched originals; see src/fonts/LICENSES/ for each
+   face's license.
+
+   League Gothic (OFL)  — display. A revival of Alternate Gothic No. 1
+                          (1903): the condensed wood-type voice of playbills
+                          and theater posters.
+   Gambetta (ITF FFL)   — body. An editorial serif with wedge terminals;
+                          the program-book voice beside the plates.
+   Martian Mono (OFL)   — instrument. Brutalist monospace for plate numbers,
+                          chips, counts — the machine's own voice. */
 
 @font-face {
-  font-family: 'Sirin Stencil';
-  src: url('./fonts/SirinStencil-Regular.woff2') format('woff2');
+  font-family: 'League Gothic';
+  src: url('./fonts/LeagueGothic-var.subset.woff2') format('woff2');
   font-weight: 400;
+  font-stretch: 75% 100%;
   font-display: swap;
 }
 
 @font-face {
-  font-family: 'Secuela';
-  src: url('./fonts/Secuela-Regular.subset.woff2') format('woff2');
+  font-family: 'Gambetta';
+  src: url('./fonts/Gambetta-Regular.woff2') format('woff2');
   font-weight: 400;
+  font-style: normal;
   font-display: swap;
 }
 
 @font-face {
-  font-family: 'Secuela';
-  src: url('./fonts/Secuela-Medium.subset.woff2') format('woff2');
+  font-family: 'Gambetta';
+  src: url('./fonts/Gambetta-Italic.woff2') format('woff2');
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Gambetta';
+  src: url('./fonts/Gambetta-Medium.woff2') format('woff2');
   font-weight: 500;
+  font-style: normal;
   font-display: swap;
 }
 
 @font-face {
-  font-family: 'Routed Gothic';
-  src: url('./fonts/RoutedGothic.subset.woff2') format('woff2');
+  font-family: 'Martian Mono';
+  src: url('./fonts/MartianMono-var.subset.woff2') format('woff2');
+  font-weight: 100 800;
+  font-stretch: 75% 112%;
   font-display: swap;
 }

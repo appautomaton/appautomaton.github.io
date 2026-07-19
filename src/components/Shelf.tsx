@@ -1,71 +1,42 @@
 import { Card, Stack, HStack, Text, Link } from '@astryxdesign/core'
 import type { ShelfData } from '../data/catalog'
+import { cardArt, layoutSpans } from '../plates/thumbs'
 
-export function Shelf({ shelf }: { shelf: ShelfData }) {
+const ROMANS = ['I', 'II', 'III', 'IV', 'V', 'VI']
+
+export function Shelf({ shelf, index }: { shelf: ShelfData; index: number }) {
   return (
-    <section
-      id={`shelf-${shelf.key}`}
-      className="aa-shelf"
-      style={{ margin: '0 0 3.5rem' }}
-    >
-      {/* Shelf plate: index letter, label, rail, unit count */}
-      <HStack align="center" gap={4}>
-        <div
-          aria-hidden="true"
-          style={{
-            width: 34,
-            height: 34,
-            flexShrink: 0,
-            display: 'grid',
-            placeItems: 'center',
-            border: '1px solid var(--color-accent)',
-            fontFamily: "'Sirin Stencil', sans-serif",
-            fontSize: '1.2rem',
-            lineHeight: 1,
-            color: 'var(--color-accent)',
-          }}
-        >
-          {shelf.letter}
+    <section id={`shelf-${shelf.key}`} className="aa-shelf">
+      {/* Act heading: numeral, label, rail, unit count */}
+      <HStack align="end" gap={4}>
+        <div className="aa-act-roman" aria-hidden="true">
+          {ROMANS[index]}
         </div>
-        <Text
-          as="h2"
-          type="label"
-          style={{
-            fontFamily: 'var(--aa-font-mono)',
-            textTransform: 'uppercase',
-            letterSpacing: '0.12em',
-            fontSize: '0.82rem',
-            color: 'var(--color-accent)',
-          }}
-        >
+        <Text as="h2" type="label" className="aa-act-label">
           {shelf.label}
         </Text>
         <div
           aria-hidden="true"
           className="aa-plate-rail"
-          style={{ flex: 1, borderTop: '1px solid var(--color-border)' }}
-        />
-        <Text
-          as="div"
-          type="label"
           style={{
-            fontFamily: 'var(--aa-font-mono)',
-            fontSize: '0.72rem',
-            letterSpacing: '0.1em',
-            color: 'var(--color-text-secondary)',
+            flex: 1,
+            alignSelf: 'center',
+            borderTop: '1px solid var(--color-border)',
           }}
-        >
+        />
+        <div className="aa-act-count">
           {String(shelf.items.length).padStart(2, '0')}
-        </Text>
+        </div>
       </HStack>
 
       <Text
         as="p"
         type="supporting"
         style={{
-          maxWidth: '62ch',
-          margin: '0.7rem 0 1.4rem',
-          fontSize: '0.92rem',
+          maxWidth: '58ch',
+          margin: '0.8rem 0 1.5rem',
+          fontStyle: 'italic',
+          fontSize: '0.98rem',
           lineHeight: 1.55,
         }}
       >
@@ -74,104 +45,112 @@ export function Shelf({ shelf }: { shelf: ShelfData }) {
 
       <div className="aa-bento">
         {shelf.items.map((p) => {
-          const featured = p.span >= 7
+          const span = layoutSpans[p.repo] ?? p.span
+          const featured = span >= 7
+          const size = featured ? 'aa-cell-l' : span >= 5 ? 'aa-cell-m' : 'aa-cell-s'
+          const art = cardArt[p.repo]
+          const layout = art?.layout ?? 'text'
+          const plate = art && (
+            <div className="aa-thumb" aria-hidden="true">
+              <img
+                className="aa-plate-img"
+                src={art.src}
+                alt=""
+                loading="lazy"
+                style={{
+                  objectPosition: art.position,
+                  transform: art.scale ? `scale(${art.scale})` : undefined,
+                }}
+              />
+            </div>
+          )
           return (
             <div
               key={p.repo}
-              className={featured ? 'aa-cell aa-cell-wide' : 'aa-cell'}
-              style={{ ['--aa-span' as string]: p.span }}
+              className={`aa-cell ${size}`}
+              style={{ ['--aa-span' as string]: span }}
             >
               <Card
-                className="aa-card"
+                className={`aa-card aa-card-${layout}`}
                 style={{
                   height: '100%',
-                  padding: featured
-                    ? '1.4rem 1.4rem 1.5rem 0'
-                    : '1.15rem 1.15rem 1.35rem 0',
-                  background: 'transparent',
-                  border: 'none',
-                  borderTop: '1px solid var(--color-border)',
+                  padding: 0,
+                  border: '1px solid var(--color-text-primary)',
+                  outline: '1px solid var(--color-border)',
+                  outlineOffset: 3,
                   borderRadius: 0,
                   boxShadow: 'none',
                 }}
               >
-                <Stack gap={2} style={{ height: '100%' }}>
-                  <HStack
-                    justify="between"
-                    gap={2}
-                    style={{ alignItems: 'baseline' }}
-                  >
-                    <Text
-                      as="div"
-                      type="body"
-                      className="aa-card-name"
-                      style={{
-                        fontFamily: 'var(--aa-font-mono)',
-                        color: 'var(--color-accent)',
-                        fontSize: featured ? '1.3rem' : '1.08rem',
-                        wordBreak: 'break-word',
-                      }}
-                    >
-                      {p.repo}
+                {(layout === 'top' || layout === 'side' || layout === 'split') && plate}
+                <Stack gap={2} className="aa-card-body">
+                  {/* exhibit caption: chips and plate number */}
+                  <HStack justify="between" gap={2}>
+                    <Text as="div" type="label" className="aa-card-chips">
+                      {p.chips.join(' · ')}
                     </Text>
                     <Text
                       as="div"
                       type="label"
-                      style={{
-                        fontFamily: 'var(--aa-font-mono)',
-                        fontSize: '0.68rem',
-                        letterSpacing: '0.12em',
-                        color: 'var(--color-text-secondary)',
-                        flexShrink: 0,
-                      }}
+                      className="aa-card-tag"
+                      style={{ fontSize: '0.6rem' }}
                     >
                       {p.tag}
                     </Text>
                   </HStack>
 
-                  {/* spec line: plain stamped type, no chrome */}
                   <Text
                     as="div"
-                    type="label"
-                    style={{
-                      fontFamily: 'var(--aa-font-mono)',
-                      fontSize: '0.64rem',
-                      letterSpacing: '0.14em',
-                      textTransform: 'uppercase',
-                      color: 'var(--color-text-secondary)',
-                    }}
+                    type="body"
+                    className="aa-card-name"
+                    style={{ fontSize: featured ? '1.9rem' : '1.6rem' }}
                   >
-                    {p.chips.join(' · ')}
+                    {p.repo}
                   </Text>
 
                   <Text
                     as="p"
                     type="body"
-                    style={{ flex: 1, marginTop: '0.35rem' }}
+                    className="aa-card-desc"
+                    style={{
+                      flex: 1,
+                      marginTop: '0.2rem',
+                      fontSize: '0.94rem',
+                      lineHeight: 1.55,
+                    }}
                   >
                     {p.description}
                   </Text>
 
-                  <Link
-                    href={p.href}
-                    target="_blank"
-                    rel="noopener"
-                    hasUnderline={false}
-                    className="aa-view"
-                    style={{
-                      alignSelf: 'flex-start',
-                      marginTop: '0.55rem',
-                      fontFamily: 'var(--aa-font-mono)',
-                      fontSize: '0.74rem',
-                      letterSpacing: '0.12em',
-                      textTransform: 'uppercase',
-                      color: 'var(--color-accent)',
-                      textDecoration: 'none',
-                    }}
-                  >
-                    View →
-                  </Link>
+                  {layout !== 'bottom' && (
+                    <Link
+                      href={p.href}
+                      target="_blank"
+                      rel="noopener"
+                      hasUnderline={false}
+                      className="aa-view"
+                      style={{ alignSelf: 'flex-start', marginTop: '0.5rem' }}
+                    >
+                      View →
+                    </Link>
+                  )}
                 </Stack>
+                {layout === 'bottom' && plate}
+                {layout === 'bottom' && (
+                  /* the view stays on the card's bottom line, under the plate,
+                     so every row's links sit on one rule */
+                  <div className="aa-card-viewbar">
+                    <Link
+                      href={p.href}
+                      target="_blank"
+                      rel="noopener"
+                      hasUnderline={false}
+                      className="aa-view"
+                    >
+                      View →
+                    </Link>
+                  </div>
+                )}
               </Card>
             </div>
           )

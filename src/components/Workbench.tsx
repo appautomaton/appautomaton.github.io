@@ -1,7 +1,9 @@
 import { useEffect, useRef, useState } from 'react'
-import { HStack, TextInput, EmptyState, Button, Text, Kbd } from '@astryxdesign/core'
+import { HStack, TextInput, Button, Text, Kbd, Stack } from '@astryxdesign/core'
 import { catalog, unitCount } from '../data/catalog'
 import { Shelf } from './Shelf'
+import { IntermissionPlate } from './Plates'
+import duck from '../plates/duck.webp'
 
 export function Workbench() {
   const [query, setQuery] = useState('')
@@ -22,6 +24,7 @@ export function Workbench() {
 
   const shelves = catalog.map((shelf) => ({
     ...shelf,
+    index: catalog.indexOf(shelf),
     items: q
       ? shelf.items.filter((p) =>
           `${p.repo} ${p.description} ${p.chips.join(' ')}`.toLowerCase().includes(q),
@@ -29,18 +32,19 @@ export function Workbench() {
       : shelf.items,
   }))
   const shown = shelves.reduce((n, s) => n + s.items.length, 0)
+  const visible = shelves.filter((s) => s.items.length > 0)
 
   return (
     <main
       id="catalog"
-      style={{ maxWidth: 1040, margin: '0 auto', padding: '0 1.5rem 3rem' }}
+      style={{ maxWidth: 1120, margin: '0 auto', padding: '3rem 1.5rem 3rem' }}
     >
       <HStack
         align="center"
         justify="between"
         gap={4}
         wrap="wrap"
-        style={{ margin: '0 0 2.2rem' }}
+        style={{ margin: '0 0 2.4rem' }}
       >
         <HStack align="center" gap={3}>
           <TextInput
@@ -62,7 +66,7 @@ export function Workbench() {
               type="label"
               style={{
                 fontFamily: 'var(--aa-font-mono)',
-                fontSize: '0.7rem',
+                fontSize: '0.66rem',
                 letterSpacing: '0.08em',
                 color: 'var(--color-text-secondary)',
               }}
@@ -76,10 +80,10 @@ export function Workbench() {
           type="label"
           style={{
             fontFamily: 'var(--aa-font-mono)',
-            fontSize: '0.72rem',
+            fontSize: '0.66rem',
             letterSpacing: '0.12em',
             textTransform: 'uppercase',
-            color: 'var(--color-text-secondary)',
+            color: 'var(--aa-patina)',
             fontVariantNumeric: 'tabular-nums',
           }}
         >
@@ -88,22 +92,46 @@ export function Workbench() {
       </HStack>
 
       {shown === 0 ? (
-        <EmptyState
-          title="No units match"
-          description="Nothing on any shelf matches that query."
-          actions={
-            <Button
-              label="Clear filter"
-              size="sm"
-              onClick={() => setQuery('')}
-              style={{ borderRadius: 0 }}
-            />
-          }
-        />
+        /* The duck waits alone on its pedestal. */
+        <Stack align="center" gap={4} style={{ padding: '2.5rem 0 3.5rem', textAlign: 'center' }}>
+          <img
+            className="aa-empty-duck aa-plate-img"
+            src={duck}
+            alt=""
+            width={800}
+            height={1062}
+            style={{ height: 'auto' }}
+          />
+          <Text
+            as="p"
+            type="body"
+            style={{
+              fontFamily: "'League Gothic', 'Arial Narrow', sans-serif",
+              fontSize: '1.7rem',
+              textTransform: 'uppercase',
+              letterSpacing: '0.02em',
+            }}
+          >
+            No units match
+          </Text>
+          <Text as="p" type="supporting" style={{ fontStyle: 'italic' }}>
+            Nothing on any shelf matches that query.
+          </Text>
+          <Button
+            label="Clear filter"
+            size="sm"
+            onClick={() => setQuery('')}
+            style={{ borderRadius: 0 }}
+          />
+        </Stack>
       ) : (
-        shelves
-          .filter((s) => s.items.length > 0)
-          .map((s) => <Shelf key={s.key} shelf={s} />)
+        visible.map((s, i) => (
+          <div key={s.key}>
+            <Shelf shelf={s} index={s.index} />
+            {/* The interlude plate plays once, after the first act. */}
+            {q === '' && i === 0 && <IntermissionPlate />}
+          </div>
+        ))
       )}
     </main>
   )

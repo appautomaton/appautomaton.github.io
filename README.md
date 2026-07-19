@@ -6,7 +6,8 @@ The landing page for [App Automaton](https://appautomaton.github.io/), the open-
 
 - [Vite](https://vite.dev) + React 19, TypeScript
 - [Astryx](https://github.com/facebook/astryx), Meta's open design system, as the component and token layer. The whole visual identity is a single `defineTheme()` call in `src/theme.ts` plus a small set of vibe variables.
-- Self-hosted OFL fonts: Sirin Stencil (display), Secuela (body), Routed Gothic (mono). Each font's license ships in `src/fonts/LICENSES/`.
+- Self-hosted fonts: League Gothic (display, OFL), Gambetta (body, ITF Free Font License), Martian Mono (labels and metadata, OFL). Each font's license ships in `src/fonts/LICENSES/`.
+- Six public-domain/CC0 engravings — Vaucanson's automata on their 1738 stage, a Rijksmuseum rocaille cartouche, the Encyclopédie's cloud-machine and Comédie-Française plates, the Amsterdam Schouwburg — recolored live with CSS filters: sepia-ink on celadon paper by day, limelight silver-sage on the darkened house by night. Sources and license notes in `src/plates/SOURCES.md`.
 
 ## Develop
 
@@ -35,4 +36,4 @@ One structural rule for this org: this site never owns a bare one-segment path l
 
 ## License
 
-MIT for everything in this repo except the fonts, which keep their own OFL licenses. See `LICENSE`.
+MIT for everything in this repo except the fonts, which keep their own licenses (OFL for League Gothic and Martian Mono, ITF Free Font License for Gambetta). The engravings in `src/plates/` are public domain or CC0. See `LICENSE`.

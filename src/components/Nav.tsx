@@ -1,5 +1,5 @@
-import { HStack, Switch, Link, Text } from '@astryxdesign/core'
-import { BrandMark } from './Logo'
+import { HStack, Text } from '@astryxdesign/core'
+import { AdaptiveMark } from './Logo'
 
 export function Nav({
   mode,
@@ -8,6 +8,7 @@ export function Nav({
   mode: 'light' | 'dark'
   onModeChange: (mode: 'light' | 'dark') => void
 }) {
+  const night = mode === 'dark'
   return (
     <nav
       style={{
@@ -23,44 +24,44 @@ export function Nav({
         justify="between"
         gap={4}
         style={{
-          maxWidth: 1040,
+          maxWidth: 1120,
           margin: '0 auto',
-          padding: '0.7rem 1.5rem',
+          padding: '0.65rem 1.5rem',
         }}
       >
         <HStack align="center" gap={2}>
-          <BrandMark size={22} />
+          <AdaptiveMark size={22} />
           <Text
             as="div"
             type="body"
             style={{
-              fontFamily: "'Sirin Stencil', sans-serif",
-              fontSize: '1.15rem',
-              color: 'var(--color-accent)',
-              letterSpacing: '0.02em',
+              fontFamily: "'League Gothic', 'Arial Narrow', sans-serif",
+              fontSize: '1.3rem',
+              textTransform: 'uppercase',
+              color: 'var(--color-text-primary)',
+              letterSpacing: '0.05em',
+              lineHeight: 1,
             }}
           >
             App Automaton
           </Text>
         </HStack>
-        <HStack align="center" gap={6}>
-          <Link
-            href="https://github.com/appautomaton"
-            style={{
-              fontFamily: 'var(--aa-font-mono)',
-              fontSize: '0.78rem',
-              textTransform: 'uppercase',
-              letterSpacing: '0.1em',
-              color: 'var(--color-accent)',
-            }}
-          >
+        <HStack align="center" gap={3}>
+          <a className="aa-ticket" href="https://github.com/appautomaton">
             GitHub
-          </Link>
-          <Switch
-            label="Night"
-            value={mode === 'dark'}
-            onChange={(checked) => onModeChange(checked ? 'dark' : 'light')}
-          />
+          </a>
+          {/* The house lights: one control, two states, styled like a
+              ticket stub — the active side is printed. */}
+          <button
+            className="aa-mode-toggle"
+            role="switch"
+            aria-checked={night}
+            aria-label="Night mode"
+            onClick={() => onModeChange(night ? 'light' : 'dark')}
+          >
+            <span className={night ? '' : 'aa-on'}>Day</span>
+            <span className={night ? 'aa-on' : ''}>Night</span>
+          </button>
         </HStack>
       </HStack>
     </nav>

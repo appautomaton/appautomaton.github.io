@@ -1,5 +1,34 @@
 import { useId } from 'react'
 
+/** The mark in the theater's own colors: ink plate by day, limelight plate
+    by night, patina core breathing like a held note. Same geometry as the
+    org avatar — only the palette adapts. */
+export function AdaptiveMark({ size = 20 }: { size?: number }) {
+  return (
+    <svg
+      viewBox="0 0 32 32"
+      width={size}
+      height={size}
+      aria-hidden="true"
+      style={{ display: 'block', flexShrink: 0 }}
+    >
+      <rect width="32" height="32" rx="7" fill="var(--color-text-primary)" />
+      <rect
+        x="8"
+        y="8"
+        width="16"
+        height="16"
+        rx="2.5"
+        fill="none"
+        stroke="var(--color-background-body)"
+        strokeWidth="1.8"
+        strokeLinejoin="round"
+      />
+      <circle className="aa-mark-core" cx="16" cy="16" r="3.6" fill="var(--aa-patina)" />
+    </svg>
+  )
+}
+
 /** The App Automaton mark exactly as it appears on the org avatar and
     favicon: dark plate, off-white frame, gradient core. Its own colors are
     the identity, so this version never gets re-themed. */
