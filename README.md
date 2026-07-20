@@ -1,39 +1,95 @@
-# appautomaton.github.io
+<div align="center">
 
-The landing page for [App Automaton](https://appautomaton.github.io/), the open-source workshop of AppCubic. It catalogs everything public on four shelves: SKILLs for coding agents, harnesses and runtimes, pure-MLX work for Apple silicon, and creative harnesses.
+<img src="./public/favicon.svg" alt="App Automaton" width="88" height="88">
 
-## Stack
+# App Automaton
 
-- [Vite](https://vite.dev) + React 19, TypeScript
-- [Astryx](https://github.com/facebook/astryx), Meta's open design system, as the component and token layer. The whole visual identity is a single `defineTheme()` call in `src/theme.ts` plus a small set of vibe variables.
-- Self-hosted fonts: League Gothic (display, OFL), Gambetta (body, ITF Free Font License), Martian Mono (labels and metadata, OFL). Each font's license ships in `src/fonts/LICENSES/`.
-- Six public-domain/CC0 engravings — Vaucanson's automata on their 1738 stage, a Rijksmuseum rocaille cartouche, the Encyclopédie's cloud-machine and Comédie-Française plates, the Amsterdam Schouwburg — recolored live with CSS filters: sepia-ink on celadon paper by day, limelight silver-sage on the darkened house by night. Sources and license notes in `src/plates/SOURCES.md`.
+**Portable systems for agents, Apple silicon, and creative computation.**
 
-## Develop
+The open-source workshop of [AppCubic](https://www.appcubic.com/), built in public and shaped by real production work.
+
+[![Visit the workshop](https://img.shields.io/badge/Visit_the_workshop-appautomaton.renocrypt.com-315c52?style=for-the-badge&logo=githubpages&logoColor=white)](https://appautomaton.renocrypt.com/)
+
+[![Deploy to GitHub Pages](https://github.com/appautomaton/appautomaton.github.io/actions/workflows/deploy.yml/badge.svg)](https://github.com/appautomaton/appautomaton.github.io/actions/workflows/deploy.yml)
+[![License: MIT](https://img.shields.io/badge/License-MIT-7c6f64?style=flat-square)](./LICENSE)
+[![React 19](https://img.shields.io/badge/React-19-149eca?style=flat-square&logo=react&logoColor=white)](https://react.dev/)
+[![TypeScript](https://img.shields.io/badge/TypeScript-6-3178c6?style=flat-square&logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
+[![Vite](https://img.shields.io/badge/Vite-8-646cff?style=flat-square&logo=vite&logoColor=white)](https://vite.dev/)
+
+[Production](https://appautomaton.renocrypt.com/) · [GitHub organization](https://github.com/appautomaton) · [AppCubic](https://www.appcubic.com/) · [RenoCrypt](https://www.renocrypt.com/)
+
+</div>
+
+---
+
+## The workshop
+
+App Automaton is where AppCubic publishes the tools it uses to make agents more capable, inspectable, and useful. The catalog gathers the organization’s public work into four shelves, from portable agent instructions to native machine-learning systems for Apple silicon.
+
+| Shelf | What lives there |
+| --- | --- |
+| **SKILLs** | Portable capabilities for coding agents, designed to travel cleanly across Claude Code, Codex, Gemini, and OpenCode. |
+| **Runtimes** | Stage-gated harnesses for orchestration, browser work, document production, and repeatable agent workflows. |
+| **MLX** | Pure-MLX speech, vision, spatial, and generative systems built for Apple silicon. |
+| **Creative** | The same disciplined machinery turned toward performance, sound, and creative tooling. |
+
+Visit the living catalog at **[appautomaton.renocrypt.com](https://appautomaton.renocrypt.com/)**.
+
+## A cabinet of machines
+
+The site borrows the visual language of an eighteenth-century cabinet theater: mechanical drawings, engraved automata, celadon paper, sepia ink, and a stage that darkens into silver sage at night.
+
+- [Vite](https://vite.dev/) and [React 19](https://react.dev/) provide the application shell, with TypeScript throughout.
+- [Astryx](https://github.com/facebook/astryx), Meta’s open design system, supplies the component and token layer. The visual identity resolves from one `defineTheme()` call in `src/theme.ts` plus a small set of atmosphere variables.
+- League Gothic, Gambetta, and Martian Mono are self-hosted. Their licenses live beside the font files in `src/fonts/LICENSES/`.
+- Six public-domain or CC0 engravings are recolored live with CSS filters. Sources and rights notes are recorded in `src/plates/SOURCES.md`.
+
+## Run it locally
 
 ```sh
 npm install
 npm run dev
 ```
 
-## Build
+For a production build:
 
 ```sh
+npx playwright install chromium
 npm run build
 ```
 
-The build typechecks, bundles, then runs `scripts/prerender.mjs`, which renders the page in headless Chromium and writes the result back to `dist/index.html`. Crawlers that skip JavaScript still see the full catalog as static HTML. The prerender needs a Playwright Chromium: `npx playwright install chromium`.
+The build type-checks the project, bundles it with Vite, and runs `scripts/prerender.mjs`. That final pass renders the complete catalog into `dist/index.html`, so crawlers and no-JavaScript clients receive meaningful HTML rather than an empty application shell.
 
-## Deploy
+## Content as a system
 
-Pushes to `main` deploy through `.github/workflows/deploy.yml` (GitHub Pages, workflow build type).
+`src/data/catalog.ts` is the source of truth for shelves, cards, counts, links, and JSON-LD. Agent-facing copy is mirrored in `public/llms.txt`; discovery metadata lives in `public/robots.txt` and `public/sitemap.xml`.
 
-## Content
+The rule is simple: change the catalog once, then let every public representation derive from it.
 
-The catalog lives in `src/data/catalog.ts` and is the single source of truth: the shelves, the cards, the unit counts, and the JSON-LD structured data all render from it. Agent-facing copy is mirrored in `public/llms.txt`.
+## Delivery
 
-One structural rule for this org: this site never owns a bare one-segment path like `/some-project/`, because project repos' own GitHub Pages resolve there and would silently shadow it. Any future page on this site lives under a two-segment path such as `/projects/<slug>/`.
+Every push to `main` runs [the GitHub Pages workflow](./.github/workflows/deploy.yml): install from the lockfile, provision Chromium, build and prerender, upload the Pages artifact, then deploy it. The production home is [appautomaton.renocrypt.com](https://appautomaton.renocrypt.com/).
+
+### Pages routing contract
+
+This organization site deliberately does not claim bare one-segment paths such as `/some-project/`. GitHub Pages reserves those paths for project sites, and a page here would silently collide with a repository’s own deployment. New landing-site routes therefore live beneath a namespace such as `/projects/<slug>/`.
+
+## The wider constellation
+
+App Automaton belongs to a small family of work with distinct public faces:
+
+- **[AppCubic](https://www.appcubic.com/)** is the applied AI studio behind the workshop: systems, research, and ventures carried through to production.
+- **[RenoCrypt](https://www.renocrypt.com/)** is the long-form technical publication: machine learning, systems, and security with the mathematics and working code intact.
+- **[App Automaton](https://appautomaton.renocrypt.com/)** is the open-source shelf: reusable skills, runtimes, MLX implementations, and creative machinery.
 
 ## License
 
-MIT for everything in this repo except the fonts, which keep their own licenses (OFL for League Gothic and Martian Mono, ITF Free Font License for Gambetta). The engravings in `src/plates/` are public domain or CC0. See `LICENSE`.
+The application code is released under the [MIT License](./LICENSE). League Gothic and Martian Mono retain their OFL terms; Gambetta retains the ITF Free Font License. The engraved source material is public domain or CC0, with provenance documented in `src/plates/SOURCES.md`.
+
+---
+
+<div align="center">
+
+Built in public by [App Automaton](https://github.com/appautomaton) · An open-source workshop of [AppCubic](https://www.appcubic.com/)
+
+</div>
