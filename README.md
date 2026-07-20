@@ -4,92 +4,128 @@
 
 # App Automaton
 
-**Portable systems for agents, Apple silicon, and creative computation.**
+**Open-source research and engineering for collaborative agents, context-rich systems, and efficient machine intelligence.**
 
-The open-source workshop of [AppCubic](https://www.appcubic.com/), built in public and shaped by real production work.
+App Automaton is the public engineering workshop of [AppCubic](https://www.appcubic.com/).
 
-[![Visit the workshop](https://img.shields.io/badge/Visit_the_workshop-appautomaton.renocrypt.com-315c52?style=for-the-badge&logo=githubpages&logoColor=white)](https://appautomaton.renocrypt.com/)
+[![Production](https://img.shields.io/badge/Production-appautomaton.renocrypt.com-315c52?style=for-the-badge)](https://appautomaton.renocrypt.com/)
 
 [![Deploy to GitHub Pages](https://github.com/appautomaton/appautomaton.github.io/actions/workflows/deploy.yml/badge.svg)](https://github.com/appautomaton/appautomaton.github.io/actions/workflows/deploy.yml)
-[![License: MIT](https://img.shields.io/badge/License-MIT-7c6f64?style=flat-square)](./LICENSE)
-[![React 19](https://img.shields.io/badge/React-19-149eca?style=flat-square&logo=react&logoColor=white)](https://react.dev/)
-[![TypeScript](https://img.shields.io/badge/TypeScript-6-3178c6?style=flat-square&logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
-[![Vite](https://img.shields.io/badge/Vite-8-646cff?style=flat-square&logo=vite&logoColor=white)](https://vite.dev/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-665f57?style=flat-square)](./LICENSE)
+[![Open source](https://img.shields.io/badge/Open_source-App_Automaton-315c52?style=flat-square)](https://github.com/appautomaton)
 
-[Production](https://appautomaton.renocrypt.com/) · [GitHub organization](https://github.com/appautomaton) · [AppCubic](https://www.appcubic.com/) · [RenoCrypt](https://www.renocrypt.com/)
+[Production](https://appautomaton.renocrypt.com/) · [GitHub](https://github.com/appautomaton) · [AppCubic](https://www.appcubic.com/) · [RenoCrypt](https://www.renocrypt.com/)
 
 </div>
 
 ---
 
-## The workshop
+## Engineering intelligence as a system
 
-App Automaton is where AppCubic publishes the tools it uses to make agents more capable, inspectable, and useful. The catalog gathers the organization’s public work into four shelves, from portable agent instructions to native machine-learning systems for Apple silicon.
+Capable models are only one component of capable software. Reliable intelligent systems also require disciplined delegation, deliberate context construction, explicit tool boundaries, durable state, and verification at every consequential transition.
 
-| Shelf | What lives there |
+App Automaton develops those layers together. The work spans multi-agent coordination, reusable capability packages, research and document pipelines, browser-grounded retrieval, native model implementations, and the infrastructure required to operate them. Projects are published as working systems rather than isolated demonstrations: interfaces are inspectable, workflows are reproducible, and outputs are designed to be checked.
+
+### The engineering position
+
+| Principle | Consequence |
 | --- | --- |
-| **SKILLs** | Portable capabilities for coding agents, designed to travel cleanly across Claude Code, Codex, Gemini, and OpenCode. |
-| **Runtimes** | Stage-gated harnesses for orchestration, browser work, document production, and repeatable agent workflows. |
-| **MLX** | Pure-MLX speech, vision, spatial, and generative systems built for Apple silicon. |
-| **Creative** | The same disciplined machinery turned toward performance, sound, and creative tooling. |
+| **Collaboration is an architecture.** | Delegation needs ownership, isolation, resumable state, and review boundaries. More agents do not produce better work unless coordination is designed. |
+| **Context is infrastructure.** | Retrieval, transformation, provenance, persistence, and selective disclosure are part of the system, not prompt decoration. |
+| **Models are software.** | Implementation quality, memory behavior, throughput, portability, and integration determine whether model capability survives contact with a real machine. |
+| **Verification closes the loop.** | A workflow is incomplete until its claims, artifacts, and operational postconditions have been tested. |
 
-Visit the living catalog at **[appautomaton.renocrypt.com](https://appautomaton.renocrypt.com/)**.
+## Programs
 
-## A cabinet of machines
+The organization’s public work is arranged into four connected programs.
 
-The site borrows the visual language of an eighteenth-century cabinet theater: mechanical drawings, engraved automata, celadon paper, sepia ink, and a stage that darkens into silver sage at night.
+### Collaborative agents
 
-- [Vite](https://vite.dev/) and [React 19](https://react.dev/) provide the application shell, with TypeScript throughout.
-- [Astryx](https://github.com/facebook/astryx), Meta’s open design system, supplies the component and token layer. The visual identity resolves from one `defineTheme()` call in `src/theme.ts` plus a small set of atmosphere variables.
-- League Gothic, Gambetta, and Martian Mono are self-hosted. Their licenses live beside the font files in `src/fonts/LICENSES/`.
-- Six public-domain or CC0 engravings are recolored live with CSS filters. Sources and rights notes are recorded in `src/plates/SOURCES.md`.
+Agent systems that preserve intent across delegation and execution.
 
-## Run it locally
+- [`agent-designer`](https://github.com/appautomaton/agent-designer) develops portable agent capabilities, MCP tool catalogs, and bridges for agent-to-agent delegation with session continuity.
+- [`automaton`](https://github.com/appautomaton/automaton) turns frame, plan, review, execution, and verification into an explicit stage-gated protocol.
+- [`automux`](https://github.com/appautomaton/automux) coordinates parallel agents through tmux or kitty, isolated Git worktrees, and file-based state.
+
+### Context and capability engineering
+
+Tools that acquire evidence, transform it without losing structure, and deliver it in forms that agents and people can inspect.
+
+- [`webmaton`](https://github.com/appautomaton/webmaton) combines grounded research, persistent browser sessions, citations, and deterministic HTML-to-Markdown conversion.
+- [`document-SKILLs`](https://github.com/appautomaton/document-SKILLs) provides portable workflows for DOCX, XLSX, PPTX, and PDF, including tracked changes, formulas, forms, and structured extraction.
+- [`presentation`](https://github.com/appautomaton/presentation) carries analytical intent through story architecture into high-fidelity PDF and editable PowerPoint deliverables.
+- [`markmaton`](https://github.com/appautomaton/markmaton) supplies a Go conversion engine and Python interface for dependable HTML-to-Markdown pipelines.
+
+### Model engineering on Apple silicon
+
+Native implementations that treat local execution as an engineering target, not a compatibility afterthought.
+
+- [`mlx-speech`](https://github.com/appautomaton/mlx-speech) covers speech synthesis, recognition, voice cloning, dialogue, and sound generation on MLX.
+- [`mlx-cv`](https://github.com/appautomaton/mlx-cv) implements detection, segmentation, and open-vocabulary grounding.
+- [`mlx-spatial`](https://github.com/appautomaton/mlx-spatial) brings 3D object, reconstruction, and spatial inference systems to Apple hardware.
+- [`ltx-video-mlx`](https://github.com/appautomaton/ltx-video-mlx) supports multimodal video generation and on-device LoRA training.
+- [`tnt-asr`](https://github.com/appautomaton/tnt-asr) turns local speech recognition into a responsive terminal instrument.
+
+### Creative systems
+
+The same methods applied where technical correctness is necessary but human judgment remains decisive.
+
+- [`setloom`](https://github.com/appautomaton/setloom) is a stage-gated co-production environment for club music, producing editable tracks, stems, renders, and listening notes while preserving the human taste gate.
+
+The complete and current index lives at **[appautomaton.renocrypt.com](https://appautomaton.renocrypt.com/)**.
+
+## This repository
+
+This repository is the presentation and discovery layer for the organization. The implementation is intentionally small:
+
+| Layer | Source of truth |
+| --- | --- |
+| Project catalog and JSON-LD | `src/data/catalog.ts` |
+| Visual system | `src/theme.ts` and the Astryx token layer |
+| Agent-readable index | `public/llms.txt` |
+| Search discovery | `public/robots.txt` and `public/sitemap.xml` |
+| Delivery | `.github/workflows/deploy.yml` |
+
+The site uses React 19, TypeScript, and Vite. Its production build runs `tsc`, bundles the application, then executes a Playwright prerender pass that writes meaningful HTML into `dist/index.html`. JavaScript-capable clients receive the full interactive application; crawlers and constrained clients still receive the complete catalog.
+
+### Visual system
+
+The `Cabinet Theater` theme is implemented as a token system rather than a layer of page-specific overrides. Astryx defines the component vocabulary; `src/theme.ts` defines paired day and night palettes, typography, motion, and engraving treatments. League Gothic, Gambetta, and Martian Mono are self-hosted, with their licenses stored beside the font assets. Every historical plate is public domain or CC0 and documented in `src/plates/SOURCES.md`.
+
+## Development
 
 ```sh
 npm install
 npm run dev
 ```
 
-For a production build:
+Build the same artifact used by production:
 
 ```sh
 npx playwright install chromium
 npm run build
 ```
 
-The build type-checks the project, bundles it with Vite, and runs `scripts/prerender.mjs`. That final pass renders the complete catalog into `dist/index.html`, so crawlers and no-JavaScript clients receive meaningful HTML rather than an empty application shell.
+Every push to `main` runs the [GitHub Pages deployment](./.github/workflows/deploy.yml): locked dependency installation, Chromium provisioning, type-checking, bundling, prerendering, artifact upload, and deployment.
 
-## Content as a system
+### Routing contract
 
-`src/data/catalog.ts` is the source of truth for shelves, cards, counts, links, and JSON-LD. Agent-facing copy is mirrored in `public/llms.txt`; discovery metadata lives in `public/robots.txt` and `public/sitemap.xml`.
+The organization site does not claim bare one-segment paths such as `/some-project/`. GitHub Pages uses those paths for repository-owned project sites; duplicating one here would create an ambiguous deployment boundary. New landing-site routes therefore live beneath an explicit namespace such as `/projects/<slug>/`.
 
-The rule is simple: change the catalog once, then let every public representation derive from it.
+## Institutional context
 
-## Delivery
+- **[AppCubic](https://www.appcubic.com/)** is the applied AI studio behind the work, carrying research, systems, and ventures through to production.
+- **[RenoCrypt](https://www.renocrypt.com/)** publishes long-form work on machine learning, systems, and security, with derivations, benchmarks, and code kept close to the claims.
+- **[App Automaton](https://appautomaton.renocrypt.com/)** publishes the reusable engineering: agent systems, capability infrastructure, model implementations, and creative tools.
 
-Every push to `main` runs [the GitHub Pages workflow](./.github/workflows/deploy.yml): install from the lockfile, provision Chromium, build and prerender, upload the Pages artifact, then deploy it. The production home is [appautomaton.renocrypt.com](https://appautomaton.renocrypt.com/).
+## License and provenance
 
-### Pages routing contract
-
-This organization site deliberately does not claim bare one-segment paths such as `/some-project/`. GitHub Pages reserves those paths for project sites, and a page here would silently collide with a repository’s own deployment. New landing-site routes therefore live beneath a namespace such as `/projects/<slug>/`.
-
-## The wider constellation
-
-App Automaton belongs to a small family of work with distinct public faces:
-
-- **[AppCubic](https://www.appcubic.com/)** is the applied AI studio behind the workshop: systems, research, and ventures carried through to production.
-- **[RenoCrypt](https://www.renocrypt.com/)** is the long-form technical publication: machine learning, systems, and security with the mathematics and working code intact.
-- **[App Automaton](https://appautomaton.renocrypt.com/)** is the open-source shelf: reusable skills, runtimes, MLX implementations, and creative machinery.
-
-## License
-
-The application code is released under the [MIT License](./LICENSE). League Gothic and Martian Mono retain their OFL terms; Gambetta retains the ITF Free Font License. The engraved source material is public domain or CC0, with provenance documented in `src/plates/SOURCES.md`.
+The application code is released under the [MIT License](./LICENSE). League Gothic and Martian Mono retain their OFL terms; Gambetta retains the ITF Free Font License. Historical image sources and rights statements are recorded in `src/plates/SOURCES.md`.
 
 ---
 
 <div align="center">
 
-Built in public by [App Automaton](https://github.com/appautomaton) · An open-source workshop of [AppCubic](https://www.appcubic.com/)
+[App Automaton](https://github.com/appautomaton) · Open-source research and engineering from [AppCubic](https://www.appcubic.com/)
 
 </div>
