@@ -53,7 +53,7 @@ export const catalog: ShelfData[] = [
         repo: 'agent-designer',
         description:
           'The skills workspace. Issue-driven workflows, an MCP tool catalog, and bridge skills for agent-to-agent delegation with session continuity.',
-        href: 'https://appautomaton.github.io/agent-designer/',
+        href: 'https://appautomaton.renocrypt.com/agent-designer/',
         chips: ['MCP', 'multi-agent'],
       },
       {
@@ -88,7 +88,7 @@ export const catalog: ShelfData[] = [
         repo: 'latex-arxiv-SKILL',
         description:
           'Turns a topic into an arXiv-ready ML review paper. Gated literature discovery, every citation verified, compiled to a two-column IEEEtran PDF.',
-        href: 'https://appautomaton.github.io/latex-arxiv-SKILL/',
+        href: 'https://appautomaton.renocrypt.com/latex-arxiv-SKILL/',
         chips: ['arXiv', 'IEEEtran'],
       },
     ],
@@ -132,7 +132,7 @@ export const catalog: ShelfData[] = [
         repo: 'docker-for-apple-container',
         description:
           'A stateless docker shim over Apple’s native container CLI on macOS, with no Docker Desktop.',
-        href: 'https://appautomaton.github.io/docker-for-apple-container/',
+        href: 'https://appautomaton.renocrypt.com/docker-for-apple-container/',
         chips: ['macOS', 'container CLI'],
       },
     ],
@@ -142,7 +142,7 @@ export const catalog: ShelfData[] = [
     'C',
     'On-device MLX',
     'Pure MLX on the Apple GPU. Speech, vision, video, and 3D that never leave the machine.',
-    [8, 4, 4, 4, 4],
+    [8, 4, 4, 4, 4, 12],
     [
       {
         repo: 'mlx-speech',
@@ -178,6 +178,13 @@ export const catalog: ShelfData[] = [
           '3D and spatial inference on device with SAM 3D Objects, TRELLIS.2, WorldMirror, and MapAnything.',
         href: 'https://github.com/appautomaton/mlx-spatial',
         chips: ['TRELLIS.2', '3D'],
+      },
+      {
+        repo: 'mlx-h3',
+        description:
+          'MiniMax-H3 text to video and stereo audio, denoised together in one packed sequence. Phase-scoped model residency, no PyTorch at runtime.',
+        href: 'https://appautomaton.renocrypt.com/mlx-h3/',
+        chips: ['MiniMax-H3', 'video + audio'],
       },
     ],
   ),

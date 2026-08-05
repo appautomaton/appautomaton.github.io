@@ -8,25 +8,25 @@ const graph = {
   '@graph': [
     {
       '@type': 'WebSite',
-      '@id': 'https://appautomaton.github.io/#website',
-      url: 'https://appautomaton.github.io/',
+      '@id': 'https://appautomaton.renocrypt.com/#website',
+      url: 'https://appautomaton.renocrypt.com/',
       name: 'App Automaton',
       description:
         'An open-source workshop for engineering with coding agents. Portable SKILLs, stage-gated harnesses, and pure-MLX work for Apple silicon.',
-      publisher: { '@id': 'https://appautomaton.github.io/#org' },
+      publisher: { '@id': 'https://appautomaton.renocrypt.com/#org' },
     },
     {
       '@type': 'Organization',
-      '@id': 'https://appautomaton.github.io/#org',
+      '@id': 'https://appautomaton.renocrypt.com/#org',
       name: 'App Automaton',
-      url: 'https://appautomaton.github.io/',
-      logo: 'https://appautomaton.github.io/apple-touch-icon.png',
+      url: 'https://appautomaton.renocrypt.com/',
+      logo: 'https://appautomaton.renocrypt.com/apple-touch-icon.png',
       parentOrganization: { '@type': 'Organization', name: 'AppCubic', url: 'https://appcubic.com' },
       sameAs: ['https://github.com/appautomaton'],
     },
     {
       '@type': 'ItemList',
-      '@id': 'https://appautomaton.github.io/#catalog',
+      '@id': 'https://appautomaton.renocrypt.com/#catalog',
       name: 'The App Automaton catalog',
       numberOfItems: catalog.reduce((n, s) => n + s.items.length, 0),
       itemListElement: catalog.flatMap((s) =>

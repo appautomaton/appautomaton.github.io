@@ -7,12 +7,12 @@ App Automaton is the open-source workshop of AppCubic. Everything public sorts o
 
 ## Shelf A: SKILLs for coding agents
 
-- [agent-designer](https://github.com/appautomaton/agent-designer): the skills workspace. Issue-driven workflows, an MCP tool catalog, and bridge skills for agent-to-agent delegation with session continuity. [Deep dive](https://appautomaton.github.io/agent-designer/).
+- [agent-designer](https://github.com/appautomaton/agent-designer): the skills workspace. Issue-driven workflows, an MCP tool catalog, and bridge skills for agent-to-agent delegation with session continuity. [Deep dive](https://appautomaton.renocrypt.com/agent-designer/).
 - [document-SKILLs](https://github.com/appautomaton/document-SKILLs): docx, xlsx, pptx, and pdf. Extraction, forms, formulas, and tracked changes. Runs on uv with PEP 723, no virtualenv.
 - [presentation](https://github.com/appautomaton/presentation): consulting-quality decks, from strategy storyboarding to pixel-perfect PDF or editable PPTX.
 - [webmaton](https://github.com/appautomaton/webmaton): grounded web research. Citations, deterministic HTML-to-Markdown, and persistent sessions over Playwright, nodriver, and Chrome DevTools.
 - [playwright-skill](https://github.com/appautomaton/playwright-skill): browser automation that also runs on Android via a Termux launcher patch and headless Chromium.
-- [latex-arxiv-SKILL](https://appautomaton.github.io/latex-arxiv-SKILL/): an agentic harness, as a portable Agent Skill, that turns a topic into an arXiv-ready ML review paper. Gated literature discovery, an issue-by-issue writing loop, every citation verified, compiled to a two-column IEEEtran PDF.
+- [latex-arxiv-SKILL](https://appautomaton.renocrypt.com/latex-arxiv-SKILL/): an agentic harness, as a portable Agent Skill, that turns a topic into an arXiv-ready ML review paper. Gated literature discovery, an issue-by-issue writing loop, every citation verified, compiled to a two-column IEEEtran PDF.
 
 ## Shelf B: Harnesses and runtimes
 
@@ -20,13 +20,14 @@ App Automaton is the open-source workshop of AppCubic. Everything public sorts o
 - [automux](https://github.com/appautomaton/automux): multi-agent orchestration in tmux or kitty, coordinating through files across parallel git worktrees.
 - [openclaw-monorepo](https://github.com/appautomaton/openclaw-monorepo): a repo-local OpenClaw workspace with JSON5 config, plugins, and Docker sandboxes.
 - [markmaton](https://github.com/appautomaton/markmaton): HTML to Markdown for agent pipelines. A Go engine wrapped in a Python CLI and API, on PyPI.
-- [docker-for-apple-container](https://appautomaton.github.io/docker-for-apple-container/): a stateless `docker` shim over Apple's native `container` CLI on macOS, with no Docker Desktop.
+- [docker-for-apple-container](https://appautomaton.renocrypt.com/docker-for-apple-container/): a stateless `docker` shim over Apple's native `container` CLI on macOS, with no Docker Desktop.
 
 ## Shelf C: On-device, in pure MLX
 
 - [mlx-speech](https://github.com/appautomaton/mlx-speech): speech synthesis, voice cloning, dialogue, sound effects, and recognition, MLX-native on the Apple GPU.
 - [tnt-asr](https://github.com/appautomaton/tnt-asr): a terminal voice-to-text TUI. Qwen3-ASR transcribes in about a second, fully local.
 - [ltx-video-mlx](https://github.com/appautomaton/ltx-video-mlx): text- and image-to-video with synchronized audio on LTX-2.3 22B. On-device LoRA fine-tuning.
+- [mlx-h3](https://appautomaton.renocrypt.com/mlx-h3/): MiniMax-H3 text to video and stereo audio, denoised together in one packed sequence. Phase-scoped model residency, no PyTorch at runtime.
 - [mlx-cv](https://github.com/appautomaton/mlx-cv): MLX-native computer vision. Detection, segmentation, and open-vocabulary grounding with SAM 3 and LocateAnything.
 - [mlx-spatial](https://github.com/appautomaton/mlx-spatial): 3D and spatial inference on device with SAM 3D Objects, TRELLIS.2, WorldMirror, and MapAnything.
 

@@ -86,6 +86,10 @@ export const cardArt: Record<string, CardArt> = {
   'mlx-cv': { src: cameraObscura, layout: 'bottom', position: '50% 45%', scale: 1.3 },
   // Spatial understanding — Dürer's perspective machine, a tall side strip.
   'mlx-spatial': { src: durerPerspective, layout: 'side', position: '48% 45%', scale: 1.8 },
+  // Picture and sound made together in one pass — the Comédie-Française in
+  // section, cut so the tiered house and the stage stand in the same frame.
+  // markmaton takes the roof truss from this plate; this crop sits lower.
+  'mlx-h3': { src: comedie, layout: 'split', position: '58% 66%', scale: 1.25 },
 
   // --- Act IV · Creative --- (split marquee)
   // Mechanical music with the human at the taste gate — the serinette,
