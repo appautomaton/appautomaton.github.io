@@ -24,12 +24,18 @@ export function Footer() {
             The open workshop of AppCubic. Everything here is MIT licensed and
             built in public.
           </Text>
+          {/* RenoCrypt carries the domain this site is served from, and links
+              here from its own footer. Return the link so the two are joined
+              from both ends rather than one. */}
           <HStack gap={6}>
             <Link href="https://github.com/appautomaton" style={linkStyle}>
               GitHub org
             </Link>
             <Link href="https://appcubic.com" style={linkStyle}>
               AppCubic
+            </Link>
+            <Link href="https://www.renocrypt.com/" style={linkStyle}>
+              RenoCrypt
             </Link>
           </HStack>
           <Text
