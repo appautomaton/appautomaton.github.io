@@ -168,9 +168,9 @@ export const catalog: ShelfData[] = [
       {
         repo: 'mlx-cv',
         description:
-          'MLX-native computer vision. Detection, segmentation, and open-vocabulary grounding with SAM 3 and LocateAnything.',
-        href: 'https://github.com/appautomaton/mlx-cv',
-        chips: ['SAM 3', 'grounding'],
+          'Open-vocabulary grounding, detection, depth and camera geometry, segmentation, and video tracking in pure MLX. Every model is checked against its upstream reference before it ships.',
+        href: 'https://appautomaton.renocrypt.com/mlx-cv/',
+        chips: ['SAM 3', 'boxes + masks + depth'],
       },
       {
         repo: 'mlx-spatial',
