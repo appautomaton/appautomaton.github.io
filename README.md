@@ -52,7 +52,7 @@ Stage-gated execution, multi-agent worktrees, agent workspaces, data conversion,
 
 Speech, vision, video, and spatial systems implemented for Apple silicon.
 
-[`mlx-speech`](https://github.com/appautomaton/mlx-speech) · [`tnt-asr`](https://github.com/appautomaton/tnt-asr) · [`ltx-video-mlx`](https://github.com/appautomaton/ltx-video-mlx) · [`mlx-cv`](https://github.com/appautomaton/mlx-cv) · [`mlx-spatial`](https://github.com/appautomaton/mlx-spatial)
+[`mlx-speech`](https://github.com/appautomaton/mlx-speech) · [`tnt-asr`](https://github.com/appautomaton/tnt-asr) · [`ltx-video-mlx`](https://github.com/appautomaton/ltx-video-mlx) · [`mlx-cv`](https://github.com/appautomaton/mlx-cv) · [`mlx-spatial`](https://github.com/appautomaton/mlx-spatial) · [`mlx-h3`](https://github.com/appautomaton/mlx-h3)
 
 ### Creative systems
 
