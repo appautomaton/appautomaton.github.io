@@ -19,7 +19,7 @@ App Automaton is the open-source workshop of AppCubic. Everything public sorts o
 - [automaton](https://github.com/appautomaton/automaton): a stage-gated harness. Frame, plan, review, execute, verify, resume. Installs as plain markdown.
 - [automux](https://github.com/appautomaton/automux): multi-agent orchestration in tmux or kitty, coordinating through files across parallel git worktrees.
 - [openclaw-monorepo](https://github.com/appautomaton/openclaw-monorepo): a repo-local OpenClaw workspace with JSON5 config, plugins, and Docker sandboxes.
-- [markmaton](https://github.com/appautomaton/markmaton): HTML to Markdown for agent pipelines. A Go engine wrapped in a Python CLI and API, on PyPI.
+- [markmaton](https://appautomaton.renocrypt.com/markmaton/): HTML to Markdown for agent pipelines. A Go parser core wrapped in a Python CLI and API, on PyPI.
 - [docker-for-apple-container](https://appautomaton.renocrypt.com/docker-for-apple-container/): a stateless `docker` shim over Apple's native `container` CLI on macOS, with no Docker Desktop.
 - [pi-arcweld](https://appautomaton.renocrypt.com/pi-arcweld/): a curated local layer welded to pinned upstream Pi. Extensions, system guidance, and MCP tooling join along one auditable seam, over a reproducible runtime.
 
