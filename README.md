@@ -46,13 +46,13 @@ Portable skills for delegation, research, browser control, documents, presentati
 
 Stage-gated execution, multi-agent worktrees, agent workspaces, data conversion, and native container operations.
 
-[`automaton`](https://github.com/appautomaton/automaton) · [`automux`](https://github.com/appautomaton/automux) · [`openclaw-monorepo`](https://github.com/appautomaton/openclaw-monorepo) · [`markmaton`](https://github.com/appautomaton/markmaton) · [`docker-for-apple-container`](https://github.com/appautomaton/docker-for-apple-container)
+[`automaton`](https://github.com/appautomaton/automaton) · [`automux`](https://github.com/appautomaton/automux) · [`openclaw-monorepo`](https://github.com/appautomaton/openclaw-monorepo) · [`markmaton`](https://github.com/appautomaton/markmaton) · [`docker-for-apple-container`](https://github.com/appautomaton/docker-for-apple-container) · [`pi-arcweld`](https://github.com/appautomaton/pi-arcweld)
 
 ### On-device intelligence
 
-Speech, vision, video, and spatial systems implemented for Apple silicon.
+Speech, vision, video, spatial, and atomistic systems implemented for Apple silicon.
 
-[`mlx-speech`](https://github.com/appautomaton/mlx-speech) · [`tnt-asr`](https://github.com/appautomaton/tnt-asr) · [`ltx-video-mlx`](https://github.com/appautomaton/ltx-video-mlx) · [`mlx-cv`](https://github.com/appautomaton/mlx-cv) · [`mlx-spatial`](https://github.com/appautomaton/mlx-spatial) · [`mlx-h3`](https://github.com/appautomaton/mlx-h3)
+[`mlx-speech`](https://github.com/appautomaton/mlx-speech) · [`tnt-asr`](https://github.com/appautomaton/tnt-asr) · [`ltx-video-mlx`](https://github.com/appautomaton/ltx-video-mlx) · [`mlx-cv`](https://github.com/appautomaton/mlx-cv) · [`mlx-spatial`](https://github.com/appautomaton/mlx-spatial) · [`mlx-h3`](https://github.com/appautomaton/mlx-h3) · [`mlx-atomistic`](https://github.com/appautomaton/mlx-atomistic)
 
 ### Creative systems
 

@@ -41,14 +41,15 @@ export const layoutSpans: Record<string, number> = {
   'playwright-skill': 4,
   'latex-arxiv-SKILL': 4,
   // Act II — automux 7×2 tall; automaton + openclaw stack beside it at 5;
-  // markmaton + docker close at 6 + 6.
+  // markmaton, docker, and pi-arcweld close at 4 + 4 + 4.
   'openclaw-monorepo': 5,
-  markmaton: 6,
-  'docker-for-apple-container': 6,
   // Act III — mlx-speech 8×2 tall; tnt-asr + ltx-video stack beside it at
-  // 4; camera obscura and Dürer close at 6 + 6.
-  'mlx-cv': 6,
-  'mlx-spatial': 6,
+  // 4; camera obscura, Dürer, and the atomistic case run 4 + 4 + 4; mlx-h3
+  // takes the full width as the act's closing banner.
+  //
+  // markmaton, docker, mlx-cv, and mlx-spatial were re-dealt to 6 while
+  // their rows held two cards each. Both rows carry three now, so they fall
+  // back to the catalog's own 4 and no override is needed.
 }
 
 export const cardArt: Record<string, CardArt> = {

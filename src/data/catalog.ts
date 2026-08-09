@@ -98,7 +98,7 @@ export const catalog: ShelfData[] = [
     'B',
     'Harnesses & runtimes',
     'Stage gates, orchestration, and plumbing. The tooling that keeps an agent honest from plan to verify.',
-    [5, 7, 4, 4, 4],
+    [5, 7, 4, 4, 4, 4],
     [
       {
         repo: 'automaton',
@@ -135,14 +135,21 @@ export const catalog: ShelfData[] = [
         href: 'https://appautomaton.renocrypt.com/docker-for-apple-container/',
         chips: ['macOS', 'container CLI'],
       },
+      {
+        repo: 'pi-arcweld',
+        description:
+          'A curated local layer welded to pinned upstream Pi. Extensions, system guidance, and MCP tooling join along one auditable seam, over a reproducible runtime.',
+        href: 'https://appautomaton.renocrypt.com/pi-arcweld/',
+        chips: ['MCP', 'pinned upstream'],
+      },
     ],
   ),
   shelf(
     'mlx',
     'C',
     'On-device MLX',
-    'Pure MLX on the Apple GPU. Speech, vision, video, and 3D that never leave the machine.',
-    [8, 4, 4, 4, 4, 12],
+    'Pure MLX on the Apple GPU. Speech, vision, video, 3D, and atomistic simulation that never leave the machine.',
+    [8, 4, 4, 4, 4, 4, 12],
     [
       {
         repo: 'mlx-speech',
@@ -178,6 +185,13 @@ export const catalog: ShelfData[] = [
           '3D and spatial inference on device with SAM 3D Objects, TRELLIS.2, WorldMirror, and MapAnything.',
         href: 'https://github.com/appautomaton/mlx-spatial',
         chips: ['TRELLIS.2', '3D'],
+      },
+      {
+        repo: 'mlx-atomistic',
+        description:
+          'Atomistic simulation on Apple silicon. A DFT and molecular-dynamics runtime on MLX and Metal, running on the GPU the Mac already has.',
+        href: 'https://appautomaton.renocrypt.com/mlx-atomistic/',
+        chips: ['DFT + MD', 'Metal'],
       },
       {
         repo: 'mlx-h3',

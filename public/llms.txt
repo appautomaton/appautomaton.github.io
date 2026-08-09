@@ -21,6 +21,7 @@ App Automaton is the open-source workshop of AppCubic. Everything public sorts o
 - [openclaw-monorepo](https://github.com/appautomaton/openclaw-monorepo): a repo-local OpenClaw workspace with JSON5 config, plugins, and Docker sandboxes.
 - [markmaton](https://github.com/appautomaton/markmaton): HTML to Markdown for agent pipelines. A Go engine wrapped in a Python CLI and API, on PyPI.
 - [docker-for-apple-container](https://appautomaton.renocrypt.com/docker-for-apple-container/): a stateless `docker` shim over Apple's native `container` CLI on macOS, with no Docker Desktop.
+- [pi-arcweld](https://appautomaton.renocrypt.com/pi-arcweld/): a curated local layer welded to pinned upstream Pi. Extensions, system guidance, and MCP tooling join along one auditable seam, over a reproducible runtime.
 
 ## Shelf C: On-device, in pure MLX
 
@@ -30,6 +31,7 @@ App Automaton is the open-source workshop of AppCubic. Everything public sorts o
 - [mlx-h3](https://appautomaton.renocrypt.com/mlx-h3/): MiniMax-H3 text to video and stereo audio, denoised together in one packed sequence. Phase-scoped model residency, no PyTorch at runtime.
 - [mlx-cv](https://appautomaton.renocrypt.com/mlx-cv/): open-vocabulary grounding, detection, depth and camera geometry, segmentation, and video tracking in pure MLX. Every model is checked against its upstream reference before it ships.
 - [mlx-spatial](https://github.com/appautomaton/mlx-spatial): 3D and spatial inference on device with SAM 3D Objects, TRELLIS.2, WorldMirror, and MapAnything.
+- [mlx-atomistic](https://appautomaton.renocrypt.com/mlx-atomistic/): atomistic simulation on Apple silicon. A DFT and molecular-dynamics runtime on MLX and Metal, running on the GPU the Mac already has.
 
 ## Shelf D: Creative harnesses
 

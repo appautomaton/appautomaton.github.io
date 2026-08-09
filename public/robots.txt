@@ -6,3 +6,6 @@ Sitemap: https://appautomaton.renocrypt.com/mlx-atomistic/sitemap-index.xml
 Sitemap: https://appautomaton.renocrypt.com/docker-for-apple-container/sitemap.xml
 Sitemap: https://appautomaton.renocrypt.com/mlx-h3/sitemap.xml
 Sitemap: https://appautomaton.renocrypt.com/mlx-cv/sitemap.xml
+Sitemap: https://appautomaton.renocrypt.com/agent-designer/sitemap.xml
+Sitemap: https://appautomaton.renocrypt.com/mlx-speech/sitemap.xml
+Sitemap: https://appautomaton.renocrypt.com/pi-arcweld/sitemap.xml
