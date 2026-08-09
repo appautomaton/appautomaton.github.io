@@ -9,3 +9,4 @@ Sitemap: https://appautomaton.renocrypt.com/mlx-cv/sitemap.xml
 Sitemap: https://appautomaton.renocrypt.com/agent-designer/sitemap.xml
 Sitemap: https://appautomaton.renocrypt.com/mlx-speech/sitemap.xml
 Sitemap: https://appautomaton.renocrypt.com/pi-arcweld/sitemap.xml
+Sitemap: https://appautomaton.renocrypt.com/markmaton/sitemap.xml

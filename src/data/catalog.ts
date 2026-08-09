@@ -124,8 +124,8 @@ export const catalog: ShelfData[] = [
       {
         repo: 'markmaton',
         description:
-          'HTML to Markdown for agent pipelines. A Go engine wrapped in a Python CLI and API, on PyPI.',
-        href: 'https://github.com/appautomaton/markmaton',
+          'HTML to Markdown for agent pipelines. A Go parser core wrapped in a Python CLI and API, on PyPI.',
+        href: 'https://appautomaton.renocrypt.com/markmaton/',
         chips: ['Go', 'PyPI'],
       },
       {

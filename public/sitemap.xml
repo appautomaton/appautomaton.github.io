@@ -16,6 +16,7 @@
   <url><loc>https://appautomaton.renocrypt.com/docker-for-apple-container/</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
   <url><loc>https://appautomaton.renocrypt.com/document-SKILLs/</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
   <url><loc>https://appautomaton.renocrypt.com/latex-arxiv-SKILL/</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://appautomaton.renocrypt.com/markmaton/</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
   <url><loc>https://appautomaton.renocrypt.com/mlx-atomistic/</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
   <url><loc>https://appautomaton.renocrypt.com/mlx-cv/</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
   <url><loc>https://appautomaton.renocrypt.com/mlx-h3/</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
