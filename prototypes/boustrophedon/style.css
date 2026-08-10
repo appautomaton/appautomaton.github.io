@@ -226,3 +226,114 @@ a{color:inherit}
   .act-head{flex-basis:82vw}
   .unit{flex-basis:80vw}
 }
+
+/* ==================================================================
+   第二稿 · 三处做狠。全部仍在表现层：文本还是文本，链接还是链接，
+   新增的装饰一律 aria-hidden 且不插进任何标题与单元之间。
+   ================================================================== */
+
+@property --plate-y { syntax:'<percentage>'; inherits:false; initial-value:20% }
+
+/* ---- ① 标题从版画里刻出来 -----------------------------------------
+   不是把字压在版画上，是让版画只在字形内部显影，而且滚动时版画在字的
+   内部走动 —— 字不动，字里的图在动。文本本身一个字都没变，可选中、
+   可朗读、爬虫照读，换掉的只是它的填充方式。 */
+@supports ((background-clip:text) or (-webkit-background-clip:text)) {
+  .head h1{
+    background-image:url('../../src/plates/comedie-section.webp');
+    background-size:auto 340%;
+    background-position:center var(--plate-y,20%);
+    -webkit-background-clip:text; background-clip:text;
+    color:transparent;
+    filter:var(--plate) contrast(1.3) brightness(1.04);
+  }
+  :root[data-mode="night"] .head h1{ filter:var(--plate) contrast(1.18) brightness(1.4) }
+  .head h1::selection{ background:var(--accent);color:var(--bg) }
+}
+@keyframes plate-drift{ from{--plate-y:6%} to{--plate-y:76%} }
+
+/* ---- ② 转行 · 犁沟掉头 --------------------------------------------
+   牛走到地头要掉头，这里把那个掉头画出来：线沿着上一幕的方向走到尽头，
+   180 度回转，指向下一幕。方向切换本身成为可见的事件，而不是硬切。 */
+.turn{position:relative;height:58vh;display:grid;place-items:center;overflow:hidden;
+  padding-inline:calc(var(--gut) + 40px) var(--gut)}
+.turn svg{width:100%;max-width:1060px;height:auto;overflow:visible}
+.turn path{fill:none;stroke:var(--accent);stroke-width:1.4;stroke-linecap:round;
+  stroke-dasharray:var(--len);stroke-dashoffset:var(--len)}
+.turn .no{position:absolute;font-family:var(--display);
+  font-size:clamp(70px,13vh,150px);line-height:.7;color:var(--accent);opacity:.15;
+  pointer-events:none}
+.turn[data-to="rtl"] .no{right:9%} .turn[data-to="ltr"] .no{left:calc(var(--gut) + 56px)}
+.turn .cap{position:absolute;bottom:15%;font-family:var(--mono);font-size:10px;
+  letter-spacing:.24em;text-transform:uppercase;color:var(--patina)}
+@keyframes furrow{ to{stroke-dashoffset:0} }
+
+/* ---- ③ 套印不准 ---------------------------------------------------
+   手工印张的色版从来不会严丝合缝。每条带给不到半度的偏转，画面就从
+   「数码完美」变成「压出来的」。幅度必须小到说不清哪里不对。 */
+.act:nth-of-type(1) .act-stage{ rotate:-.3deg }
+.act:nth-of-type(2) .act-stage{ rotate: .36deg }
+.act:nth-of-type(3) .act-stage{ rotate:-.24deg }
+.coda .inner{ rotate:.18deg }
+
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .head h1  { animation:plate-drift linear both; animation-timeline:scroll(root block); animation-range:0% 32% }
+    .turn path{ animation:furrow      linear both; animation-timeline:view(); animation-range:cover 14% cover 74% }
+  }
+}
+/* 降级与减弱动态：犁沟直接画完，偏转归零，标题回到实色。 */
+@supports not (animation-timeline: view()){ .turn path{stroke-dashoffset:0} }
+@media (prefers-reduced-motion: reduce){
+  .turn{height:auto;padding-block:9vh}
+  .turn path{stroke-dashoffset:0}
+  .act-stage,.coda .inner{rotate:none}
+}
+
+/* 犁沟只画一条：默认收尾指向左（下一幕从右往左读）。要指向右时整条
+   镜像过来，箭头方向跟着一起翻，不用维护第二条路径。 */
+.turn[data-to="ltr"] svg{ transform:scaleX(-1) }
+
+/* ---- 修：版画填充的标题必须落在平场上 -----------------------------
+   第一稿里标题的填充和它背后的版画底同色同调，"AUTOMATON" 读成了
+   "AUTOMAT?N"。刻出来的字要看得见，靠的是它下面那块被压平的底 ——
+   真正的版画也是这么做的：留白先压出来，字才立得住。
+   这不是审美取舍，读不出来的标题等于丢内容。 */
+.head::after{
+  content:'';position:absolute;inset:0;z-index:0;pointer-events:none;
+  background:
+    linear-gradient(100deg, var(--bg) 0 26%, color-mix(in srgb,var(--bg) 78%,transparent) 52%, transparent 82%),
+    linear-gradient(to top, var(--bg) 0 6%, transparent 30%);
+}
+.head .say{z-index:2}
+@supports ((background-clip:text) or (-webkit-background-clip:text)) {
+  .head h1{ filter:var(--plate) contrast(1.9) brightness(1.5) saturate(.7) }
+  :root[data-mode="night"] .head h1{ filter:var(--plate) contrast(1.7) brightness(2.1) saturate(.8) }
+}
+
+/* ---- 再修：给版画填充加一个对比度下限 -----------------------------
+   上一版把版画直接灌进字形，结果字的明暗完全听凭图上那一块的明暗 ——
+   碰上暗部就整个字沉进背景。照片式填充没有下限，调滤镜是治不好的。
+
+   办法是把版画和一块纯色地用 blend 钳住：
+     夜间 lighten  → 结果永远不暗于地色，暗部被地色接住
+     日间 darken   → 结果永远不亮于墨色，亮部被墨色接住
+   纹理照旧从另一侧透出来，但可读性有了数学下限，不靠运气。 */
+@supports ((background-clip:text) or (-webkit-background-clip:text)) and (background-blend-mode:lighten) {
+  .head h1{
+    background-image:linear-gradient(#3A4438 0 0), url('../../src/plates/comedie-section.webp');
+    background-size:auto, auto 340%;
+    background-position:center, center var(--plate-y,20%);
+    background-blend-mode:darken;
+    filter:none;
+  }
+  :root[data-mode="night"] .head h1{
+    background-image:linear-gradient(#A8BCAE 0 0), url('../../src/plates/comedie-section.webp');
+    background-blend-mode:lighten;
+    filter:none;
+  }
+}
+/* 没有 blend 就不玩这个花样，回到实色。看得见永远优先于好看。 */
+@supports not (background-blend-mode:lighten) {
+  .head h1{ background-image:none; color:var(--text); -webkit-text-fill-color:var(--text) }
+}

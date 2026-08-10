@@ -35,6 +35,19 @@ const unit = (p) => {
 
 /* A 向右读，B 掉头向左，C 再向右，D 是尾声不做带。
    方向交替本身就是这一版的主张，所以它由序号决定，不由数据决定。 */
+
+/* 转行：牛走到地头掉头。纯装饰，aria-hidden，而且它落在两幕之间，
+   不会插进任何标题与它的单元中间 —— DOM 的那条直线没有被打断。
+   pathLength="100" 把描边长度归一化，dasharray 就不必跟着坐标改。 */
+const turn = (to, numeral) => `
+    <div class="turn" data-to="${to}" aria-hidden="true" style="--len:100">
+      <span class="no">${numeral}</span>
+      <svg viewBox="0 0 1060 220" role="presentation">
+        <path pathLength="100" d="M 12 34 H 936 A 74 74 0 0 1 936 182 H 12 M 12 182 l 26 -12 M 12 182 l 26 12"/>
+      </svg>
+      <span class="cap">${to === 'rtl' ? 'the turn · now reading left' : 'the turn · now reading right'}</span>
+    </div>`
+
 const acts = catalog
   .filter((s) => s.items.length > 1)
   .map((shelf, i) => {
@@ -50,7 +63,7 @@ const acts = catalog
               <p class="no">ACT ${ROMAN[i]} · ${shelf.items.length} UNITS</p>
               <h2 id="${id}">${esc(shelf.label)}</h2>
               <p>${esc(shelf.blurb)}</p>
-              <p class="dir">${dir === 'ltr' ? '读法 ————→ 向右' : '←———— 向左 读法'}</p>
+              <p class="dir">${dir === 'ltr' ? 'reading ————→ right' : 'left ←———— reading'}</p>
             </header>
 ${shelf.items.map(unit).join('')}
           </div>
@@ -58,6 +71,7 @@ ${shelf.items.map(unit).join('')}
       </div>
     </section>`
   })
+  .flatMap((html, i, all) => (i < all.length - 1 ? [html, turn(i % 2 === 0 ? 'rtl' : 'ltr', ROMAN[i + 1])] : [html]))
   .join('\n')
 
 const coda = catalog.find((s) => s.items.length === 1)
@@ -103,7 +117,7 @@ writeFileSync(
 <title>App Automaton — an open workshop for engineering with coding agents</title>
 <meta name="description" content="Twenty open-source units across four shelves: portable SKILLs, stage-gated harnesses, on-device MLX runtimes, and creative production. An AppCubic workshop.">
 <link rel="canonical" href="https://appautomaton.renocrypt.com/">
-<link rel="stylesheet" href="./boustrophedon.css">
+<link rel="stylesheet" href="./style.css">
 <script type="application/ld+json">
 ${JSON.stringify(ld, null, 2)}
 </script>
@@ -120,7 +134,6 @@ ${JSON.stringify(ld, null, 2)}
   <span class="mark">App Automaton</span>
   <nav>
     <a href="https://github.com/appautomaton">GitHub</a>
-    <a href="./menu.html">十二种动效</a>
     <div class="toggle">
       <button data-mode="day" aria-pressed="true">Day</button>
       <button data-mode="night" aria-pressed="false">Night</button>
@@ -141,6 +154,8 @@ ${JSON.stringify(ld, null, 2)}
 <main id="catalog">
 ${acts}
 
+${turn("rtl", ROMAN[catalog.length - 1])}
+
   <section class="coda" aria-labelledby="act-d">
     <div class="inner">
       <div>
@@ -159,11 +174,10 @@ ${acts}
     ${total} units · ${catalog.length} shelves<br>
     League Gothic · Gambetta · Martian Mono<br>
     Plates public domain, sources recorded<br>
-    <a href="./menu.html">全部十二种动效样例</a>
   </p>
 </footer>
 
-<script src="./boustrophedon.js"></script>
+<script src="./script.js"></script>
 </body>
 </html>
 `,

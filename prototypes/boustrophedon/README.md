@@ -33,6 +33,19 @@ Four techniques, one metaphor. A sheet of paper pulled through a press.
 - **The margin** carries registration marks and a run indicator, which is the
   only part of this that is navigation rather than atmosphere.
 
+Three further moves, added in the second pass:
+
+- **The title is cut from a plate.** The engraving fills the letterforms and
+  drifts inside them as the page scrolls, so the type holds still while the
+  image inside it moves. The text is still text.
+- **The turn is drawn.** Between acts a furrow runs to the headland, curves
+  180 degrees, and comes back pointing the other way. The change of direction
+  becomes an event rather than a cut. Decorative, `aria-hidden`, and placed
+  between acts so it never lands between a heading and its units.
+- **Misregistration.** Each band is rotated by a third of a degree. Hand-pulled
+  sheets never register perfectly, and the small error is what separates a
+  print from a screenshot. It has to be too small to name.
+
 ## What it must not cost
 
 Everything above happens in the presentation layer. The rules the prototype was
@@ -42,8 +55,35 @@ written against, and the measurements that hold them:
 | --- | --- |
 | DOM order is reading order | `h1 → h2 h3×6 → h2 h3×6 → h2 h3×7 → h2 h3` |
 | Every unit is a real link | 20 `<a href>`, 15 on this domain |
-| Nothing is injected by script | 723 readable words with JS off |
+| Nothing is injected by script | 742 readable words with JS off |
 | Structured data is intact | 22 JSON-LD nodes |
+| Every image is described | 21 of 21 carry `alt` |
+| Decoration stays out of the outline | 3 turns, all `aria-hidden` |
+| One language per document | 0 stray CJK characters under `lang="en"` |
+
+### The title had to be measured, not eyeballed
+
+Filling type with a photograph has no floor: wherever the plate is dark, the
+letter is dark, and on a dark ground the word disappears. The first pass read
+`AUTOMAT?N` because two letters landed on a shadow. Raising the filter did not
+fix it, because the problem is that the fill is unbounded.
+
+The fix is a blend floor. The letters carry two background layers, a flat
+colour and the plate, composited with `background-blend-mode: darken` by day
+and `lighten` by night, so the fill can never cross the flat colour. The
+texture still comes through from the other side.
+
+Measured on rendered pixels, sampling only the glyph interiors via a magenta
+mask pass:
+
+| Mode | Background | Glyph median | Worst 5% |
+| --- | --- | --- | --- |
+| Day | 0.818 | 0.054 | **8.36:1** |
+| Night | 0.006 | 0.888 | **9.35:1** |
+
+Large text needs 3.0:1, body text 4.5:1. Both modes clear the stricter bar. A
+browser without `background-blend-mode` drops the fill entirely and gets solid
+ink, because being read beats being admired.
 
 Act II reads right to left on screen. In the document its heading is still
 followed by its six units in a straight line. `flex-direction: row-reverse`
