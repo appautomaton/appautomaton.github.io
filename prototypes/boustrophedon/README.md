@@ -94,6 +94,37 @@ Without scroll-driven animation support, or under
 falls back to `static`, `nowrap` to `wrap`, the transform drops, and the
 reversed band returns to `row`. All twenty units stay visible either way.
 
+Third pass:
+
+- **A double furrow.** The longest shelf outgrew one line, so it folds into two
+  that run against each other. The document does not fold with it: the heading
+  is still followed by the top row and then the bottom row, in order.
+- **The act numeral drifts against its band.** Two layers at different speeds
+  is the cheapest way to give a sheet thickness.
+- **It prints.** A site about printing should come off a printer as a
+  catalogue. `@media print` flattens the bands, drops every decoration, and
+  appends each `href` after its link, because paper cannot be clicked.
+
+## Measured
+
+Scrolling the whole document, 220 steps, on a 1440×900 viewport:
+
+| | |
+| --- | --- |
+| Median frame | 8.3 ms |
+| 95th percentile | 9.4 ms |
+| Frames over 33 ms | 2 of 216, both image decodes at the start |
+| Animations | 34, all of them scroll-driven |
+
+Everything runs on the compositor because only `transform`, `opacity`, and
+registered custom properties are animated. No scroll listener drives layout.
+
+Tabbing through a band was the thing most likely to be broken, and is not:
+focus moves through all six units of Act I with none of them landing offscreen.
+The horizontal position is a pure function of vertical scroll, so the browser's
+own `scrollIntoView` solves the horizontal case for free. A band driven by
+JavaScript would have needed focus management written by hand.
+
 ## A trap worth remembering
 
 The plates first used `view()` for the hatch reveal, which froze at 7.3 of 8px

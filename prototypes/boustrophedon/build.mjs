@@ -53,20 +53,32 @@ const acts = catalog
   .map((shelf, i) => {
     const dir = i % 2 === 0 ? 'ltr' : 'rtl'
     const id = `act-${shelf.letter.toLowerCase()}`
+    /* 单元多到一条犁沟装不下时，折成上下两条反向并行的。DOM 不变：
+       标题、上行的单元、下行的单元，依然是一条直线。 */
+    const double = shelf.items.length > 6
+    const head = `<header class="act-head">
+              <p class="no">ACT ${ROMAN[i]} · ${shelf.items.length} UNITS${double ? ' · DOUBLE FURROW' : ''}</p>
+              <h2 id="${id}">${esc(shelf.label)}</h2>
+              <p>${esc(shelf.blurb)}</p>
+              <p class="dir">${double ? 'reading ⇄ both ways' : dir === 'ltr' ? 'reading ————→ right' : 'left ←———— reading'}</p>
+            </header>`
     return `
-    <section class="act" data-dir="${dir}" aria-labelledby="${id}" id="shelf-${shelf.letter}">
+    <section class="act" data-dir="${dir}"${double ? ' data-plow="double"' : ''} aria-labelledby="${id}" id="shelf-${shelf.letter}">
       <div class="act-rail" style="--units:${shelf.items.length}">
         <div class="act-stage">
           <span class="act-no" aria-hidden="true">${ROMAN[i]}</span>
-          <div class="reel">
-            <header class="act-head">
-              <p class="no">ACT ${ROMAN[i]} · ${shelf.items.length} UNITS</p>
-              <h2 id="${id}">${esc(shelf.label)}</h2>
-              <p>${esc(shelf.blurb)}</p>
-              <p class="dir">${dir === 'ltr' ? 'reading ————→ right' : 'left ←———— reading'}</p>
-            </header>
-${shelf.items.map(unit).join('')}
+          ${double ? `
+          <div class="reel reel-a">
+            ${head}
+${shelf.items.slice(0, Math.ceil(shelf.items.length / 2)).map(unit).join('')}
           </div>
+          <div class="reel reel-b">
+${shelf.items.slice(Math.ceil(shelf.items.length / 2)).map(unit).join('')}
+          </div>` : `
+          <div class="reel">
+            ${head}
+${shelf.items.map(unit).join('')}
+          </div>`}
         </div>
       </div>
     </section>`

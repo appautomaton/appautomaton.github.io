@@ -337,3 +337,85 @@ a{color:inherit}
 @supports not (background-blend-mode:lighten) {
   .head h1{ background-image:none; color:var(--text); -webkit-text-fill-color:var(--text) }
 }
+
+/* ==================================================================
+   第三稿
+   ================================================================== */
+
+/* ---- 双犁 ----------------------------------------------------------
+   最长的一幕拆成上下两条反向并行的犁沟。DOM 仍是一条直线：标题、
+   上行的单元、下行的单元，依次排列。分行只是把同一条队伍折了一下。 */
+/* align-items 必须是 flex-start：column 方向下默认的 stretch 会把带子
+   宽度钉成容器宽，而位移量写的是 calc(-100% + 100vw) —— 带宽一旦等于
+   视口宽，这个式子就是 0，带子纹丝不动。带必须由内容撑宽再溢出。 */
+.act[data-plow="double"] .act-stage{flex-direction:column;justify-content:center;
+  align-items:flex-start;gap:26px}
+.act[data-plow="double"] .reel-b{flex-direction:row-reverse}
+.act[data-plow="double"] .unit{flex-basis:min(440px,86vw);flex-direction:row;align-items:stretch}
+.act[data-plow="double"] .unit .lid{flex:0 0 132px;aspect-ratio:1}
+.act[data-plow="double"] .unit .meat{padding:16px 18px;gap:6px}
+.act[data-plow="double"] .unit p{font-size:13.5px;line-height:1.45}
+.act[data-plow="double"] .unit h3{font-size:13px}
+.act[data-plow="double"] .act-head{flex-basis:min(400px,80vw);padding-right:20px}
+.act[data-plow="double"] .act-head h2{font-size:clamp(38px,5vw,68px)}
+.act[data-plow="double"] .act-head p{font-size:14.5px}
+
+/* ---- 幕号逆向漂移 --------------------------------------------------
+   卡片往一边走，幕号往另一边走。两个速度不同的图层，纸就有了厚度。 */
+@keyframes no-drift-ltr{ from{transform:translateX(9vw)}  to{transform:translateX(-5vw)} }
+@keyframes no-drift-rtl{ from{transform:translateX(-9vw)} to{transform:translateX(5vw)} }
+
+/* ---- 转行的幕号：压在犁沟回转处，不再贴边 -------------------------- */
+.turn .no{position:absolute;top:50%;translate:0 -50%;opacity:.13}
+.turn[data-to="rtl"] .no{right:14%} .turn[data-to="ltr"] .no{left:calc(var(--gut) + 14%)}
+
+/* ---- 尾声：收束要收得住 -------------------------------------------- */
+.coda{padding:22vh var(--gut) 16vh calc(var(--gut) + 40px)}
+.coda .inner{grid-template-columns:.9fr 1.1fr;gap:56px}
+.coda h2{font-size:clamp(58px,11vw,168px)}
+.coda .kicker{margin-bottom:10px}
+.coda .unit{max-width:none}
+.coda .unit .lid{aspect-ratio:16/10}
+
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .act[data-plow="double"] .reel-a{ animation:reel-ltr linear both; animation-timeline:--act; animation-range:contain 0% contain 100% }
+    .act[data-plow="double"] .reel-b{ animation:reel-rtl linear both; animation-timeline:--act; animation-range:contain 0% contain 100% }
+    .act[data-dir="ltr"] .act-no{ animation:no-drift-ltr linear both; animation-timeline:--act; animation-range:contain 0% contain 100% }
+    .act[data-dir="rtl"] .act-no{ animation:no-drift-rtl linear both; animation-timeline:--act; animation-range:contain 0% contain 100% }
+  }
+}
+@media (prefers-reduced-motion: reduce){
+  .act[data-plow="double"] .act-stage{flex-direction:column}
+  .act[data-plow="double"] .reel-b{flex-direction:row}
+  .act-no{animation:none;transform:none}
+  .turn{display:none}            /* 掉头是动作，不动就没有意义，直接省掉 */
+}
+@supports not (animation-timeline: view()){ .turn{display:none} }
+
+/* ---- 印出来 --------------------------------------------------------
+   这个站讲的是印刷，那它就该印得出来。打印时回到单栏目录：带子拉直，
+   装饰全撤，链接后面把地址补上 —— 纸上点不动，地址就得看得见。 */
+@media print{
+  @page{ margin:16mm }
+  :root{ --bg:#fff; --surface:#fff; --border:#bbb; --text:#111; --dim:#444; --accent:#1b4a3a; --patina:#3d6b58 }
+  .top,.margin,.turn,.head .plate-bed,.head::after{ display:none }
+  body{ background:#fff;color:#111;font-size:10.5pt }
+  .head{ min-height:auto;padding:0 0 8mm;page-break-after:avoid }
+  .head h1{ background:none;color:#111;-webkit-text-fill-color:#111;font-size:44pt;filter:none }
+  .act-rail{ height:auto } .act-stage{ position:static;height:auto;display:block;rotate:none }
+  .reel{ display:block;transform:none!important;padding:0 }
+  .act-head{ page-break-after:avoid;padding:0 0 4mm }
+  .act-head h2{ font-size:22pt }
+  .unit{
+    display:grid;grid-template-columns:26mm 1fr;gap:5mm;break-inside:avoid;
+    border:0;border-top:.3pt solid #bbb;padding:3mm 0;transform:none;filter:none;opacity:1;
+  }
+  .unit .lid img{ mask-image:none;-webkit-mask-image:none;filter:grayscale(1) contrast(1.1) }
+  .unit .go{ display:none }
+  .unit h3::after{ content:" · " attr(href) }
+  .unit{ text-decoration:none }
+  a[href^="http"]::after{ content:" (" attr(href) ")";font-size:8pt;color:#555;word-break:break-all }
+  .unit .chips span{ border-color:#ccc }
+  .colophon{ page-break-before:auto;border-top:.3pt solid #bbb }
+}
