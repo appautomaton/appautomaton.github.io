@@ -37,7 +37,7 @@ export const repos: OrgRepo[] = [
       "mcp"
     ],
     "hasSite": true,
-    "lastmod": "2026-08-05",
+    "lastmod": "2026-08-10",
     "sitemap": "https://appautomaton.renocrypt.com/agent-designer/sitemap.xml"
   },
   {
@@ -53,7 +53,7 @@ export const repos: OrgRepo[] = [
       "opencode"
     ],
     "hasSite": true,
-    "lastmod": "2026-07-28",
+    "lastmod": "2026-08-10",
     "sitemap": null
   },
   {
@@ -91,7 +91,7 @@ export const repos: OrgRepo[] = [
       "macos"
     ],
     "hasSite": true,
-    "lastmod": "2026-08-05",
+    "lastmod": "2026-08-10",
     "sitemap": "https://appautomaton.renocrypt.com/docker-for-apple-container/sitemap.xml"
   },
   {
@@ -139,7 +139,7 @@ export const repos: OrgRepo[] = [
       "scientific-writing"
     ],
     "hasSite": true,
-    "lastmod": "2026-08-05",
+    "lastmod": "2026-08-10",
     "sitemap": null
   },
   {
@@ -180,7 +180,7 @@ export const repos: OrgRepo[] = [
       "web-scraping"
     ],
     "hasSite": true,
-    "lastmod": "2026-08-09",
+    "lastmod": "2026-08-10",
     "sitemap": "https://appautomaton.renocrypt.com/markmaton/sitemap.xml"
   },
   {
@@ -387,7 +387,7 @@ export const repos: OrgRepo[] = [
       "techno"
     ],
     "hasSite": true,
-    "lastmod": "2026-06-20",
+    "lastmod": "2026-08-10",
     "sitemap": null
   },
   {
