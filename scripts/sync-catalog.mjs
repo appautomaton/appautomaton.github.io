@@ -95,7 +95,11 @@ function audit(name, url, html) {
   const strays = (html.match(/href=["']https:\/\/appautomaton\.github\.io/gi) ?? []).length
   if (strays) warnings.push(`${strays} link(s) to the github.io address, which redirects here`)
 
-  if (!/href=["']https:\/\/appautomaton\.renocrypt\.com\/["']/i.test(html))
+  /* The trailing slash is optional because a URL with an empty path and one
+     with "/" are the same address, and a page that writes it either way is
+     linking here. Requiring the slash reported a page as unlinked when it was
+     not, which is the expensive direction for a check like this to be wrong. */
+  if (!/href=["']https:\/\/appautomaton\.renocrypt\.com\/?["']/i.test(html))
     warnings.push('no link back to the catalog')
 
   for (const w of warnings) console.warn(`warn: ${name} ${w}`)
