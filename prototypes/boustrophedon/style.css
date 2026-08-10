@@ -419,3 +419,38 @@ a{color:inherit}
   .unit .chips span{ border-color:#ccc }
   .colophon{ page-break-before:auto;border-top:.3pt solid #bbb }
 }
+
+/* ==================================================================
+   窄屏
+   一条犁沟在手机上已经够宽了，两条只会把卡片压成细长条。所以双犁在
+   820px 以下退回单条 —— 折行是为装不下才折的，装得下就不折。
+   ================================================================== */
+@media (max-width:820px){
+  :root{ --gut:16px }
+
+  /* 顶栏原来是三块并排，窄屏下第三块被挤出画面，NIGHT 直接看不见。 */
+  .top{height:auto;min-height:52px;padding:8px var(--gut) 8px calc(var(--gut) + 10px);gap:10px;flex-wrap:wrap}
+  .top .mark{font-size:10px;letter-spacing:.14em}
+  .top nav{gap:10px;flex-shrink:0}
+  .toggle button{padding:5px 9px;font-size:9px}
+
+  /* 双犁在窄屏保留 —— 两行确实装得下（实测内容 665px，舞台 788px）。
+     要修的是拉伸：reel 默认 align-items:stretch，一行里最高的那张会把
+     其余全部撑到同高，短文案的卡片下面拖出一大片空白。 */
+  .act[data-plow="double"] .reel{align-items:flex-start;gap:12px}
+  .act[data-plow="double"] .unit{flex-basis:min(340px,84vw)}
+  .act[data-plow="double"] .unit .lid{flex:0 0 96px}
+  .act[data-plow="double"] .unit .meat{padding:13px 14px}
+  .act[data-plow="double"] .unit p{font-size:12.5px;-webkit-line-clamp:4}
+  .act[data-plow="double"] .act-head{flex-basis:min(340px,84vw)}
+  .act[data-plow="double"] .act-head h2{font-size:clamp(32px,9vw,52px)}
+
+  .reel{align-items:flex-start;gap:14px}
+  .unit{flex-basis:78vw}
+  .act-head{flex-basis:80vw}
+  .act-no{font-size:clamp(90px,18vh,150px);left:calc(var(--gut) + 10px)}
+  .turn{height:38vh}
+  .head{padding-left:calc(var(--gut) + 22px)}
+  .coda{padding-left:calc(var(--gut) + 22px)}
+  .colophon{padding-left:calc(var(--gut) + 22px)}
+}
