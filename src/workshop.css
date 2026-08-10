@@ -473,6 +473,36 @@
   transition-duration: 130ms;
 }
 
+/* The repository link sits one step behind the project's own page: same
+   plate lettering, quieter ink, and no standing rule under it. */
+.aa-bento .aa-view-quiet {
+  color: var(--color-text-secondary);
+}
+
+.aa-card:hover .aa-view-quiet,
+.aa-card:focus-within .aa-view-quiet {
+  color: var(--aa-flood-muted);
+  border-bottom-color: transparent;
+}
+
+.aa-bento .aa-view:hover,
+.aa-card:hover .aa-view-quiet:hover {
+  border-bottom-color: currentColor;
+}
+
+/* The name is the link when a project has a page. It reads as type, and
+   only admits to being a link under the pointer. */
+.aa-card-namelink {
+  color: inherit;
+  text-decoration: none;
+}
+
+.aa-card-namelink:hover {
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.12em;
+}
+
 /* --- Card species --------------------------------------------------------
    Five shapes, hand-distributed across each shelf: plate on top, plate
    below the text, a tall side strip, an image-led split, and pure type.

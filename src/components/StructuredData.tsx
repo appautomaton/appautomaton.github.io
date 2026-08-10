@@ -29,15 +29,19 @@ const graph = {
       '@id': 'https://appautomaton.renocrypt.com/#catalog',
       name: 'The App Automaton catalog',
       numberOfItems: catalog.reduce((n, s) => n + s.items.length, 0),
+      /* url is the address a reader should be sent to, which is the project's
+         own page on this domain whenever it has one. codeRepository stays
+         GitHub. Keeping those two apart is what stops the graph from
+         declaring that these projects live on another host. */
       itemListElement: catalog.flatMap((s) =>
         s.items.map((p) => ({
           '@type': 'SoftwareSourceCode',
+          '@id': `${p.site ?? p.source}#project`,
           name: p.repo,
           description: p.description,
-          url: p.href,
-          codeRepository: p.href.startsWith('https://github.com/')
-            ? p.href
-            : `https://github.com/appautomaton/${p.repo}`,
+          url: p.site ?? p.source,
+          codeRepository: p.source,
+          isPartOf: { '@id': 'https://appautomaton.renocrypt.com/#website' },
         })),
       ),
     },

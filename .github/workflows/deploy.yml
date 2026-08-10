@@ -23,9 +23,13 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      # 24, not 22: the prerender step imports the catalog straight from
+      # TypeScript to check the rendered card count against it. Pinning the
+      # runtime that strips types keeps that check running rather than
+      # quietly degrading to a warning.
       - uses: actions/setup-node@v4
         with:
-          node-version: 22
+          node-version: 24
           cache: npm
 
       - run: npm ci

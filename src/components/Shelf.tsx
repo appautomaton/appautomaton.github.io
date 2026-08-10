@@ -1,8 +1,33 @@
 import { Card, Stack, HStack, Text, Link } from '@astryxdesign/core'
-import type { ShelfData } from '../data/catalog'
+import type { Project, ShelfData } from '../data/catalog'
 import { cardArt, layoutSpans } from '../plates/thumbs'
 
 const ROMANS = ['I', 'II', 'III', 'IV', 'V', 'VI']
+
+/** Two destinations per exhibit: the project's own page on this domain, and
+    the repository it is cut from. The page link is the primary one and stays
+    in the tab, which also keeps the catalog a connected site rather than a
+    list of departures. Projects without a page show the source alone. */
+function CardLinks({ project }: { project: Project }) {
+  return (
+    <HStack gap={3} align="center">
+      {project.site && (
+        <Link href={project.site} hasUnderline={false} className="aa-view">
+          View →
+        </Link>
+      )}
+      <Link
+        href={project.source}
+        target="_blank"
+        rel="noopener"
+        hasUnderline={false}
+        className="aa-view aa-view-quiet"
+      >
+        Source ↗
+      </Link>
+    </HStack>
+  )
+}
 
 export function Shelf({ shelf, index }: { shelf: ShelfData; index: number }) {
   return (
@@ -99,13 +124,22 @@ export function Shelf({ shelf, index }: { shelf: ShelfData; index: number }) {
                     </Text>
                   </HStack>
 
+                  {/* The name carries the link when the project has a page,
+                      so the anchor text is the project's name rather than a
+                      bare "view". Styled to inherit, so nothing shifts. */}
                   <Text
                     as="div"
                     type="body"
                     className="aa-card-name"
                     style={{ fontSize: featured ? '1.9rem' : '1.6rem' }}
                   >
-                    {p.repo}
+                    {p.site ? (
+                      <a href={p.site} className="aa-card-namelink">
+                        {p.repo}
+                      </a>
+                    ) : (
+                      p.repo
+                    )}
                   </Text>
 
                   <Text
@@ -123,32 +157,17 @@ export function Shelf({ shelf, index }: { shelf: ShelfData; index: number }) {
                   </Text>
 
                   {layout !== 'bottom' && (
-                    <Link
-                      href={p.href}
-                      target="_blank"
-                      rel="noopener"
-                      hasUnderline={false}
-                      className="aa-view"
-                      style={{ alignSelf: 'flex-start', marginTop: '0.5rem' }}
-                    >
-                      View →
-                    </Link>
+                    <div style={{ alignSelf: 'flex-start', marginTop: '0.5rem' }}>
+                      <CardLinks project={p} />
+                    </div>
                   )}
                 </Stack>
                 {layout === 'bottom' && plate}
                 {layout === 'bottom' && (
-                  /* the view stays on the card's bottom line, under the plate,
+                  /* the links stay on the card's bottom line, under the plate,
                      so every row's links sit on one rule */
                   <div className="aa-card-viewbar">
-                    <Link
-                      href={p.href}
-                      target="_blank"
-                      rel="noopener"
-                      hasUnderline={false}
-                      className="aa-view"
-                    >
-                      View →
-                    </Link>
+                    <CardLinks project={p} />
                   </div>
                 )}
               </Card>

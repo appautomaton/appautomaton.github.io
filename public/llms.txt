@@ -5,37 +5,39 @@
 
 App Automaton is the open-source workshop of AppCubic. Everything public sorts onto four shelves: SKILLs that teach agents workflows, harnesses that keep them honest, models that run on the laptop's own silicon, and a creative harness that points the same method at club music. SKILLs are portable SKILL.md packs with three layers of disclosure (frontmatter the agent always sees, a workflow body loaded on invocation, references pulled on demand), and the same folder works unchanged under Claude Code, Codex, Gemini, and OpenCode.
 
+Each project below links to its own page on this site first, then to the repository it is cut from. Projects with no page of their own link to the repository alone.
+
 ## Shelf A: SKILLs for coding agents
 
-- [agent-designer](https://github.com/appautomaton/agent-designer): the skills workspace. Issue-driven workflows, an MCP tool catalog, and bridge skills for agent-to-agent delegation with session continuity. [Deep dive](https://appautomaton.renocrypt.com/agent-designer/).
-- [document-SKILLs](https://github.com/appautomaton/document-SKILLs): docx, xlsx, pptx, and pdf. Extraction, forms, formulas, and tracked changes. Runs on uv with PEP 723, no virtualenv.
-- [presentation](https://github.com/appautomaton/presentation): consulting-quality decks, from strategy storyboarding to pixel-perfect PDF or editable PPTX.
+- [agent-designer](https://appautomaton.renocrypt.com/agent-designer/): the skills workspace. Issue-driven workflows, an MCP tool catalog, and bridge skills for agent-to-agent delegation with session continuity. [Source](https://github.com/appautomaton/agent-designer).
+- [document-SKILLs](https://appautomaton.renocrypt.com/document-SKILLs/): docx, xlsx, pptx, and pdf. Extraction, forms, formulas, and tracked changes. Runs on uv with PEP 723, no virtualenv. [Source](https://github.com/appautomaton/document-SKILLs).
+- [presentation](https://appautomaton.renocrypt.com/presentation/): consulting-quality decks, from strategy storyboarding to pixel-perfect PDF or editable PPTX. [Source](https://github.com/appautomaton/presentation).
 - [webmaton](https://github.com/appautomaton/webmaton): grounded web research. Citations, deterministic HTML-to-Markdown, and persistent sessions over Playwright, nodriver, and Chrome DevTools.
 - [playwright-skill](https://github.com/appautomaton/playwright-skill): browser automation that also runs on Android via a Termux launcher patch and headless Chromium.
-- [latex-arxiv-SKILL](https://appautomaton.renocrypt.com/latex-arxiv-SKILL/): an agentic harness, as a portable Agent Skill, that turns a topic into an arXiv-ready ML review paper. Gated literature discovery, an issue-by-issue writing loop, every citation verified, compiled to a two-column IEEEtran PDF.
+- [latex-arxiv-SKILL](https://appautomaton.renocrypt.com/latex-arxiv-SKILL/): an agentic harness, as a portable Agent Skill, that turns a topic into an arXiv-ready ML review paper. Gated literature discovery, an issue-by-issue writing loop, every citation verified, compiled to a two-column IEEEtran PDF. [Source](https://github.com/appautomaton/latex-arxiv-SKILL).
 
 ## Shelf B: Harnesses and runtimes
 
-- [automaton](https://github.com/appautomaton/automaton): a stage-gated harness. Frame, plan, review, execute, verify, resume. Installs as plain markdown.
+- [automaton](https://appautomaton.renocrypt.com/automaton/): a stage-gated harness. Frame, plan, review, execute, verify, resume. Installs as plain markdown. [Source](https://github.com/appautomaton/automaton).
 - [automux](https://github.com/appautomaton/automux): multi-agent orchestration in tmux or kitty, coordinating through files across parallel git worktrees.
 - [openclaw-monorepo](https://github.com/appautomaton/openclaw-monorepo): a repo-local OpenClaw workspace with JSON5 config, plugins, and Docker sandboxes.
-- [markmaton](https://appautomaton.renocrypt.com/markmaton/): HTML to Markdown for agent pipelines. A Go parser core wrapped in a Python CLI and API, on PyPI.
-- [docker-for-apple-container](https://appautomaton.renocrypt.com/docker-for-apple-container/): a stateless `docker` shim over Apple's native `container` CLI on macOS, with no Docker Desktop.
-- [pi-arcweld](https://appautomaton.renocrypt.com/pi-arcweld/): a curated local layer welded to pinned upstream Pi. Extensions, system guidance, and MCP tooling join along one auditable seam, over a reproducible runtime.
+- [markmaton](https://appautomaton.renocrypt.com/markmaton/): HTML to Markdown for agent pipelines. A Go parser core wrapped in a Python CLI and API, on PyPI. [Source](https://github.com/appautomaton/markmaton).
+- [docker-for-apple-container](https://appautomaton.renocrypt.com/docker-for-apple-container/): a stateless `docker` shim over Apple's native `container` CLI on macOS, with no Docker Desktop. [Source](https://github.com/appautomaton/docker-for-apple-container).
+- [pi-arcweld](https://appautomaton.renocrypt.com/pi-arcweld/): a curated local layer welded to pinned upstream Pi. Extensions, system guidance, and MCP tooling join along one auditable seam, over a reproducible runtime. [Source](https://github.com/appautomaton/pi-arcweld).
 
 ## Shelf C: On-device, in pure MLX
 
-- [mlx-speech](https://github.com/appautomaton/mlx-speech): speech synthesis, voice cloning, dialogue, sound effects, and recognition, MLX-native on the Apple GPU.
-- [tnt-asr](https://github.com/appautomaton/tnt-asr): a terminal voice-to-text TUI. Qwen3-ASR transcribes in about a second, fully local.
+- [mlx-speech](https://appautomaton.renocrypt.com/mlx-speech/): speech synthesis, voice cloning, dialogue, sound effects, and recognition, MLX-native on the Apple GPU. [Source](https://github.com/appautomaton/mlx-speech).
+- [tnt-asr](https://appautomaton.renocrypt.com/tnt-asr/): a terminal voice-to-text TUI. Qwen3-ASR transcribes in about a second, fully local. [Source](https://github.com/appautomaton/tnt-asr).
 - [ltx-video-mlx](https://github.com/appautomaton/ltx-video-mlx): text- and image-to-video with synchronized audio on LTX-2.3 22B. On-device LoRA fine-tuning.
-- [mlx-h3](https://appautomaton.renocrypt.com/mlx-h3/): MiniMax-H3 text to video and stereo audio, denoised together in one packed sequence. Phase-scoped model residency, no PyTorch at runtime.
-- [mlx-cv](https://appautomaton.renocrypt.com/mlx-cv/): open-vocabulary grounding, detection, depth and camera geometry, segmentation, and video tracking in pure MLX. Every model is checked against its upstream reference before it ships.
-- [mlx-spatial](https://github.com/appautomaton/mlx-spatial): 3D and spatial inference on device with SAM 3D Objects, TRELLIS.2, WorldMirror, and MapAnything.
-- [mlx-atomistic](https://appautomaton.renocrypt.com/mlx-atomistic/): atomistic simulation on Apple silicon. A DFT and molecular-dynamics runtime on MLX and Metal, running on the GPU the Mac already has.
+- [mlx-cv](https://appautomaton.renocrypt.com/mlx-cv/): open-vocabulary grounding, detection, depth and camera geometry, segmentation, and video tracking in pure MLX. Every model is checked against its upstream reference before it ships. [Source](https://github.com/appautomaton/mlx-cv).
+- [mlx-spatial](https://appautomaton.renocrypt.com/mlx-spatial/): 3D and spatial inference on device with SAM 3D Objects, TRELLIS.2, WorldMirror, and MapAnything. [Source](https://github.com/appautomaton/mlx-spatial).
+- [mlx-atomistic](https://appautomaton.renocrypt.com/mlx-atomistic/): atomistic simulation on Apple silicon. A DFT and molecular-dynamics runtime on MLX and Metal, running on the GPU the Mac already has. [Source](https://github.com/appautomaton/mlx-atomistic).
+- [mlx-h3](https://appautomaton.renocrypt.com/mlx-h3/): MiniMax-H3 text to video and stereo audio, denoised together in one packed sequence. Phase-scoped model residency, no PyTorch at runtime. [Source](https://github.com/appautomaton/mlx-h3).
 
 ## Shelf D: Creative harnesses
 
-- [setloom](https://github.com/appautomaton/setloom): producer-first co-production for club music. Musical intent into editable tracks, stems, renders, and listening notes, with the human keeping the taste gate.
+- [setloom](https://appautomaton.renocrypt.com/setloom/): producer-first co-production for club music. Musical intent into editable tracks, stems, renders, and listening notes, with the human keeping the taste gate. [Source](https://github.com/appautomaton/setloom).
 
 ## Links
 
