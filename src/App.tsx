@@ -57,6 +57,8 @@ function App() {
         // @ts-expect-error -- custom properties aren't in CSSProperties
         '--aa-font-mono': vibe.fontMono,
         '--aa-patina': vibe.patina,
+        '--aa-title-floor': vibe.titleFloor,
+        '--aa-title-blend': vibe.titleBlend,
         '--aa-lamp': vibe.lamp,
         '--aa-plate-filter': vibe.plateFilter,
         '--aa-plate-blend': vibe.plateBlend,

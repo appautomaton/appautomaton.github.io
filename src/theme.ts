@@ -19,6 +19,16 @@ export type Vibe = {
   fontMono: string
   /* patinated bronze for plate numbers and counts */
   patina: string
+  /* The title is cut from a plate: an engraving fills the letterforms and
+     drifts inside them as the page scrolls. A photographic fill has no floor,
+     so wherever the plate goes dark the letter goes dark, and on a dark ground
+     the word disappears. These two clamp it. The flat colour is composited
+     under the plate and the blend mode decides which side is bounded: darken
+     by day, so the fill can never rise above the ink; lighten by night, so it
+     can never fall below the paper. Measured on rendered glyph pixels, the
+     worst five per cent sit near 8:1 in both modes. */
+  titleFloor: string
+  titleBlend: string
   /* the follow spot: a faint pool of light on the night cursor */
   lamp: string
   /* engraving finish per mode, plus the verdigris hover bloom */
@@ -39,6 +49,8 @@ export type Vibe = {
 export const THEATER_VIBE_DAY: Vibe = {
   fontMono: "'Martian Mono', ui-monospace, monospace",
   patina: '#4E7D6C',
+  titleFloor: '#33402F',
+  titleBlend: 'darken',
   lamp: 'rgba(0, 0, 0, 0)',
   plateFilter:
     'grayscale(1) sepia(0.3) hue-rotate(68deg) saturate(0.45) contrast(1.03) brightness(1.04)',
@@ -58,6 +70,8 @@ export const THEATER_VIBE_DAY: Vibe = {
 export const THEATER_VIBE_NIGHT: Vibe = {
   fontMono: "'Martian Mono', ui-monospace, monospace",
   patina: '#7FA98F',
+  titleFloor: '#AFC3B4',
+  titleBlend: 'lighten',
   lamp: 'rgba(150, 200, 170, 0.05)',
   plateFilter:
     'grayscale(1) invert(0.92) sepia(0.45) hue-rotate(75deg) saturate(0.8) brightness(0.82) contrast(1.08)',

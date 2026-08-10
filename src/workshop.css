@@ -1103,3 +1103,47 @@
     word-break: break-all;
   }
 }
+
+/* --- the title, cut from a plate -----------------------------------------
+   Not type laid over an engraving: the engraving appears only inside the
+   letterforms, and it drifts inside them as the page scrolls, so the type
+   holds still while the image within it moves.
+
+   The fill is clamped. A photographic fill has no floor, so wherever the
+   plate goes dark the letter goes dark, and on a dark ground the word simply
+   disappears — an earlier pass of this genuinely read AUTOMAT?N. Raising a
+   filter cannot fix an unbounded fill; a blend floor can. --aa-title-floor is
+   composited under the plate and --aa-title-blend decides which side is
+   bounded, both riding the same day/night vibe as every other treatment here.
+
+   The text is still text: selectable, readable aloud, and read by crawlers.
+   Only its fill changed. A browser without background-blend-mode drops the
+   whole conceit and gets solid ink, because being read beats being admired. */
+@property --aa-title-y { syntax: '<percentage>'; inherits: false; initial-value: 18% }
+
+@supports ((background-clip: text) or (-webkit-background-clip: text)) and
+          (background-blend-mode: lighten) {
+  .aa-plaque-panel h1 {
+    background-image:
+      linear-gradient(var(--aa-title-floor) 0 0),
+      url('./plates/comedie-section.webp');
+    background-size: auto, auto 320%;
+    background-position: center, center var(--aa-title-y, 18%);
+    background-blend-mode: var(--aa-title-blend);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+}
+
+@keyframes aa-title-drift { from { --aa-title-y: 4% } to { --aa-title-y: 74% } }
+
+@supports (animation-timeline: scroll()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .aa-plaque-panel h1 {
+      animation: aa-title-drift linear both;
+      animation-timeline: scroll(root block);
+      animation-range: 0% 30%;
+    }
+  }
+}
