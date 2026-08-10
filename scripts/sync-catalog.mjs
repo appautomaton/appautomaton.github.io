@@ -61,19 +61,54 @@ async function fetchRepos() {
    rather than the repo's homepage field means the flag cannot claim a site
    that stopped being served, and a redirect is not a site: the address that
    belongs in a link is the one that answered. */
-async function serves(url) {
+/* HEAD is enough to learn that an address answers. The page itself is fetched
+   with GET, because a HEAD response carries no body and the audit below reads
+   the markup. */
+async function serves(url, method = 'HEAD') {
   const res = await fetch(url, {
-    method: 'HEAD',
+    method,
     redirect: 'manual',
     signal: AbortSignal.timeout(15000),
   })
   return res.status === 200 ? res : null
 }
 
+/* Each project page is built in its own repository, so nothing here can keep
+   their markup right. What this can do is look, on every build, and say what
+   it saw. A canonical naming some other address is the one finding that stops
+   the build: it removes the page from the index outright, and it is never what
+   anyone meant. The rest are reported and left alone. */
+function audit(name, url, html) {
+  const problems = []
+  const warnings = []
+
+  const canonical = html.match(/<link[^>]+rel=["']canonical["'][^>]*>/i)?.[0]
+  const href = canonical?.match(/href=["']([^"']+)["']/i)?.[1]
+  if (!href) warnings.push('no canonical')
+  else if (href !== url) problems.push(`canonical points at ${href}, not ${url}`)
+
+  if (!/<title[^>]*>\s*\S/i.test(html)) warnings.push('no title')
+  if (!/<meta[^>]+name=["']description["']/i.test(html)) warnings.push('no meta description')
+  if (/content=["']https:\/\/appautomaton\.github\.io/i.test(html))
+    warnings.push('an og tag names the github.io address, which redirects here')
+
+  const strays = (html.match(/href=["']https:\/\/appautomaton\.github\.io/gi) ?? []).length
+  if (strays) warnings.push(`${strays} link(s) to the github.io address, which redirects here`)
+
+  if (!/href=["']https:\/\/appautomaton\.renocrypt\.com\/["']/i.test(html))
+    warnings.push('no link back to the catalog')
+
+  for (const w of warnings) console.warn(`warn: ${name} ${w}`)
+  return problems
+}
+
 async function probe(name) {
   try {
-    const page = await serves(`${ORIGIN}/${name}/`)
+    const url = `${ORIGIN}/${name}/`
+    const page = await serves(url, 'GET')
     if (!page) return { hasSite: false }
+
+    const problems = audit(name, url, await page.text())
 
     /* GitHub Pages reports when it last wrote the document, which is the only
        honest lastmod available for a page built in another repository. */
@@ -97,6 +132,7 @@ async function probe(name) {
       hasSite: true,
       lastmod: stamp && !Number.isNaN(stamp.valueOf()) ? stamp.toISOString().slice(0, 10) : null,
       sitemap,
+      problems,
     }
   } catch (e) {
     return { hasSite: null, error: String(e) }
@@ -151,6 +187,10 @@ const merged = repos.map((r, i) => {
 })
 
 for (const name of unreachable) console.warn(`warn: could not probe ${name}, kept the last answer`)
+
+const misCanonicalled = repos.flatMap((r, i) => (probes[i].problems ?? []).map((p) => `  ${r.name}: ${p}`))
+if (misCanonicalled.length)
+  throw new Error(`project pages name an address that is not their own:\n${misCanonicalled.join('\n')}`)
 
 /* The homepage field is what GitHub shows beside the repo and what a reader
    follows from the org page, so it should name the address that serves the

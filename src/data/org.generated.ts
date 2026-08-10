@@ -110,7 +110,7 @@ export const repos: OrgRepo[] = [
       "pptx"
     ],
     "hasSite": true,
-    "lastmod": "2026-07-01",
+    "lastmod": "2026-08-10",
     "sitemap": null
   },
   {
@@ -363,7 +363,7 @@ export const repos: OrgRepo[] = [
       "slides"
     ],
     "hasSite": true,
-    "lastmod": "2026-07-09",
+    "lastmod": "2026-08-10",
     "sitemap": null
   },
   {
@@ -410,7 +410,7 @@ export const repos: OrgRepo[] = [
       "whisper-alternative"
     ],
     "hasSite": true,
-    "lastmod": "2026-06-24",
+    "lastmod": "2026-08-10",
     "sitemap": null
   },
   {
