@@ -14,6 +14,8 @@ export type OrgRepo = {
   hasSite: boolean
   /** The date that page was last built, from its Last-Modified header. */
   lastmod: string | null
+  /** The project's own sitemap, when it serves one. */
+  sitemap: string | null
 }
 
 export const org = "appautomaton"
@@ -35,7 +37,8 @@ export const repos: OrgRepo[] = [
       "mcp"
     ],
     "hasSite": true,
-    "lastmod": "2026-08-05"
+    "lastmod": "2026-08-05",
+    "sitemap": "https://appautomaton.renocrypt.com/agent-designer/sitemap.xml"
   },
   {
     "name": "automaton",
@@ -50,7 +53,8 @@ export const repos: OrgRepo[] = [
       "opencode"
     ],
     "hasSite": true,
-    "lastmod": "2026-07-28"
+    "lastmod": "2026-07-28",
+    "sitemap": null
   },
   {
     "name": "automux",
@@ -68,7 +72,8 @@ export const repos: OrgRepo[] = [
       "tmux"
     ],
     "hasSite": false,
-    "lastmod": null
+    "lastmod": null,
+    "sitemap": null
   },
   {
     "name": "docker-for-apple-container",
@@ -86,7 +91,8 @@ export const repos: OrgRepo[] = [
       "macos"
     ],
     "hasSite": true,
-    "lastmod": "2026-08-05"
+    "lastmod": "2026-08-05",
+    "sitemap": "https://appautomaton.renocrypt.com/docker-for-apple-container/sitemap.xml"
   },
   {
     "name": "document-SKILLs",
@@ -104,7 +110,8 @@ export const repos: OrgRepo[] = [
       "pptx"
     ],
     "hasSite": true,
-    "lastmod": "2026-07-01"
+    "lastmod": "2026-07-01",
+    "sitemap": null
   },
   {
     "name": "latex-arxiv-SKILL",
@@ -132,7 +139,8 @@ export const repos: OrgRepo[] = [
       "scientific-writing"
     ],
     "hasSite": true,
-    "lastmod": "2026-08-05"
+    "lastmod": "2026-08-05",
+    "sitemap": null
   },
   {
     "name": "ltx-video-mlx",
@@ -149,7 +157,8 @@ export const repos: OrgRepo[] = [
       "video-generation"
     ],
     "hasSite": false,
-    "lastmod": null
+    "lastmod": null,
+    "sitemap": null
   },
   {
     "name": "markmaton",
@@ -171,7 +180,8 @@ export const repos: OrgRepo[] = [
       "web-scraping"
     ],
     "hasSite": true,
-    "lastmod": "2026-08-09"
+    "lastmod": "2026-08-09",
+    "sitemap": "https://appautomaton.renocrypt.com/markmaton/sitemap.xml"
   },
   {
     "name": "mlx-atomistic",
@@ -192,7 +202,8 @@ export const repos: OrgRepo[] = [
       "scientific-computing"
     ],
     "hasSite": true,
-    "lastmod": "2026-08-10"
+    "lastmod": "2026-08-10",
+    "sitemap": "https://appautomaton.renocrypt.com/mlx-atomistic/sitemap-index.xml"
   },
   {
     "name": "mlx-cv",
@@ -216,7 +227,8 @@ export const repos: OrgRepo[] = [
       "visual-grounding"
     ],
     "hasSite": true,
-    "lastmod": "2026-08-08"
+    "lastmod": "2026-08-08",
+    "sitemap": "https://appautomaton.renocrypt.com/mlx-cv/sitemap.xml"
   },
   {
     "name": "mlx-h3",
@@ -232,7 +244,8 @@ export const repos: OrgRepo[] = [
       "video-generation"
     ],
     "hasSite": true,
-    "lastmod": "2026-08-05"
+    "lastmod": "2026-08-05",
+    "sitemap": "https://appautomaton.renocrypt.com/mlx-h3/sitemap.xml"
   },
   {
     "name": "mlx-spatial",
@@ -256,7 +269,8 @@ export const repos: OrgRepo[] = [
       "trellis"
     ],
     "hasSite": true,
-    "lastmod": "2026-08-07"
+    "lastmod": "2026-08-07",
+    "sitemap": "https://appautomaton.renocrypt.com/mlx-spatial/sitemap.xml"
   },
   {
     "name": "mlx-speech",
@@ -274,7 +288,8 @@ export const repos: OrgRepo[] = [
       "voice-cloning"
     ],
     "hasSite": true,
-    "lastmod": "2026-08-05"
+    "lastmod": "2026-08-05",
+    "sitemap": "https://appautomaton.renocrypt.com/mlx-speech/sitemap.xml"
   },
   {
     "name": "openclaw-monorepo",
@@ -290,7 +305,8 @@ export const repos: OrgRepo[] = [
       "termux"
     ],
     "hasSite": false,
-    "lastmod": null
+    "lastmod": null,
+    "sitemap": null
   },
   {
     "name": "pi-arcweld",
@@ -310,7 +326,8 @@ export const repos: OrgRepo[] = [
       "typescript"
     ],
     "hasSite": true,
-    "lastmod": "2026-08-10"
+    "lastmod": "2026-08-10",
+    "sitemap": "https://appautomaton.renocrypt.com/pi-arcweld/sitemap.xml"
   },
   {
     "name": "playwright-skill",
@@ -328,7 +345,8 @@ export const repos: OrgRepo[] = [
       "web-automation"
     ],
     "hasSite": false,
-    "lastmod": null
+    "lastmod": null,
+    "sitemap": null
   },
   {
     "name": "presentation",
@@ -345,7 +363,8 @@ export const repos: OrgRepo[] = [
       "slides"
     ],
     "hasSite": true,
-    "lastmod": "2026-07-09"
+    "lastmod": "2026-07-09",
+    "sitemap": null
   },
   {
     "name": "setloom",
@@ -368,7 +387,8 @@ export const repos: OrgRepo[] = [
       "techno"
     ],
     "hasSite": true,
-    "lastmod": "2026-06-20"
+    "lastmod": "2026-06-20",
+    "sitemap": null
   },
   {
     "name": "tnt-asr",
@@ -390,7 +410,8 @@ export const repos: OrgRepo[] = [
       "whisper-alternative"
     ],
     "hasSite": true,
-    "lastmod": "2026-06-24"
+    "lastmod": "2026-06-24",
+    "sitemap": null
   },
   {
     "name": "webmaton",
@@ -407,6 +428,7 @@ export const repos: OrgRepo[] = [
       "web-scraping"
     ],
     "hasSite": false,
-    "lastmod": null
+    "lastmod": null,
+    "sitemap": null
   }
 ]

@@ -61,23 +61,42 @@ async function fetchRepos() {
    rather than the repo's homepage field means the flag cannot claim a site
    that stopped being served, and a redirect is not a site: the address that
    belongs in a link is the one that answered. */
+async function serves(url) {
+  const res = await fetch(url, {
+    method: 'HEAD',
+    redirect: 'manual',
+    signal: AbortSignal.timeout(15000),
+  })
+  return res.status === 200 ? res : null
+}
+
 async function probe(name) {
-  const url = `${ORIGIN}/${name}/`
   try {
-    const res = await fetch(url, {
-      method: 'HEAD',
-      redirect: 'manual',
-      signal: AbortSignal.timeout(15000),
-    })
-    if (res.status !== 200) return { hasSite: false, status: res.status }
+    const page = await serves(`${ORIGIN}/${name}/`)
+    if (!page) return { hasSite: false }
+
     /* GitHub Pages reports when it last wrote the document, which is the only
        honest lastmod available for a page built in another repository. */
-    const header = res.headers.get('last-modified')
+    const header = page.headers.get('last-modified')
     const stamp = header ? new Date(header) : null
+
+    /* A project that grows past one page keeps its own sitemap, and the host's
+       robots.txt is where a crawler is told those exist. Asking which of the
+       two conventional names answers is how that list stops being a thing
+       somebody has to remember to update. */
+    let sitemap = null
+    for (const name_ of ['sitemap-index.xml', 'sitemap.xml']) {
+      const url = `${ORIGIN}/${name}/${name_}`
+      if (await serves(url)) {
+        sitemap = url
+        break
+      }
+    }
+
     return {
       hasSite: true,
-      status: 200,
       lastmod: stamp && !Number.isNaN(stamp.valueOf()) ? stamp.toISOString().slice(0, 10) : null,
+      sitemap,
     }
   } catch (e) {
     return { hasSite: null, error: String(e) }
@@ -116,9 +135,19 @@ const merged = repos.map((r, i) => {
   if (p.hasSite === null) {
     unreachable.push(r.name)
     const before = previousByName.get(r.name)
-    return { ...r, hasSite: before?.hasSite ?? false, lastmod: before?.lastmod ?? null }
+    return {
+      ...r,
+      hasSite: before?.hasSite ?? false,
+      lastmod: before?.lastmod ?? null,
+      sitemap: before?.sitemap ?? null,
+    }
   }
-  return { ...r, hasSite: p.hasSite, lastmod: p.hasSite ? p.lastmod : null }
+  return {
+    ...r,
+    hasSite: p.hasSite,
+    lastmod: p.hasSite ? p.lastmod : null,
+    sitemap: p.hasSite ? p.sitemap : null,
+  }
 })
 
 for (const name of unreachable) console.warn(`warn: could not probe ${name}, kept the last answer`)
@@ -166,12 +195,13 @@ if (missing.length)
 
 const exhibits = merged
   .filter((r) => placed.has(r.name))
-  .map(({ name, description, topics, hasSite, lastmod }) => ({
+  .map(({ name, description, topics, hasSite, lastmod, sitemap }) => ({
     name,
     description,
     topics,
     hasSite,
     lastmod,
+    sitemap,
   }))
   .sort((a, b) => a.name.localeCompare(b.name))
 
@@ -191,6 +221,8 @@ export type OrgRepo = {
   hasSite: boolean
   /** The date that page was last built, from its Last-Modified header. */
   lastmod: string | null
+  /** The project's own sitemap, when it serves one. */
+  sitemap: string | null
 }
 
 export const org = ${JSON.stringify(ORG)}
@@ -203,7 +235,9 @@ writeFileSync(OUT, module)
 
 const live = exhibits.filter((r) => r.hasSite).length
 const dated = exhibits.filter((r) => r.lastmod).length
+const mapped = exhibits.filter((r) => r.sitemap).length
 console.log(
   `synced ${exhibits.length} exhibits from the ${ORG} org, ${live} publishing a page ` +
-    `(${dated} dated), ${Object.keys(notShown).length} deliberately unlisted`,
+    `(${dated} dated, ${mapped} with their own sitemap), ` +
+    `${Object.keys(notShown).length} deliberately unlisted`,
 )

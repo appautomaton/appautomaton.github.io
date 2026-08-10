@@ -29,6 +29,8 @@ export type Project = {
   chips: string[]
   /** When the page was last built, from the serving host. Null without a page. */
   lastmod: string | null
+  /** The project's own sitemap, when it serves one. */
+  sitemap: string | null
   /** Stable catalog plate, stamped from shelf letter + position: "A-01". */
   tag: string
   /** Bento width on the 12-column desktop grid. */
@@ -58,6 +60,7 @@ function join(placement: Placement, letter: string, index: number): Project {
     source: `${GITHUB_ORG}/${placement.repo}`,
     chips: placement.chips ?? facts.topics.slice(0, 2),
     lastmod: facts.lastmod,
+    sitemap: facts.sitemap,
     tag: `${letter}-${String(index + 1).padStart(2, '0')}`,
     span: placement.span,
   }
