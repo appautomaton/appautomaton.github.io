@@ -1,0 +1,225 @@
+[
+ {
+  "letter": "A",
+  "label": "SKILLs",
+  "blurb": "Portable SKILL.md packs with three layers of disclosure. The same folder runs unchanged under Claude Code, Codex, Gemini, and OpenCode.",
+  "items": [
+   {
+    "repo": "agent-designer",
+    "description": "The skills workspace. Issue-driven workflows, an MCP tool catalog, and bridge skills for agent-to-agent delegation with session continuity.",
+    "chips": [
+     "MCP",
+     "multi-agent"
+    ],
+    "site": "https://appautomaton.renocrypt.com/agent-designer/",
+    "tag": "A-01"
+   },
+   {
+    "repo": "document-SKILLs",
+    "description": "docx, xlsx, pptx, and pdf. Extraction, forms, formulas, and tracked changes. Runs on uv with PEP 723, no virtualenv.",
+    "chips": [
+     "uv",
+     "PEP 723"
+    ],
+    "site": "https://appautomaton.renocrypt.com/document-SKILLs/",
+    "tag": "A-02"
+   },
+   {
+    "repo": "presentation",
+    "description": "Consulting-quality decks, from strategy storyboarding to pixel-perfect PDF or editable PPTX.",
+    "chips": [
+     "PDF",
+     "PPTX"
+    ],
+    "site": "https://appautomaton.renocrypt.com/presentation/",
+    "tag": "A-03"
+   },
+   {
+    "repo": "webmaton",
+    "description": "Grounded web research. Citations, deterministic HTML-to-Markdown, and persistent sessions over Playwright, nodriver, and Chrome DevTools.",
+    "chips": [
+     "Playwright",
+     "CDP"
+    ],
+    "tag": "A-04"
+   },
+   {
+    "repo": "playwright-skill",
+    "description": "Browser automation that also runs on Android via a Termux launcher patch and headless Chromium.",
+    "chips": [
+     "Android",
+     "Termux"
+    ],
+    "tag": "A-05"
+   },
+   {
+    "repo": "latex-arxiv-SKILL",
+    "description": "Turns a topic into an arXiv-ready ML review paper. Gated literature discovery, every citation verified, compiled to a two-column IEEEtran PDF.",
+    "chips": [
+     "arXiv",
+     "IEEEtran"
+    ],
+    "site": "https://appautomaton.renocrypt.com/latex-arxiv-SKILL/",
+    "tag": "A-06"
+   }
+  ]
+ },
+ {
+  "letter": "B",
+  "label": "Harnesses & runtimes",
+  "blurb": "Stage gates, orchestration, and plumbing. The tooling that keeps an agent honest from plan to verify.",
+  "items": [
+   {
+    "repo": "automaton",
+    "description": "A stage-gated harness. Frame, plan, review, execute, verify, resume. Installs as plain markdown.",
+    "chips": [
+     "stage gates",
+     "markdown"
+    ],
+    "site": "https://appautomaton.renocrypt.com/automaton/",
+    "tag": "B-01"
+   },
+   {
+    "repo": "automux",
+    "description": "Multi-agent orchestration in tmux or kitty, coordinating through files across parallel git worktrees.",
+    "chips": [
+     "tmux",
+     "worktrees"
+    ],
+    "tag": "B-02"
+   },
+   {
+    "repo": "openclaw-monorepo",
+    "description": "A repo-local OpenClaw workspace with JSON5 config, plugins, and Docker sandboxes.",
+    "chips": [
+     "JSON5",
+     "Docker"
+    ],
+    "tag": "B-03"
+   },
+   {
+    "repo": "markmaton",
+    "description": "HTML to Markdown for agent pipelines. A Go parser core wrapped in a Python CLI and API, on PyPI.",
+    "chips": [
+     "Go",
+     "PyPI"
+    ],
+    "site": "https://appautomaton.renocrypt.com/markmaton/",
+    "tag": "B-04"
+   },
+   {
+    "repo": "docker-for-apple-container",
+    "description": "A stateless docker shim over Apple’s native container CLI on macOS, with no Docker Desktop.",
+    "chips": [
+     "macOS",
+     "container CLI"
+    ],
+    "site": "https://appautomaton.renocrypt.com/docker-for-apple-container/",
+    "tag": "B-05"
+   },
+   {
+    "repo": "pi-arcweld",
+    "description": "A curated local layer welded to pinned upstream Pi. Extensions, system guidance, and MCP tooling join along one auditable seam, over a reproducible runtime.",
+    "chips": [
+     "MCP",
+     "pinned upstream"
+    ],
+    "site": "https://appautomaton.renocrypt.com/pi-arcweld/",
+    "tag": "B-06"
+   }
+  ]
+ },
+ {
+  "letter": "C",
+  "label": "On-device MLX",
+  "blurb": "Pure MLX on the Apple GPU. Speech, vision, video, 3D, and atomistic simulation that never leave the machine.",
+  "items": [
+   {
+    "repo": "mlx-speech",
+    "description": "Speech synthesis, voice cloning, dialogue, sound effects, and recognition, MLX-native on the Apple GPU.",
+    "chips": [
+     "TTS",
+     "ASR"
+    ],
+    "site": "https://appautomaton.renocrypt.com/mlx-speech/",
+    "tag": "C-01"
+   },
+   {
+    "repo": "tnt-asr",
+    "description": "A terminal voice-to-text TUI. Qwen3-ASR transcribes in about a second, fully local.",
+    "chips": [
+     "Qwen3-ASR",
+     "TUI"
+    ],
+    "site": "https://appautomaton.renocrypt.com/tnt-asr/",
+    "tag": "C-02"
+   },
+   {
+    "repo": "ltx-video-mlx",
+    "description": "Text- and image-to-video with synchronized audio on LTX-2.3 22B. On-device LoRA fine-tuning.",
+    "chips": [
+     "LTX-2.3 22B",
+     "LoRA"
+    ],
+    "tag": "C-03"
+   },
+   {
+    "repo": "mlx-cv",
+    "description": "Open-vocabulary grounding, detection, depth and camera geometry, segmentation, and video tracking in pure MLX. Every model is checked against its upstream reference before it ships.",
+    "chips": [
+     "SAM 3",
+     "boxes + masks + depth"
+    ],
+    "site": "https://appautomaton.renocrypt.com/mlx-cv/",
+    "tag": "C-04"
+   },
+   {
+    "repo": "mlx-spatial",
+    "description": "3D and spatial inference on device with SAM 3D Objects, TRELLIS.2, WorldMirror, and MapAnything.",
+    "chips": [
+     "TRELLIS.2",
+     "3D"
+    ],
+    "site": "https://appautomaton.renocrypt.com/mlx-spatial/",
+    "tag": "C-05"
+   },
+   {
+    "repo": "mlx-atomistic",
+    "description": "Atomistic simulation on Apple silicon. A DFT and molecular-dynamics runtime on MLX and Metal, running on the GPU the Mac already has.",
+    "chips": [
+     "DFT + MD",
+     "Metal"
+    ],
+    "site": "https://appautomaton.renocrypt.com/mlx-atomistic/",
+    "tag": "C-06"
+   },
+   {
+    "repo": "mlx-h3",
+    "description": "MiniMax-H3 text to video and stereo audio, denoised together in one packed sequence. Phase-scoped model residency, no PyTorch at runtime.",
+    "chips": [
+     "MiniMax-H3",
+     "video + audio"
+    ],
+    "site": "https://appautomaton.renocrypt.com/mlx-h3/",
+    "tag": "C-07"
+   }
+  ]
+ },
+ {
+  "letter": "D",
+  "label": "Creative harnesses",
+  "blurb": "The same stage-gated method, pointed at club music.",
+  "items": [
+   {
+    "repo": "setloom",
+    "description": "Producer-first co-production for club music. Musical intent into editable tracks, stems, renders, and listening notes, with the human keeping the taste gate.",
+    "chips": [
+     "club music",
+     "stems"
+    ],
+    "site": "https://appautomaton.renocrypt.com/setloom/",
+    "tag": "D-01"
+   }
+  ]
+ }
+]

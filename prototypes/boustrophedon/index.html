@@ -1,0 +1,589 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>App Automaton — an open workshop for engineering with coding agents</title>
+<meta name="description" content="Twenty open-source units across four shelves: portable SKILLs, stage-gated harnesses, on-device MLX runtimes, and creative production. An AppCubic workshop.">
+<link rel="canonical" href="https://appautomaton.renocrypt.com/">
+<link rel="stylesheet" href="./style.css">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebSite",
+      "@id": "https://appautomaton.renocrypt.com/#website",
+      "name": "App Automaton",
+      "url": "https://appautomaton.renocrypt.com/",
+      "publisher": {
+        "@id": "https://appautomaton.renocrypt.com/#org"
+      }
+    },
+    {
+      "@type": "Organization",
+      "@id": "https://appautomaton.renocrypt.com/#org",
+      "name": "App Automaton",
+      "url": "https://appautomaton.renocrypt.com/"
+    },
+    {
+      "@type": "SoftwareSourceCode",
+      "@id": "https://appautomaton.renocrypt.com/agent-designer/#project",
+      "name": "agent-designer",
+      "description": "The skills workspace. Issue-driven workflows, an MCP tool catalog, and bridge skills for agent-to-agent delegation with session continuity.",
+      "url": "https://appautomaton.renocrypt.com/agent-designer/",
+      "codeRepository": "https://github.com/appautomaton/agent-designer",
+      "isPartOf": {
+        "@id": "https://appautomaton.renocrypt.com/#website"
+      }
+    },
+    {
+      "@type": "SoftwareSourceCode",
+      "@id": "https://appautomaton.renocrypt.com/document-SKILLs/#project",
+      "name": "document-SKILLs",
+      "description": "docx, xlsx, pptx, and pdf. Extraction, forms, formulas, and tracked changes. Runs on uv with PEP 723, no virtualenv.",
+      "url": "https://appautomaton.renocrypt.com/document-SKILLs/",
+      "codeRepository": "https://github.com/appautomaton/document-SKILLs",
+      "isPartOf": {
+        "@id": "https://appautomaton.renocrypt.com/#website"
+      }
+    },
+    {
+      "@type": "SoftwareSourceCode",
+      "@id": "https://appautomaton.renocrypt.com/presentation/#project",
+      "name": "presentation",
+      "description": "Consulting-quality decks, from strategy storyboarding to pixel-perfect PDF or editable PPTX.",
+      "url": "https://appautomaton.renocrypt.com/presentation/",
+      "codeRepository": "https://github.com/appautomaton/presentation",
+      "isPartOf": {
+        "@id": "https://appautomaton.renocrypt.com/#website"
+      }
+    },
+    {
+      "@type": "SoftwareSourceCode",
+      "@id": "https://github.com/appautomaton/webmaton#project",
+      "name": "webmaton",
+      "description": "Grounded web research. Citations, deterministic HTML-to-Markdown, and persistent sessions over Playwright, nodriver, and Chrome DevTools.",
+      "url": "https://github.com/appautomaton/webmaton",
+      "codeRepository": "https://github.com/appautomaton/webmaton",
+      "isPartOf": {
+        "@id": "https://appautomaton.renocrypt.com/#website"
+      }
+    },
+    {
+      "@type": "SoftwareSourceCode",
+      "@id": "https://github.com/appautomaton/playwright-skill#project",
+      "name": "playwright-skill",
+      "description": "Browser automation that also runs on Android via a Termux launcher patch and headless Chromium.",
+      "url": "https://github.com/appautomaton/playwright-skill",
+      "codeRepository": "https://github.com/appautomaton/playwright-skill",
+      "isPartOf": {
+        "@id": "https://appautomaton.renocrypt.com/#website"
+      }
+    },
+    {
+      "@type": "SoftwareSourceCode",
+      "@id": "https://appautomaton.renocrypt.com/latex-arxiv-SKILL/#project",
+      "name": "latex-arxiv-SKILL",
+      "description": "Turns a topic into an arXiv-ready ML review paper. Gated literature discovery, every citation verified, compiled to a two-column IEEEtran PDF.",
+      "url": "https://appautomaton.renocrypt.com/latex-arxiv-SKILL/",
+      "codeRepository": "https://github.com/appautomaton/latex-arxiv-SKILL",
+      "isPartOf": {
+        "@id": "https://appautomaton.renocrypt.com/#website"
+      }
+    },
+    {
+      "@type": "SoftwareSourceCode",
+      "@id": "https://appautomaton.renocrypt.com/automaton/#project",
+      "name": "automaton",
+      "description": "A stage-gated harness. Frame, plan, review, execute, verify, resume. Installs as plain markdown.",
+      "url": "https://appautomaton.renocrypt.com/automaton/",
+      "codeRepository": "https://github.com/appautomaton/automaton",
+      "isPartOf": {
+        "@id": "https://appautomaton.renocrypt.com/#website"
+      }
+    },
+    {
+      "@type": "SoftwareSourceCode",
+      "@id": "https://github.com/appautomaton/automux#project",
+      "name": "automux",
+      "description": "Multi-agent orchestration in tmux or kitty, coordinating through files across parallel git worktrees.",
+      "url": "https://github.com/appautomaton/automux",
+      "codeRepository": "https://github.com/appautomaton/automux",
+      "isPartOf": {
+        "@id": "https://appautomaton.renocrypt.com/#website"
+      }
+    },
+    {
+      "@type": "SoftwareSourceCode",
+      "@id": "https://github.com/appautomaton/openclaw-monorepo#project",
+      "name": "openclaw-monorepo",
+      "description": "A repo-local OpenClaw workspace with JSON5 config, plugins, and Docker sandboxes.",
+      "url": "https://github.com/appautomaton/openclaw-monorepo",
+      "codeRepository": "https://github.com/appautomaton/openclaw-monorepo",
+      "isPartOf": {
+        "@id": "https://appautomaton.renocrypt.com/#website"
+      }
+    },
+    {
+      "@type": "SoftwareSourceCode",
+      "@id": "https://appautomaton.renocrypt.com/markmaton/#project",
+      "name": "markmaton",
+      "description": "HTML to Markdown for agent pipelines. A Go parser core wrapped in a Python CLI and API, on PyPI.",
+      "url": "https://appautomaton.renocrypt.com/markmaton/",
+      "codeRepository": "https://github.com/appautomaton/markmaton",
+      "isPartOf": {
+        "@id": "https://appautomaton.renocrypt.com/#website"
+      }
+    },
+    {
+      "@type": "SoftwareSourceCode",
+      "@id": "https://appautomaton.renocrypt.com/docker-for-apple-container/#project",
+      "name": "docker-for-apple-container",
+      "description": "A stateless docker shim over Apple’s native container CLI on macOS, with no Docker Desktop.",
+      "url": "https://appautomaton.renocrypt.com/docker-for-apple-container/",
+      "codeRepository": "https://github.com/appautomaton/docker-for-apple-container",
+      "isPartOf": {
+        "@id": "https://appautomaton.renocrypt.com/#website"
+      }
+    },
+    {
+      "@type": "SoftwareSourceCode",
+      "@id": "https://appautomaton.renocrypt.com/pi-arcweld/#project",
+      "name": "pi-arcweld",
+      "description": "A curated local layer welded to pinned upstream Pi. Extensions, system guidance, and MCP tooling join along one auditable seam, over a reproducible runtime.",
+      "url": "https://appautomaton.renocrypt.com/pi-arcweld/",
+      "codeRepository": "https://github.com/appautomaton/pi-arcweld",
+      "isPartOf": {
+        "@id": "https://appautomaton.renocrypt.com/#website"
+      }
+    },
+    {
+      "@type": "SoftwareSourceCode",
+      "@id": "https://appautomaton.renocrypt.com/mlx-speech/#project",
+      "name": "mlx-speech",
+      "description": "Speech synthesis, voice cloning, dialogue, sound effects, and recognition, MLX-native on the Apple GPU.",
+      "url": "https://appautomaton.renocrypt.com/mlx-speech/",
+      "codeRepository": "https://github.com/appautomaton/mlx-speech",
+      "isPartOf": {
+        "@id": "https://appautomaton.renocrypt.com/#website"
+      }
+    },
+    {
+      "@type": "SoftwareSourceCode",
+      "@id": "https://appautomaton.renocrypt.com/tnt-asr/#project",
+      "name": "tnt-asr",
+      "description": "A terminal voice-to-text TUI. Qwen3-ASR transcribes in about a second, fully local.",
+      "url": "https://appautomaton.renocrypt.com/tnt-asr/",
+      "codeRepository": "https://github.com/appautomaton/tnt-asr",
+      "isPartOf": {
+        "@id": "https://appautomaton.renocrypt.com/#website"
+      }
+    },
+    {
+      "@type": "SoftwareSourceCode",
+      "@id": "https://github.com/appautomaton/ltx-video-mlx#project",
+      "name": "ltx-video-mlx",
+      "description": "Text- and image-to-video with synchronized audio on LTX-2.3 22B. On-device LoRA fine-tuning.",
+      "url": "https://github.com/appautomaton/ltx-video-mlx",
+      "codeRepository": "https://github.com/appautomaton/ltx-video-mlx",
+      "isPartOf": {
+        "@id": "https://appautomaton.renocrypt.com/#website"
+      }
+    },
+    {
+      "@type": "SoftwareSourceCode",
+      "@id": "https://appautomaton.renocrypt.com/mlx-cv/#project",
+      "name": "mlx-cv",
+      "description": "Open-vocabulary grounding, detection, depth and camera geometry, segmentation, and video tracking in pure MLX. Every model is checked against its upstream reference before it ships.",
+      "url": "https://appautomaton.renocrypt.com/mlx-cv/",
+      "codeRepository": "https://github.com/appautomaton/mlx-cv",
+      "isPartOf": {
+        "@id": "https://appautomaton.renocrypt.com/#website"
+      }
+    },
+    {
+      "@type": "SoftwareSourceCode",
+      "@id": "https://appautomaton.renocrypt.com/mlx-spatial/#project",
+      "name": "mlx-spatial",
+      "description": "3D and spatial inference on device with SAM 3D Objects, TRELLIS.2, WorldMirror, and MapAnything.",
+      "url": "https://appautomaton.renocrypt.com/mlx-spatial/",
+      "codeRepository": "https://github.com/appautomaton/mlx-spatial",
+      "isPartOf": {
+        "@id": "https://appautomaton.renocrypt.com/#website"
+      }
+    },
+    {
+      "@type": "SoftwareSourceCode",
+      "@id": "https://appautomaton.renocrypt.com/mlx-atomistic/#project",
+      "name": "mlx-atomistic",
+      "description": "Atomistic simulation on Apple silicon. A DFT and molecular-dynamics runtime on MLX and Metal, running on the GPU the Mac already has.",
+      "url": "https://appautomaton.renocrypt.com/mlx-atomistic/",
+      "codeRepository": "https://github.com/appautomaton/mlx-atomistic",
+      "isPartOf": {
+        "@id": "https://appautomaton.renocrypt.com/#website"
+      }
+    },
+    {
+      "@type": "SoftwareSourceCode",
+      "@id": "https://appautomaton.renocrypt.com/mlx-h3/#project",
+      "name": "mlx-h3",
+      "description": "MiniMax-H3 text to video and stereo audio, denoised together in one packed sequence. Phase-scoped model residency, no PyTorch at runtime.",
+      "url": "https://appautomaton.renocrypt.com/mlx-h3/",
+      "codeRepository": "https://github.com/appautomaton/mlx-h3",
+      "isPartOf": {
+        "@id": "https://appautomaton.renocrypt.com/#website"
+      }
+    },
+    {
+      "@type": "SoftwareSourceCode",
+      "@id": "https://appautomaton.renocrypt.com/setloom/#project",
+      "name": "setloom",
+      "description": "Producer-first co-production for club music. Musical intent into editable tracks, stems, renders, and listening notes, with the human keeping the taste gate.",
+      "url": "https://appautomaton.renocrypt.com/setloom/",
+      "codeRepository": "https://github.com/appautomaton/setloom",
+      "isPartOf": {
+        "@id": "https://appautomaton.renocrypt.com/#website"
+      }
+    }
+  ]
+}
+</script>
+</head>
+<body>
+<a class="skip" href="#catalog">Skip to the catalog</a>
+
+<div class="margin" aria-hidden="true">
+  <span class="hair"></span><span class="run"></span>
+  <ol><li data-act="A">A</li><li data-act="B">B</li><li data-act="C">C</li><li data-act="D">D</li></ol>
+</div>
+
+<div class="top">
+  <span class="mark">App Automaton</span>
+  <nav>
+    <a href="https://github.com/appautomaton">GitHub</a>
+    <div class="toggle">
+      <button data-mode="day" aria-pressed="true">Day</button>
+      <button data-mode="night" aria-pressed="false">Night</button>
+    </div>
+  </nav>
+</div>
+
+<header class="head">
+  <div class="plate-bed" aria-hidden="true"><img src="../../src/plates/schouwburg.webp" alt=""></div>
+  <div class="say">
+    <p class="kicker">The open workshop of AppCubic</p>
+    <h1>App<br>Automaton</h1>
+    <p class="sub">An open-source workshop for engineering with coding agents. Portable SKILLs, stage-gated harnesses, on-device MLX runtimes, and one creative harness pointed at club music.</p>
+    <p class="count">20 units · 4 shelves · read boustrophedon ⇄</p>
+  </div>
+</header>
+
+<main id="catalog">
+
+    <section class="act" data-dir="ltr" aria-labelledby="act-a" id="shelf-A">
+      <div class="act-rail" style="--units:6">
+        <div class="act-stage">
+          <span class="act-no" aria-hidden="true">I</span>
+          
+          <div class="reel">
+            <header class="act-head">
+              <p class="no">ACT I · 6 UNITS</p>
+              <h2 id="act-a">SKILLs</h2>
+              <p>Portable SKILL.md packs with three layers of disclosure. The same folder runs unchanged under Claude Code, Codex, Gemini, and OpenCode.</p>
+              <p class="dir">reading ————→ right</p>
+            </header>
+
+          <a class="unit" href="https://appautomaton.renocrypt.com/agent-designer/">
+            <span class="lid"><img src="../../src/plates/camera-obscura.webp" alt=""></span>
+            <span class="meat">
+              <span class="plate-no">PLATE A-01</span>
+              <h3>agent-designer</h3>
+              <p>The skills workspace. Issue-driven workflows, an MCP tool catalog, and bridge skills for agent-to-agent delegation with session continuity.</p>
+              <span class="chips"><span>MCP</span><span>multi-agent</span></span>
+              <span class="go">Open →</span>
+            </span>
+          </a>
+          <a class="unit" href="https://appautomaton.renocrypt.com/document-SKILLs/">
+            <span class="lid"><img src="../../src/plates/gears.webp" alt=""></span>
+            <span class="meat">
+              <span class="plate-no">PLATE A-02</span>
+              <h3>document-SKILLs</h3>
+              <p>docx, xlsx, pptx, and pdf. Extraction, forms, formulas, and tracked changes. Runs on uv with PEP 723, no virtualenv.</p>
+              <span class="chips"><span>uv</span><span>PEP 723</span></span>
+              <span class="go">Open →</span>
+            </span>
+          </a>
+          <a class="unit" href="https://appautomaton.renocrypt.com/presentation/">
+            <span class="lid"><img src="../../src/plates/magic-lantern.webp" alt=""></span>
+            <span class="meat">
+              <span class="plate-no">PLATE A-03</span>
+              <h3>presentation</h3>
+              <p>Consulting-quality decks, from strategy storyboarding to pixel-perfect PDF or editable PPTX.</p>
+              <span class="chips"><span>PDF</span><span>PPTX</span></span>
+              <span class="go">Open →</span>
+            </span>
+          </a>
+          <a class="unit" href="https://github.com/appautomaton/webmaton">
+            <span class="lid"><img src="../../src/plates/serinette.webp" alt=""></span>
+            <span class="meat">
+              <span class="plate-no">PLATE A-04</span>
+              <h3>webmaton</h3>
+              <p>Grounded web research. Citations, deterministic HTML-to-Markdown, and persistent sessions over Playwright, nodriver, and Chrome DevTools.</p>
+              <span class="chips"><span>Playwright</span><span>CDP</span></span>
+              <span class="go">Open →</span>
+            </span>
+          </a>
+          <a class="unit" href="https://github.com/appautomaton/playwright-skill">
+            <span class="lid"><img src="../../src/plates/duck.webp" alt=""></span>
+            <span class="meat">
+              <span class="plate-no">PLATE A-05</span>
+              <h3>playwright-skill</h3>
+              <p>Browser automation that also runs on Android via a Termux launcher patch and headless Chromium.</p>
+              <span class="chips"><span>Android</span><span>Termux</span></span>
+              <span class="go">Open →</span>
+            </span>
+          </a>
+          <a class="unit" href="https://appautomaton.renocrypt.com/latex-arxiv-SKILL/">
+            <span class="lid"><img src="../../src/plates/cloud-machine.webp" alt=""></span>
+            <span class="meat">
+              <span class="plate-no">PLATE A-06</span>
+              <h3>latex-arxiv-SKILL</h3>
+              <p>Turns a topic into an arXiv-ready ML review paper. Gated literature discovery, every citation verified, compiled to a two-column IEEEtran PDF.</p>
+              <span class="chips"><span>arXiv</span><span>IEEEtran</span></span>
+              <span class="go">Open →</span>
+            </span>
+          </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="turn" data-to="rtl" aria-hidden="true" style="--len:100">
+      <span class="no">II</span>
+      <svg viewBox="0 0 1060 220" role="presentation">
+        <path pathLength="100" d="M 12 34 H 936 A 74 74 0 0 1 936 182 H 12 M 12 182 l 26 -12 M 12 182 l 26 12"/>
+      </svg>
+      <span class="cap">the turn · now reading left</span>
+    </div>
+
+    <section class="act" data-dir="rtl" aria-labelledby="act-b" id="shelf-B">
+      <div class="act-rail" style="--units:6">
+        <div class="act-stage">
+          <span class="act-no" aria-hidden="true">II</span>
+          
+          <div class="reel">
+            <header class="act-head">
+              <p class="no">ACT II · 6 UNITS</p>
+              <h2 id="act-b">Harnesses &amp; runtimes</h2>
+              <p>Stage gates, orchestration, and plumbing. The tooling that keeps an agent honest from plan to verify.</p>
+              <p class="dir">left ←———— reading</p>
+            </header>
+
+          <a class="unit" href="https://appautomaton.renocrypt.com/automaton/">
+            <span class="lid"><img src="../../src/plates/imprimerie.webp" alt=""></span>
+            <span class="meat">
+              <span class="plate-no">PLATE B-01</span>
+              <h3>automaton</h3>
+              <p>A stage-gated harness. Frame, plan, review, execute, verify, resume. Installs as plain markdown.</p>
+              <span class="chips"><span>stage gates</span><span>markdown</span></span>
+              <span class="go">Open →</span>
+            </span>
+          </a>
+          <a class="unit" href="https://github.com/appautomaton/automux">
+            <span class="lid"><img src="../../src/plates/durer-perspective.webp" alt=""></span>
+            <span class="meat">
+              <span class="plate-no">PLATE B-02</span>
+              <h3>automux</h3>
+              <p>Multi-agent orchestration in tmux or kitty, coordinating through files across parallel git worktrees.</p>
+              <span class="chips"><span>tmux</span><span>worktrees</span></span>
+              <span class="go">Open →</span>
+            </span>
+          </a>
+          <a class="unit" href="https://github.com/appautomaton/openclaw-monorepo">
+            <span class="lid"><img src="../../src/plates/schouwburg.webp" alt=""></span>
+            <span class="meat">
+              <span class="plate-no">PLATE B-03</span>
+              <h3>openclaw-monorepo</h3>
+              <p>A repo-local OpenClaw workspace with JSON5 config, plugins, and Docker sandboxes.</p>
+              <span class="chips"><span>JSON5</span><span>Docker</span></span>
+              <span class="go">Open →</span>
+            </span>
+          </a>
+          <a class="unit" href="https://appautomaton.renocrypt.com/markmaton/">
+            <span class="lid"><img src="../../src/plates/stage-trio.webp" alt=""></span>
+            <span class="meat">
+              <span class="plate-no">PLATE B-04</span>
+              <h3>markmaton</h3>
+              <p>HTML to Markdown for agent pipelines. A Go parser core wrapped in a Python CLI and API, on PyPI.</p>
+              <span class="chips"><span>Go</span><span>PyPI</span></span>
+              <span class="go">Open →</span>
+            </span>
+          </a>
+          <a class="unit" href="https://appautomaton.renocrypt.com/docker-for-apple-container/">
+            <span class="lid"><img src="../../src/plates/cartouche.webp" alt=""></span>
+            <span class="meat">
+              <span class="plate-no">PLATE B-05</span>
+              <h3>docker-for-apple-container</h3>
+              <p>A stateless docker shim over Apple’s native container CLI on macOS, with no Docker Desktop.</p>
+              <span class="chips"><span>macOS</span><span>container CLI</span></span>
+              <span class="go">Open →</span>
+            </span>
+          </a>
+          <a class="unit" href="https://appautomaton.renocrypt.com/pi-arcweld/">
+            <span class="lid"><img src="../../src/plates/comedie-section.webp" alt=""></span>
+            <span class="meat">
+              <span class="plate-no">PLATE B-06</span>
+              <h3>pi-arcweld</h3>
+              <p>A curated local layer welded to pinned upstream Pi. Extensions, system guidance, and MCP tooling join along one auditable seam, over a reproducible runtime.</p>
+              <span class="chips"><span>MCP</span><span>pinned upstream</span></span>
+              <span class="go">Open →</span>
+            </span>
+          </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="turn" data-to="ltr" aria-hidden="true" style="--len:100">
+      <span class="no">III</span>
+      <svg viewBox="0 0 1060 220" role="presentation">
+        <path pathLength="100" d="M 12 34 H 936 A 74 74 0 0 1 936 182 H 12 M 12 182 l 26 -12 M 12 182 l 26 12"/>
+      </svg>
+      <span class="cap">the turn · now reading right</span>
+    </div>
+
+    <section class="act" data-dir="ltr" data-plow="double" aria-labelledby="act-c" id="shelf-C">
+      <div class="act-rail" style="--units:7">
+        <div class="act-stage">
+          <span class="act-no" aria-hidden="true">III</span>
+          
+          <div class="reel reel-a">
+            <header class="act-head">
+              <p class="no">ACT III · 7 UNITS · DOUBLE FURROW</p>
+              <h2 id="act-c">On-device MLX</h2>
+              <p>Pure MLX on the Apple GPU. Speech, vision, video, 3D, and atomistic simulation that never leave the machine.</p>
+              <p class="dir">reading ⇄ both ways</p>
+            </header>
+
+          <a class="unit" href="https://appautomaton.renocrypt.com/mlx-speech/">
+            <span class="lid"><img src="../../src/plates/camera-obscura.webp" alt=""></span>
+            <span class="meat">
+              <span class="plate-no">PLATE C-01</span>
+              <h3>mlx-speech</h3>
+              <p>Speech synthesis, voice cloning, dialogue, sound effects, and recognition, MLX-native on the Apple GPU.</p>
+              <span class="chips"><span>TTS</span><span>ASR</span></span>
+              <span class="go">Open →</span>
+            </span>
+          </a>
+          <a class="unit" href="https://appautomaton.renocrypt.com/tnt-asr/">
+            <span class="lid"><img src="../../src/plates/gears.webp" alt=""></span>
+            <span class="meat">
+              <span class="plate-no">PLATE C-02</span>
+              <h3>tnt-asr</h3>
+              <p>A terminal voice-to-text TUI. Qwen3-ASR transcribes in about a second, fully local.</p>
+              <span class="chips"><span>Qwen3-ASR</span><span>TUI</span></span>
+              <span class="go">Open →</span>
+            </span>
+          </a>
+          <a class="unit" href="https://github.com/appautomaton/ltx-video-mlx">
+            <span class="lid"><img src="../../src/plates/magic-lantern.webp" alt=""></span>
+            <span class="meat">
+              <span class="plate-no">PLATE C-03</span>
+              <h3>ltx-video-mlx</h3>
+              <p>Text- and image-to-video with synchronized audio on LTX-2.3 22B. On-device LoRA fine-tuning.</p>
+              <span class="chips"><span>LTX-2.3 22B</span><span>LoRA</span></span>
+              <span class="go">Open →</span>
+            </span>
+          </a>
+          <a class="unit" href="https://appautomaton.renocrypt.com/mlx-cv/">
+            <span class="lid"><img src="../../src/plates/serinette.webp" alt=""></span>
+            <span class="meat">
+              <span class="plate-no">PLATE C-04</span>
+              <h3>mlx-cv</h3>
+              <p>Open-vocabulary grounding, detection, depth and camera geometry, segmentation, and video tracking in pure MLX. Every model is checked against its upstream reference before it ships.</p>
+              <span class="chips"><span>SAM 3</span><span>boxes + masks + depth</span></span>
+              <span class="go">Open →</span>
+            </span>
+          </a>
+          </div>
+          <div class="reel reel-b">
+
+          <a class="unit" href="https://appautomaton.renocrypt.com/mlx-spatial/">
+            <span class="lid"><img src="../../src/plates/duck.webp" alt=""></span>
+            <span class="meat">
+              <span class="plate-no">PLATE C-05</span>
+              <h3>mlx-spatial</h3>
+              <p>3D and spatial inference on device with SAM 3D Objects, TRELLIS.2, WorldMirror, and MapAnything.</p>
+              <span class="chips"><span>TRELLIS.2</span><span>3D</span></span>
+              <span class="go">Open →</span>
+            </span>
+          </a>
+          <a class="unit" href="https://appautomaton.renocrypt.com/mlx-atomistic/">
+            <span class="lid"><img src="../../src/plates/cloud-machine.webp" alt=""></span>
+            <span class="meat">
+              <span class="plate-no">PLATE C-06</span>
+              <h3>mlx-atomistic</h3>
+              <p>Atomistic simulation on Apple silicon. A DFT and molecular-dynamics runtime on MLX and Metal, running on the GPU the Mac already has.</p>
+              <span class="chips"><span>DFT + MD</span><span>Metal</span></span>
+              <span class="go">Open →</span>
+            </span>
+          </a>
+          <a class="unit" href="https://appautomaton.renocrypt.com/mlx-h3/">
+            <span class="lid"><img src="../../src/plates/imprimerie.webp" alt=""></span>
+            <span class="meat">
+              <span class="plate-no">PLATE C-07</span>
+              <h3>mlx-h3</h3>
+              <p>MiniMax-H3 text to video and stereo audio, denoised together in one packed sequence. Phase-scoped model residency, no PyTorch at runtime.</p>
+              <span class="chips"><span>MiniMax-H3</span><span>video + audio</span></span>
+              <span class="go">Open →</span>
+            </span>
+          </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+    <div class="turn" data-to="rtl" aria-hidden="true" style="--len:100">
+      <span class="no">IV</span>
+      <svg viewBox="0 0 1060 220" role="presentation">
+        <path pathLength="100" d="M 12 34 H 936 A 74 74 0 0 1 936 182 H 12 M 12 182 l 26 -12 M 12 182 l 26 12"/>
+      </svg>
+      <span class="cap">the turn · now reading left</span>
+    </div>
+
+  <section class="coda" aria-labelledby="act-d">
+    <div class="inner">
+      <div>
+        <p class="kicker">Act IV · coda</p>
+        <h2 id="act-d">Creative harnesses</h2>
+        <p class="blurb">The same stage-gated method, pointed at club music.</p>
+      </div>
+      
+          <a class="unit" href="https://appautomaton.renocrypt.com/setloom/">
+            <span class="lid"><img src="../../src/plates/durer-perspective.webp" alt=""></span>
+            <span class="meat">
+              <span class="plate-no">PLATE D-01</span>
+              <h3>setloom</h3>
+              <p>Producer-first co-production for club music. Musical intent into editable tracks, stems, renders, and listening notes, with the human keeping the taste gate.</p>
+              <span class="chips"><span>club music</span><span>stems</span></span>
+              <span class="go">Open →</span>
+            </span>
+          </a>
+    </div>
+  </section>
+</main>
+
+<footer class="colophon">
+  <p>Boustrophedon: as the ox plows. One line runs right, the next turns and runs left. It is how early Greek inscriptions were cut, and it is how this catalog reads. The direction alternates in the presentation only. In the document, every unit follows its heading in a single straight line.</p>
+  <p class="mono">
+    20 units · 4 shelves<br>
+    League Gothic · Gambetta · Martian Mono<br>
+    Plates public domain, sources recorded<br>
+  </p>
+</footer>
+
+<script src="./script.js"></script>
+</body>
+</html>

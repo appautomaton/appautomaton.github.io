@@ -1,0 +1,456 @@
+/* 回行 · BOUSTROPHEDON
+   ==================================================================
+   牛耕式转行：一行向右，下一行掉头向左。古希腊铭文和早期拉丁碑刻的
+   书写方式，也是这个站的谱系里真实存在的东西，不是套用的花样。
+
+   四条约束，先锋只发生在表现层：
+
+   1. DOM 顺序 = 阅读顺序。标题在前，单元在后，线性排列，永远。
+      横向、反向、错位全部由 transform 完成，一个元素都不移出文档流。
+   2. 每个单元是真的 <a href>。爬虫拿到的是链接，不是 onclick 的 div。
+   3. 没有一个字是 JS 注入的。关掉 JS，内容一字不少。
+   4. 不支持滚动时间线、或者用户开了减弱动态效果时，横向带退化成
+      普通的换行网格。降级后仍然完整，只是不动。
+   ================================================================== */
+
+@font-face { font-family:'League Gothic'; src:url('../../src/fonts/LeagueGothic-var.subset.woff2') format('woff2'); font-weight:400; font-stretch:75% 100%; font-display:swap }
+@font-face { font-family:'Gambetta'; src:url('../../src/fonts/Gambetta-Regular.woff2') format('woff2'); font-weight:400; font-display:swap }
+@font-face { font-family:'Gambetta'; src:url('../../src/fonts/Gambetta-Italic.woff2') format('woff2'); font-weight:400; font-style:italic; font-display:swap }
+@font-face { font-family:'Martian Mono'; src:url('../../src/fonts/MartianMono-var.subset.woff2') format('woff2'); font-weight:100 800; font-stretch:75% 112%; font-display:swap }
+
+@property --hatch { syntax:'<length>'; inherits:false; initial-value:0px }
+@property --press { syntax:'<number>'; inherits:false; initial-value:0 }
+@property --ink   { syntax:'<number>'; inherits:false; initial-value:0 }
+
+:root{
+  --bg:#E9EAE1; --surface:#F2F3EA; --border:#CDD0C0; --accent:#2A5847;
+  --text:#1E241E; --dim:#5F6A5D; --patina:#4E7D6C;
+  --plate:grayscale(1) sepia(.3) hue-rotate(68deg) saturate(.45) contrast(1.03) brightness(1.04);
+  --blend:multiply;
+  --display:'League Gothic','Arial Narrow',sans-serif;
+  --body:'Gambetta',Georgia,serif;
+  --mono:'Martian Mono',ui-monospace,monospace;
+  --gut:clamp(20px,4vw,64px);
+}
+:root[data-mode="night"]{
+  --bg:#0E1310; --surface:#151C17; --border:#28312A; --accent:#5FA284;
+  --text:#DCE4D4; --dim:#8A9787; --patina:#7FA98F;
+  --plate:grayscale(1) invert(.92) sepia(.45) hue-rotate(75deg) saturate(.8) brightness(.82) contrast(1.08);
+  --blend:screen;
+}
+
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  background:var(--bg);color:var(--text);font-family:var(--body);font-size:17px;line-height:1.62;
+  -webkit-font-smoothing:antialiased;overflow-x:hidden;
+  transition:background-color 500ms ease,color 500ms ease;
+}
+img{display:block;width:100%;height:auto}
+a{color:inherit}
+.skip{position:absolute;left:-9999px;top:0}
+.skip:focus{left:var(--gut);top:10px;z-index:99;background:var(--accent);color:var(--bg);padding:10px 16px;font-family:var(--mono);font-size:12px}
+
+/* ---- 版口：左边缘的定位标记，印张的套准线 ----------------------- */
+.margin{position:fixed;left:0;top:0;bottom:0;width:var(--gut);z-index:40;pointer-events:none}
+.margin .hair{position:absolute;left:calc(var(--gut) - 1px);top:0;bottom:0;width:1px;background:var(--border)}
+.margin .run{position:absolute;left:calc(var(--gut) - 2px);top:0;width:3px;height:100%;
+  background:var(--accent);transform-origin:top;transform:scaleY(0)}
+.margin ol{position:absolute;inset:0;list-style:none;display:flex;flex-direction:column;
+  justify-content:space-evenly;align-items:center;padding:14vh 0}
+.margin li{font-family:var(--mono);font-size:10px;letter-spacing:.1em;color:var(--patina);opacity:.55}
+.margin li[data-on="1"]{opacity:1;color:var(--accent)}
+
+/* ---- 顶栏 -------------------------------------------------------- */
+.top{position:fixed;inset:0 0 auto 0;z-index:50;height:56px;display:flex;align-items:center;
+  justify-content:space-between;padding:0 var(--gut) 0 calc(var(--gut) + 18px);
+  background:color-mix(in srgb,var(--bg) 86%,transparent);backdrop-filter:blur(12px);
+  border-bottom:1px solid var(--border)}
+.top .mark{font-family:var(--mono);font-size:11px;letter-spacing:.18em;text-transform:uppercase;font-weight:600}
+.top nav{display:flex;gap:14px;align-items:center}
+.top nav a{font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--dim);text-decoration:none}
+.top nav a:hover{color:var(--accent)}
+.toggle{display:flex;border:1px solid var(--border)}
+.toggle button{font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;
+  background:none;border:0;color:var(--dim);padding:6px 11px;cursor:pointer}
+.toggle button[aria-pressed="true"]{background:var(--text);color:var(--bg)}
+
+/* ---- 卷首 -------------------------------------------------------- */
+.head{position:relative;min-height:100vh;display:grid;align-content:center;
+  padding:120px var(--gut) 90px calc(var(--gut) + 40px);overflow:hidden}
+.head .plate-bed{position:absolute;inset:0;z-index:0;opacity:.5}
+.head .plate-bed img{height:100%;object-fit:cover;filter:var(--plate);mix-blend-mode:var(--blend)}
+.head .say{position:relative;z-index:1;max-width:min(1120px,100%)}
+.kicker{font-family:var(--mono);font-size:11px;letter-spacing:.24em;text-transform:uppercase;color:var(--patina);margin-bottom:22px}
+.head h1{font-family:var(--display);font-weight:400;line-height:.82;text-transform:uppercase;
+  font-size:clamp(64px,15vw,240px);letter-spacing:.005em;
+  font-stretch:calc(100% - var(--vel-abs,0) * 18%)}
+.head .sub{max-width:52ch;margin-top:30px;color:var(--dim);font-size:clamp(17px,1.6vw,21px)}
+.head .count{margin-top:40px;font-family:var(--mono);font-size:12px;letter-spacing:.2em;
+  text-transform:uppercase;color:var(--accent)}
+
+/* ---- 一幕 -------------------------------------------------------- */
+.act{position:relative}
+.act-rail{position:relative;height:calc(105vh + var(--units,6) * 44vh)}
+.act-stage{position:sticky;top:56px;height:calc(100vh - 56px);overflow:hidden;
+  display:flex;align-items:center}
+.act-no{position:absolute;left:calc(var(--gut) + 26px);top:14vh;z-index:0;pointer-events:none;
+  font-family:var(--display);font-size:clamp(120px,26vh,300px);line-height:.7;color:var(--accent);
+  opacity:.11;font-stretch:calc(100% - var(--vel-abs,0) * 24%)}
+
+.reel{display:flex;align-items:stretch;gap:22px;padding-inline:calc(var(--gut) + 40px);
+  will-change:transform}
+.act[data-dir="rtl"] .reel{flex-direction:row-reverse}
+
+.act-head{flex:0 0 min(520px,74vw);display:flex;flex-direction:column;justify-content:center;
+  padding-right:26px}
+.act-head .no{font-family:var(--mono);font-size:11px;letter-spacing:.22em;color:var(--patina);
+  text-transform:uppercase;margin-bottom:14px}
+.act-head h2{font-family:var(--display);font-weight:400;font-size:clamp(48px,7vw,104px);
+  line-height:.88;text-transform:uppercase}
+.act-head p{margin-top:18px;color:var(--dim);font-size:16px;max-width:44ch}
+.act-head .dir{margin-top:26px;font-family:var(--mono);font-size:10px;letter-spacing:.2em;
+  color:var(--accent);text-transform:uppercase}
+
+/* ---- 一个单元 ---------------------------------------------------- */
+.unit{
+  flex:0 0 min(340px,80vw);display:flex;flex-direction:column;text-decoration:none;
+  background:var(--surface);border:1px solid var(--border);padding:0;
+  --press:1;
+}
+.unit .lid{position:relative;overflow:hidden;aspect-ratio:4/3;background:var(--bg)}
+.unit .lid img{height:100%;object-fit:cover;filter:var(--plate);mix-blend-mode:var(--blend)}
+.unit .meat{padding:20px 20px 24px;display:flex;flex-direction:column;gap:9px;flex:1}
+.unit .plate-no{font-family:var(--mono);font-size:10px;letter-spacing:.18em;color:var(--patina)}
+.unit h3{font-family:var(--mono);font-size:14px;letter-spacing:.04em;font-weight:600;line-height:1.3}
+.unit p{font-size:14.5px;color:var(--dim);line-height:1.5;flex:1}
+.unit .chips{display:flex;gap:7px;flex-wrap:wrap;margin-top:4px}
+.unit .chips span{font-family:var(--mono);font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;
+  color:var(--patina);border:1px solid var(--border);padding:3px 7px}
+.unit .go{font-family:var(--mono);font-size:10px;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--accent);margin-top:10px}
+.unit:hover{border-color:var(--accent)}
+.unit:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+
+/* ---- 尾声：D 只有一个单元，不做横向带，改成满幅收束 -------------- */
+.coda{padding:18vh var(--gut) 14vh calc(var(--gut) + 40px)}
+.coda .inner{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:center}
+.coda h2{font-family:var(--display);font-weight:400;font-size:clamp(52px,9vw,132px);
+  line-height:.86;text-transform:uppercase}
+.coda .blurb{color:var(--dim);margin-top:18px;max-width:40ch}
+.coda .unit{flex:none;max-width:520px}
+
+/* ---- 版权页 ------------------------------------------------------ */
+.colophon{border-top:1px solid var(--border);padding:70px var(--gut) 90px calc(var(--gut) + 40px);
+  display:grid;grid-template-columns:1fr auto;gap:34px;align-items:end}
+.colophon p{color:var(--dim);font-size:15px;max-width:56ch}
+.colophon .mono{font-family:var(--mono);font-size:10px;letter-spacing:.14em;color:var(--patina);
+  text-transform:uppercase;line-height:2}
+.colophon a{color:var(--accent)}
+
+/* ================= 动作 ============================================ */
+@keyframes reel-ltr { from{transform:translateX(0)}                       to{transform:translateX(calc(-100% + 100vw))} }
+@keyframes reel-rtl { from{transform:translateX(calc(-100% + 100vw))}     to{transform:translateX(0)} }
+@keyframes hatch-in { from{--hatch:0px} to{--hatch:8px} }
+@keyframes press-in { from{--press:0}   to{--press:1} }
+@keyframes run-fill { from{transform:scaleY(0)} to{transform:scaleY(1)} }
+
+/* 刻线：内容从雕版排线的缝隙里长出来。雕版师加密排线来建立层次，
+   这里让排线一道道加粗直到并成实面。 */
+.lid img, .head .plate-bed img{
+  -webkit-mask-image:repeating-linear-gradient(-42deg,#000 0 var(--hatch,8px),transparent var(--hatch,8px) 8px);
+          mask-image:repeating-linear-gradient(-42deg,#000 0 var(--hatch,8px),transparent var(--hatch,8px) 8px);
+}
+/* 落版：卡片是被压下来的，不是淡进来的。--press 默认 1，所以任何没有
+   被接上时间线的卡片（带内、降级、减弱动态）都是落定状态，不会白屏。 */
+.unit{
+  transform:scale(calc(1.06 - var(--press)*.06)) translateY(calc((1 - var(--press)) * 22px));
+  filter:blur(calc((1 - var(--press)) * 3px));
+  opacity:calc(.12 + var(--press)*.88);
+}
+.coda .unit{ --press:0 }
+
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .act-rail{ view-timeline:--act block }
+    .act[data-dir="ltr"] .reel{ animation:reel-ltr linear both; animation-timeline:--act; animation-range:contain 0% contain 100% }
+    .act[data-dir="rtl"] .reel{ animation:reel-rtl linear both; animation-timeline:--act; animation-range:contain 0% contain 100% }
+
+    /* 带内的图版接的是「这一幕」的时间线，不是 view()。
+       卡片在 sticky 带里横向走，垂直位置几乎不动，view() 的进度会冻在
+       半路 —— 实测卡在 7.3/8px，刻线永远差最后一口气。改接 --act 之后，
+       整条带在行进过程中一路刻实，像一整张纸被拉过压印机，而不是二十
+       个各自为政的小动画。 */
+    .reel .lid img{ animation:hatch-in linear both; animation-timeline:--act; animation-range:contain 0% contain 62% }
+
+    /* 落版留给「垂直到场」的两种情形：尾声，和降级后的网格。
+       带内卡片的入场方式是横向行进，本身已经是入场，不必再压一次。 */
+    .coda .unit{ animation:press-in linear both; animation-timeline:view(); animation-range:cover 10% cover 46% }
+    .coda .lid img{ animation:hatch-in linear both; animation-timeline:view(); animation-range:cover 8% cover 56% }
+    .head .plate-bed img{ animation:hatch-in linear both; animation-timeline:view(); animation-range:cover 0% cover 40% }
+
+    .margin .run{ animation:run-fill linear both; animation-timeline:scroll(root block) }
+  }
+}
+
+/* ---- 降级：不支持滚动时间线，或用户要求减弱动态效果 -------------- */
+/* 横向带变成普通换行网格。内容一样不少，只是不动。 */
+@supports not (animation-timeline: view()) {
+  .act-rail{height:auto}
+  .act-stage{position:static;height:auto;display:block;padding:12vh 0}
+  .reel{flex-wrap:wrap;transform:none!important}
+  .act[data-dir="rtl"] .reel{flex-direction:row}
+  .act-no{position:static;opacity:.14;margin-left:calc(var(--gut) + 40px)}
+}
+@media (prefers-reduced-motion: reduce){
+  .act-rail{height:auto}
+  .act-stage{position:static;height:auto;display:block;padding:12vh 0}
+  .reel{flex-wrap:wrap;transform:none!important}
+  .act[data-dir="rtl"] .reel{flex-direction:row}
+  .act-no{position:static;opacity:.14;margin-left:calc(var(--gut) + 40px)}
+  .unit{transform:none;filter:none;opacity:1}
+  .lid img,.head .plate-bed img{mask-image:none;-webkit-mask-image:none}
+}
+
+/* ---- 跨文档形变：hub 与 15 个子站同源，浏览器接手中间的过渡 ------ */
+@view-transition{ navigation:auto }
+::view-transition-old(root),::view-transition-new(root){
+  animation-duration:400ms;animation-timing-function:cubic-bezier(.22,1,.36,1)
+}
+::view-transition-group(unit-lid){ animation-duration:600ms;animation-timing-function:cubic-bezier(.22,1,.36,1) }
+
+@media (max-width:820px){
+  .coda .inner{grid-template-columns:1fr}
+  .colophon{grid-template-columns:1fr}
+  .act-head{flex-basis:82vw}
+  .unit{flex-basis:80vw}
+}
+
+/* ==================================================================
+   第二稿 · 三处做狠。全部仍在表现层：文本还是文本，链接还是链接，
+   新增的装饰一律 aria-hidden 且不插进任何标题与单元之间。
+   ================================================================== */
+
+@property --plate-y { syntax:'<percentage>'; inherits:false; initial-value:20% }
+
+/* ---- ① 标题从版画里刻出来 -----------------------------------------
+   不是把字压在版画上，是让版画只在字形内部显影，而且滚动时版画在字的
+   内部走动 —— 字不动，字里的图在动。文本本身一个字都没变，可选中、
+   可朗读、爬虫照读，换掉的只是它的填充方式。 */
+@supports ((background-clip:text) or (-webkit-background-clip:text)) {
+  .head h1{
+    background-image:url('../../src/plates/comedie-section.webp');
+    background-size:auto 340%;
+    background-position:center var(--plate-y,20%);
+    -webkit-background-clip:text; background-clip:text;
+    color:transparent;
+    filter:var(--plate) contrast(1.3) brightness(1.04);
+  }
+  :root[data-mode="night"] .head h1{ filter:var(--plate) contrast(1.18) brightness(1.4) }
+  .head h1::selection{ background:var(--accent);color:var(--bg) }
+}
+@keyframes plate-drift{ from{--plate-y:6%} to{--plate-y:76%} }
+
+/* ---- ② 转行 · 犁沟掉头 --------------------------------------------
+   牛走到地头要掉头，这里把那个掉头画出来：线沿着上一幕的方向走到尽头，
+   180 度回转，指向下一幕。方向切换本身成为可见的事件，而不是硬切。 */
+.turn{position:relative;height:58vh;display:grid;place-items:center;overflow:hidden;
+  padding-inline:calc(var(--gut) + 40px) var(--gut)}
+.turn svg{width:100%;max-width:1060px;height:auto;overflow:visible}
+.turn path{fill:none;stroke:var(--accent);stroke-width:1.4;stroke-linecap:round;
+  stroke-dasharray:var(--len);stroke-dashoffset:var(--len)}
+.turn .no{position:absolute;font-family:var(--display);
+  font-size:clamp(70px,13vh,150px);line-height:.7;color:var(--accent);opacity:.15;
+  pointer-events:none}
+.turn[data-to="rtl"] .no{right:9%} .turn[data-to="ltr"] .no{left:calc(var(--gut) + 56px)}
+.turn .cap{position:absolute;bottom:15%;font-family:var(--mono);font-size:10px;
+  letter-spacing:.24em;text-transform:uppercase;color:var(--patina)}
+@keyframes furrow{ to{stroke-dashoffset:0} }
+
+/* ---- ③ 套印不准 ---------------------------------------------------
+   手工印张的色版从来不会严丝合缝。每条带给不到半度的偏转，画面就从
+   「数码完美」变成「压出来的」。幅度必须小到说不清哪里不对。 */
+.act:nth-of-type(1) .act-stage{ rotate:-.3deg }
+.act:nth-of-type(2) .act-stage{ rotate: .36deg }
+.act:nth-of-type(3) .act-stage{ rotate:-.24deg }
+.coda .inner{ rotate:.18deg }
+
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .head h1  { animation:plate-drift linear both; animation-timeline:scroll(root block); animation-range:0% 32% }
+    .turn path{ animation:furrow      linear both; animation-timeline:view(); animation-range:cover 14% cover 74% }
+  }
+}
+/* 降级与减弱动态：犁沟直接画完，偏转归零，标题回到实色。 */
+@supports not (animation-timeline: view()){ .turn path{stroke-dashoffset:0} }
+@media (prefers-reduced-motion: reduce){
+  .turn{height:auto;padding-block:9vh}
+  .turn path{stroke-dashoffset:0}
+  .act-stage,.coda .inner{rotate:none}
+}
+
+/* 犁沟只画一条：默认收尾指向左（下一幕从右往左读）。要指向右时整条
+   镜像过来，箭头方向跟着一起翻，不用维护第二条路径。 */
+.turn[data-to="ltr"] svg{ transform:scaleX(-1) }
+
+/* ---- 修：版画填充的标题必须落在平场上 -----------------------------
+   第一稿里标题的填充和它背后的版画底同色同调，"AUTOMATON" 读成了
+   "AUTOMAT?N"。刻出来的字要看得见，靠的是它下面那块被压平的底 ——
+   真正的版画也是这么做的：留白先压出来，字才立得住。
+   这不是审美取舍，读不出来的标题等于丢内容。 */
+.head::after{
+  content:'';position:absolute;inset:0;z-index:0;pointer-events:none;
+  background:
+    linear-gradient(100deg, var(--bg) 0 26%, color-mix(in srgb,var(--bg) 78%,transparent) 52%, transparent 82%),
+    linear-gradient(to top, var(--bg) 0 6%, transparent 30%);
+}
+.head .say{z-index:2}
+@supports ((background-clip:text) or (-webkit-background-clip:text)) {
+  .head h1{ filter:var(--plate) contrast(1.9) brightness(1.5) saturate(.7) }
+  :root[data-mode="night"] .head h1{ filter:var(--plate) contrast(1.7) brightness(2.1) saturate(.8) }
+}
+
+/* ---- 再修：给版画填充加一个对比度下限 -----------------------------
+   上一版把版画直接灌进字形，结果字的明暗完全听凭图上那一块的明暗 ——
+   碰上暗部就整个字沉进背景。照片式填充没有下限，调滤镜是治不好的。
+
+   办法是把版画和一块纯色地用 blend 钳住：
+     夜间 lighten  → 结果永远不暗于地色，暗部被地色接住
+     日间 darken   → 结果永远不亮于墨色，亮部被墨色接住
+   纹理照旧从另一侧透出来，但可读性有了数学下限，不靠运气。 */
+@supports ((background-clip:text) or (-webkit-background-clip:text)) and (background-blend-mode:lighten) {
+  .head h1{
+    background-image:linear-gradient(#3A4438 0 0), url('../../src/plates/comedie-section.webp');
+    background-size:auto, auto 340%;
+    background-position:center, center var(--plate-y,20%);
+    background-blend-mode:darken;
+    filter:none;
+  }
+  :root[data-mode="night"] .head h1{
+    background-image:linear-gradient(#A8BCAE 0 0), url('../../src/plates/comedie-section.webp');
+    background-blend-mode:lighten;
+    filter:none;
+  }
+}
+/* 没有 blend 就不玩这个花样，回到实色。看得见永远优先于好看。 */
+@supports not (background-blend-mode:lighten) {
+  .head h1{ background-image:none; color:var(--text); -webkit-text-fill-color:var(--text) }
+}
+
+/* ==================================================================
+   第三稿
+   ================================================================== */
+
+/* ---- 双犁 ----------------------------------------------------------
+   最长的一幕拆成上下两条反向并行的犁沟。DOM 仍是一条直线：标题、
+   上行的单元、下行的单元，依次排列。分行只是把同一条队伍折了一下。 */
+/* align-items 必须是 flex-start：column 方向下默认的 stretch 会把带子
+   宽度钉成容器宽，而位移量写的是 calc(-100% + 100vw) —— 带宽一旦等于
+   视口宽，这个式子就是 0，带子纹丝不动。带必须由内容撑宽再溢出。 */
+.act[data-plow="double"] .act-stage{flex-direction:column;justify-content:center;
+  align-items:flex-start;gap:26px}
+.act[data-plow="double"] .reel-b{flex-direction:row-reverse}
+.act[data-plow="double"] .unit{flex-basis:min(440px,86vw);flex-direction:row;align-items:stretch}
+.act[data-plow="double"] .unit .lid{flex:0 0 132px;aspect-ratio:1}
+.act[data-plow="double"] .unit .meat{padding:16px 18px;gap:6px}
+.act[data-plow="double"] .unit p{font-size:13.5px;line-height:1.45}
+.act[data-plow="double"] .unit h3{font-size:13px}
+.act[data-plow="double"] .act-head{flex-basis:min(400px,80vw);padding-right:20px}
+.act[data-plow="double"] .act-head h2{font-size:clamp(38px,5vw,68px)}
+.act[data-plow="double"] .act-head p{font-size:14.5px}
+
+/* ---- 幕号逆向漂移 --------------------------------------------------
+   卡片往一边走，幕号往另一边走。两个速度不同的图层，纸就有了厚度。 */
+@keyframes no-drift-ltr{ from{transform:translateX(9vw)}  to{transform:translateX(-5vw)} }
+@keyframes no-drift-rtl{ from{transform:translateX(-9vw)} to{transform:translateX(5vw)} }
+
+/* ---- 转行的幕号：压在犁沟回转处，不再贴边 -------------------------- */
+.turn .no{position:absolute;top:50%;translate:0 -50%;opacity:.13}
+.turn[data-to="rtl"] .no{right:14%} .turn[data-to="ltr"] .no{left:calc(var(--gut) + 14%)}
+
+/* ---- 尾声：收束要收得住 -------------------------------------------- */
+.coda{padding:22vh var(--gut) 16vh calc(var(--gut) + 40px)}
+.coda .inner{grid-template-columns:.9fr 1.1fr;gap:56px}
+.coda h2{font-size:clamp(58px,11vw,168px)}
+.coda .kicker{margin-bottom:10px}
+.coda .unit{max-width:none}
+.coda .unit .lid{aspect-ratio:16/10}
+
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .act[data-plow="double"] .reel-a{ animation:reel-ltr linear both; animation-timeline:--act; animation-range:contain 0% contain 100% }
+    .act[data-plow="double"] .reel-b{ animation:reel-rtl linear both; animation-timeline:--act; animation-range:contain 0% contain 100% }
+    .act[data-dir="ltr"] .act-no{ animation:no-drift-ltr linear both; animation-timeline:--act; animation-range:contain 0% contain 100% }
+    .act[data-dir="rtl"] .act-no{ animation:no-drift-rtl linear both; animation-timeline:--act; animation-range:contain 0% contain 100% }
+  }
+}
+@media (prefers-reduced-motion: reduce){
+  .act[data-plow="double"] .act-stage{flex-direction:column}
+  .act[data-plow="double"] .reel-b{flex-direction:row}
+  .act-no{animation:none;transform:none}
+  .turn{display:none}            /* 掉头是动作，不动就没有意义，直接省掉 */
+}
+@supports not (animation-timeline: view()){ .turn{display:none} }
+
+/* ---- 印出来 --------------------------------------------------------
+   这个站讲的是印刷，那它就该印得出来。打印时回到单栏目录：带子拉直，
+   装饰全撤，链接后面把地址补上 —— 纸上点不动，地址就得看得见。 */
+@media print{
+  @page{ margin:16mm }
+  :root{ --bg:#fff; --surface:#fff; --border:#bbb; --text:#111; --dim:#444; --accent:#1b4a3a; --patina:#3d6b58 }
+  .top,.margin,.turn,.head .plate-bed,.head::after{ display:none }
+  body{ background:#fff;color:#111;font-size:10.5pt }
+  .head{ min-height:auto;padding:0 0 8mm;page-break-after:avoid }
+  .head h1{ background:none;color:#111;-webkit-text-fill-color:#111;font-size:44pt;filter:none }
+  .act-rail{ height:auto } .act-stage{ position:static;height:auto;display:block;rotate:none }
+  .reel{ display:block;transform:none!important;padding:0 }
+  .act-head{ page-break-after:avoid;padding:0 0 4mm }
+  .act-head h2{ font-size:22pt }
+  .unit{
+    display:grid;grid-template-columns:26mm 1fr;gap:5mm;break-inside:avoid;
+    border:0;border-top:.3pt solid #bbb;padding:3mm 0;transform:none;filter:none;opacity:1;
+  }
+  .unit .lid img{ mask-image:none;-webkit-mask-image:none;filter:grayscale(1) contrast(1.1) }
+  .unit .go{ display:none }
+  .unit h3::after{ content:" · " attr(href) }
+  .unit{ text-decoration:none }
+  a[href^="http"]::after{ content:" (" attr(href) ")";font-size:8pt;color:#555;word-break:break-all }
+  .unit .chips span{ border-color:#ccc }
+  .colophon{ page-break-before:auto;border-top:.3pt solid #bbb }
+}
+
+/* ==================================================================
+   窄屏
+   一条犁沟在手机上已经够宽了，两条只会把卡片压成细长条。所以双犁在
+   820px 以下退回单条 —— 折行是为装不下才折的，装得下就不折。
+   ================================================================== */
+@media (max-width:820px){
+  :root{ --gut:16px }
+
+  /* 顶栏原来是三块并排，窄屏下第三块被挤出画面，NIGHT 直接看不见。 */
+  .top{height:auto;min-height:52px;padding:8px var(--gut) 8px calc(var(--gut) + 10px);gap:10px;flex-wrap:wrap}
+  .top .mark{font-size:10px;letter-spacing:.14em}
+  .top nav{gap:10px;flex-shrink:0}
+  .toggle button{padding:5px 9px;font-size:9px}
+
+  /* 双犁在窄屏保留 —— 两行确实装得下（实测内容 665px，舞台 788px）。
+     要修的是拉伸：reel 默认 align-items:stretch，一行里最高的那张会把
+     其余全部撑到同高，短文案的卡片下面拖出一大片空白。 */
+  .act[data-plow="double"] .reel{align-items:flex-start;gap:12px}
+  .act[data-plow="double"] .unit{flex-basis:min(340px,84vw)}
+  .act[data-plow="double"] .unit .lid{flex:0 0 96px}
+  .act[data-plow="double"] .unit .meat{padding:13px 14px}
+  .act[data-plow="double"] .unit p{font-size:12.5px;-webkit-line-clamp:4}
+  .act[data-plow="double"] .act-head{flex-basis:min(340px,84vw)}
+  .act[data-plow="double"] .act-head h2{font-size:clamp(32px,9vw,52px)}
+
+  .reel{align-items:flex-start;gap:14px}
+  .unit{flex-basis:78vw}
+  .act-head{flex-basis:80vw}
+  .act-no{font-size:clamp(90px,18vh,150px);left:calc(var(--gut) + 10px)}
+  .turn{height:38vh}
+  .head{padding-left:calc(var(--gut) + 22px)}
+  .coda{padding-left:calc(var(--gut) + 22px)}
+  .colophon{padding-left:calc(var(--gut) + 22px)}
+}
