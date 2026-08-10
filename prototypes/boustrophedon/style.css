@@ -1,0 +1,228 @@
+/* 回行 · BOUSTROPHEDON
+   ==================================================================
+   牛耕式转行：一行向右，下一行掉头向左。古希腊铭文和早期拉丁碑刻的
+   书写方式，也是这个站的谱系里真实存在的东西，不是套用的花样。
+
+   四条约束，先锋只发生在表现层：
+
+   1. DOM 顺序 = 阅读顺序。标题在前，单元在后，线性排列，永远。
+      横向、反向、错位全部由 transform 完成，一个元素都不移出文档流。
+   2. 每个单元是真的 <a href>。爬虫拿到的是链接，不是 onclick 的 div。
+   3. 没有一个字是 JS 注入的。关掉 JS，内容一字不少。
+   4. 不支持滚动时间线、或者用户开了减弱动态效果时，横向带退化成
+      普通的换行网格。降级后仍然完整，只是不动。
+   ================================================================== */
+
+@font-face { font-family:'League Gothic'; src:url('../../src/fonts/LeagueGothic-var.subset.woff2') format('woff2'); font-weight:400; font-stretch:75% 100%; font-display:swap }
+@font-face { font-family:'Gambetta'; src:url('../../src/fonts/Gambetta-Regular.woff2') format('woff2'); font-weight:400; font-display:swap }
+@font-face { font-family:'Gambetta'; src:url('../../src/fonts/Gambetta-Italic.woff2') format('woff2'); font-weight:400; font-style:italic; font-display:swap }
+@font-face { font-family:'Martian Mono'; src:url('../../src/fonts/MartianMono-var.subset.woff2') format('woff2'); font-weight:100 800; font-stretch:75% 112%; font-display:swap }
+
+@property --hatch { syntax:'<length>'; inherits:false; initial-value:0px }
+@property --press { syntax:'<number>'; inherits:false; initial-value:0 }
+@property --ink   { syntax:'<number>'; inherits:false; initial-value:0 }
+
+:root{
+  --bg:#E9EAE1; --surface:#F2F3EA; --border:#CDD0C0; --accent:#2A5847;
+  --text:#1E241E; --dim:#5F6A5D; --patina:#4E7D6C;
+  --plate:grayscale(1) sepia(.3) hue-rotate(68deg) saturate(.45) contrast(1.03) brightness(1.04);
+  --blend:multiply;
+  --display:'League Gothic','Arial Narrow',sans-serif;
+  --body:'Gambetta',Georgia,serif;
+  --mono:'Martian Mono',ui-monospace,monospace;
+  --gut:clamp(20px,4vw,64px);
+}
+:root[data-mode="night"]{
+  --bg:#0E1310; --surface:#151C17; --border:#28312A; --accent:#5FA284;
+  --text:#DCE4D4; --dim:#8A9787; --patina:#7FA98F;
+  --plate:grayscale(1) invert(.92) sepia(.45) hue-rotate(75deg) saturate(.8) brightness(.82) contrast(1.08);
+  --blend:screen;
+}
+
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  background:var(--bg);color:var(--text);font-family:var(--body);font-size:17px;line-height:1.62;
+  -webkit-font-smoothing:antialiased;overflow-x:hidden;
+  transition:background-color 500ms ease,color 500ms ease;
+}
+img{display:block;width:100%;height:auto}
+a{color:inherit}
+.skip{position:absolute;left:-9999px;top:0}
+.skip:focus{left:var(--gut);top:10px;z-index:99;background:var(--accent);color:var(--bg);padding:10px 16px;font-family:var(--mono);font-size:12px}
+
+/* ---- 版口：左边缘的定位标记，印张的套准线 ----------------------- */
+.margin{position:fixed;left:0;top:0;bottom:0;width:var(--gut);z-index:40;pointer-events:none}
+.margin .hair{position:absolute;left:calc(var(--gut) - 1px);top:0;bottom:0;width:1px;background:var(--border)}
+.margin .run{position:absolute;left:calc(var(--gut) - 2px);top:0;width:3px;height:100%;
+  background:var(--accent);transform-origin:top;transform:scaleY(0)}
+.margin ol{position:absolute;inset:0;list-style:none;display:flex;flex-direction:column;
+  justify-content:space-evenly;align-items:center;padding:14vh 0}
+.margin li{font-family:var(--mono);font-size:10px;letter-spacing:.1em;color:var(--patina);opacity:.55}
+.margin li[data-on="1"]{opacity:1;color:var(--accent)}
+
+/* ---- 顶栏 -------------------------------------------------------- */
+.top{position:fixed;inset:0 0 auto 0;z-index:50;height:56px;display:flex;align-items:center;
+  justify-content:space-between;padding:0 var(--gut) 0 calc(var(--gut) + 18px);
+  background:color-mix(in srgb,var(--bg) 86%,transparent);backdrop-filter:blur(12px);
+  border-bottom:1px solid var(--border)}
+.top .mark{font-family:var(--mono);font-size:11px;letter-spacing:.18em;text-transform:uppercase;font-weight:600}
+.top nav{display:flex;gap:14px;align-items:center}
+.top nav a{font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--dim);text-decoration:none}
+.top nav a:hover{color:var(--accent)}
+.toggle{display:flex;border:1px solid var(--border)}
+.toggle button{font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;
+  background:none;border:0;color:var(--dim);padding:6px 11px;cursor:pointer}
+.toggle button[aria-pressed="true"]{background:var(--text);color:var(--bg)}
+
+/* ---- 卷首 -------------------------------------------------------- */
+.head{position:relative;min-height:100vh;display:grid;align-content:center;
+  padding:120px var(--gut) 90px calc(var(--gut) + 40px);overflow:hidden}
+.head .plate-bed{position:absolute;inset:0;z-index:0;opacity:.5}
+.head .plate-bed img{height:100%;object-fit:cover;filter:var(--plate);mix-blend-mode:var(--blend)}
+.head .say{position:relative;z-index:1;max-width:min(1120px,100%)}
+.kicker{font-family:var(--mono);font-size:11px;letter-spacing:.24em;text-transform:uppercase;color:var(--patina);margin-bottom:22px}
+.head h1{font-family:var(--display);font-weight:400;line-height:.82;text-transform:uppercase;
+  font-size:clamp(64px,15vw,240px);letter-spacing:.005em;
+  font-stretch:calc(100% - var(--vel-abs,0) * 18%)}
+.head .sub{max-width:52ch;margin-top:30px;color:var(--dim);font-size:clamp(17px,1.6vw,21px)}
+.head .count{margin-top:40px;font-family:var(--mono);font-size:12px;letter-spacing:.2em;
+  text-transform:uppercase;color:var(--accent)}
+
+/* ---- 一幕 -------------------------------------------------------- */
+.act{position:relative}
+.act-rail{position:relative;height:calc(105vh + var(--units,6) * 44vh)}
+.act-stage{position:sticky;top:56px;height:calc(100vh - 56px);overflow:hidden;
+  display:flex;align-items:center}
+.act-no{position:absolute;left:calc(var(--gut) + 26px);top:14vh;z-index:0;pointer-events:none;
+  font-family:var(--display);font-size:clamp(120px,26vh,300px);line-height:.7;color:var(--accent);
+  opacity:.11;font-stretch:calc(100% - var(--vel-abs,0) * 24%)}
+
+.reel{display:flex;align-items:stretch;gap:22px;padding-inline:calc(var(--gut) + 40px);
+  will-change:transform}
+.act[data-dir="rtl"] .reel{flex-direction:row-reverse}
+
+.act-head{flex:0 0 min(520px,74vw);display:flex;flex-direction:column;justify-content:center;
+  padding-right:26px}
+.act-head .no{font-family:var(--mono);font-size:11px;letter-spacing:.22em;color:var(--patina);
+  text-transform:uppercase;margin-bottom:14px}
+.act-head h2{font-family:var(--display);font-weight:400;font-size:clamp(48px,7vw,104px);
+  line-height:.88;text-transform:uppercase}
+.act-head p{margin-top:18px;color:var(--dim);font-size:16px;max-width:44ch}
+.act-head .dir{margin-top:26px;font-family:var(--mono);font-size:10px;letter-spacing:.2em;
+  color:var(--accent);text-transform:uppercase}
+
+/* ---- 一个单元 ---------------------------------------------------- */
+.unit{
+  flex:0 0 min(340px,80vw);display:flex;flex-direction:column;text-decoration:none;
+  background:var(--surface);border:1px solid var(--border);padding:0;
+  --press:1;
+}
+.unit .lid{position:relative;overflow:hidden;aspect-ratio:4/3;background:var(--bg)}
+.unit .lid img{height:100%;object-fit:cover;filter:var(--plate);mix-blend-mode:var(--blend)}
+.unit .meat{padding:20px 20px 24px;display:flex;flex-direction:column;gap:9px;flex:1}
+.unit .plate-no{font-family:var(--mono);font-size:10px;letter-spacing:.18em;color:var(--patina)}
+.unit h3{font-family:var(--mono);font-size:14px;letter-spacing:.04em;font-weight:600;line-height:1.3}
+.unit p{font-size:14.5px;color:var(--dim);line-height:1.5;flex:1}
+.unit .chips{display:flex;gap:7px;flex-wrap:wrap;margin-top:4px}
+.unit .chips span{font-family:var(--mono);font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;
+  color:var(--patina);border:1px solid var(--border);padding:3px 7px}
+.unit .go{font-family:var(--mono);font-size:10px;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--accent);margin-top:10px}
+.unit:hover{border-color:var(--accent)}
+.unit:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+
+/* ---- 尾声：D 只有一个单元，不做横向带，改成满幅收束 -------------- */
+.coda{padding:18vh var(--gut) 14vh calc(var(--gut) + 40px)}
+.coda .inner{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:center}
+.coda h2{font-family:var(--display);font-weight:400;font-size:clamp(52px,9vw,132px);
+  line-height:.86;text-transform:uppercase}
+.coda .blurb{color:var(--dim);margin-top:18px;max-width:40ch}
+.coda .unit{flex:none;max-width:520px}
+
+/* ---- 版权页 ------------------------------------------------------ */
+.colophon{border-top:1px solid var(--border);padding:70px var(--gut) 90px calc(var(--gut) + 40px);
+  display:grid;grid-template-columns:1fr auto;gap:34px;align-items:end}
+.colophon p{color:var(--dim);font-size:15px;max-width:56ch}
+.colophon .mono{font-family:var(--mono);font-size:10px;letter-spacing:.14em;color:var(--patina);
+  text-transform:uppercase;line-height:2}
+.colophon a{color:var(--accent)}
+
+/* ================= 动作 ============================================ */
+@keyframes reel-ltr { from{transform:translateX(0)}                       to{transform:translateX(calc(-100% + 100vw))} }
+@keyframes reel-rtl { from{transform:translateX(calc(-100% + 100vw))}     to{transform:translateX(0)} }
+@keyframes hatch-in { from{--hatch:0px} to{--hatch:8px} }
+@keyframes press-in { from{--press:0}   to{--press:1} }
+@keyframes run-fill { from{transform:scaleY(0)} to{transform:scaleY(1)} }
+
+/* 刻线：内容从雕版排线的缝隙里长出来。雕版师加密排线来建立层次，
+   这里让排线一道道加粗直到并成实面。 */
+.lid img, .head .plate-bed img{
+  -webkit-mask-image:repeating-linear-gradient(-42deg,#000 0 var(--hatch,8px),transparent var(--hatch,8px) 8px);
+          mask-image:repeating-linear-gradient(-42deg,#000 0 var(--hatch,8px),transparent var(--hatch,8px) 8px);
+}
+/* 落版：卡片是被压下来的，不是淡进来的。--press 默认 1，所以任何没有
+   被接上时间线的卡片（带内、降级、减弱动态）都是落定状态，不会白屏。 */
+.unit{
+  transform:scale(calc(1.06 - var(--press)*.06)) translateY(calc((1 - var(--press)) * 22px));
+  filter:blur(calc((1 - var(--press)) * 3px));
+  opacity:calc(.12 + var(--press)*.88);
+}
+.coda .unit{ --press:0 }
+
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .act-rail{ view-timeline:--act block }
+    .act[data-dir="ltr"] .reel{ animation:reel-ltr linear both; animation-timeline:--act; animation-range:contain 0% contain 100% }
+    .act[data-dir="rtl"] .reel{ animation:reel-rtl linear both; animation-timeline:--act; animation-range:contain 0% contain 100% }
+
+    /* 带内的图版接的是「这一幕」的时间线，不是 view()。
+       卡片在 sticky 带里横向走，垂直位置几乎不动，view() 的进度会冻在
+       半路 —— 实测卡在 7.3/8px，刻线永远差最后一口气。改接 --act 之后，
+       整条带在行进过程中一路刻实，像一整张纸被拉过压印机，而不是二十
+       个各自为政的小动画。 */
+    .reel .lid img{ animation:hatch-in linear both; animation-timeline:--act; animation-range:contain 0% contain 62% }
+
+    /* 落版留给「垂直到场」的两种情形：尾声，和降级后的网格。
+       带内卡片的入场方式是横向行进，本身已经是入场，不必再压一次。 */
+    .coda .unit{ animation:press-in linear both; animation-timeline:view(); animation-range:cover 10% cover 46% }
+    .coda .lid img{ animation:hatch-in linear both; animation-timeline:view(); animation-range:cover 8% cover 56% }
+    .head .plate-bed img{ animation:hatch-in linear both; animation-timeline:view(); animation-range:cover 0% cover 40% }
+
+    .margin .run{ animation:run-fill linear both; animation-timeline:scroll(root block) }
+  }
+}
+
+/* ---- 降级：不支持滚动时间线，或用户要求减弱动态效果 -------------- */
+/* 横向带变成普通换行网格。内容一样不少，只是不动。 */
+@supports not (animation-timeline: view()) {
+  .act-rail{height:auto}
+  .act-stage{position:static;height:auto;display:block;padding:12vh 0}
+  .reel{flex-wrap:wrap;transform:none!important}
+  .act[data-dir="rtl"] .reel{flex-direction:row}
+  .act-no{position:static;opacity:.14;margin-left:calc(var(--gut) + 40px)}
+}
+@media (prefers-reduced-motion: reduce){
+  .act-rail{height:auto}
+  .act-stage{position:static;height:auto;display:block;padding:12vh 0}
+  .reel{flex-wrap:wrap;transform:none!important}
+  .act[data-dir="rtl"] .reel{flex-direction:row}
+  .act-no{position:static;opacity:.14;margin-left:calc(var(--gut) + 40px)}
+  .unit{transform:none;filter:none;opacity:1}
+  .lid img,.head .plate-bed img{mask-image:none;-webkit-mask-image:none}
+}
+
+/* ---- 跨文档形变：hub 与 15 个子站同源，浏览器接手中间的过渡 ------ */
+@view-transition{ navigation:auto }
+::view-transition-old(root),::view-transition-new(root){
+  animation-duration:400ms;animation-timing-function:cubic-bezier(.22,1,.36,1)
+}
+::view-transition-group(unit-lid){ animation-duration:600ms;animation-timing-function:cubic-bezier(.22,1,.36,1) }
+
+@media (max-width:820px){
+  .coda .inner{grid-template-columns:1fr}
+  .colophon{grid-template-columns:1fr}
+  .act-head{flex-basis:82vw}
+  .unit{flex-basis:80vw}
+}
