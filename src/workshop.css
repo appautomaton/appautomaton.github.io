@@ -829,3 +829,277 @@
     display: none;
   }
 }
+
+/* ==========================================================================
+   Boustrophedon
+   --------------------------------------------------------------------------
+   As the ox plows: one act runs right, the next turns and runs left. It is
+   how early Greek inscriptions were cut, which puts it in the same lineage as
+   the plates and the wood type this page is already built from.
+
+   Four constraints. Everything avant-garde happens in the presentation layer:
+
+   1. Document order is reading order. The heading precedes its units, in one
+      straight line, always. Sideways, reversed and rotated are all transforms,
+      and nothing leaves flow.
+   2. Every unit is a real anchor. A crawler receives links, not click
+      handlers.
+   3. Not a word is injected by script. With JavaScript off the catalog is
+      complete, because the build prerenders it.
+   4. Without scroll-driven animation, or under prefers-reduced-motion, the
+      bands fall back to wrapping grids. Degraded, still whole.
+   ========================================================================== */
+
+@property --aa-hatch { syntax: '<length>'; inherits: false; initial-value: 8px }
+
+:root {
+  --aa-nav: 3.15rem;
+  --aa-gut: clamp(1.25rem, 4vw, 4rem);
+}
+
+/* --- the act ------------------------------------------------------------ */
+.aa-act { position: relative; margin: 0; }
+.aa-act-rail { position: relative; height: calc(105vh + var(--aa-units, 6) * 40vh); }
+.aa-act-stage {
+  position: sticky;
+  top: var(--aa-nav);
+  height: calc(100vh - var(--aa-nav));
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+}
+/* Hand-pulled sheets never register perfectly, and the small error is what
+   separates a print from a screenshot. It has to be too small to name. */
+.aa-act:nth-of-type(odd) .aa-act-stage { rotate: -0.28deg }
+.aa-act:nth-of-type(even) .aa-act-stage { rotate: 0.32deg }
+
+.aa-act-no {
+  position: absolute;
+  left: calc(var(--aa-gut) + 1.5rem);
+  top: 12vh;
+  z-index: 0;
+  pointer-events: none;
+  font-family: 'League Gothic', 'Arial Narrow', sans-serif;
+  font-size: clamp(7rem, 24vh, 18rem);
+  line-height: 0.7;
+  color: var(--color-accent);
+  opacity: 0.1;
+}
+
+/* --- the band ------------------------------------------------------------
+   .aa-bento was a grid. Inside an act it becomes the furrow, so every
+   descendant rule written against .aa-bento keeps working unchanged. */
+/* Centred, not stretched. A stretched row pulls every card to the height of
+   the tallest, and a short entry then trails a field of empty surface down
+   most of the screen. Cards keep their own height and hang on a common
+   centreline, which is also how plates sit in a cabinet. */
+.aa-act .aa-bento {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+  padding-inline: calc(var(--aa-gut) + 2.5rem);
+  grid-template-columns: none;
+  will-change: transform;
+}
+.aa-act[data-dir='rtl'] .aa-bento { flex-direction: row-reverse }
+
+.aa-act .aa-cell {
+  flex: 0 0 min(21rem, 80vw);
+  grid-column: auto;
+  min-width: 0;
+}
+.aa-act .aa-cell-l { flex-basis: min(26rem, 84vw) }
+
+.aa-act-head {
+  flex: 0 0 min(32rem, 78vw);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding-right: 1.6rem;
+}
+.aa-act-meta {
+  font-family: var(--aa-font-mono);
+  font-size: 0.66rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--aa-patina);
+  margin-bottom: 0.9rem;
+}
+.aa-act .aa-act-label {
+  font-family: 'League Gothic', 'Arial Narrow', sans-serif;
+  font-size: clamp(2.6rem, 6vw, 5.4rem);
+  line-height: 0.9;
+  text-transform: uppercase;
+  letter-spacing: 0.01em;
+  color: var(--color-text-primary);
+}
+.aa-act-blurb {
+  margin-top: 1rem;
+  max-width: 42ch;
+  font-style: italic;
+  font-size: 0.97rem;
+  line-height: 1.55;
+}
+.aa-act-dir {
+  margin-top: 1.5rem;
+  font-family: var(--aa-font-mono);
+  font-size: 0.62rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--color-accent);
+}
+
+/* --- the turn ----------------------------------------------------------- */
+.aa-turn {
+  position: relative;
+  height: 52vh;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  padding-inline: calc(var(--aa-gut) + 2.5rem) var(--aa-gut);
+}
+.aa-turn svg { width: 100%; max-width: 66rem; height: auto; overflow: visible }
+.aa-turn path {
+  fill: none;
+  stroke: var(--color-accent);
+  stroke-width: 1.4;
+  stroke-linecap: round;
+  stroke-dasharray: 100;
+  stroke-dashoffset: 100;
+}
+.aa-turn[data-to='ltr'] svg { transform: scaleX(-1) }
+.aa-turn-no {
+  position: absolute;
+  top: 50%;
+  translate: 0 -50%;
+  font-family: 'League Gothic', 'Arial Narrow', sans-serif;
+  font-size: clamp(4.5rem, 13vh, 9rem);
+  line-height: 0.7;
+  color: var(--color-accent);
+  opacity: 0.13;
+  pointer-events: none;
+}
+.aa-turn[data-to='rtl'] .aa-turn-no { right: 14% }
+.aa-turn[data-to='ltr'] .aa-turn-no { left: calc(var(--aa-gut) + 14%) }
+.aa-turn-cap {
+  position: absolute;
+  bottom: 15%;
+  font-family: var(--aa-font-mono);
+  font-size: 0.62rem;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--aa-patina);
+}
+
+/* --- hatching ------------------------------------------------------------
+   Cross-hatching is how an engraver builds tone, so the reveal may as well
+   describe the medium: the plates are cut open a line at a time as the band
+   is drawn across. It runs on the act's timeline rather than view(), because
+   a card inside a sticky band travels sideways while its vertical position
+   holds still, and a view timeline would see no progress to report. */
+.aa-act .aa-plate-img {
+  -webkit-mask-image: repeating-linear-gradient(-42deg, #000 0 var(--aa-hatch), transparent var(--aa-hatch) 8px);
+  mask-image: repeating-linear-gradient(-42deg, #000 0 var(--aa-hatch), transparent var(--aa-hatch) 8px);
+}
+
+/* --- layout of the page around the acts --------------------------------- */
+.aa-workbench { padding: 3rem 0 4rem }
+.aa-filterbar {
+  max-width: 1120px;
+  margin: 0 auto 2.4rem;
+  padding-inline: 1.5rem;
+}
+
+@keyframes aa-reel-ltr { from { transform: translateX(0) } to { transform: translateX(calc(-100% + 100vw)) } }
+@keyframes aa-reel-rtl { from { transform: translateX(calc(-100% + 100vw)) } to { transform: translateX(0) } }
+@keyframes aa-hatch-in { from { --aa-hatch: 0px } to { --aa-hatch: 8px } }
+@keyframes aa-furrow { to { stroke-dashoffset: 0 } }
+@keyframes aa-no-ltr { from { transform: translateX(8vw) } to { transform: translateX(-4vw) } }
+@keyframes aa-no-rtl { from { transform: translateX(-8vw) } to { transform: translateX(4vw) } }
+
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .aa-act-rail { view-timeline: --aa-act block }
+    .aa-act[data-dir='ltr'] .aa-bento {
+      animation: aa-reel-ltr linear both;
+      animation-timeline: --aa-act;
+      animation-range: contain 0% contain 100%;
+    }
+    .aa-act[data-dir='rtl'] .aa-bento {
+      animation: aa-reel-rtl linear both;
+      animation-timeline: --aa-act;
+      animation-range: contain 0% contain 100%;
+    }
+    .aa-act .aa-plate-img {
+      animation: aa-hatch-in linear both;
+      animation-timeline: --aa-act;
+      animation-range: contain 0% contain 60%;
+    }
+    .aa-act[data-dir='ltr'] .aa-act-no {
+      animation: aa-no-ltr linear both;
+      animation-timeline: --aa-act;
+      animation-range: contain 0% contain 100%;
+    }
+    .aa-act[data-dir='rtl'] .aa-act-no {
+      animation: aa-no-rtl linear both;
+      animation-timeline: --aa-act;
+      animation-range: contain 0% contain 100%;
+    }
+    .aa-turn path {
+      animation: aa-furrow linear both;
+      animation-timeline: view();
+      animation-range: cover 14% cover 74%;
+    }
+  }
+}
+
+/* --- degraded, still whole ---------------------------------------------- */
+@supports not (animation-timeline: view()) {
+  .aa-act-rail { height: auto }
+  .aa-act-stage { position: static; height: auto; display: block; overflow: visible; rotate: none }
+  .aa-act .aa-bento { flex-wrap: wrap; transform: none !important; padding-inline: 1.5rem }
+  .aa-act[data-dir='rtl'] .aa-bento { flex-direction: row }
+  .aa-act-no { position: static; opacity: 0.14; margin-left: 1.5rem }
+  .aa-act .aa-plate-img { mask-image: none; -webkit-mask-image: none }
+  .aa-turn { display: none }
+}
+@media (prefers-reduced-motion: reduce) {
+  .aa-act-rail { height: auto }
+  .aa-act-stage { position: static; height: auto; display: block; overflow: visible; rotate: none }
+  .aa-act .aa-bento { flex-wrap: wrap; transform: none !important; padding-inline: 1.5rem }
+  .aa-act[data-dir='rtl'] .aa-bento { flex-direction: row }
+  .aa-act-no { position: static; opacity: 0.14; margin-left: 1.5rem }
+  .aa-act .aa-plate-img { mask-image: none; -webkit-mask-image: none }
+  .aa-turn { display: none }
+}
+
+@media (max-width: 860px) {
+  :root { --aa-gut: 1rem }
+  .aa-act .aa-bento { gap: 0.9rem; align-items: flex-start; padding-inline: calc(var(--aa-gut) + 1.25rem) }
+  .aa-act .aa-cell,
+  .aa-act .aa-cell-l { flex-basis: 78vw }
+  .aa-act-head { flex-basis: 80vw }
+  .aa-act .aa-act-label { font-size: clamp(2rem, 9vw, 3.2rem) }
+  .aa-turn { height: 34vh }
+  .aa-filterbar { padding-inline: 1.25rem }
+}
+
+/* --- it prints -----------------------------------------------------------
+   A page about printing should come off a printer as a catalogue: the bands
+   flatten, the decoration drops out, and every address is spelled after its
+   link, because paper cannot be clicked. */
+@media print {
+  @page { margin: 16mm }
+  .aa-turn, .aa-act-no, .aa-act-dir { display: none }
+  .aa-act-rail { height: auto }
+  .aa-act-stage { position: static; height: auto; display: block; overflow: visible; rotate: none }
+  .aa-act .aa-bento { display: block; transform: none !important; padding: 0 }
+  .aa-act .aa-cell, .aa-act .aa-cell-l { break-inside: avoid; margin: 0 0 4mm }
+  .aa-act .aa-plate-img { mask-image: none; -webkit-mask-image: none; filter: grayscale(1) }
+  .aa-act-head { display: block; padding: 0 0 4mm; break-after: avoid }
+  .aa-card a[href^='http']::after {
+    content: ' (' attr(href) ')';
+    font-size: 8pt;
+    word-break: break-all;
+  }
+}
