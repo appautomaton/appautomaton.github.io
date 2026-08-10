@@ -54,15 +54,21 @@ page.on('pageerror', (e) => errors.push(String(e)))
 await page.goto(`http://127.0.0.1:${port}/`, { waitUntil: 'networkidle' })
 await page.waitForSelector('.aa-card', { timeout: 15000 })
 
-/* The catalog is the source of truth for how many exhibits exist. Node
-   strips the type annotations, so it can be read here directly; if a
-   runtime ever cannot, the floor below still catches a real regression and
-   the skipped check says so out loud rather than passing quietly. */
+/* The catalog is the source of truth for how many exhibits exist and for
+   when each project's page was last built. Node strips the type annotations,
+   so it can be read here directly; if a runtime ever cannot, the floor below
+   still catches a real regression and the skipped checks say so out loud
+   rather than passing quietly. */
 let expectedCards = null
+let lastmodByUrl = new Map()
 try {
-  ;({ unitCount: expectedCards } = await import('../src/data/catalog.ts'))
+  const { catalog, unitCount } = await import('../src/data/catalog.ts')
+  expectedCards = unitCount
+  lastmodByUrl = new Map(
+    catalog.flatMap((s) => s.items.filter((p) => p.site).map((p) => [p.site, p.lastmod])),
+  )
 } catch (e) {
-  console.warn(`warn: exact card count not checked, catalog would not load (${e.message})`)
+  console.warn(`warn: card count and lastmod not applied, catalog would not load (${e.message})`)
 }
 
 const cards = await page.locator('.aa-card').count()
@@ -80,10 +86,13 @@ console.log(`prerendered dist/index.html with ${cards} catalog cards`)
 
 /* --- Sitemap ------------------------------------------------------------
    Every internal address the rendered page links to, and nothing else.
-   No changefreq or priority: Google ignores both. No lastmod on project
-   pages either, because those pages are built in their own repositories
-   and this build has no truthful date for them. An invented lastmod is
-   worse than none, since Google drops the signal once it stops matching. */
+
+   No changefreq or priority: Google ignores both. lastmod comes from the
+   Last-Modified header the serving host returned when the sync step probed
+   each page, so it is the date that page was actually built rather than a
+   date this build invented. A lastmod that stops matching reality is worse
+   than none, because Google drops the signal instead of the page. Anything
+   the sync could not date is listed without one. */
 
 const linked = [
   ...new Set(
@@ -102,7 +111,10 @@ const sitemap = [
   '     actually renders. Edit src/data/catalog.ts, not this file. -->',
   '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">',
   `  <url><loc>${ORIGIN}/</loc><lastmod>${buildDate}</lastmod></url>`,
-  ...linked.map((u) => `  <url><loc>${u}</loc></url>`),
+  ...linked.map((u) => {
+    const lastmod = lastmodByUrl.get(u)
+    return `  <url><loc>${u}</loc>${lastmod ? `<lastmod>${lastmod}</lastmod>` : ''}</url>`
+  }),
   '</urlset>',
   '',
 ].join('\n')

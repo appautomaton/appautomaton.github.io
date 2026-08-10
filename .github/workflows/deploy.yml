@@ -3,6 +3,12 @@ name: Deploy to GitHub Pages
 on:
   push:
     branches: [main]
+  # The catalog is read from the org at build time, so the site goes stale
+  # whenever a project ships and nothing here is pushed. A daily rebuild is
+  # what makes a new repository, a newly published page, or a rewritten
+  # description reach the catalog and the sitemap without anyone doing it.
+  schedule:
+    - cron: "17 5 * * *"
   workflow_dispatch:
 
 permissions:
@@ -38,7 +44,12 @@ jobs:
       # into dist/index.html, so crawlers see real HTML.
       - run: npx playwright install --with-deps chromium
 
+      # The build starts by reading the org, which is an authenticated call
+      # here only to stay clear of the anonymous rate limit that shared runner
+      # addresses reach on their own.
       - run: npm run build
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - uses: actions/configure-pages@v5
 
