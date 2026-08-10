@@ -29,46 +29,43 @@ function CardLinks({ project }: { project: Project }) {
   )
 }
 
+/* Boustrophedon: as the ox plows. One act runs right, the next turns and runs
+   left. The direction comes from the shelf's own position in the catalog, not
+   from its position after filtering, so a filtered view does not resequence
+   the furrows under the reader.
+
+   Only the presentation turns. In the document the heading is still followed
+   by its units in one straight line, which is what a crawler and a screen
+   reader both read. The band is moved with a transform; nothing leaves flow. */
 export function Shelf({ shelf, index }: { shelf: ShelfData; index: number }) {
+  const dir = index % 2 === 0 ? 'ltr' : 'rtl'
   return (
-    <section id={`shelf-${shelf.key}`} className="aa-shelf">
-      {/* Act heading: numeral, label, rail, unit count */}
-      <HStack align="end" gap={4}>
-        <div className="aa-act-roman" aria-hidden="true">
-          {ROMANS[index]}
-        </div>
-        <Text as="h2" type="label" className="aa-act-label">
-          {shelf.label}
-        </Text>
-        <div
-          aria-hidden="true"
-          className="aa-plate-rail"
-          style={{
-            flex: 1,
-            alignSelf: 'center',
-            borderTop: '1px solid var(--color-border)',
-          }}
-        />
-        <div className="aa-act-count">
-          {String(shelf.items.length).padStart(2, '0')}
-        </div>
-      </HStack>
-
-      <Text
-        as="p"
-        type="supporting"
-        style={{
-          maxWidth: '58ch',
-          margin: '0.8rem 0 1.5rem',
-          fontStyle: 'italic',
-          fontSize: '0.98rem',
-          lineHeight: 1.55,
-        }}
+    <section id={`shelf-${shelf.key}`} className="aa-shelf aa-act" data-dir={dir}>
+      <div
+        className="aa-act-rail"
+        style={{ ['--aa-units' as string]: shelf.items.length }}
       >
-        {shelf.blurb}
-      </Text>
+        <div className="aa-act-stage">
+          <div className="aa-act-no" aria-hidden="true">
+            {ROMANS[index]}
+          </div>
 
-      <div className="aa-bento">
+          <div className="aa-bento">
+            <header className="aa-act-head">
+              <div className="aa-act-meta">
+                Act {ROMANS[index]} · {String(shelf.items.length).padStart(2, '0')} units
+              </div>
+              <Text as="h2" type="label" className="aa-act-label">
+                {shelf.label}
+              </Text>
+              <Text as="p" type="supporting" className="aa-act-blurb">
+                {shelf.blurb}
+              </Text>
+              <div className="aa-act-dir" aria-hidden="true">
+                {dir === 'ltr' ? 'reading ————→ right' : 'left ←———— reading'}
+              </div>
+            </header>
+
         {shelf.items.map((p) => {
           const span = layoutSpans[p.repo] ?? p.span
           const featured = span >= 7
@@ -126,9 +123,14 @@ export function Shelf({ shelf, index }: { shelf: ShelfData; index: number }) {
 
                   {/* The name carries the link when the project has a page,
                       so the anchor text is the project's name rather than a
-                      bare "view". Styled to inherit, so nothing shifts. */}
+                      bare "view". Styled to inherit, so nothing shifts.
+
+                      It is a heading, not a div. The outline is how a crawler
+                      and a language model both reconstruct what this page
+                      contains, and a catalog whose entries are divs reads as
+                      four shelf names with nothing on them. */}
                   <Text
-                    as="div"
+                    as="h3"
                     type="body"
                     className="aa-card-name"
                     style={{ fontSize: featured ? '1.9rem' : '1.6rem' }}
@@ -174,7 +176,30 @@ export function Shelf({ shelf, index }: { shelf: ShelfData; index: number }) {
             </div>
           )
         })}
+          </div>
+        </div>
       </div>
     </section>
+  )
+}
+
+/* The turn. An ox reaching the headland does not jump to the next furrow, it
+   swings around, and the reader should see the same thing rather than a cut.
+   Decoration only: aria-hidden, and it sits between acts, so it never lands
+   between a heading and the units that belong to it. */
+export function Turn({ to, numeral }: { to: 'ltr' | 'rtl'; numeral: string }) {
+  return (
+    <div className="aa-turn" data-to={to} aria-hidden="true">
+      <span className="aa-turn-no">{numeral}</span>
+      <svg viewBox="0 0 1060 220" role="presentation">
+        <path
+          pathLength={100}
+          d="M 12 34 H 936 A 74 74 0 0 1 936 182 H 12 M 12 182 l 26 -12 M 12 182 l 26 12"
+        />
+      </svg>
+      <span className="aa-turn-cap">
+        {to === 'rtl' ? 'the turn · now reading left' : 'the turn · now reading right'}
+      </span>
+    </div>
   )
 }

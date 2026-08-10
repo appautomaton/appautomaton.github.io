@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react'
 import { HStack, TextInput, Button, Text, Kbd, Stack } from '@astryxdesign/core'
 import { catalog, unitCount } from '../data/catalog'
-import { Shelf } from './Shelf'
+import { Shelf, Turn } from './Shelf'
 import { IntermissionPlate } from './Plates'
 import duck from '../plates/duck.webp'
 
@@ -35,16 +35,15 @@ export function Workbench() {
   const visible = shelves.filter((s) => s.items.length > 0)
 
   return (
-    <main
-      id="catalog"
-      style={{ maxWidth: 1120, margin: '0 auto', padding: '3rem 1.5rem 3rem' }}
-    >
+    /* The bands run full bleed, so the page no longer carries one width. The
+       filter bar keeps the old measure; the acts set their own. */
+    <main id="catalog" className="aa-workbench">
       <HStack
         align="center"
         justify="between"
         gap={4}
         wrap="wrap"
-        style={{ margin: '0 0 2.4rem' }}
+        className="aa-filterbar"
       >
         <HStack align="center" gap={3}>
           <TextInput
@@ -125,13 +124,24 @@ export function Workbench() {
           />
         </Stack>
       ) : (
-        visible.map((s, i) => (
-          <div key={s.key}>
-            <Shelf shelf={s} index={s.index} />
-            {/* The interlude plate plays once, after the first act. */}
-            {q === '' && i === 0 && <IntermissionPlate />}
-          </div>
-        ))
+        visible.map((s, i) => {
+          const next = visible[i + 1]
+          return (
+            <div key={s.key}>
+              <Shelf shelf={s} index={s.index} />
+              {/* The interlude plate plays once, after the first act. */}
+              {q === '' && i === 0 && <IntermissionPlate />}
+              {/* The furrow turns between acts, and only where the next act
+                  actually reverses, so the drawing never contradicts itself. */}
+              {next && (
+                <Turn
+                  to={next.index % 2 === 0 ? 'ltr' : 'rtl'}
+                  numeral={['I', 'II', 'III', 'IV', 'V', 'VI'][next.index]}
+                />
+              )}
+            </div>
+          )
+        })
       )}
     </main>
   )
