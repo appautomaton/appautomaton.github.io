@@ -182,6 +182,13 @@ export const shelves: Shelf[] = [
         span: 4,
       },
       {
+        repo: 'mlx-minimax-music3',
+        description:
+          'MiniMax Music 3 in pure MLX. Lyrics and a structured caption to 44.1 kHz stereo, with phase-scoped model residency and no PyTorch at runtime.',
+        chips: ['flow matching', '44.1 kHz'],
+        span: 8,
+      },
+      {
         repo: 'mlx-h3',
         description:
           'MiniMax-H3 text to video and stereo audio, denoised together in one packed sequence. Phase-scoped model residency, no PyTorch at runtime.',

@@ -34,6 +34,7 @@ Each project below links to its own page on this site first, then to the reposit
 - [mlx-spatial](https://appautomaton.renocrypt.com/mlx-spatial/): 3D and spatial inference on device with SAM 3D Objects, TRELLIS.2, WorldMirror, and MapAnything. [Source](https://github.com/appautomaton/mlx-spatial).
 - [mlx-atomistic](https://appautomaton.renocrypt.com/mlx-atomistic/): atomistic simulation on Apple silicon. A DFT and molecular-dynamics runtime on MLX and Metal, running on the GPU the Mac already has. [Source](https://github.com/appautomaton/mlx-atomistic).
 - [mlx-h3](https://appautomaton.renocrypt.com/mlx-h3/): MiniMax-H3 text to video and stereo audio, denoised together in one packed sequence. Phase-scoped model residency, no PyTorch at runtime. [Source](https://github.com/appautomaton/mlx-h3).
+- [mlx-minimax-music3](https://appautomaton.renocrypt.com/mlx-minimax-music3/): MiniMax Music 3 in pure MLX. Lyrics and a structured caption to 44.1 kHz stereo, eight codebooks a frame at twenty-five frames a second, flow-matched and decoded on the Mac's own silicon. [Source](https://github.com/appautomaton/mlx-minimax-music3).
 
 ## Shelf D: Creative harnesses
 

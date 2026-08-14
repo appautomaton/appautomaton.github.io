@@ -202,7 +202,7 @@ export const repos: OrgRepo[] = [
       "scientific-computing"
     ],
     "hasSite": true,
-    "lastmod": "2026-08-10",
+    "lastmod": "2026-08-14",
     "sitemap": "https://appautomaton.renocrypt.com/mlx-atomistic/sitemap-index.xml"
   },
   {
@@ -246,6 +246,14 @@ export const repos: OrgRepo[] = [
     "hasSite": true,
     "lastmod": "2026-08-05",
     "sitemap": "https://appautomaton.renocrypt.com/mlx-h3/sitemap.xml"
+  },
+  {
+    "name": "mlx-minimax-music3",
+    "description": "Pure MLX inference for MiniMax Music 3 on Apple silicon.",
+    "topics": [],
+    "hasSite": true,
+    "lastmod": "2026-08-14",
+    "sitemap": "https://appautomaton.renocrypt.com/mlx-minimax-music3/sitemap.xml"
   },
   {
     "name": "mlx-spatial",
