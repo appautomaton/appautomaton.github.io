@@ -1,8 +1,14 @@
 # Search discovery: state, mechanism, and what to check next
 
-Paused 2026-08-10 with two Google Search Console validations in flight. This
-file is the handoff: what was wrong, what was changed, what runs on its own
-now, and what a returning reader should look at before touching anything.
+Paused 2026-08-10 with two Google Search Console validations in flight, resumed
+2026-08-17. This file is the handoff: what was wrong, what was changed, what
+runs on its own now, and what a returning reader should look at before touching
+anything.
+
+The validations had not been read yet when work resumed, so the section on what
+to check when they finish is still a question rather than a result. What the
+second pass did change is the layer underneath: the host is now proxied, which
+turns several things this document called impossible into ordinary edits.
 
 ## The two problems
 
@@ -61,11 +67,20 @@ back.
 cron at 05:17 UTC. A build takes about one minute. Public repositories do not
 consume GitHub Actions minutes, so the schedule is free to keep.
 
-Each build enforces three things.
+Each build enforces four things.
 
 **The gate.** `scripts/sync-catalog.mjs` refuses to build if any public repo in
 the org is neither placed on a shelf nor listed in `notShown` with a reason.
 A project cannot ship unlinked and unnoticed.
+
+**The page question.** The gate catches a project nobody placed. The quieter
+version of the same mistake is a project on a shelf that publishes no page,
+because from here a page still to come and a page never wanted both read as
+`hasSite: false`. A placement carrying a `noPage` reason is the whole
+difference. An exhibit without one is named on every build, and so is a reason
+still sitting there after its page went live, since a stale reason is worse
+than none. Both are warnings rather than failures, because the page would be
+built in another repository and this build cannot make that call.
 
 **The spoke audit.** The same script fetches every project page and reports a
 missing canonical, missing title or description, a link or og tag naming the
@@ -79,8 +94,8 @@ refuses to deploy over someone else's head tag is a hub nobody keeps.
 against the catalog, then HEAD-checks every URL it just listed. A 404 or 410
 fails the build; a redirect or a network error warns.
 
-As of the pause, the audit reports zero warnings across 20 exhibits, 15 of
-which publish a page.
+As of 2026-08-17 the audit reports zero warnings across 21 exhibits, 16 of
+which publish a page, and one open page question, `webmaton`.
 
 > One trap worth knowing: a scheduled workflow on a public repository is
 > disabled automatically after 60 days without repository activity. GitHub
@@ -135,3 +150,36 @@ Five repositories had their GitHub `homepage` field repointed from
 `appautomaton.github.io` to the served address, so the link GitHub shows
 beside a repo no longer redirects. The sync step warns when a homepage stops
 matching, so this stays true without anyone remembering it.
+
+`appcubic.com/appautomaton/` is the highest-authority page linking into this
+catalog, and every one of its links named the retired `appautomaton.github.io`
+address. Its structured data also claimed a different `@id` for the same
+organization than the one used here, which is the kind of split that keeps a
+retrieval system from resolving an entity at all. Both are corrected in that
+site's own repository.
+
+**The host is proxied as of 2026-08-17.** The origin is still GitHub Pages and
+the build is unchanged, but there is an edge in front of it now. Two limits
+described above stop being limits. A repository rename no longer has to mean a
+permanent 404, because a redirect can be declared at the edge instead of hoping
+GitHub provides one, which it does not for project pages. And a directive such
+as `noindex` can be applied to a path prefix without editing the repository
+that builds those pages, which was the only reason the `mlx-atomistic` fix had
+to be made inside `gen_api_docs.py`.
+
+The preconditions were read rather than assumed. The zone was already on SSL
+strict, which is what keeps a proxied GitHub Pages host from looping, and three
+other GitHub Pages hostnames in the same zone were already proxied the same
+way, so the pattern was routine rather than an experiment.
+
+One check is worth repeating after any change at the edge. Cloudflare can block
+AI crawlers at the zone level, and a catalog that has gone invisible to GPTBot
+and ClaudeBot has lost the thing this work is for. At the time of the change,
+GPTBot, OAI-SearchBot, ClaudeBot, Claude-SearchBot, PerplexityBot, Googlebot,
+and bingbot all answered 200 on the root, on a project page, on robots.txt, and
+on llms.txt.
+
+Enforce HTTPS was off on this repository, which is why a link to the retired
+`github.io` address arrived on http and needed a second hop to reach https. It
+is on now, here and on `mlx-minimax-music3`, the one project repository that
+also had it off.
