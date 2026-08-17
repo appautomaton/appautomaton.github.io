@@ -38,6 +38,12 @@ const graph = {
           '@type': 'SoftwareSourceCode',
           '@id': `${p.site ?? p.source}#project`,
           name: p.repo,
+          /* The repository name is the identifier, so it keeps `name` and
+             agrees with `codeRepository`. These are the strings a reader or a
+             model would type instead, and `mlx cv` reaches nothing without
+             them. Omitted rather than emitted empty, because an empty array in
+             a graph is a claim that no other name exists. */
+          ...(p.alsoKnownAs.length ? { alternateName: p.alsoKnownAs } : {}),
           description: p.description,
           url: p.site ?? p.source,
           codeRepository: p.source,

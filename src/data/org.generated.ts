@@ -44,6 +44,7 @@ export const repos: OrgRepo[] = [
     "name": "automaton",
     "description": "AI coding agent framework — portable, stage-gated harness for Claude Code, Codex, and OpenCode",
     "topics": [
+      "agent-harness",
       "agentic-workflow",
       "ai-agents",
       "claude-code",
@@ -168,19 +169,22 @@ export const repos: OrgRepo[] = [
       "ai-agents",
       "claude-code",
       "cli-tool",
+      "content-extraction",
       "firecrawl",
       "golang",
       "html-parser",
       "html-to-markdown",
+      "html2md",
       "llm",
       "markdown",
+      "markdown-converter",
       "pypi",
       "python",
       "rag",
       "web-scraping"
     ],
     "hasSite": true,
-    "lastmod": "2026-08-10",
+    "lastmod": "2026-08-14",
     "sitemap": "https://appautomaton.renocrypt.com/markmaton/sitemap.xml"
   },
   {
@@ -202,7 +206,7 @@ export const repos: OrgRepo[] = [
       "scientific-computing"
     ],
     "hasSite": true,
-    "lastmod": "2026-08-14",
+    "lastmod": "2026-08-17",
     "sitemap": "https://appautomaton.renocrypt.com/mlx-atomistic/sitemap-index.xml"
   },
   {
@@ -227,7 +231,7 @@ export const repos: OrgRepo[] = [
       "visual-grounding"
     ],
     "hasSite": true,
-    "lastmod": "2026-08-08",
+    "lastmod": "2026-08-14",
     "sitemap": "https://appautomaton.renocrypt.com/mlx-cv/sitemap.xml"
   },
   {
@@ -244,13 +248,25 @@ export const repos: OrgRepo[] = [
       "video-generation"
     ],
     "hasSite": true,
-    "lastmod": "2026-08-05",
+    "lastmod": "2026-08-14",
     "sitemap": "https://appautomaton.renocrypt.com/mlx-h3/sitemap.xml"
   },
   {
     "name": "mlx-minimax-music3",
     "description": "Pure MLX inference for MiniMax Music 3 on Apple silicon.",
-    "topics": [],
+    "topics": [
+      "apple-mlx",
+      "apple-silicon",
+      "audio-generation",
+      "flow-matching",
+      "generative-ai",
+      "macos",
+      "minimax-music",
+      "mlx",
+      "music-generation",
+      "on-device-ai",
+      "text-to-music"
+    ],
     "hasSite": true,
     "lastmod": "2026-08-14",
     "sitemap": "https://appautomaton.renocrypt.com/mlx-minimax-music3/sitemap.xml"
@@ -277,7 +293,7 @@ export const repos: OrgRepo[] = [
       "trellis"
     ],
     "hasSite": true,
-    "lastmod": "2026-08-07",
+    "lastmod": "2026-08-14",
     "sitemap": "https://appautomaton.renocrypt.com/mlx-spatial/sitemap.xml"
   },
   {
@@ -296,7 +312,7 @@ export const repos: OrgRepo[] = [
       "voice-cloning"
     ],
     "hasSite": true,
-    "lastmod": "2026-08-05",
+    "lastmod": "2026-08-14",
     "sitemap": "https://appautomaton.renocrypt.com/mlx-speech/sitemap.xml"
   },
   {
@@ -331,7 +347,8 @@ export const repos: OrgRepo[] = [
       "pi",
       "pi-agent",
       "reproducible-builds",
-      "typescript"
+      "typescript",
+      "vendoring"
     ],
     "hasSite": true,
     "lastmod": "2026-08-10",
@@ -348,6 +365,9 @@ export const repos: OrgRepo[] = [
       "claude-code",
       "claude-skills",
       "codex",
+      "git-subtree",
+      "headless-chromium",
+      "mobile-automation",
       "playwright",
       "termux",
       "web-automation"
@@ -428,11 +448,15 @@ export const repos: OrgRepo[] = [
       "agent-skills",
       "ai-agents",
       "browser-automation",
+      "cdp",
+      "chrome-devtools-protocol",
       "claude-code",
       "codex",
       "html-to-markdown",
+      "nodriver",
       "playwright",
       "web-automation",
+      "web-research",
       "web-scraping"
     ],
     "hasSite": false,

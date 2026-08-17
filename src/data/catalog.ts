@@ -27,6 +27,8 @@ export type Project = {
   source: string
   /** Two short, factual chips. */
   chips: string[]
+  /** Written forms of the name, for `alternateName`. Empty for most projects. */
+  alsoKnownAs: string[]
   /** When the page was last built, from the serving host. Null without a page. */
   lastmod: string | null
   /** The project's own sitemap, when it serves one. */
@@ -59,6 +61,7 @@ function join(placement: Placement, letter: string, index: number): Project {
     site: facts.hasSite ? `${ORIGIN}/${placement.repo}/` : undefined,
     source: `${GITHUB_ORG}/${placement.repo}`,
     chips: placement.chips ?? facts.topics.slice(0, 2),
+    alsoKnownAs: placement.alsoKnownAs ?? [],
     lastmod: facts.lastmod,
     sitemap: facts.sitemap,
     tag: `${letter}-${String(index + 1).padStart(2, '0')}`,

@@ -19,6 +19,22 @@ export type Placement = {
   chips?: [string, string]
   /** Bento width on the 12-column desktop grid. */
   span: number
+  /** The forms of the name a person or a model would actually type, for
+      `alternateName` in the structured data. The repository name stays the
+      identifier and keeps `name`, matching `codeRepository`.
+
+      Listed only where a written form is a genuinely different string:
+      `mlx cv` does not match `mlx-cv` on a tokenizer that respects the hyphen,
+      and neither does `MLX CV`. Single-word names are left out on purpose,
+      because `Markmaton` and `markmaton` are the same token to anything that
+      matches case-insensitively, and an entry that adds no new string only
+      dilutes the ones that do. */
+  alsoKnownAs?: string[]
+  /** Why this project ships without a page of its own. Set it only when that
+      is a decision rather than a to-do: an exhibit with no page and no reason
+      here reads exactly like one that forgot to publish, and the sync step
+      cannot tell them apart either, so it asks about every one of them. */
+  noPage?: string
 }
 
 export type Shelf = {
@@ -43,6 +59,7 @@ export const shelves: Shelf[] = [
           'The skills workspace. Issue-driven workflows, an MCP tool catalog, and bridge skills for agent-to-agent delegation with session continuity.',
         chips: ['MCP', 'multi-agent'],
         span: 7,
+        alsoKnownAs: ['Agent Designer', 'agent designer'],
       },
       {
         repo: 'document-SKILLs',
@@ -50,6 +67,7 @@ export const shelves: Shelf[] = [
           'docx, xlsx, pptx, and pdf. Extraction, forms, formulas, and tracked changes. Runs on uv with PEP 723, no virtualenv.',
         chips: ['uv', 'PEP 723'],
         span: 5,
+        alsoKnownAs: ['Document SKILLs', 'document skills'],
       },
       {
         repo: 'presentation',
@@ -64,6 +82,8 @@ export const shelves: Shelf[] = [
           'Grounded web research. Citations, deterministic HTML-to-Markdown, and persistent sessions over Playwright, nodriver, and Chrome DevTools.',
         chips: ['Playwright', 'CDP'],
         span: 3,
+        noPage:
+          'five skills cloned and symlinked into place, compared in a README table a page would only repeat',
       },
       {
         repo: 'playwright-skill',
@@ -71,6 +91,8 @@ export const shelves: Shelf[] = [
           'Browser automation that also runs on Android via a Termux launcher patch and headless Chromium.',
         chips: ['Android', 'Termux'],
         span: 3,
+        alsoKnownAs: ['Playwright SKILL', 'playwright skill'],
+        noPage: 'a SKILL installed by git subtree, documented in SKILL.md where it lands',
       },
       {
         repo: 'latex-arxiv-SKILL',
@@ -78,6 +100,10 @@ export const shelves: Shelf[] = [
           'Turns a topic into an arXiv-ready ML review paper. Gated literature discovery, every citation verified, compiled to a two-column IEEEtran PDF.',
         chips: ['arXiv', 'IEEEtran'],
         span: 3,
+        /* Its own page titles itself `arXiv Review Paper Harness`, which shares
+           no substring with the repository name. Carrying that here is what
+           lets the two records resolve to one project. */
+        alsoKnownAs: ['LaTeX arXiv SKILL', 'latex arxiv skill', 'arXiv Review Paper Harness'],
       },
     ],
   },
@@ -101,6 +127,7 @@ export const shelves: Shelf[] = [
           'Multi-agent orchestration in tmux or kitty, coordinating through files across parallel git worktrees.',
         chips: ['tmux', 'worktrees'],
         span: 7,
+        noPage: 'an npm install away, and read from the terminal rather than the browser',
       },
       {
         repo: 'openclaw-monorepo',
@@ -108,6 +135,8 @@ export const shelves: Shelf[] = [
           'A repo-local OpenClaw workspace with JSON5 config, plugins, and Docker sandboxes.',
         chips: ['JSON5', 'Docker'],
         span: 4,
+        alsoKnownAs: ['OpenClaw monorepo', 'openclaw monorepo'],
+        noPage: 'a workspace to clone and configure, not a tool to read about',
       },
       {
         repo: 'markmaton',
@@ -122,6 +151,7 @@ export const shelves: Shelf[] = [
           'A stateless docker shim over Apple’s native container CLI on macOS, with no Docker Desktop.',
         chips: ['macOS', 'container CLI'],
         span: 4,
+        alsoKnownAs: ['Docker for Apple Container', 'docker for apple container'],
       },
       {
         repo: 'pi-arcweld',
@@ -129,6 +159,7 @@ export const shelves: Shelf[] = [
           'A curated local layer welded to pinned upstream Pi. Extensions, system guidance, and MCP tooling join along one auditable seam, over a reproducible runtime.',
         chips: ['MCP', 'pinned upstream'],
         span: 4,
+        alsoKnownAs: ['Pi Arcweld', 'pi arcweld'],
       },
     ],
   },
@@ -145,6 +176,7 @@ export const shelves: Shelf[] = [
           'Speech synthesis, voice cloning, dialogue, sound effects, and recognition, MLX-native on the Apple GPU.',
         chips: ['TTS', 'ASR'],
         span: 8,
+        alsoKnownAs: ['MLX Speech', 'mlx speech'],
       },
       {
         repo: 'tnt-asr',
@@ -152,6 +184,7 @@ export const shelves: Shelf[] = [
           'A terminal voice-to-text TUI. Qwen3-ASR transcribes in about a second, fully local.',
         chips: ['Qwen3-ASR', 'TUI'],
         span: 4,
+        alsoKnownAs: ['TNT ASR', 'tnt asr', 'TNT'],
       },
       {
         repo: 'ltx-video-mlx',
@@ -159,6 +192,8 @@ export const shelves: Shelf[] = [
           'Text- and image-to-video with synchronized audio on LTX-2.3 22B. On-device LoRA fine-tuning.',
         chips: ['LTX-2.3 22B', 'LoRA'],
         span: 4,
+        alsoKnownAs: ['LTX Video MLX', 'ltx video mlx'],
+        noPage: 'driven from a checkout, with docs/ travelling beside the code that needs it',
       },
       {
         repo: 'mlx-cv',
@@ -166,6 +201,7 @@ export const shelves: Shelf[] = [
           'Open-vocabulary grounding, detection, depth and camera geometry, segmentation, and video tracking in pure MLX. Every model is checked against its upstream reference before it ships.',
         chips: ['SAM 3', 'boxes + masks + depth'],
         span: 4,
+        alsoKnownAs: ['MLX CV', 'mlx cv'],
       },
       {
         repo: 'mlx-spatial',
@@ -173,6 +209,7 @@ export const shelves: Shelf[] = [
           '3D and spatial inference on device with SAM 3D Objects, TRELLIS.2, WorldMirror, and MapAnything.',
         chips: ['TRELLIS.2', '3D'],
         span: 4,
+        alsoKnownAs: ['MLX Spatial', 'mlx spatial'],
       },
       {
         repo: 'mlx-atomistic',
@@ -180,6 +217,7 @@ export const shelves: Shelf[] = [
           'Atomistic simulation on Apple silicon. A DFT and molecular-dynamics runtime on MLX and Metal, running on the GPU the Mac already has.',
         chips: ['DFT + MD', 'Metal'],
         span: 4,
+        alsoKnownAs: ['MLX Atomistic', 'mlx atomistic'],
       },
       {
         repo: 'mlx-minimax-music3',
@@ -187,6 +225,7 @@ export const shelves: Shelf[] = [
           'MiniMax Music 3 in pure MLX. Lyrics and a structured caption to 44.1 kHz stereo, with phase-scoped model residency and no PyTorch at runtime.',
         chips: ['flow matching', '44.1 kHz'],
         span: 8,
+        alsoKnownAs: ['MLX MiniMax Music 3', 'mlx minimax music 3'],
       },
       {
         repo: 'mlx-h3',
@@ -194,6 +233,7 @@ export const shelves: Shelf[] = [
           'MiniMax-H3 text to video and stereo audio, denoised together in one packed sequence. Phase-scoped model residency, no PyTorch at runtime.',
         chips: ['MiniMax-H3', 'video + audio'],
         span: 12,
+        alsoKnownAs: ['MLX H3', 'mlx h3'],
       },
     ],
   },

@@ -237,6 +237,33 @@ if (missing.length)
     `src/data/shelves.ts places repositories the org no longer returns: ${missing.join(', ')}`,
   )
 
+/* The gate above catches a project nobody placed. This catches the quieter
+   version of the same mistake: a project on a shelf that publishes no page.
+   From here those look identical whether the page is a to-do or was never
+   wanted, because hasSite is false either way. A placement carrying a noPage
+   reason is the difference, so an exhibit without one is named on every build
+   until somebody publishes the page or writes the reason down.
+
+   Warned rather than thrown. The page would be built in another repository,
+   and a hub that refuses to deploy over a decision it cannot make is a hub
+   nobody keeps.
+
+   The check runs both ways: a reason still sitting there after the page went
+   live is a stale reason, and a catalog that keeps stale reasons stops being
+   the place anyone looks. */
+const placementByRepo = new Map(shelves.flatMap((s) => s.items.map((p) => [p.repo, p])))
+
+for (const r of merged) {
+  const placement = placementByRepo.get(r.name)
+  if (!placement) continue
+  if (!r.hasSite && !placement.noPage)
+    console.warn(`warn: ${r.name} is on a shelf, publishes no page, and gives no noPage reason`)
+  if (r.hasSite && placement.noPage)
+    console.warn(
+      `warn: ${r.name} publishes a page now, but shelves.ts still says noPage: ${placement.noPage}`,
+    )
+}
+
 const exhibits = merged
   .filter((r) => placed.has(r.name))
   .map(({ name, description, topics, hasSite, lastmod, sitemap }) => ({
@@ -280,8 +307,10 @@ writeFileSync(OUT, module)
 const live = exhibits.filter((r) => r.hasSite).length
 const dated = exhibits.filter((r) => r.lastmod).length
 const mapped = exhibits.filter((r) => r.sitemap).length
+const byChoice = exhibits.filter((r) => !r.hasSite && placementByRepo.get(r.name)?.noPage).length
 console.log(
   `synced ${exhibits.length} exhibits from the ${ORG} org, ${live} publishing a page ` +
     `(${dated} dated, ${mapped} with their own sitemap), ` +
+    `${byChoice} shelved without one on purpose, ` +
     `${Object.keys(notShown).length} deliberately unlisted`,
 )
