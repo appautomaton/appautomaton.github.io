@@ -1,5 +1,74 @@
 # Search discovery: state, mechanism, and what to check next
 
+## Current review: September 5, 2026
+
+The August handoff below records earlier work and hypotheses. It does not
+establish why Google excluded any particular page or whether a validation
+passed. The current Search Console report and individual URL inspections
+must be read separately because their data can differ in freshness.
+
+The daily deployment stopped refreshing the catalog after August 24. A new
+public repository, `mlx-timesfm`, had no placement, so the catalog gate
+correctly failed the build. A fresh public inventory also showed that the
+`automux` entry was no longer available to public visitors. The catalog now
+includes the forecasting project and removes the unavailable link.
+
+The text index is now generated from the same catalog as the visible cards
+and structured data. There is no separate project list to update in
+`public/llms.txt`. The home page sitemap entry no longer uses the daily build
+date as a content modification date. Project dates still come from their
+HTTP `Last-Modified` headers.
+
+HTTP access blocks, rate limits, redirects, and server errors now keep the
+previous probe result and report a warning. Only 404 and 410 establish that
+a previously known page is absent. A temporary failure must not silently
+remove a project page from the catalog and sitemap.
+
+Each workflow run now has a summary and a `catalog-build-report` artifact
+containing its log, outcome, and warnings, retained for 30 days. Pull requests
+run the build and checks without deploying. Production deployment still
+requires a successful build on `main`.
+
+The live home page, the five project pages listed in the August handoff,
+`agent-designer`, `robots.txt`, and `llms.txt` returned HTTP 200 during this
+review. Seven crawler user-agent strings also received 200 responses at
+the root, `document-SKILLs`, `robots.txt`, and `llms.txt`. These requests came
+from a developer machine, not verified crawler IP addresses. They show no
+block on those requests, not proof of universal crawler access or indexing.
+
+The AppCubic workshop page and RenoCrypt footer already link to the catalog.
+The accompanying AppCubic change corrects outdated project and license copy
+and links directly to the document and presentation project pages.
+
+### What the measurements can establish
+
+Search Console access was restored during the review. Individual inspections
+showed successful fetches and self-selected canonicals for some excluded
+landing pages. Several recorded crawls predate the August fixes, while at
+least one post-fix crawl still resulted in exclusion. This does not support
+claiming that links or metadata alone explain every exclusion.
+
+Google's live tests accepted `agent-designer` and `pi-arcweld`. Indexing
+requests were accepted for those pages and `tnt-asr`. A queued request is not an indexing result. Detailed
+account measurements and the follow-up baseline are kept outside this public
+repository.
+
+For the next comparison, record the report's data date, property, date range,
+and per-URL status. Check whether the last crawl advanced before attributing
+an outcome to a page change. Review usefulness and distinctiveness against
+the actual queries and project documentation when a current, technically
+eligible page remains excluded. Do not add words just to reach a length target.
+
+Google describes `Crawled - currently not indexed` as a state, not a specific
+diagnosis. Its [crawl guidance](https://developers.google.com/crawling/docs/crawl-budget)
+does not establish that this site's reference pages exhausted its capacity.
+Its [AI features guidance](https://developers.google.com/search/docs/appearance/ai-features)
+also does not require `llms.txt` or special structured data for inclusion.
+The text index is maintained for consumers that use it, not as a promised
+ranking or citation improvement.
+
+## Historical handoff: August 10–17
+
 Paused 2026-08-10 with two Google Search Console validations in flight, resumed
 2026-08-17. This file is the handoff: what was wrong, what was changed, what
 runs on its own now, and what a returning reader should look at before touching
@@ -12,7 +81,7 @@ turns several things this document called impossible into ordinary edits.
 
 ## The two problems
 
-Search Console reported two separate things that turned out to share one cause.
+The earlier investigation considered two reported indexing groups together.
 
 **Discovered, currently not indexed (5 pages, first detected 2023-09-09).**
 `document-SKILLs`, `mlx-speech`, `pi-arcweld`, `presentation`, `tnt-asr`. All
@@ -26,10 +95,10 @@ discovery rather than endorsement.
 declined. Auto-generated API reference, one page per module, indistinguishable
 from each other to a ranking system.
 
-The link between them is the host. Every project page on this domain is served
-from `appautomaton.renocrypt.com/<repo>/`, so all of them draw on one crawl
-budget. Fifty-eight generated reference pages were absorbing the fetches the
-five orphans never got.
+The working hypothesis was that generated reference pages and weak internal
+links affected crawl prioritization across the shared host. There was no
+crawl-log evidence establishing that the reference pages consumed the fetches
+the landing pages would otherwise have received.
 
 ## What changed
 
@@ -57,9 +126,8 @@ were deleted from `public/`.
 **Every project page names itself and links home.** Ten spoke repositories
 gained a self-referential `<link rel="canonical">`, corrected `og:url`,
 JSON-LD under the same `@id` the catalog uses, and a link back to
-`https://appautomaton.renocrypt.com/`. That last one is the substantive fix
-for the five orphans: the catalog was voting for them and nothing was voting
-back.
+`https://appautomaton.renocrypt.com/`. The links connect the project pages
+to the catalog. Their effect on indexing still needs measurement.
 
 ## What runs without anyone asking
 
@@ -86,7 +154,7 @@ built in another repository and this build cannot make that call.
 missing canonical, missing title or description, a link or og tag naming the
 old `appautomaton.github.io` address, or a missing link back to the catalog.
 A canonical pointing at some *other* address fails the build outright, because
-that removes the page from the index and is never what anyone meant. The rest
+it requests consolidation under another URL and needs review. The rest
 are warnings, because the markup lives in other repositories and a hub that
 refuses to deploy over someone else's head tag is a hub nobody keeps.
 

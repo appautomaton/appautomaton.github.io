@@ -37,7 +37,7 @@ export const repos: OrgRepo[] = [
       "mcp"
     ],
     "hasSite": true,
-    "lastmod": "2026-08-10",
+    "lastmod": "2026-08-17",
     "sitemap": "https://appautomaton.renocrypt.com/agent-designer/sitemap.xml"
   },
   {
@@ -58,25 +58,6 @@ export const repos: OrgRepo[] = [
     "sitemap": null
   },
   {
-    "name": "automux",
-    "description": "Multi-agent orchestration through tmux or kitty — run Claude Code, Codex, and Gemini CLI in parallel git worktrees with file-based coordination.",
-    "topics": [
-      "agent-orchestration",
-      "agentic-workflows",
-      "ai-agents",
-      "claude-code",
-      "codex",
-      "gemini-cli",
-      "git-worktree",
-      "multi-agent",
-      "npm-package",
-      "tmux"
-    ],
-    "hasSite": false,
-    "lastmod": null,
-    "sitemap": null
-  },
-  {
     "name": "docker-for-apple-container",
     "description": "Run docker and docker compose on macOS, backed by Apple's native container CLI. No Docker Desktop.",
     "topics": [
@@ -92,7 +73,7 @@ export const repos: OrgRepo[] = [
       "macos"
     ],
     "hasSite": true,
-    "lastmod": "2026-08-10",
+    "lastmod": "2026-09-05",
     "sitemap": "https://appautomaton.renocrypt.com/docker-for-apple-container/sitemap.xml"
   },
   {
@@ -111,7 +92,7 @@ export const repos: OrgRepo[] = [
       "pptx"
     ],
     "hasSite": true,
-    "lastmod": "2026-08-10",
+    "lastmod": "2026-08-17",
     "sitemap": null
   },
   {
@@ -140,7 +121,7 @@ export const repos: OrgRepo[] = [
       "scientific-writing"
     ],
     "hasSite": true,
-    "lastmod": "2026-08-10",
+    "lastmod": "2026-08-17",
     "sitemap": null
   },
   {
@@ -206,7 +187,7 @@ export const repos: OrgRepo[] = [
       "scientific-computing"
     ],
     "hasSite": true,
-    "lastmod": "2026-08-17",
+    "lastmod": "2026-08-27",
     "sitemap": "https://appautomaton.renocrypt.com/mlx-atomistic/sitemap-index.xml"
   },
   {
@@ -231,7 +212,7 @@ export const repos: OrgRepo[] = [
       "visual-grounding"
     ],
     "hasSite": true,
-    "lastmod": "2026-08-14",
+    "lastmod": "2026-08-17",
     "sitemap": "https://appautomaton.renocrypt.com/mlx-cv/sitemap.xml"
   },
   {
@@ -248,7 +229,7 @@ export const repos: OrgRepo[] = [
       "video-generation"
     ],
     "hasSite": true,
-    "lastmod": "2026-08-14",
+    "lastmod": "2026-08-17",
     "sitemap": "https://appautomaton.renocrypt.com/mlx-h3/sitemap.xml"
   },
   {
@@ -268,7 +249,7 @@ export const repos: OrgRepo[] = [
       "text-to-music"
     ],
     "hasSite": true,
-    "lastmod": "2026-08-14",
+    "lastmod": "2026-08-17",
     "sitemap": "https://appautomaton.renocrypt.com/mlx-minimax-music3/sitemap.xml"
   },
   {
@@ -293,7 +274,7 @@ export const repos: OrgRepo[] = [
       "trellis"
     ],
     "hasSite": true,
-    "lastmod": "2026-08-14",
+    "lastmod": "2026-08-17",
     "sitemap": "https://appautomaton.renocrypt.com/mlx-spatial/sitemap.xml"
   },
   {
@@ -312,8 +293,26 @@ export const repos: OrgRepo[] = [
       "voice-cloning"
     ],
     "hasSite": true,
-    "lastmod": "2026-08-14",
+    "lastmod": "2026-09-05",
     "sitemap": "https://appautomaton.renocrypt.com/mlx-speech/sitemap.xml"
+  },
+  {
+    "name": "mlx-timesfm",
+    "description": "Pure MLX inference for Google TimesFM 3.0 on Apple silicon.",
+    "topics": [
+      "apple-silicon",
+      "forecasting",
+      "machine-learning",
+      "metal",
+      "mlx",
+      "on-device-ai",
+      "python",
+      "time-series",
+      "timesfm"
+    ],
+    "hasSite": false,
+    "lastmod": null,
+    "sitemap": null
   },
   {
     "name": "openclaw-monorepo",
@@ -351,7 +350,7 @@ export const repos: OrgRepo[] = [
       "vendoring"
     ],
     "hasSite": true,
-    "lastmod": "2026-08-10",
+    "lastmod": "2026-08-17",
     "sitemap": "https://appautomaton.renocrypt.com/pi-arcweld/sitemap.xml"
   },
   {
@@ -438,7 +437,7 @@ export const repos: OrgRepo[] = [
       "whisper-alternative"
     ],
     "hasSite": true,
-    "lastmod": "2026-08-10",
+    "lastmod": "2026-08-17",
     "sitemap": null
   },
   {

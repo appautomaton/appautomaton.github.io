@@ -3,6 +3,8 @@ name: Deploy to GitHub Pages
 on:
   push:
     branches: [main]
+  pull_request:
+    branches: [main]
   # The catalog is read from the org at build time, so the site goes stale
   # whenever a project ships and nothing here is pushed. A daily rebuild is
   # what makes a new repository, a newly published page, or a rewritten
@@ -13,19 +15,14 @@ on:
 
 permissions:
   contents: read
-  pages: write
-  id-token: write
 
 concurrency:
-  group: pages
+  group: pages-${{ github.ref }}
   cancel-in-progress: true
 
 jobs:
-  build-deploy:
+  build:
     runs-on: ubuntu-latest
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
     steps:
       - uses: actions/checkout@v4
 
@@ -47,15 +44,52 @@ jobs:
       # The build starts by reading the org, which is an authenticated call
       # here only to stay clear of the anonymous rate limit that shared runner
       # addresses reach on their own.
-      - run: npm run build
+      - name: Check discovery helpers
+        run: node --test scripts/discovery.test.mjs
+
+      - name: Lint
+        run: npm run lint
+
+      - name: Build and audit catalog
+        id: build
+        shell: bash
+        run: |
+          set -o pipefail
+          npm run build 2>&1 | tee build.log
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      - uses: actions/configure-pages@v5
+      - name: Summarize catalog checks
+        if: always()
+        run: node scripts/report-build.mjs '${{ steps.build.outcome }}'
+
+      - name: Save catalog report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: catalog-build-report
+          path: |
+            build.log
+            build-report.json
+          retention-days: 30
 
       - uses: actions/upload-pages-artifact@v3
+        if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request'
         with:
           path: dist
+
+  deploy:
+    needs: build
+    if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request'
+    runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/configure-pages@v5
 
       - id: deployment
         uses: actions/deploy-pages@v4

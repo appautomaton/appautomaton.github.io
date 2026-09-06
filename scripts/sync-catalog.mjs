@@ -15,6 +15,7 @@
 import { writeFileSync, existsSync } from 'node:fs'
 import { join, dirname } from 'node:path'
 import { fileURLToPath, pathToFileURL } from 'node:url'
+import { serves } from './probe-response.mjs'
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..')
 /* A TypeScript module rather than JSON: Vite, tsc, and Node's own loader all
@@ -64,15 +65,6 @@ async function fetchRepos() {
 /* HEAD is enough to learn that an address answers. The page itself is fetched
    with GET, because a HEAD response carries no body and the audit below reads
    the markup. */
-async function serves(url, method = 'HEAD') {
-  const res = await fetch(url, {
-    method,
-    redirect: 'manual',
-    signal: AbortSignal.timeout(15000),
-  })
-  return res.status === 200 ? res : null
-}
-
 /* Each project page is built in its own repository, so nothing here can keep
    their markup right. What this can do is look, on every build, and say what
    it saw. A canonical naming some other address is the one finding that stops
@@ -190,7 +182,10 @@ const merged = repos.map((r, i) => {
   }
 })
 
-for (const name of unreachable) console.warn(`warn: could not probe ${name}, kept the last answer`)
+for (const name of unreachable) {
+  const index = repos.findIndex((repo) => repo.name === name)
+  console.warn(`warn: could not probe ${name}, kept the last answer (${probes[index].error})`)
+}
 
 const misCanonicalled = repos.flatMap((r, i) => (probes[i].problems ?? []).map((p) => `  ${r.name}: ${p}`))
 if (misCanonicalled.length)

@@ -21,8 +21,8 @@ export function Footer() {
       >
         <Stack gap={4} style={{ flex: '1 1 22rem', maxWidth: '36rem' }}>
           <Text as="p" type="body" style={{ fontSize: '1.05rem', lineHeight: 1.6 }}>
-            The open workshop of AppCubic. Everything here is MIT licensed and
-            built in public.
+            The open workshop of AppCubic. Built in public. See each project
+            for its source license and model terms.
           </Text>
           {/* RenoCrypt carries the domain this site is served from, and links
               here from its own footer. Return the link so the two are joined
