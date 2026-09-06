@@ -122,14 +122,6 @@ export const shelves: Shelf[] = [
         span: 5,
       },
       {
-        repo: 'automux',
-        description:
-          'Multi-agent orchestration in tmux or kitty, coordinating through files across parallel git worktrees.',
-        chips: ['tmux', 'worktrees'],
-        span: 7,
-        noPage: 'an npm install away, and read from the terminal rather than the browser',
-      },
-      {
         repo: 'openclaw-monorepo',
         description:
           'A repo-local OpenClaw workspace with JSON5 config, plugins, and Docker sandboxes.',
@@ -234,6 +226,15 @@ export const shelves: Shelf[] = [
         chips: ['MiniMax-H3', 'video + audio'],
         span: 12,
         alsoKnownAs: ['MLX H3', 'mlx h3'],
+      },
+      {
+        repo: 'mlx-timesfm',
+        description:
+          'TimesFM 3.0 time-series forecasting on Apple silicon, with univariate and multivariate forecasts in pure MLX. Model weights have separate usage terms.',
+        chips: ['TimesFM 3.0', 'forecasting'],
+        span: 12,
+        alsoKnownAs: ['MLX TimesFM', 'mlx timesfm'],
+        noPage: 'installed from PyPI, with setup, examples, and model terms in the repository README',
       },
     ],
   },

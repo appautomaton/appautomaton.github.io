@@ -21,7 +21,7 @@ const graph = {
       name: 'App Automaton',
       url: 'https://appautomaton.renocrypt.com/',
       logo: 'https://appautomaton.renocrypt.com/apple-touch-icon.png',
-      parentOrganization: { '@type': 'Organization', name: 'AppCubic', url: 'https://appcubic.com' },
+      parentOrganization: { '@type': 'Organization', name: 'AppCubic', url: 'https://www.appcubic.com' },
       sameAs: ['https://github.com/appautomaton', 'https://huggingface.co/appautomaton'],
     },
     {
