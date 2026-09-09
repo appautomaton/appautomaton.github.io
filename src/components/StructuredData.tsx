@@ -8,25 +8,25 @@ const graph = {
   '@graph': [
     {
       '@type': 'WebSite',
-      '@id': 'https://appautomaton.renocrypt.com/#website',
-      url: 'https://appautomaton.renocrypt.com/',
+      '@id': 'https://appautomaton.com/#website',
+      url: 'https://appautomaton.com/',
       name: 'App Automaton',
       description:
         'An open-source workshop for engineering with coding agents. Portable SKILLs, stage-gated harnesses, and pure-MLX work for Apple silicon.',
-      publisher: { '@id': 'https://appautomaton.renocrypt.com/#org' },
+      publisher: { '@id': 'https://appautomaton.com/#org' },
     },
     {
       '@type': 'Organization',
-      '@id': 'https://appautomaton.renocrypt.com/#org',
+      '@id': 'https://appautomaton.com/#org',
       name: 'App Automaton',
-      url: 'https://appautomaton.renocrypt.com/',
-      logo: 'https://appautomaton.renocrypt.com/apple-touch-icon.png',
+      url: 'https://appautomaton.com/',
+      logo: 'https://appautomaton.com/apple-touch-icon.png',
       parentOrganization: { '@type': 'Organization', name: 'AppCubic', url: 'https://www.appcubic.com' },
       sameAs: ['https://github.com/appautomaton', 'https://huggingface.co/appautomaton'],
     },
     {
       '@type': 'ItemList',
-      '@id': 'https://appautomaton.renocrypt.com/#catalog',
+      '@id': 'https://appautomaton.com/#catalog',
       name: 'The App Automaton catalog',
       numberOfItems: catalog.reduce((n, s) => n + s.items.length, 0),
       /* url is the address a reader should be sent to, which is the project's
@@ -47,7 +47,7 @@ const graph = {
           description: p.description,
           url: p.site ?? p.source,
           codeRepository: p.source,
-          isPartOf: { '@id': 'https://appautomaton.renocrypt.com/#website' },
+          isPartOf: { '@id': 'https://appautomaton.com/#website' },
         })),
       ),
     },
