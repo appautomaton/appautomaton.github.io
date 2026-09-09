@@ -8,11 +8,11 @@
 
 An [AppCubic](https://www.appcubic.com/) workshop.
 
-[![Production](https://img.shields.io/badge/Production-appautomaton.renocrypt.com-315c52?style=flat-square)](https://appautomaton.renocrypt.com/)
+[![Production](https://img.shields.io/badge/Production-appautomaton.com-315c52?style=flat-square)](https://appautomaton.com/)
 [![Deploy to GitHub Pages](https://github.com/appautomaton/appautomaton.github.io/actions/workflows/deploy.yml/badge.svg)](https://github.com/appautomaton/appautomaton.github.io/actions/workflows/deploy.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-665f57?style=flat-square)](./LICENSE)
 
-[Production](https://appautomaton.renocrypt.com/) · [GitHub](https://github.com/appautomaton) · [AppCubic](https://www.appcubic.com/) · [RenoCrypt](https://www.renocrypt.com/)
+[Production](https://appautomaton.com/) · [GitHub](https://github.com/appautomaton) · [AppCubic](https://www.appcubic.com/) · [RenoCrypt](https://www.renocrypt.com/)
 
 </div>
 
@@ -60,7 +60,7 @@ Human-led production with the same explicit stages and inspectable artifacts.
 
 [`setloom`](https://github.com/appautomaton/setloom)
 
-The full index is maintained at **[appautomaton.renocrypt.com](https://appautomaton.renocrypt.com/)**.
+The full index is maintained at **[appautomaton.com](https://appautomaton.com/)**.
 
 ## This repository
 
@@ -129,3 +129,12 @@ The application code is released under the [MIT License](./LICENSE). League Goth
 [App Automaton](https://github.com/appautomaton) · An [AppCubic](https://www.appcubic.com/) workshop
 
 </div>
+
+## Domain migration
+
+The canonical host is `appautomaton.com`; `www` and the former
+`appautomaton.renocrypt.com` redirect here preserving paths and query strings.
+GitHub Pages project sites inherit this host. During their metadata migration,
+the catalog audit warns when a project canonical names exactly the same path on
+the former host; unrelated domains and wrong paths still fail the build. Remove
+this exception once the independently maintained project pages are updated.

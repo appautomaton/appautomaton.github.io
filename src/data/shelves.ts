@@ -115,6 +115,12 @@ export const shelves: Shelf[] = [
       'Stage gates, orchestration, and plumbing. The tooling that keeps an agent honest from plan to verify.',
     items: [
       {
+        repo: 'plexmaton',
+        description: 'AI coding in your terminal, with model and skill choice, tool review, and resumable conversations.',
+        chips: ['terminal', 'coding agents'],
+        span: 4,
+      },
+      {
         repo: 'automaton',
         description:
           'A stage-gated harness. Frame, plan, review, execute, verify, resume. Installs as plain markdown.',

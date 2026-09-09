@@ -19,7 +19,7 @@ import { catalog, unitCount } from '../src/data/catalog.ts'
 import { renderLlms } from './discovery-files.mjs'
 
 const DIST = join(dirname(fileURLToPath(import.meta.url)), '..', 'dist')
-const ORIGIN = 'https://appautomaton.renocrypt.com'
+const ORIGIN = 'https://appautomaton.com'
 
 const MIME = {
   '.html': 'text/html',
@@ -91,7 +91,7 @@ console.log(`wrote dist/llms.txt with ${projects.length} projects`)
 
 const linked = [
   ...new Set(
-    [...html.matchAll(/href="(https:\/\/appautomaton\.renocrypt\.com\/[^"#?]*)"/g)].map(
+    [...html.matchAll(/href="(https:\/\/appautomaton\.com\/[^"#?]*)"/g)].map(
       (m) => m[1],
     ),
   ),

@@ -24,7 +24,7 @@ const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..')
 const OUT = join(ROOT, 'src', 'data', 'org.generated.ts')
 
 const ORG = 'appautomaton'
-const ORIGIN = 'https://appautomaton.renocrypt.com'
+const ORIGIN = 'https://appautomaton.com'
 /* The org site repo is this site; it is the root, not an exhibit. */
 const SITE_REPO = `${ORG}.github.io`
 
@@ -77,6 +77,8 @@ function audit(name, url, html) {
   const canonical = html.match(/<link[^>]+rel=["']canonical["'][^>]*>/i)?.[0]
   const href = canonical?.match(/href=["']([^"']+)["']/i)?.[1]
   if (!href) warnings.push('no canonical')
+  else if (href === url.replace('https://appautomaton.com', 'https://appautomaton.renocrypt.com'))
+    warnings.push('canonical still names the former domain; update the project repository')
   else if (href !== url) problems.push(`canonical points at ${href}, not ${url}`)
 
   if (!/<title[^>]*>\s*\S/i.test(html)) warnings.push('no title')
@@ -91,7 +93,7 @@ function audit(name, url, html) {
      with "/" are the same address, and a page that writes it either way is
      linking here. Requiring the slash reported a page as unlinked when it was
      not, which is the expensive direction for a check like this to be wrong. */
-  if (!/href=["']https:\/\/appautomaton\.renocrypt\.com\/?["']/i.test(html))
+  if (!/href=["']https:\/\/appautomaton\.com\/?["']/i.test(html))
     warnings.push('no link back to the catalog')
 
   for (const w of warnings) console.warn(`warn: ${name} ${w}`)

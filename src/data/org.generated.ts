@@ -10,7 +10,7 @@ export type OrgRepo = {
   /** The repository's own one-liner, as GitHub reports it. */
   description: string
   topics: string[]
-  /** True when https://appautomaton.renocrypt.com/<name>/ answered 200. */
+  /** True when https://appautomaton.com/<name>/ answered 200. */
   hasSite: boolean
   /** The date that page was last built, from its Last-Modified header. */
   lastmod: string | null
@@ -19,7 +19,7 @@ export type OrgRepo = {
 }
 
 export const org = "appautomaton"
-export const origin = "https://appautomaton.renocrypt.com"
+export const origin = "https://appautomaton.com"
 
 export const repos: OrgRepo[] = [
   {
@@ -38,7 +38,7 @@ export const repos: OrgRepo[] = [
     ],
     "hasSite": true,
     "lastmod": "2026-08-17",
-    "sitemap": "https://appautomaton.renocrypt.com/agent-designer/sitemap.xml"
+    "sitemap": "https://appautomaton.com/agent-designer/sitemap.xml"
   },
   {
     "name": "automaton",
@@ -74,7 +74,7 @@ export const repos: OrgRepo[] = [
     ],
     "hasSite": true,
     "lastmod": "2026-09-05",
-    "sitemap": "https://appautomaton.renocrypt.com/docker-for-apple-container/sitemap.xml"
+    "sitemap": "https://appautomaton.com/docker-for-apple-container/sitemap.xml"
   },
   {
     "name": "document-SKILLs",
@@ -92,7 +92,7 @@ export const repos: OrgRepo[] = [
       "pptx"
     ],
     "hasSite": true,
-    "lastmod": "2026-08-17",
+    "lastmod": "2026-09-06",
     "sitemap": null
   },
   {
@@ -187,8 +187,8 @@ export const repos: OrgRepo[] = [
       "scientific-computing"
     ],
     "hasSite": true,
-    "lastmod": "2026-08-27",
-    "sitemap": "https://appautomaton.renocrypt.com/mlx-atomistic/sitemap-index.xml"
+    "lastmod": "2026-09-06",
+    "sitemap": "https://appautomaton.com/mlx-atomistic/sitemap-index.xml"
   },
   {
     "name": "mlx-cv",
@@ -275,7 +275,7 @@ export const repos: OrgRepo[] = [
     ],
     "hasSite": true,
     "lastmod": "2026-08-17",
-    "sitemap": "https://appautomaton.renocrypt.com/mlx-spatial/sitemap.xml"
+    "sitemap": "https://appautomaton.com/mlx-spatial/sitemap.xml"
   },
   {
     "name": "mlx-speech",
@@ -294,7 +294,7 @@ export const repos: OrgRepo[] = [
     ],
     "hasSite": true,
     "lastmod": "2026-09-05",
-    "sitemap": "https://appautomaton.renocrypt.com/mlx-speech/sitemap.xml"
+    "sitemap": "https://appautomaton.com/mlx-speech/sitemap.xml"
   },
   {
     "name": "mlx-timesfm",
@@ -376,6 +376,14 @@ export const repos: OrgRepo[] = [
     "sitemap": null
   },
   {
+    "name": "plexmaton",
+    "description": "AI coding in your terminal, with clarity and control. Bring your models and skills, review tool actions, and return to conversations with their history intact.",
+    "topics": [],
+    "hasSite": false,
+    "lastmod": null,
+    "sitemap": null
+  },
+  {
     "name": "presentation",
     "description": "A business question goes in. A consulting-grade deck comes out. Four composable skills for Claude Code and Codex: strategy storyboarding, brand identity, pixel-perfect PDF, native editable PPTX.",
     "topics": [
@@ -437,7 +445,7 @@ export const repos: OrgRepo[] = [
       "whisper-alternative"
     ],
     "hasSite": true,
-    "lastmod": "2026-08-17",
+    "lastmod": "2026-09-06",
     "sitemap": null
   },
   {
