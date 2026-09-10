@@ -1,0 +1,292 @@
+{
+  "version": 1,
+  "organization": "appautomaton",
+  "entries": [
+    {
+      "repoId": 1119857172,
+      "repo": "agent-designer",
+      "group": "skills",
+      "order": 0,
+      "lastKnown": {
+        "homepage": "https://appautomaton.com/agent-designer/",
+        "hasSite": true,
+        "lastmod": "2026-09-10",
+        "sitemap": "https://appautomaton.com/agent-designer/sitemap.xml"
+      },
+      "artwork": "knight"
+    },
+    {
+      "repoId": 1140927126,
+      "repo": "document-SKILLs",
+      "group": "skills",
+      "order": 1,
+      "lastKnown": {
+        "homepage": "https://appautomaton.com/document-SKILLs/",
+        "hasSite": true,
+        "lastmod": "2026-09-10",
+        "sitemap": "https://appautomaton.com/document-SKILLs/sitemap.xml"
+      },
+      "artwork": "notebook"
+    },
+    {
+      "repoId": 1192075944,
+      "repo": "presentation",
+      "group": "skills",
+      "order": 2,
+      "lastKnown": {
+        "homepage": "https://appautomaton.com/presentation/",
+        "hasSite": true,
+        "lastmod": "2026-09-10",
+        "sitemap": "https://appautomaton.com/presentation/sitemap.xml"
+      },
+      "artwork": "projector"
+    },
+    {
+      "repoId": 1204991462,
+      "repo": "webmaton",
+      "group": "skills",
+      "order": 3,
+      "lastKnown": {
+        "homepage": "",
+        "hasSite": false,
+        "lastmod": null,
+        "sitemap": null
+      },
+      "artwork": "compass"
+    },
+    {
+      "repoId": 1125500272,
+      "repo": "playwright-skill",
+      "group": "skills",
+      "order": 4,
+      "lastKnown": {
+        "homepage": "",
+        "hasSite": false,
+        "lastmod": null,
+        "sitemap": null
+      },
+      "artwork": "binoculars"
+    },
+    {
+      "repoId": 950805672,
+      "repo": "latex-arxiv-SKILL",
+      "group": "skills",
+      "order": 5,
+      "lastKnown": {
+        "homepage": "https://appautomaton.com/latex-arxiv-SKILL/",
+        "hasSite": true,
+        "lastmod": "2026-09-10",
+        "sitemap": "https://appautomaton.com/latex-arxiv-SKILL/sitemap.xml"
+      },
+      "artwork": "encyclopedia"
+    },
+    {
+      "repoId": 1351955929,
+      "repo": "plexmaton",
+      "group": "harnesses",
+      "order": 6,
+      "lastKnown": {
+        "homepage": "",
+        "hasSite": false,
+        "lastmod": null,
+        "sitemap": null
+      },
+      "artwork": "aperture"
+    },
+    {
+      "repoId": 1226150677,
+      "repo": "automaton",
+      "group": "harnesses",
+      "order": 7,
+      "lastKnown": {
+        "homepage": "https://appautomaton.com/automaton/",
+        "hasSite": true,
+        "lastmod": "2026-09-10",
+        "sitemap": "https://appautomaton.com/automaton/sitemap.xml"
+      },
+      "artwork": "spinning-wheel"
+    },
+    {
+      "repoId": 1145237178,
+      "repo": "openclaw-monorepo",
+      "group": "harnesses",
+      "order": 8,
+      "lastKnown": {
+        "homepage": "",
+        "hasSite": false,
+        "lastmod": null,
+        "sitemap": null
+      },
+      "artwork": "shell"
+    },
+    {
+      "repoId": 1204977925,
+      "repo": "markmaton",
+      "group": "harnesses",
+      "order": 9,
+      "lastKnown": {
+        "homepage": "https://appautomaton.com/markmaton/",
+        "hasSite": true,
+        "lastmod": "2026-09-10",
+        "sitemap": "https://appautomaton.com/markmaton/sitemap.xml"
+      },
+      "artwork": "hand-plane"
+    },
+    {
+      "repoId": 1282632918,
+      "repo": "docker-for-apple-container",
+      "group": "harnesses",
+      "order": 10,
+      "lastKnown": {
+        "homepage": "https://appautomaton.com/docker-for-apple-container/",
+        "hasSite": true,
+        "lastmod": "2026-09-10",
+        "sitemap": "https://appautomaton.com/docker-for-apple-container/sitemap.xml"
+      },
+      "artwork": "toolbox"
+    },
+    {
+      "repoId": 1299542971,
+      "repo": "pi-arcweld",
+      "group": "harnesses",
+      "order": 11,
+      "lastKnown": {
+        "homepage": "https://appautomaton.com/pi-arcweld/",
+        "hasSite": true,
+        "lastmod": "2026-09-10",
+        "sitemap": "https://appautomaton.com/pi-arcweld/sitemap.xml"
+      },
+      "artwork": "blowtorch"
+    },
+    {
+      "repoId": 1197331187,
+      "repo": "mlx-speech",
+      "group": "mlx",
+      "order": 12,
+      "lastKnown": {
+        "homepage": "https://appautomaton.com/mlx-speech/",
+        "hasSite": true,
+        "lastmod": "2026-09-10",
+        "sitemap": "https://appautomaton.com/mlx-speech/sitemap.xml"
+      },
+      "artwork": "megaphone"
+    },
+    {
+      "repoId": 1157979774,
+      "repo": "tnt-asr",
+      "group": "mlx",
+      "order": 13,
+      "lastKnown": {
+        "homepage": "https://appautomaton.com/tnt-asr/",
+        "hasSite": true,
+        "lastmod": "2026-09-10",
+        "sitemap": "https://appautomaton.com/tnt-asr/sitemap.xml"
+      },
+      "artwork": "walkman"
+    },
+    {
+      "repoId": 1181193024,
+      "repo": "ltx-video-mlx",
+      "group": "mlx",
+      "order": 14,
+      "lastKnown": {
+        "homepage": "",
+        "hasSite": false,
+        "lastmod": null,
+        "sitemap": null
+      },
+      "artwork": "movie-camera"
+    },
+    {
+      "repoId": 1260752036,
+      "repo": "mlx-cv",
+      "group": "mlx",
+      "order": 15,
+      "lastKnown": {
+        "homepage": "https://appautomaton.com/mlx-cv/",
+        "hasSite": true,
+        "lastmod": "2026-09-10",
+        "sitemap": "https://appautomaton.com/mlx-cv/sitemap.xml"
+      },
+      "artwork": "camera"
+    },
+    {
+      "repoId": 1227277248,
+      "repo": "mlx-spatial",
+      "group": "mlx",
+      "order": 16,
+      "lastKnown": {
+        "homepage": "https://appautomaton.com/mlx-spatial/",
+        "hasSite": true,
+        "lastmod": "2026-09-10",
+        "sitemap": "https://appautomaton.com/mlx-spatial/sitemap.xml"
+      },
+      "artwork": "marble-bust"
+    },
+    {
+      "repoId": 1239193367,
+      "repo": "mlx-atomistic",
+      "group": "mlx",
+      "order": 17,
+      "lastKnown": {
+        "homepage": "https://appautomaton.com/mlx-atomistic/",
+        "hasSite": true,
+        "lastmod": "2026-09-10",
+        "sitemap": "https://appautomaton.com/mlx-atomistic/sitemap-index.xml"
+      },
+      "artwork": "microscope"
+    },
+    {
+      "repoId": 1334345932,
+      "repo": "mlx-minimax-music3",
+      "group": "mlx",
+      "order": 18,
+      "lastKnown": {
+        "homepage": "https://appautomaton.com/mlx-minimax-music3/",
+        "hasSite": true,
+        "lastmod": "2026-09-10",
+        "sitemap": "https://appautomaton.com/mlx-minimax-music3/sitemap.xml"
+      },
+      "artwork": "ukulele"
+    },
+    {
+      "repoId": 1323419458,
+      "repo": "mlx-h3",
+      "group": "mlx",
+      "order": 19,
+      "lastKnown": {
+        "homepage": "https://appautomaton.com/mlx-h3/",
+        "hasSite": true,
+        "lastmod": "2026-09-10",
+        "sitemap": "https://appautomaton.com/mlx-h3/sitemap.xml"
+      },
+      "artwork": "ray"
+    },
+    {
+      "repoId": 1354987267,
+      "repo": "mlx-timesfm",
+      "group": "mlx",
+      "order": 20,
+      "lastKnown": {
+        "homepage": "",
+        "hasSite": false,
+        "lastmod": null,
+        "sitemap": null
+      },
+      "artwork": "clock"
+    },
+    {
+      "repoId": 1261660195,
+      "repo": "setloom",
+      "group": "creative",
+      "order": 21,
+      "lastKnown": {
+        "homepage": "https://appautomaton.com/setloom/",
+        "hasSite": true,
+        "lastmod": "2026-09-10",
+        "sitemap": "https://appautomaton.com/setloom/sitemap.xml"
+      },
+      "artwork": "boombox"
+    }
+  ]
+}

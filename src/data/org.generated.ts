@@ -6,6 +6,10 @@
    builds with no network. Run `npm run sync` to refresh. */
 
 export type OrgRepo = {
+  /** Durable GitHub identity. Display order never comes from the API response. */
+  repoId: number
+  createdAt: string
+  catalogOrder: number
   name: string
   /** The repository's own one-liner, as GitHub reports it. */
   description: string
@@ -27,6 +31,9 @@ export const origin = "https://appautomaton.com"
 
 export const repos: OrgRepo[] = [
   {
+    "repoId": 1119857172,
+    "createdAt": "2025-12-20T01:26:41Z",
+    "catalogOrder": 0,
     "name": "agent-designer",
     "description": "Portable SKILLs workspace for Claude Code, Codex, and Gemini — issue-driven workflows and cross-agent collaboration via bridge scripts with session continuity.",
     "topics": [
@@ -46,6 +53,9 @@ export const repos: OrgRepo[] = [
     "sitemap": "https://appautomaton.com/agent-designer/sitemap.xml"
   },
   {
+    "repoId": 1226150677,
+    "createdAt": "2026-05-01T03:08:30Z",
+    "catalogOrder": 7,
     "name": "automaton",
     "description": "AI coding agent framework — portable, stage-gated harness for Claude Code, Codex, and OpenCode",
     "topics": [
@@ -64,6 +74,9 @@ export const repos: OrgRepo[] = [
     "sitemap": "https://appautomaton.com/automaton/sitemap.xml"
   },
   {
+    "repoId": 1282632918,
+    "createdAt": "2026-06-28T02:57:38Z",
+    "catalogOrder": 10,
     "name": "docker-for-apple-container",
     "description": "Run docker and docker compose on macOS, backed by Apple's native container CLI. No Docker Desktop.",
     "topics": [
@@ -84,6 +97,9 @@ export const repos: OrgRepo[] = [
     "sitemap": "https://appautomaton.com/docker-for-apple-container/sitemap.xml"
   },
   {
+    "repoId": 1140927126,
+    "createdAt": "2026-01-24T00:06:34Z",
+    "catalogOrder": 1,
     "name": "document-SKILLs",
     "description": "Claude Code and Codex SKILLs for PDF, Excel, Word, and PowerPoint manipulation — extraction, forms, formulas, tracked changes, adapted from Anthropic skills.",
     "topics": [
@@ -104,6 +120,9 @@ export const repos: OrgRepo[] = [
     "sitemap": "https://appautomaton.com/document-SKILLs/sitemap.xml"
   },
   {
+    "repoId": 950805672,
+    "createdAt": "2025-03-18T17:58:07Z",
+    "catalogOrder": 5,
     "name": "latex-arxiv-SKILL",
     "description": "A highly customizable agentic harness for arXiv-ready ML/AI review papers (and beyond). It drives agentic AI like Codex CLI and Claude Code through a gated LaTeX workflow with verified BibTeX citations.",
     "topics": [
@@ -134,6 +153,9 @@ export const repos: OrgRepo[] = [
     "sitemap": "https://appautomaton.com/latex-arxiv-SKILL/sitemap.xml"
   },
   {
+    "repoId": 1181193024,
+    "createdAt": "2026-03-13T21:11:43Z",
+    "catalogOrder": 14,
     "name": "ltx-video-mlx",
     "description": "LTX-2.3 22B text-to-video and image-to-video generation with synchronized audio on Apple Silicon — 8-bit/4-bit MLX inference plus on-device LoRA fine-tuning.",
     "topics": [
@@ -153,6 +175,9 @@ export const repos: OrgRepo[] = [
     "sitemap": null
   },
   {
+    "repoId": 1204977925,
+    "createdAt": "2026-04-08T14:13:33Z",
+    "catalogOrder": 9,
     "name": "markmaton",
     "description": "Lightweight HTML-to-Markdown parser for AI agent workflows — Python CLI and API around a fast Go engine, available on PyPI.",
     "topics": [
@@ -180,6 +205,9 @@ export const repos: OrgRepo[] = [
     "sitemap": "https://appautomaton.com/markmaton/sitemap.xml"
   },
   {
+    "repoId": 1239193367,
+    "createdAt": "2026-05-14T21:19:16Z",
+    "catalogOrder": 17,
     "name": "mlx-atomistic",
     "description": "Apple Silicon-native molecular dynamics and DFT runtime built on MLX and Metal — the GPU on your Mac, no CUDA or cloud.",
     "topics": [
@@ -203,6 +231,9 @@ export const repos: OrgRepo[] = [
     "sitemap": "https://appautomaton.com/mlx-atomistic/sitemap-index.xml"
   },
   {
+    "repoId": 1260752036,
+    "createdAt": "2026-06-05T20:45:31Z",
+    "catalogOrder": 15,
     "name": "mlx-cv",
     "description": "MLX-native computer vision for Apple Silicon: open-vocabulary grounding, object detection, depth and camera geometry, segmentation, and video object tracking.",
     "topics": [
@@ -229,6 +260,9 @@ export const repos: OrgRepo[] = [
     "sitemap": "https://appautomaton.com/mlx-cv/sitemap.xml"
   },
   {
+    "repoId": 1323419458,
+    "createdAt": "2026-08-04T22:15:04Z",
+    "catalogOrder": 19,
     "name": "mlx-h3",
     "description": "Pure MLX MiniMax-H3 text-to-video-and-audio inference for Apple Silicon.",
     "topics": [
@@ -247,6 +281,9 @@ export const repos: OrgRepo[] = [
     "sitemap": "https://appautomaton.com/mlx-h3/sitemap.xml"
   },
   {
+    "repoId": 1334345932,
+    "createdAt": "2026-08-14T15:57:29Z",
+    "catalogOrder": 18,
     "name": "mlx-minimax-music3",
     "description": "Pure MLX inference for MiniMax Music 3 on Apple silicon.",
     "topics": [
@@ -268,6 +305,9 @@ export const repos: OrgRepo[] = [
     "sitemap": "https://appautomaton.com/mlx-minimax-music3/sitemap.xml"
   },
   {
+    "repoId": 1227277248,
+    "createdAt": "2026-05-02T13:09:20Z",
+    "catalogOrder": 16,
     "name": "mlx-spatial",
     "description": "MLX-native 3D and spatial inference for Apple silicon: object reconstruction, image-to-mesh, scene geometry, Gaussian splats, and multi-view bundles.",
     "topics": [
@@ -294,6 +334,9 @@ export const repos: OrgRepo[] = [
     "sitemap": "https://appautomaton.com/mlx-spatial/sitemap.xml"
   },
   {
+    "repoId": 1197331187,
+    "createdAt": "2026-03-31T13:54:27Z",
+    "catalogOrder": 12,
     "name": "mlx-speech",
     "description": "Pure-MLX speech synthesis, voice cloning, dialogue, sound-effects, and ASR for Apple Silicon: Fish S2 Pro, VibeVoice, LongCat, MOSS, Step-Audio, Cohere ASR.",
     "topics": [
@@ -314,6 +357,9 @@ export const repos: OrgRepo[] = [
     "sitemap": "https://appautomaton.com/mlx-speech/sitemap.xml"
   },
   {
+    "repoId": 1354987267,
+    "createdAt": "2026-09-02T16:28:24Z",
+    "catalogOrder": 20,
     "name": "mlx-timesfm",
     "description": "Pure MLX inference for Google TimesFM 3.0 on Apple silicon.",
     "topics": [
@@ -333,6 +379,9 @@ export const repos: OrgRepo[] = [
     "sitemap": null
   },
   {
+    "repoId": 1145237178,
+    "createdAt": "2026-01-29T15:34:55Z",
+    "catalogOrder": 8,
     "name": "openclaw-monorepo",
     "description": "Repo-local OpenClaw workspace with modular JSON5 config, plugins, and Docker sandboxes — runs coding-agent CLIs on desktop or Android Termux.",
     "topics": [
@@ -351,6 +400,9 @@ export const repos: OrgRepo[] = [
     "sitemap": null
   },
   {
+    "repoId": 1299542971,
+    "createdAt": "2026-07-13T17:09:56Z",
+    "catalogOrder": 11,
     "name": "pi-arcweld",
     "description": "Pi Arcweld, an auditable local workspace for Pi: pinned upstream source, curated extensions, bounded MCP tooling, and a reproducible external runtime (pi-arcweld)",
     "topics": [
@@ -374,6 +426,9 @@ export const repos: OrgRepo[] = [
     "sitemap": "https://appautomaton.com/pi-arcweld/sitemap.xml"
   },
   {
+    "repoId": 1125500272,
+    "createdAt": "2025-12-30T20:57:29Z",
+    "catalogOrder": 4,
     "name": "playwright-skill",
     "description": "Android-friendly Playwright SKILL for AI agents — Termux launcher patch, headless Chromium, install via git subtree into .codex/skills.",
     "topics": [
@@ -397,6 +452,9 @@ export const repos: OrgRepo[] = [
     "sitemap": null
   },
   {
+    "repoId": 1351955929,
+    "createdAt": "2026-08-31T03:40:15Z",
+    "catalogOrder": 6,
     "name": "plexmaton",
     "description": "AI coding in your terminal, with clarity and control. Bring your models and skills, review tool actions, and return to conversations with their history intact.",
     "topics": [],
@@ -406,6 +464,9 @@ export const repos: OrgRepo[] = [
     "sitemap": null
   },
   {
+    "repoId": 1192075944,
+    "createdAt": "2026-03-25T21:43:24Z",
+    "catalogOrder": 2,
     "name": "presentation",
     "description": "A business question goes in. A consulting-grade deck comes out. Four composable skills for Claude Code and Codex: strategy storyboarding, brand identity, pixel-perfect PDF, native editable PPTX.",
     "topics": [
@@ -425,6 +486,9 @@ export const repos: OrgRepo[] = [
     "sitemap": "https://appautomaton.com/presentation/sitemap.xml"
   },
   {
+    "repoId": 1261660195,
+    "createdAt": "2026-06-07T01:43:41Z",
+    "catalogOrder": 21,
     "name": "setloom",
     "description": "Taste-first club-music production that automates everything but the judgment. You direct in plain language; the agent writes each track's source, drives the synths, renders, and inspects. You never operate a DAW or plug-in; you make every musical call. Open-source, keyboard-first.",
     "topics": [
@@ -450,6 +514,9 @@ export const repos: OrgRepo[] = [
     "sitemap": "https://appautomaton.com/setloom/sitemap.xml"
   },
   {
+    "repoId": 1157979774,
+    "createdAt": "2026-02-14T15:56:37Z",
+    "catalogOrder": 13,
     "name": "tnt-asr",
     "description": "Terminal voice-to-text TUI — Qwen3-ASR-1.7B on the Apple GPU via MLX (mlx-speech). Fully local, no PyTorch, transcribes in ~1s. macOS Apple Silicon.",
     "topics": [
@@ -474,6 +541,9 @@ export const repos: OrgRepo[] = [
     "sitemap": "https://appautomaton.com/tnt-asr/sitemap.xml"
   },
   {
+    "repoId": 1204991462,
+    "createdAt": "2026-04-08T14:27:15Z",
+    "catalogOrder": 3,
     "name": "webmaton",
     "description": "Portable web-research and browser-automation SKILLs for Claude Code, Codex, and OpenCode — Playwright, Chrome DevTools, nodriver, and HTML-to-Markdown.",
     "topics": [

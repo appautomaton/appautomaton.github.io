@@ -20,6 +20,8 @@ export const ORIGIN = origin
 const GITHUB_ORG = `https://github.com/${org}`
 
 export type Project = {
+  repoId: number
+  catalogOrder?: number
   repo: string
   description: string
   /** The project's own page on this domain. Absent when it publishes none. */
@@ -54,6 +56,8 @@ function join(placement: Placement, letter: string, index: number): Project {
   const facts = byName.get(placement.repo)
   if (!facts) throw new Error(`${placement.repo} is on a shelf but absent from org.generated.ts`)
   return {
+    repoId: facts.repoId,
+    catalogOrder: facts.catalogOrder,
     repo: placement.repo,
     /* The repository's own one-liner is the default. A placement overrides it
        where the catalog wants a sentence written for this page rather than

@@ -32,7 +32,8 @@ test('outages, access blocks, rate limits, and redirects are not missing pages',
 import {readRepositories} from './github-repositories.mjs'
 import {sculpture,seedFor} from './sculptures.mjs'
 test('GitHub discovery paginates and excludes private, foreign, forked, archived, and root repositories',async()=>{
- const repo=name=>({name,private:false,owner:{login:'studio'},description:'A project.',topics:[],homepage:''})
+ let nextId=1
+ const repo=name=>({id:nextId++,created_at:'2026-09-10T00:00:00Z',name,private:false,owner:{login:'studio'},description:'A project.',topics:[],homepage:''})
  const calls=[]
  const entries=await readRepositories('studio','test-token',async(url,options)=>{
   calls.push({url,options})
@@ -43,6 +44,8 @@ test('GitHub discovery paginates and excludes private, foreign, forked, archived
  assert.equal(calls.length,2)
  assert.equal(entries.length,101)
  assert.equal(entries.at(-1).name,'last')
+ assert.equal(entries.at(-1).repoId,101)
+ assert.equal(entries.at(-1).createdAt,'2026-09-10T00:00:00Z')
  assert(calls.every(c=>new URL(c.url).origin==='https://api.github.com'))
  assert(calls.every(c=>c.options.headers.authorization==='Bearer test-token'))
  await assert.rejects(readRepositories('studio',null,async()=>new Response('',{status:503})),/GitHub API returned 503/)
@@ -84,3 +87,10 @@ test('project indexing guards inspect canonical metadata and both HTML and HTTP 
  assert.match(audit(page,new Headers({'X-Robots-Tag':'googlebot: noindex'})).join(' '),/forbids indexing/)
  assert.deepEqual(audit(page+'<meta name="robots" content="index, follow, max-image-preview:large">'),[])
 })
+
+
+test('an unstable GitHub page boundary cannot duplicate an identity',async()=>{
+ const item=id=>({id,created_at:'2026-09-10T00:00:00Z',name:'project-'+id,private:false,owner:{login:'studio'}});
+ await assert.rejects(readRepositories('studio',null,async url=>Response.json(new URL(url).searchParams.get('page')==='1'?Array.from({length:100},(_,i)=>item(i+1)):[item(100)])),/repeated a repository ID/);
+ await assert.rejects(readRepositories('studio',null,async()=>Response.json([{...item(1),id:null}])),/invalid repository identity/);
+});

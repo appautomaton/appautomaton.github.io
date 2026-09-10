@@ -28,5 +28,5 @@ export function selectExhibits(repos,shelves,notShown){
 
 export function resolveShelves(shelves,repos){
  const placed=new Set(shelves.flatMap(s=>s.items.map(p=>p.repo)))
- return shelves.map(s=>({...s,items:[...s.items,...repos.filter(r=>!placed.has(r.name)&&r.automaticGroup===s.key).sort((a,b)=>a.name.localeCompare(b.name)).map(r=>({repo:r.name,span:4}))]}))
+ return shelves.map(s=>({...s,items:[...s.items,...repos.filter(r=>!placed.has(r.name)&&r.automaticGroup===s.key).sort((a,b)=>(a.catalogOrder??Infinity)-(b.catalogOrder??Infinity)||a.name.localeCompare(b.name)).map(r=>({repo:r.name,span:4}))]}))
 }

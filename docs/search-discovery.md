@@ -10,7 +10,11 @@ and project metadata correction are recorded in [PR #7](https://github.com/appau
 pages, and writes `src/data/org.generated.ts`. `src/data/catalog.ts` joins those
 facts to the editorial placement in `src/data/shelves.ts`. New public websites
 with a valid GitHub About URL are included automatically. Name and topics
-select a fallback category, which editorial placement can override. Existing
+select an initial fallback category, which editorial placement can override.
+GitHub repository IDs bind the saved order, category, and artwork. New entries
+append within their field. The published `catalog-state.json` carries that
+state into subsequent builds; the checked-in checkpoint supports offline work.
+Missing known identities or a lost registry stop publication for review. Existing
 source-only exhibits and deliberate exclusions retain their explicit choices.
 
 `scripts/build.mjs` uses that catalog to generate:
@@ -39,7 +43,8 @@ HTTP headers, and an incorrect GitHub About URL fail the sync. Sitemap
 candidates must serve XML documents. Missing descriptions and absent backlinks
 are reported for the owning project to resolve. Outages and access blocks do
 not prove that a project page has disappeared. Only a definitive 404/410 can
-remove a known page link.
+remove a curated page link. An automatic entry that becomes ineligible stops
+publication until its exclusion or restoration is reviewed.
 
 GitHub API pagination prevents a future page-one cutoff. API failures in CI
 stop publication instead of silently deploying an old snapshot. The previous
@@ -65,9 +70,10 @@ this public repository.
 A project's artwork, heading, and primary action share one HTML anchor. A
 separate source link is present when the project also publishes a website.
 Every link has descriptive HTML text, and publication rejects duplicated
-destinations within a project entry. Purely decorative sculptures use empty
-alt attributes because their enclosing links already contain project names.
-They are not screenshots or informative diagrams.
+destinations within a project entry. Catalog illustrations have concise descriptions of the actual objects.
+Repeated hero/index previews and ambient backgrounds use empty alt attributes.
+The model images are illustrations, not product screenshots or diagrams.
 
-Open Graph and Twitter card fields point to the same original 1200 by 630 PNG.
+Open Graph and Twitter card fields point to the same composed 1200 by 630 PNG. A native share control uses the
+canonical URL, with clipboard and selectable-text fallbacks.
 Sharing metadata is served in the initial HTML without a social-plugin runtime.
