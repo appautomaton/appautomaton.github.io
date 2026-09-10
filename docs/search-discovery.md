@@ -59,3 +59,15 @@ Lighthouse validates technical basics. It does not measure actual Google
 indexing, search rankings, or citations by assistants. Use Search Console for
 those account-specific observations and keep raw account reports outside
 this public repository.
+
+## Link and image semantics
+
+A project's artwork, heading, and primary action share one HTML anchor. A
+separate source link is present when the project also publishes a website.
+Every link has descriptive HTML text, and publication rejects duplicated
+destinations within a project entry. Purely decorative sculptures use empty
+alt attributes because their enclosing links already contain project names.
+They are not screenshots or informative diagrams.
+
+Open Graph and Twitter card fields point to the same original 1200 by 630 PNG.
+Sharing metadata is served in the initial HTML without a social-plugin runtime.
