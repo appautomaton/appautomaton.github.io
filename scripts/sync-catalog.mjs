@@ -77,8 +77,6 @@ function audit(name, url, html) {
   const canonical = html.match(/<link[^>]+rel=["']canonical["'][^>]*>/i)?.[0]
   const href = canonical?.match(/href=["']([^"']+)["']/i)?.[1]
   if (!href) warnings.push('no canonical')
-  else if (href === url.replace('https://appautomaton.com', 'https://appautomaton.renocrypt.com'))
-    warnings.push('canonical still names the former domain; update the project repository')
   else if (href !== url) problems.push(`canonical points at ${href}, not ${url}`)
 
   if (!/<title[^>]*>\s*\S/i.test(html)) warnings.push('no title')
