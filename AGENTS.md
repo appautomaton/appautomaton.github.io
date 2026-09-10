@@ -13,9 +13,14 @@ bare project directories.
   working page enter automatically through `scripts/catalog-policy.mjs`;
   explicit placements and exclusions override the fallback classification. Use the joined catalog for visible links, structured
   data, text output, and sitemaps. Do not invent project destinations.
+- Bind automatic presentation state to GitHub repository IDs. Curated order
+  lives in `shelves.ts`, explicit art direction in `site/artwork.json`, and
+  saved automatic order/category/artwork in the published `catalog-state.json`.
+  Refresh the checked-in checkpoint with `npm run sync`. Never sort published
+  entries by API response order or silently reset the registry.
 - Keep production indexable and project links normally followable. Preserve
   discovery checks, API pagination, daily/manual refresh, and failure behavior.
-- Use original artwork and licensed local fonts. No Google Fonts. Retain asset
+- Use original or appropriately licensed artwork and licensed local fonts. No Google Fonts. Retain asset
   provenance. Historical fonts and plates under `src/` support the archived
   prototypes and are not part of the production asset pipeline.
 - Keep scroll native, respect reduced motion, and provide keyboard access and

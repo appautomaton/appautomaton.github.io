@@ -34,6 +34,22 @@
  systemTheme.addEventListener('change',event=>{
   if(!['light','dark'].includes(read('aa-mode'))){requestedTheme=root.dataset.theme=event.matches?'night':'day';reflectTheme()}
  })
+ const shareAddress=document.querySelector('link[rel=canonical]').href
+ const share=document.querySelector('.share-workshop')
+ const shareStatus=document.querySelector('.share-status')
+ const shareUrl=document.querySelector('.share-url')
+ if(share&&(navigator.share||navigator.clipboard?.writeText)){
+  share.hidden=false
+  share.addEventListener('click',async()=>{
+   share.disabled=true
+   try{
+    if(navigator.share){await navigator.share({title:'App Automaton',text:'Open tools for coding agents, local intelligence, and creative work.',url:shareAddress})}
+    else{await navigator.clipboard.writeText(shareAddress);share.querySelector('span').textContent='Link copied';shareStatus.textContent='Link copied to clipboard';setTimeout(()=>{share.querySelector('span').textContent='Share this page'},3000)}
+   }catch(error){
+    if(error.name!=='AbortError'){shareUrl.hidden=false;shareUrl.focus();shareUrl.select();shareStatus.textContent='Copy the selected website address to share it.'}
+   }finally{share.disabled=false}
+  })
+ }
  const tools=document.querySelector('.catalog-tools')
  const input=tools.querySelector('input')
  const cards=[...document.querySelectorAll('.project')]
@@ -115,6 +131,7 @@
   frameId=0
   if(document.hidden)return
   const offset=scrollY,h=metrics.height
+  header.dataset.scrolled=String(offset>60)
   const inHero=offset<metrics.top+h
   hero.dataset.visible=String(inHero)
   header.dataset.tone=(offset+65>=metrics.top&&offset+65<metrics.end)||(offset+65>=metrics.approachTop&&offset+65<metrics.approachEnd)?'light':'normal'

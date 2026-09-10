@@ -13,13 +13,23 @@ tracking. Warm paper, green charcoal, cobalt, and mineral accent colors form
 the day and night palettes. The brand mark preserves App Automaton's rounded
 square and circular core.
 
+## A collection with material character
+
+Twenty-seven CC0 models from Poly Haven bring optical instruments, books,
+woodworking tools, sound equipment, sculpture, and natural forms into the
+collection. Each current project has a distinct object. `site/artwork.json`
+records art direction, artists, licenses, and camera settings;
+`site/artwork-sources.json` pins downloaded packages with checksums. Raw models
+stay in a private authoring cache. The browser receives only responsive WebP
+renders. The public colophon links to every source model and artist.
+
 ## Original material studies
 
 `scripts/render-art.py` builds the sculptures and studio environments in a
 fresh Blender scene. Ceramic folios, an anodized aperture, woven metal,
 concentric lenses, a continuous knot, and an orbital instrument give the
-collection a shared material vocabulary. All geometry, materials, lighting,
-and cameras are authored for this site. No external model or texture is used.
+collection a shared material vocabulary. These original forms and their materials, lighting, and cameras were authored
+for this site. They complement the separately credited public model collection.
 
 The script is an optional authoring tool. Run Blender with
 `--background --factory-startup --python scripts/render-art.py -- --output PATH`,
@@ -28,7 +38,9 @@ production inputs. A normal Node build requires neither Blender nor an image
 encoder. The earlier vector studies remain in `scripts/sculptures.mjs` as
 source experiments.
 
-The build assigns artwork families from project metadata. Finished images are
+Curated artwork is assigned explicitly. New automatic entries receive spare
+objects and retain that assignment through their GitHub repository ID.
+The published registry preserves those choices across subsequent builds. Finished images are
 reused across the gallery, index, and project list. Explicit dimensions reserve
 space, and below-the-fold images load lazily. There is no canvas or WebGL runtime.
 

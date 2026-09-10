@@ -1,0 +1,760 @@
+{
+  "version": 1,
+  "models": [
+    {
+      "key": "knight",
+      "sourceId": "chess_set",
+      "title": "Chess Set",
+      "authors": [
+        "Riley Queen"
+      ],
+      "license": "CC0-1.0",
+      "licenseUrl": "https://polyhaven.com/license",
+      "url": "https://polyhaven.com/a/chess_set",
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "camera": [
+        4,
+        -6,
+        3.3
+      ],
+      "objects": [
+        "piece_knight_white_01"
+      ],
+      "alt": "A white knight chess piece.",
+      "groups": [
+        "skills"
+      ]
+    },
+    {
+      "key": "notebook",
+      "sourceId": "binder_notebook",
+      "title": "Binder Notebook",
+      "authors": [
+        "DaDrood"
+      ],
+      "license": "CC0-1.0",
+      "licenseUrl": "https://polyhaven.com/license",
+      "url": "https://polyhaven.com/a/binder_notebook",
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "camera": [
+        3,
+        -5,
+        5.4
+      ],
+      "objects": [
+        "binder_notebook"
+      ],
+      "alt": "An open leather notebook with cream paper.",
+      "groups": [
+        "skills"
+      ]
+    },
+    {
+      "key": "projector",
+      "sourceId": "filmstrip_projector_8mm",
+      "title": "Filmstrip Projector 8mm",
+      "authors": [
+        "PeterM"
+      ],
+      "license": "CC0-1.0",
+      "licenseUrl": "https://polyhaven.com/license",
+      "url": "https://polyhaven.com/a/filmstrip_projector_8mm",
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "camera": [
+        -4,
+        6,
+        3.3
+      ],
+      "exclude": [
+        "cable",
+        "schuko",
+        "connector"
+      ],
+      "alt": "An 8mm film projector with two reels.",
+      "groups": [
+        "skills"
+      ]
+    },
+    {
+      "key": "compass",
+      "sourceId": "seadogs_compass",
+      "title": "Seadogs Compass",
+      "authors": [
+        "Benny Weimer"
+      ],
+      "license": "CC0-1.0",
+      "licenseUrl": "https://polyhaven.com/license",
+      "url": "https://polyhaven.com/a/seadogs_compass",
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "camera": [
+        4,
+        -6,
+        3.3
+      ],
+      "alt": "An open brass compass.",
+      "groups": [
+        "skills"
+      ]
+    },
+    {
+      "key": "binoculars",
+      "sourceId": "binoculars",
+      "title": "Binoculars",
+      "authors": [
+        "Derek Wight"
+      ],
+      "license": "CC0-1.0",
+      "licenseUrl": "https://polyhaven.com/license",
+      "url": "https://polyhaven.com/a/binoculars",
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "camera": [
+        4,
+        -6,
+        3.3
+      ],
+      "exclude": [
+        "strap"
+      ],
+      "alt": "A pair of black binoculars.",
+      "groups": [
+        "skills"
+      ]
+    },
+    {
+      "key": "encyclopedia",
+      "sourceId": "book_encyclopedia_set_01",
+      "title": "Book Encyclopedia Set 01",
+      "authors": [
+        "John Malcolm"
+      ],
+      "license": "CC0-1.0",
+      "licenseUrl": "https://polyhaven.com/license",
+      "url": "https://polyhaven.com/a/book_encyclopedia_set_01",
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "camera": [
+        3,
+        -5,
+        5.4
+      ],
+      "objects": [
+        "book_encyclopedia_set_01_book01",
+        "book_encyclopedia_set_01_book02",
+        "book_encyclopedia_set_01_book03"
+      ],
+      "alt": "Three leather-bound encyclopedia volumes.",
+      "groups": [
+        "skills"
+      ]
+    },
+    {
+      "key": "spinning-wheel",
+      "sourceId": "spinning_wheel_01",
+      "title": "Spinning Wheel 01",
+      "authors": [
+        "Sofia Pahaoja"
+      ],
+      "license": "CC0-1.0",
+      "licenseUrl": "https://polyhaven.com/license",
+      "url": "https://polyhaven.com/a/spinning_wheel_01",
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "camera": [
+        4,
+        -6,
+        3.3
+      ],
+      "alt": "A wooden spinning wheel.",
+      "groups": [
+        "harnesses",
+        "mlx"
+      ]
+    },
+    {
+      "key": "shell",
+      "sourceId": "lambis_shell",
+      "title": "Lambis Shell",
+      "authors": [
+        "Kuutti Siitonen"
+      ],
+      "license": "CC0-1.0",
+      "licenseUrl": "https://polyhaven.com/license",
+      "url": "https://polyhaven.com/a/lambis_shell",
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "camera": [
+        4,
+        -6,
+        3.3
+      ],
+      "alt": "A spined seashell.",
+      "groups": [
+        "harnesses",
+        "mlx"
+      ]
+    },
+    {
+      "key": "hand-plane",
+      "sourceId": "hand_plane_no4",
+      "title": "Hand Plane No4",
+      "authors": [
+        "Satyaki Mandal"
+      ],
+      "license": "CC0-1.0",
+      "licenseUrl": "https://polyhaven.com/license",
+      "url": "https://polyhaven.com/a/hand_plane_no4",
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "camera": [
+        4,
+        -6,
+        3.3
+      ],
+      "alt": "A woodworking hand plane with wooden handles.",
+      "groups": [
+        "harnesses",
+        "mlx"
+      ]
+    },
+    {
+      "key": "toolbox",
+      "sourceId": "metal_toolbox",
+      "title": "Metal Toolbox",
+      "authors": [
+        "Mateusz Sadek"
+      ],
+      "license": "CC0-1.0",
+      "licenseUrl": "https://polyhaven.com/license",
+      "url": "https://polyhaven.com/a/metal_toolbox",
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "camera": [
+        4,
+        -6,
+        3.3
+      ],
+      "alt": "An open metal toolbox.",
+      "groups": [
+        "harnesses",
+        "mlx"
+      ]
+    },
+    {
+      "key": "blowtorch",
+      "sourceId": "brass_blowtorch",
+      "title": "Brass Blowtorch",
+      "authors": [
+        "Ulan Cabanilla"
+      ],
+      "license": "CC0-1.0",
+      "licenseUrl": "https://polyhaven.com/license",
+      "url": "https://polyhaven.com/a/brass_blowtorch",
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "camera": [
+        4,
+        -6,
+        3.3
+      ],
+      "alt": "A brass blowtorch.",
+      "groups": [
+        "harnesses",
+        "mlx"
+      ]
+    },
+    {
+      "key": "megaphone",
+      "sourceId": "Megaphone_01",
+      "title": "Megaphone 01",
+      "authors": [
+        "Ethan Simon-Law"
+      ],
+      "license": "CC0-1.0",
+      "licenseUrl": "https://polyhaven.com/license",
+      "url": "https://polyhaven.com/a/Megaphone_01",
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "camera": [
+        4,
+        -6,
+        3.3
+      ],
+      "alt": "A red and white megaphone.",
+      "groups": [
+        "mlx"
+      ]
+    },
+    {
+      "key": "walkman",
+      "sourceId": "portable_cassette_player",
+      "title": "Portable Cassette Player",
+      "authors": [
+        "Mateusz Sadek"
+      ],
+      "license": "CC0-1.0",
+      "licenseUrl": "https://polyhaven.com/license",
+      "url": "https://polyhaven.com/a/portable_cassette_player",
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "camera": [
+        4,
+        -6,
+        3.3
+      ],
+      "alt": "A portable cassette player beside a tape.",
+      "groups": [
+        "mlx"
+      ]
+    },
+    {
+      "key": "movie-camera",
+      "sourceId": "vintage_video_camera",
+      "title": "Vintage Video Camera",
+      "authors": [
+        "James Ray Cock",
+        "Jenelle van Heerden"
+      ],
+      "license": "CC0-1.0",
+      "licenseUrl": "https://polyhaven.com/license",
+      "url": "https://polyhaven.com/a/vintage_video_camera",
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "camera": [
+        4,
+        -6,
+        3.3
+      ],
+      "alt": "A vintage movie camera with multiple lenses.",
+      "groups": [
+        "mlx"
+      ]
+    },
+    {
+      "key": "camera",
+      "sourceId": "Camera_01",
+      "title": "Camera 01",
+      "authors": [
+        "Rajil Jose Macatangay"
+      ],
+      "license": "CC0-1.0",
+      "licenseUrl": "https://polyhaven.com/license",
+      "url": "https://polyhaven.com/a/Camera_01",
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "camera": [
+        4,
+        -6,
+        3.3
+      ],
+      "objects": [
+        "Camera_01"
+      ],
+      "alt": "A vintage rangefinder camera.",
+      "groups": [
+        "mlx"
+      ]
+    },
+    {
+      "key": "marble-bust",
+      "sourceId": "marble_bust_01",
+      "title": "Marble Bust 01",
+      "authors": [
+        "Rico Cilliers"
+      ],
+      "license": "CC0-1.0",
+      "licenseUrl": "https://polyhaven.com/license",
+      "url": "https://polyhaven.com/a/marble_bust_01",
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "camera": [
+        -3,
+        -7,
+        2.4
+      ],
+      "alt": "A carved marble portrait bust.",
+      "groups": [
+        "mlx"
+      ]
+    },
+    {
+      "key": "microscope",
+      "sourceId": "vintage_microscope",
+      "title": "Vintage Microscope",
+      "authors": [
+        "Luis José Fernández Rodríguez"
+      ],
+      "license": "CC0-1.0",
+      "licenseUrl": "https://polyhaven.com/license",
+      "url": "https://polyhaven.com/a/vintage_microscope",
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "camera": [
+        4,
+        -6,
+        3.3
+      ],
+      "alt": "A brass laboratory microscope.",
+      "groups": [
+        "mlx"
+      ]
+    },
+    {
+      "key": "ukulele",
+      "sourceId": "Ukulele_01",
+      "title": "Ukulele 01",
+      "authors": [
+        "Joseph Burgan"
+      ],
+      "license": "CC0-1.0",
+      "licenseUrl": "https://polyhaven.com/license",
+      "url": "https://polyhaven.com/a/Ukulele_01",
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "camera": [
+        4,
+        -6,
+        3.3
+      ],
+      "alt": "A wooden ukulele.",
+      "groups": [
+        "creative"
+      ]
+    },
+    {
+      "key": "ray",
+      "sourceId": "bronze_ray_statue",
+      "title": "Bronze Ray Statue",
+      "authors": [
+        "Tina"
+      ],
+      "license": "CC0-1.0",
+      "licenseUrl": "https://polyhaven.com/license",
+      "url": "https://polyhaven.com/a/bronze_ray_statue",
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "camera": [
+        4,
+        -6,
+        3.3
+      ],
+      "alt": "A blue patinated bronze ray sculpture.",
+      "groups": [
+        "mlx"
+      ]
+    },
+    {
+      "key": "clock",
+      "sourceId": "mantel_clock_01",
+      "title": "Mantel Clock 01",
+      "authors": [
+        "Yann Kervran",
+        "Rico Cilliers"
+      ],
+      "license": "CC0-1.0",
+      "licenseUrl": "https://polyhaven.com/license",
+      "url": "https://polyhaven.com/a/mantel_clock_01",
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "camera": [
+        4,
+        -6,
+        3.3
+      ],
+      "alt": "An arched wooden mantel clock.",
+      "groups": [
+        "mlx"
+      ]
+    },
+    {
+      "key": "boombox",
+      "sourceId": "boombox",
+      "title": "Boombox",
+      "authors": [
+        "Thomas Paul Mouilleron"
+      ],
+      "license": "CC0-1.0",
+      "licenseUrl": "https://polyhaven.com/license",
+      "url": "https://polyhaven.com/a/boombox",
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "camera": [
+        4,
+        -6,
+        3.3
+      ],
+      "alt": "A portable stereo with two speakers.",
+      "groups": [
+        "creative"
+      ]
+    },
+    {
+      "key": "laptop",
+      "sourceId": "classic_laptop",
+      "title": "Classic Laptop",
+      "authors": [
+        "Arrangemonk"
+      ],
+      "license": "CC0-1.0",
+      "licenseUrl": "https://polyhaven.com/license",
+      "url": "https://polyhaven.com/a/classic_laptop",
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "camera": [
+        4,
+        -6,
+        3.3
+      ],
+      "alt": "An open laptop computer.",
+      "groups": [
+        "harnesses",
+        "mlx"
+      ]
+    },
+    {
+      "key": "circuit-board",
+      "sourceId": "circuit_board",
+      "title": "Circuit Board",
+      "authors": [
+        "Benny Weimer"
+      ],
+      "license": "CC0-1.0",
+      "licenseUrl": "https://polyhaven.com/license",
+      "url": "https://polyhaven.com/a/circuit_board",
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "camera": [
+        3,
+        -5,
+        5.4
+      ],
+      "alt": "A populated circuit board with a cooling fan.",
+      "groups": [
+        "harnesses",
+        "mlx"
+      ]
+    },
+    {
+      "key": "multimeter",
+      "sourceId": "retro_multimeter",
+      "title": "Retro Multimeter",
+      "authors": [
+        "elli moeller"
+      ],
+      "license": "CC0-1.0",
+      "licenseUrl": "https://polyhaven.com/license",
+      "url": "https://polyhaven.com/a/retro_multimeter",
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "camera": [
+        4,
+        -6,
+        3.3
+      ],
+      "alt": "An analog multimeter with test leads.",
+      "groups": [
+        "harnesses",
+        "mlx"
+      ]
+    },
+    {
+      "key": "industrial-microscope",
+      "sourceId": "industrial_microscope",
+      "title": "Industrial Microscope",
+      "authors": [
+        "Lukas Walzer"
+      ],
+      "license": "CC0-1.0",
+      "licenseUrl": "https://polyhaven.com/license",
+      "url": "https://polyhaven.com/a/industrial_microscope",
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "camera": [
+        4,
+        -6,
+        3.3
+      ],
+      "exclude": [
+        "cable"
+      ],
+      "alt": "An industrial microscope with a binocular head.",
+      "groups": [
+        "mlx"
+      ]
+    },
+    {
+      "key": "ceramic-vase",
+      "sourceId": "ceramic_vase_02",
+      "title": "Ceramic Vase 02",
+      "authors": [
+        "James Ray Cock"
+      ],
+      "license": "CC0-1.0",
+      "licenseUrl": "https://polyhaven.com/license",
+      "url": "https://polyhaven.com/a/ceramic_vase_02",
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "camera": [
+        4,
+        -6,
+        3.3
+      ],
+      "alt": "A white ceramic vase.",
+      "groups": [
+        "creative"
+      ]
+    },
+    {
+      "key": "space-instrument",
+      "sourceId": "vintage_spacecraft_instrument",
+      "title": "Vintage Spacecraft Instrument",
+      "authors": [
+        "Michał Wiśniewski"
+      ],
+      "license": "CC0-1.0",
+      "licenseUrl": "https://polyhaven.com/license",
+      "url": "https://polyhaven.com/a/vintage_spacecraft_instrument",
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "camera": [
+        4,
+        -6,
+        3.3
+      ],
+      "alt": "A spacecraft instrument panel with a globe display.",
+      "groups": [
+        "harnesses",
+        "mlx"
+      ]
+    }
+  ],
+  "assignments": {
+    "agent-designer": "knight",
+    "document-SKILLs": "notebook",
+    "presentation": "projector",
+    "webmaton": "compass",
+    "playwright-skill": "binoculars",
+    "latex-arxiv-SKILL": "encyclopedia",
+    "automaton": "spinning-wheel",
+    "openclaw-monorepo": "shell",
+    "markmaton": "hand-plane",
+    "docker-for-apple-container": "toolbox",
+    "pi-arcweld": "blowtorch",
+    "mlx-speech": "megaphone",
+    "tnt-asr": "walkman",
+    "ltx-video-mlx": "movie-camera",
+    "mlx-cv": "camera",
+    "mlx-spatial": "marble-bust",
+    "mlx-atomistic": "microscope",
+    "mlx-minimax-music3": "ukulele",
+    "mlx-h3": "ray",
+    "mlx-timesfm": "clock",
+    "setloom": "boombox",
+    "plexmaton": "aperture"
+  },
+  "featured": [
+    "agent-designer",
+    "openclaw-monorepo",
+    "mlx-speech",
+    "mlx-cv",
+    "mlx-spatial",
+    "mlx-atomistic"
+  ],
+  "covers": {
+    "skills": "knight",
+    "harnesses": "aperture",
+    "mlx": "microscope",
+    "creative": "ukulele"
+  },
+  "environment": {
+    "title": "Studio Small 09",
+    "author": "Sergej Majboroda",
+    "url": "https://polyhaven.com/a/studio_small_09",
+    "license": "CC0-1.0"
+  }
+}

@@ -6,7 +6,7 @@ An open workshop for coding agents, local intelligence, and creative tools.
 
 ## The website
 
-The page is complete HTML, with original rendered sculptures and SVG interface marks,
+The page is complete HTML, with a curated public 3D model collection, original sculptures, and SVG interface marks,
 self-hosted Uncut Sans, day and night palettes, and optional motion. Browser
 JavaScript adds search, filtering, and presentation controls. There is no
 runtime framework, client-side catalog fetch, or hydration step.
@@ -22,12 +22,29 @@ Blender is an optional artwork-authoring tool and is not needed for the site bui
 current catalog includes active, original repositories, excluding the
 organization site itself. `src/data/shelves.ts` holds editorial placement and
 explicit reasons for work that is not exhibited. New repositories with a valid About URL and a working page are included
-automatically, with a category derived from their name and topics. Editorial
+automatically, with an initial category derived from their name and topics. Editorial
 placements override that fallback; explicit exclusions remain excluded.
+
+Display order never comes from API response order. The curated entries keep
+the order in `shelves.ts`. Automatic additions follow them within each field,
+in first-publication order. A successful build saves each repository ID,
+category, order, and artwork in `catalog-state.json`. The next build reads
+that published registry, so new projects, changed topics, and renamed automatic
+entries cannot rearrange existing artwork. The initial batch is ordered by
+creation date and repository ID. `site/artwork.json` remains the explicit art
+direction override.
+
+`src/data/catalog-state.json` is the checked-in offline checkpoint. Refresh it
+with `npm run sync`; do not hand-edit generated state. Scheduled builds carry
+the latest registry in their Pages artifact and diagnostic artifact without
+committing back to GitHub. Main deployments are serialized. A missing known
+repository or lost registry fails publication for review instead of silently
+removing a project or resetting its presentation.
 
 Project page availability, canonical metadata, modification dates, and
 sitemaps are checked against the serving site. Definitive 404/410 responses
-remove a page link. Access blocks, rate limits, and outages retain the previous
+can remove a curated page link. An automatic entry becoming ineligible stops
+publication until its disposition is reviewed. Access blocks, rate limits, and outages retain the previous
 known result and report a warning. A missing or incorrect canonical, an indexing prohibition, or an incorrect
 GitHub About URL fails the build. URLs come from the verified About field. The GitHub credential is sent only to the GitHub API.
 
@@ -80,8 +97,7 @@ robots.txt declares the project sitemaps discovered by the build.
 
 [Design notes](docs/design.md) describe the gallery and motion system.
 Uncut Sans by Kasper Nordkvist is served under the SIL Open Font License.
-The sculpture geometry, studio lighting, and SVG interface marks were authored
-for this website. [Asset provenance](site/assets/SOURCES.md) records their
+The collection combines CC0 models from Poly Haven with original sculptures and SVG interface marks. All current project cards use distinct artwork; the larger library supplies spare objects for newly discovered projects. [Asset provenance](site/assets/SOURCES.md) records their
 origins. Floema was a reference for spatial composition and editorial rhythm;
 its assets are not used here.
 
@@ -91,3 +107,24 @@ can still be viewed. Production publishes assets only from `site/assets/`.
 
 Application code and original artwork are released under the [MIT License](LICENSE).
 Font and historical-asset licenses retain their own terms.
+
+## Optional artwork authoring
+
+The website build never downloads models or invokes Blender. To recreate the
+public model renders, use a cache outside the public repository:
+
+```sh
+node scripts/fetch-art-models.mjs /path/to/private-model-cache
+blender --background --factory-startup --disable-autoexec --python scripts/render-model-library.py -- --manifest site/artwork.json --cache /path/to/private-model-cache --output /path/to/renders --hdri /path/to/studio_small_09_1k.hdr
+```
+
+The downloader verifies the recorded source checksums and restricts model
+resources to their declared package. The renderer selects the intended mesh
+objects and fits their camera-space bounds without clipping. Rendering was
+verified with Blender 5.2.1. Image compression uses WebP at quality 82 in 320,
+480, and 720px variants.
+
+`site/artwork.json` controls the collection and explicit repository assignments.
+New repositories receive an unused object when one is available. If a future
+catalog outgrows the library, reuse is balanced so artwork never blocks a
+project from being published.

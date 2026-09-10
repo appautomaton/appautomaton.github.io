@@ -18,7 +18,7 @@ permissions:
 
 concurrency:
   group: pages-${{ github.ref }}
-  cancel-in-progress: true
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
 
 jobs:
   build:
@@ -61,6 +61,8 @@ jobs:
           path: |
             build.log
             build-report.json
+            src/data/catalog-state.json
+            src/data/org.generated.ts
           retention-days: 30
 
       - name: Save the static preview

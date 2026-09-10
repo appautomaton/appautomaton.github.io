@@ -3,6 +3,8 @@ import {readFile,access} from 'node:fs/promises'
 import {gzipSync} from 'node:zlib'
 import {catalog,ORIGIN,unitCount} from '../src/data/catalog.ts'
 import {escapeHTML as e} from './interface.mjs'
+import {assignArtwork} from './artwork.mjs'
+import {validateState} from './catalog-state.mjs'
 const html=await readFile('dist/index.html','utf8')
 const projects=catalog.flatMap(g=>g.items)
 assert.equal(ORIGIN,'https://appautomaton.com','Unexpected publication origin')
@@ -63,3 +65,22 @@ for(const anchor of html.matchAll(/<a\b[^>]*>([\s\S]*?)<\/a>/gi)) {
 }
 for(const img of html.matchAll(/<img\b[^>]*>/gi))assert(/\balt="[^"]*"/.test(img[0]),'An image is missing its text alternative attribute')
 for(const name of ['twitter:title','twitter:description','twitter:image','twitter:image:alt'])assert(html.includes(`name="${name}"`),'Missing social card field: '+name)
+
+const registry=validateState(JSON.parse(await readFile('dist/catalog-state.json','utf8')));
+assert(registry.entries.length>=projects.length,'The published registry omitted project identities');
+const registryById=new Map(registry.entries.map(row=>[row.repoId,row]));
+const assignments=assignArtwork(catalog.flatMap(g=>g.items.map(p=>({...p,group:g.key}))),registry);
+for(const [index,project] of projects.entries()){
+ const entry=registryById.get(project.repoId);
+ assert(entry&&entry.repo===project.repo,`Missing durable identity: ${project.repo}`);
+ assert.equal(entry.order,project.catalogOrder,'Snapshot and registry order differ');
+ const artwork=assignments.get(project.repo);
+ assert.equal(entry.artwork,artwork.key,'Snapshot and registry artwork differ');
+ assert(articles[index].includes(`assets/objects/${artwork.file}.`),'Rendered artwork differs from the saved assignment');
+}
+assert.equal(new Set(projects.map(p=>p.repoId)).size,projects.length,'The catalog repeats a repository identity');
+for(const article of articles)assert(/<img[^>]*alt="[^"]+"/.test(article),'A catalog illustration needs a factual description');
+assert(html.includes('class="share-workshop"'),'Missing native sharing control');
+assert(!html.includes('<h3>No match.'),'Search status must not become a document heading');
+const colophon=await readFile('dist/colophon.html','utf8');
+assert(colophon.includes('https://polyhaven.com/license'),'Missing model license provenance');
