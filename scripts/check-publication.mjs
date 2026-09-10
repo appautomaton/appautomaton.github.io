@@ -18,6 +18,8 @@ for(const p of projects){
 const articles=[...html.matchAll(/<article\b[\s\S]*?<\/article>/g)].map(m=>m[0])
 for(const article of articles){
  assert(!/^<article[^>]*\bhidden(?:\s|=|>)/.test(article),'Project content must be visible before JavaScript')
+ const destinations=[...article.matchAll(/<a\b[^>]*href="([^"]+)"/g)].map(m=>m[1])
+ assert.equal(destinations.length,new Set(destinations).size,'A project repeats links to the same destination')
  for(const anchor of article.matchAll(/<a\b([^>]*)>/gi)){
   const rel=anchor[1].match(/\brel\s*=\s*(["'])(.*?)\1/i)?.[2]||''
   assert(!/\b(nofollow|ugc|sponsored)\b/i.test(rel),'Project backlinks must follow normally')
@@ -54,3 +56,10 @@ for(const [path,width,height] of [['dist/og.png',1200,630],['dist/apple-touch-ic
  assert.equal(png.readUInt32BE(16),width)
  assert.equal(png.readUInt32BE(20),height)
 }
+
+for(const anchor of html.matchAll(/<a\b[^>]*>([\s\S]*?)<\/a>/gi)) {
+ const text=anchor[1].replace(/<svg\b[\s\S]*?<\/svg>/gi,'').replace(/<[^>]*>/g,'').trim()
+ assert(text,'Every link needs descriptive HTML text, including image links')
+}
+for(const img of html.matchAll(/<img\b[^>]*>/gi))assert(/\balt="[^"]*"/.test(img[0]),'An image is missing its text alternative attribute')
+for(const name of ['twitter:title','twitter:description','twitter:image','twitter:image:alt'])assert(html.includes(`name="${name}"`),'Missing social card field: '+name)
