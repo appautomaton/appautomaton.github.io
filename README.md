@@ -130,11 +130,12 @@ The application code is released under the [MIT License](./LICENSE). League Goth
 
 </div>
 
-## Domain migration
+## Project addresses
 
-The canonical host is `appautomaton.com`; `www` and the former
-`appautomaton.renocrypt.com` redirect here preserving paths and query strings.
-GitHub Pages project sites inherit this host. During their metadata migration,
-the catalog audit warns when a project canonical names exactly the same path on
-the former host; unrelated domains and wrong paths still fail the build. Remove
-this exception once the independently maintained project pages are updated.
+The canonical host is `appautomaton.com`; `www` redirects here. GitHub Pages
+project sites inherit this host. The catalog audit rejects a project canonical
+that differs from its served URL, including one on the former hostname.
+
+Legacy project paths under `appautomaton.renocrypt.com` redirect here with paths
+and query strings preserved. That hostname's root now serves a separate
+RenoCrypt field guide.
