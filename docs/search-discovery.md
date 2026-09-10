@@ -8,7 +8,10 @@ and project metadata correction are recorded in [PR #7](https://github.com/appau
 
 `scripts/sync-catalog.mjs` reads the public GitHub organization, checks project
 pages, and writes `src/data/org.generated.ts`. `src/data/catalog.ts` joins those
-facts to the editorial placement in `src/data/shelves.ts`.
+facts to the editorial placement in `src/data/shelves.ts`. New public websites
+with a valid GitHub About URL are included automatically. Name and topics
+select a fallback category, which editorial placement can override. Existing
+source-only exhibits and deliberate exclusions retain their explicit choices.
 
 `scripts/build.mjs` uses that catalog to generate:
 
@@ -31,9 +34,10 @@ The build must not ship missing catalog entries, restrictive backlink
 attributes, a wrong canonical origin, or incomplete discovery files. It
 also verifies local assets and compressed browser-code budgets.
 
-A canonical pointing at the wrong project address fails the sync. A missing
-canonical, missing description, outdated homepage field, or absent backlink
-is reported for the owning project to resolve. Outages and access blocks do
+A missing or incorrect canonical, an indexing prohibition in page metadata or
+HTTP headers, and an incorrect GitHub About URL fail the sync. Sitemap
+candidates must serve XML documents. Missing descriptions and absent backlinks
+are reported for the owning project to resolve. Outages and access blocks do
 not prove that a project page has disappeared. Only a definitive 404/410 can
 remove a known page link.
 

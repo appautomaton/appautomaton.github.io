@@ -57,3 +57,30 @@ test('every sculpture produces nonempty, deterministic geometry without executin
  }
  assert.equal(seedFor('example'),seedFor('example'))
 })
+
+import {homepageProblem,selectExhibits,resolveShelves} from './catalog-policy.mjs'
+test('new public project websites enter the catalog automatically while editorial choices remain explicit',()=>{
+ const shelves=[{key:'skills',items:[]},{key:'harnesses',items:[{repo:'source-only',span:4}]},{key:'mlx',items:[]},{key:'creative',items:[]}]
+ const repo=(name,extra={})=>({name,topics:[],homepage:`https://appautomaton.com/${name}/`,hasSite:true,...extra})
+ const entries=[repo('source-only',{homepage:'',hasSite:false}),repo('new-skill'),repo('mlx-new'),repo('studio',{topics:['music-production']}),repo('new-system'),repo('excluded'),repo('not-published',{hasSite:false}),repo('no-homepage',{homepage:''})]
+ const selected=selectExhibits(entries,shelves,{excluded:'Deliberately unlisted'})
+ assert.equal(selected.length,5)
+ const result=resolveShelves(shelves,selected)
+ assert.deepEqual(result.map(s=>s.items.map(p=>p.repo)),[['new-skill'],['source-only','new-system'],['mlx-new'],['studio']])
+ assert.equal(homepageProblem(repo('mlx-new'),'https://appautomaton.com'),null)
+ for(const homepage of ['https://appautomaton.renocrypt.com/mlx-new/','https://appautomaton.com/another/','http://appautomaton.com/mlx-new/','javascript:alert(1)'])assert(homepageProblem(repo('mlx-new',{homepage}),'https://appautomaton.com'))
+ assert.throws(()=>selectExhibits([],shelves,{}),/unavailable repositories/)
+})
+
+import {auditProjectPage} from './page-audit.mjs'
+test('project indexing guards inspect canonical metadata and both HTML and HTTP robot directives',()=>{
+ const url='https://appautomaton.com/example/'
+ const page=`<title>Example</title><meta name="description" content="An example."><link href="${url}" rel="canonical"><a href="https://appautomaton.com/">Workshop</a>`
+ const audit=(html=page,headers=new Headers())=>auditProjectPage(url,html,headers).problems
+ assert.deepEqual(audit(),[])
+ assert.match(audit(page.replace(url,'https://appautomaton.renocrypt.com/example/')).join(' '),/canonical/)
+ assert.match(audit('<title>Missing canonical</title>').join(' '),/missing canonical/)
+ for(const meta of ['<meta name="robots" content="noindex,follow">','<meta content="NONE" name="googlebot">','<meta name="bingbot" content="noindex">'])assert.match(audit(page+meta).join(' '),/forbids indexing/)
+ assert.match(audit(page,new Headers({'X-Robots-Tag':'googlebot: noindex'})).join(' '),/forbids indexing/)
+ assert.deepEqual(audit(page+'<meta name="robots" content="index, follow, max-image-preview:large">'),[])
+})

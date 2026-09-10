@@ -1,8 +1,8 @@
 /* The catalog the page renders: the org's own account of itself, joined to
    the placements in shelves.ts.
 
-   Nothing here is typed by hand. Addresses are derived from the repository
-   name, whether a project has a page comes from a probe of that address, and
+   Nothing here is typed by hand. Addresses come from the verified GitHub About
+   field, whether a project has a page comes from a probe of that address, and
    the date a page was last built comes from the server that serves it. The
    join happens once, so the rendered cards, the structured data, and the
    sitemap are three views of one list rather than three lists to keep level.
@@ -13,6 +13,7 @@
    through Node's own loader, which resolves nothing implicitly. */
 import { org, origin, repos } from './org.generated.ts'
 import { shelves } from './shelves.ts'
+import { resolveShelves } from '../../scripts/catalog-policy.mjs'
 import type { Placement } from './shelves.ts'
 
 export const ORIGIN = origin
@@ -58,7 +59,7 @@ function join(placement: Placement, letter: string, index: number): Project {
        where the catalog wants a sentence written for this page rather than
        for a search box. */
     description: placement.description ?? facts.description,
-    site: facts.hasSite ? `${ORIGIN}/${placement.repo}/` : undefined,
+    site: facts.hasSite ? facts.homepage : undefined,
     source: `${GITHUB_ORG}/${placement.repo}`,
     chips: placement.chips ?? facts.topics.slice(0, 2),
     alsoKnownAs: placement.alsoKnownAs ?? [],
@@ -69,7 +70,7 @@ function join(placement: Placement, letter: string, index: number): Project {
   }
 }
 
-export const catalog: ShelfData[] = shelves.map((s) => ({
+export const catalog: ShelfData[] = resolveShelves(shelves,repos).map((s) => ({
   key: s.key,
   letter: s.letter,
   label: s.label,

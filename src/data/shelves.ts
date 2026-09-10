@@ -2,14 +2,14 @@
 
    Facts about each project — whether it exists, what it calls itself, whether
    it publishes a page and when that page was last built — are fetched by
-   scripts/sync-catalog.mjs and land in org.generated.json. This file holds
+   scripts/sync-catalog.mjs and land in org.generated.ts. This file holds
    the decisions no API can make: which shelf a project belongs on, how wide
    its case sits, and the sentence that introduces it when the repository's
    own one-liner is not the one the catalog wants to say.
 
-   Every repository in the org must appear here, either on a shelf or in
-   notShown. The sync step refuses to build otherwise, which is the only
-   reliable way to keep a project from shipping unlinked and unnoticed. */
+   New public repositories with a validated About URL and a working page are
+   placed automatically from their name and topics. Entries here override
+   their placement or copy. notShown remains an explicit exclusion. */
 
 export type Placement = {
   repo: string

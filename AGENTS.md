@@ -9,7 +9,9 @@ bare project directories.
   HTML with Node 24. Browser JavaScript is a progressive enhancement, with no
   framework, runtime data fetch, or content hidden behind a loading animation.
 - Project facts come from `scripts/sync-catalog.mjs`; editorial placement lives
-  in `src/data/shelves.ts`. Use the joined catalog for visible links, structured
+  in `src/data/shelves.ts`. New public sites with a validated About URL and a
+  working page enter automatically through `scripts/catalog-policy.mjs`;
+  explicit placements and exclusions override the fallback classification. Use the joined catalog for visible links, structured
   data, text output, and sitemaps. Do not invent project destinations.
 - Keep production indexable and project links normally followable. Preserve
   discovery checks, API pagination, daily/manual refresh, and failure behavior.

@@ -21,14 +21,15 @@ Blender is an optional artwork-authoring tool and is not needed for the site bui
 `scripts/sync-catalog.mjs` paginates GitHub's public organization API. The
 current catalog includes active, original repositories, excluding the
 organization site itself. `src/data/shelves.ts` holds editorial placement and
-explicit reasons for work that is not exhibited. An unplaced repository stops
-the build so it cannot disappear unnoticed.
+explicit reasons for work that is not exhibited. New repositories with a valid About URL and a working page are included
+automatically, with a category derived from their name and topics. Editorial
+placements override that fallback; explicit exclusions remain excluded.
 
 Project page availability, canonical metadata, modification dates, and
 sitemaps are checked against the serving site. Definitive 404/410 responses
 remove a page link. Access blocks, rate limits, and outages retain the previous
-known result and report a warning. A canonical naming a different address
-fails the build. The GitHub credential is sent only to the GitHub API.
+known result and report a warning. A missing or incorrect canonical, an indexing prohibition, or an incorrect
+GitHub About URL fails the build. URLs come from the verified About field. The GitHub credential is sent only to the GitHub API.
 
 The daily publication must refresh the API successfully. An API failure in CI
 stops deployment, preserving the previous live site. Local work can use the
