@@ -6,14 +6,15 @@ An open workshop for coding agents, local intelligence, and creative tools.
 
 ## The website
 
-The page is complete HTML, with original sculptural SVG illustrations,
+The page is complete HTML, with original rendered sculptures and SVG interface marks,
 self-hosted Uncut Sans, day and night palettes, and optional motion. Browser
 JavaScript adds search, filtering, and presentation controls. There is no
 runtime framework, client-side catalog fetch, or hydration step.
 
 A Node 24 build uses only the standard library. It renders the same catalog
 into the page, JSON-LD, `catalog.json`, `llms.txt`, and the discovery files.
-The browser receives finished illustrations, not a 3D rendering engine.
+The browser receives compressed WebP images, not a 3D rendering engine.
+Blender is an optional artwork-authoring tool and is not needed for the site build.
 
 ## Project discovery
 
@@ -78,7 +79,7 @@ robots.txt declares the project sitemaps discovered by the build.
 
 [Design notes](docs/design.md) describe the gallery and motion system.
 Uncut Sans by Kasper Nordkvist is served under the SIL Open Font License.
-The sculpture geometry, lighting code, and SVG interface marks were authored
+The sculpture geometry, studio lighting, and SVG interface marks were authored
 for this website. [Asset provenance](site/assets/SOURCES.md) records their
 origins. Floema was a reference for spatial composition and editorial rhythm;
 its assets are not used here.

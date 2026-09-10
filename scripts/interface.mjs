@@ -16,4 +16,4 @@ const paths={
  circle:'<circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="3"/><path d="M12 3v6m0 6v6M3 12h6m6 0h6"/>',
 }
 export function icon(name, cls='') { return `<svg class="icon ${cls}" viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${paths[name]||paths.arrow}</svg>` }
-export function logo() { return '<svg class="brand-mark" viewBox="0 0 48 48" width="48" height="48" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="square" aria-hidden="true"><path d="M5 40V18a9.5 9.5 0 0 1 19 0v22M24 40V26a9.5 9.5 0 0 1 19 0v14M5 28h19M24 33h19"/></svg>' }
+export function logo() { return '<svg class="brand-mark" viewBox="0 0 48 48" width="48" height="48" aria-hidden="true"><rect x="6" y="6" width="36" height="36" rx="10" fill="none" stroke="currentColor" stroke-width="4.5"/><circle class="brand-core" cx="24" cy="24" r="7.5" fill="currentColor"/></svg>' }
