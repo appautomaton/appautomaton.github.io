@@ -35,7 +35,7 @@ export type Project = {
   sitemap: string | null
   /** Stable catalog plate, stamped from shelf letter + position: "A-01". */
   tag: string
-  /** Bento width on the 12-column desktop grid. */
+  /** Layout hint retained for the historical prototypes. */
   span: number
 }
 

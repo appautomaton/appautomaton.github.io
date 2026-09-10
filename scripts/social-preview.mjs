@@ -1,0 +1,12 @@
+// Local export canvases for the committed share image and touch icon. These
+// previews are not part of a normal build and must not be deployed.
+import {writeFile,mkdir} from 'node:fs/promises'
+import {sculpture} from './sculptures.mjs'
+import {logo} from './interface.mjs'
+await mkdir('dist/assets',{recursive:true})
+await writeFile('dist/assets/social-knot.svg',sculpture('knot',17))
+await writeFile('dist/assets/social-molecule.svg',sculpture('molecule',72))
+await writeFile('dist/social-preview.html',`<!doctype html><html lang="en" data-theme="day"><head><meta charset="utf-8"><meta name="robots" content="noindex"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="stylesheet" href="assets/style.css"><style>html,body{width:1200px;height:630px;overflow:hidden;background:#f1efe9;color:#232923}.card{position:relative;width:1200px;height:630px;padding:48px 60px}.brand{font-size:24px;position:relative;z-index:2}.brand-mark{width:44px;height:44px}.label{position:absolute;top:67px;right:60px;font-size:11px;letter-spacing:1px}.title{position:absolute;top:230px;left:60px;z-index:2;font-size:75px;letter-spacing:-4.3px;line-height:1.07}.note{position:absolute;left:64px;bottom:50px;font-size:14px}.address{position:absolute;right:60px;bottom:50px;font-size:14px}.object{position:absolute;width:480px;height:480px;right:-65px;top:150px}.small{position:absolute;width:245px;height:245px;right:250px;top:5px;transform:rotate(-15deg)}.rule{position:absolute;left:60px;right:60px;bottom:84px;border-top:1px solid #bfc4b9}</style></head><body><div class="card"><div class="brand">${logo()}<span>App<br>Automaton</span></div><span class="label">AN OPEN WORKSHOP FOR AI</span><h1 class="title">Tools for thought.<br>Built for real work.</h1><img class="object" src="assets/social-knot.svg" alt="" width="640" height="640"><img class="small" src="assets/social-molecule.svg" alt="" width="640" height="640"><div class="rule"></div><span class="note">Agents. Local intelligence. Creative tools.</span><span class="address">appautomaton.com</span></div></body></html>`)
+await writeFile('dist/icon-preview.html',`<!doctype html><html><head><meta name="robots" content="noindex"><style>html,body{margin:0;width:180px;height:180px;overflow:hidden;background:#283b30}img{display:block;width:180px;height:180px}</style></head><body><img src="assets/mark.svg" alt=""></body></html>`)
+console.log('Export 1200×630: http://127.0.0.1:4174/social-preview.html')
+console.log('Export 180×180: http://127.0.0.1:4174/icon-preview.html')

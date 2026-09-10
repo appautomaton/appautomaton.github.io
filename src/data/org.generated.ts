@@ -37,7 +37,7 @@ export const repos: OrgRepo[] = [
       "mcp"
     ],
     "hasSite": true,
-    "lastmod": "2026-08-17",
+    "lastmod": "2026-09-10",
     "sitemap": "https://appautomaton.com/agent-designer/sitemap.xml"
   },
   {
@@ -54,8 +54,8 @@ export const repos: OrgRepo[] = [
       "opencode"
     ],
     "hasSite": true,
-    "lastmod": "2026-08-10",
-    "sitemap": null
+    "lastmod": "2026-09-10",
+    "sitemap": "https://appautomaton.com/automaton/sitemap.xml"
   },
   {
     "name": "docker-for-apple-container",
@@ -73,7 +73,7 @@ export const repos: OrgRepo[] = [
       "macos"
     ],
     "hasSite": true,
-    "lastmod": "2026-09-05",
+    "lastmod": "2026-09-10",
     "sitemap": "https://appautomaton.com/docker-for-apple-container/sitemap.xml"
   },
   {
@@ -92,8 +92,8 @@ export const repos: OrgRepo[] = [
       "pptx"
     ],
     "hasSite": true,
-    "lastmod": "2026-09-06",
-    "sitemap": null
+    "lastmod": "2026-09-10",
+    "sitemap": "https://appautomaton.com/document-SKILLs/sitemap.xml"
   },
   {
     "name": "latex-arxiv-SKILL",
@@ -121,8 +121,8 @@ export const repos: OrgRepo[] = [
       "scientific-writing"
     ],
     "hasSite": true,
-    "lastmod": "2026-08-17",
-    "sitemap": null
+    "lastmod": "2026-09-10",
+    "sitemap": "https://appautomaton.com/latex-arxiv-SKILL/sitemap.xml"
   },
   {
     "name": "ltx-video-mlx",
@@ -165,8 +165,8 @@ export const repos: OrgRepo[] = [
       "web-scraping"
     ],
     "hasSite": true,
-    "lastmod": "2026-08-14",
-    "sitemap": "https://appautomaton.renocrypt.com/markmaton/sitemap.xml"
+    "lastmod": "2026-09-10",
+    "sitemap": "https://appautomaton.com/markmaton/sitemap.xml"
   },
   {
     "name": "mlx-atomistic",
@@ -187,7 +187,7 @@ export const repos: OrgRepo[] = [
       "scientific-computing"
     ],
     "hasSite": true,
-    "lastmod": "2026-09-06",
+    "lastmod": "2026-09-10",
     "sitemap": "https://appautomaton.com/mlx-atomistic/sitemap-index.xml"
   },
   {
@@ -212,8 +212,8 @@ export const repos: OrgRepo[] = [
       "visual-grounding"
     ],
     "hasSite": true,
-    "lastmod": "2026-08-17",
-    "sitemap": "https://appautomaton.renocrypt.com/mlx-cv/sitemap.xml"
+    "lastmod": "2026-09-10",
+    "sitemap": "https://appautomaton.com/mlx-cv/sitemap.xml"
   },
   {
     "name": "mlx-h3",
@@ -229,8 +229,8 @@ export const repos: OrgRepo[] = [
       "video-generation"
     ],
     "hasSite": true,
-    "lastmod": "2026-08-17",
-    "sitemap": "https://appautomaton.renocrypt.com/mlx-h3/sitemap.xml"
+    "lastmod": "2026-09-10",
+    "sitemap": "https://appautomaton.com/mlx-h3/sitemap.xml"
   },
   {
     "name": "mlx-minimax-music3",
@@ -249,8 +249,8 @@ export const repos: OrgRepo[] = [
       "text-to-music"
     ],
     "hasSite": true,
-    "lastmod": "2026-08-17",
-    "sitemap": "https://appautomaton.renocrypt.com/mlx-minimax-music3/sitemap.xml"
+    "lastmod": "2026-09-10",
+    "sitemap": "https://appautomaton.com/mlx-minimax-music3/sitemap.xml"
   },
   {
     "name": "mlx-spatial",
@@ -274,7 +274,7 @@ export const repos: OrgRepo[] = [
       "trellis"
     ],
     "hasSite": true,
-    "lastmod": "2026-08-17",
+    "lastmod": "2026-09-10",
     "sitemap": "https://appautomaton.com/mlx-spatial/sitemap.xml"
   },
   {
@@ -293,7 +293,7 @@ export const repos: OrgRepo[] = [
       "voice-cloning"
     ],
     "hasSite": true,
-    "lastmod": "2026-09-05",
+    "lastmod": "2026-09-10",
     "sitemap": "https://appautomaton.com/mlx-speech/sitemap.xml"
   },
   {
@@ -350,8 +350,8 @@ export const repos: OrgRepo[] = [
       "vendoring"
     ],
     "hasSite": true,
-    "lastmod": "2026-08-17",
-    "sitemap": "https://appautomaton.renocrypt.com/pi-arcweld/sitemap.xml"
+    "lastmod": "2026-09-10",
+    "sitemap": "https://appautomaton.com/pi-arcweld/sitemap.xml"
   },
   {
     "name": "playwright-skill",
@@ -398,8 +398,8 @@ export const repos: OrgRepo[] = [
       "slides"
     ],
     "hasSite": true,
-    "lastmod": "2026-08-10",
-    "sitemap": null
+    "lastmod": "2026-09-10",
+    "sitemap": "https://appautomaton.com/presentation/sitemap.xml"
   },
   {
     "name": "setloom",
@@ -422,8 +422,8 @@ export const repos: OrgRepo[] = [
       "techno"
     ],
     "hasSite": true,
-    "lastmod": "2026-08-10",
-    "sitemap": null
+    "lastmod": "2026-09-10",
+    "sitemap": "https://appautomaton.com/setloom/sitemap.xml"
   },
   {
     "name": "tnt-asr",
@@ -445,8 +445,8 @@ export const repos: OrgRepo[] = [
       "whisper-alternative"
     ],
     "hasSite": true,
-    "lastmod": "2026-09-06",
-    "sitemap": null
+    "lastmod": "2026-09-10",
+    "sitemap": "https://appautomaton.com/tnt-asr/sitemap.xml"
   },
   {
     "name": "webmaton",

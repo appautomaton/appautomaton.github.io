@@ -1,5 +1,5 @@
 /* Pre-build sync: read what the org actually contains and write it to
-   src/data/org.generated.json.
+   src/data/org.generated.ts.
 
    Everything factual about a project already lives on GitHub or on the wire.
    Whether a repository exists, what it calls itself, whether it publishes a
@@ -16,47 +16,18 @@ import { writeFileSync, existsSync } from 'node:fs'
 import { join, dirname } from 'node:path'
 import { fileURLToPath, pathToFileURL } from 'node:url'
 import { serves } from './probe-response.mjs'
+import { readRepositories } from './github-repositories.mjs'
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..')
-/* A TypeScript module rather than JSON: Vite, tsc, and Node's own loader all
-   read it the same way, where a .json import would need an import attribute
-   in one of them and not the others. */
+/* Node 24 reads the typed catalog directly at build time. */
 const OUT = join(ROOT, 'src', 'data', 'org.generated.ts')
 
 const ORG = 'appautomaton'
 const ORIGIN = 'https://appautomaton.com'
-/* The org site repo is this site; it is the root, not an exhibit. */
-const SITE_REPO = `${ORG}.github.io`
 
 const token = process.env.GITHUB_TOKEN ?? process.env.GH_TOKEN
 
-async function fetchRepos() {
-  const res = await fetch(
-    `https://api.github.com/orgs/${ORG}/repos?per_page=100&type=public&sort=full_name`,
-    {
-      headers: {
-        accept: 'application/vnd.github+json',
-        'user-agent': `${ORG}-landing-build`,
-        ...(token ? { authorization: `Bearer ${token}` } : {}),
-      },
-      signal: AbortSignal.timeout(20000),
-    },
-  )
-  if (!res.ok) throw new Error(`GitHub API returned ${res.status} ${res.statusText}`)
-  const all = await res.json()
-  if (all.length === 100) console.warn('warn: hit the first page limit, add pagination')
-  /* Templates stay: latex-arxiv-SKILL is marked one because it is meant to be
-     cloned, which makes it more of a project here rather than less. Only
-     archived work, forks of other people's code, and this site drop out. */
-  return all
-    .filter((r) => !r.archived && !r.fork && r.name !== SITE_REPO)
-    .map((r) => ({
-      name: r.name,
-      description: (r.description ?? '').trim(),
-      topics: r.topics ?? [],
-      homepage: (r.homepage ?? '').trim(),
-    }))
-}
+const fetchRepos = () => readRepositories(ORG, token)
 
 /* A project has a page when its address answers 200 here. Asking the wire
    rather than the repo's homepage field means the flag cannot claim a site
@@ -150,7 +121,7 @@ let repos
 try {
   repos = await fetchRepos()
 } catch (e) {
-  if (!previous) throw new Error(`cannot reach the GitHub API and no committed copy exists: ${e}`)
+  if (!previous || process.env.GITHUB_ACTIONS === 'true') throw new Error(`cannot refresh GitHub metadata; keeping the previous deployment: ${e}`)
   console.warn(`warn: keeping the committed org snapshot, the API was unreachable (${e})`)
   process.exit(0)
 }

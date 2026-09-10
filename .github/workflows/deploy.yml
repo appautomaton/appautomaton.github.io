@@ -26,26 +26,16 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      # 24, not 22: the prerender step imports the catalog straight from
-      # TypeScript to check the rendered card count against it. Pinning the
-      # runtime that strips types keeps that check running rather than
-      # quietly degrading to a warning.
+      # Node 24 reads the typed catalog directly. The site has no dependencies.
       - uses: actions/setup-node@v4
         with:
           node-version: 24
-          cache: npm
-
-      - run: npm ci
-
-      # The build ends with a prerender pass that bakes the rendered page
-      # into dist/index.html, so crawlers see real HTML.
-      - run: npx playwright install --with-deps chromium
 
       # The build starts by reading the org, which is an authenticated call
       # here only to stay clear of the anonymous rate limit that shared runner
       # addresses reach on their own.
       - name: Check discovery helpers
-        run: node --test scripts/discovery.test.mjs
+        run: npm test
 
       - name: Lint
         run: npm run lint
@@ -72,6 +62,14 @@ jobs:
             build.log
             build-report.json
           retention-days: 30
+
+      - name: Save the static preview
+        uses: actions/upload-artifact@v4
+        with:
+          name: website-preview
+          path: dist
+          include-hidden-files: true
+          retention-days: 14
 
       - uses: actions/upload-pages-artifact@v3
         if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request'

@@ -17,7 +17,7 @@ export type Placement = {
   description?: string
   /** Two short, factual chips. Falls back to the first two GitHub topics. */
   chips?: [string, string]
-  /** Bento width on the 12-column desktop grid. */
+  /** Layout hint retained for the historical prototypes. */
   span: number
   /** The forms of the name a person or a model would actually type, for
       `alternateName` in the structured data. The repository name stays the
@@ -49,9 +49,9 @@ export const shelves: Shelf[] = [
   {
     key: 'skills',
     letter: 'A',
-    label: 'SKILLs',
+    label: 'Agent skills',
     blurb:
-      'Portable SKILL.md packs with three layers of disclosure. The same folder runs unchanged under Claude Code, Codex, Gemini, and OpenCode.',
+      'Reusable workflows for coding agents, research, documents, presentations, and technical writing.',
     items: [
       {
         repo: 'agent-designer',
@@ -110,9 +110,9 @@ export const shelves: Shelf[] = [
   {
     key: 'harnesses',
     letter: 'B',
-    label: 'Harnesses & runtimes',
+    label: 'Working systems',
     blurb:
-      'Stage gates, orchestration, and plumbing. The tooling that keeps an agent honest from plan to verify.',
+      'Interfaces and working structures for agent execution, context, data conversion, and local development.',
     items: [
       {
         repo: 'plexmaton',
@@ -164,9 +164,9 @@ export const shelves: Shelf[] = [
   {
     key: 'mlx',
     letter: 'C',
-    label: 'On-device MLX',
+    label: 'Local intelligence',
     blurb:
-      'Pure MLX on the Apple GPU. Speech, vision, video, 3D, and atomistic simulation that never leave the machine.',
+      'Models and runtimes for speech, vision, video, 3D, forecasting, and scientific work on Apple silicon.',
     items: [
       {
         repo: 'mlx-speech',
@@ -247,8 +247,8 @@ export const shelves: Shelf[] = [
   {
     key: 'creative',
     letter: 'D',
-    label: 'Creative harnesses',
-    blurb: 'The same stage-gated method, pointed at club music.',
+    label: 'Creative practice',
+    blurb: 'Tools for human-directed music production, with editable outputs and room for judgment.',
     items: [
       {
         repo: 'setloom',
