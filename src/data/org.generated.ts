@@ -10,6 +10,10 @@ export type OrgRepo = {
   /** The repository's own one-liner, as GitHub reports it. */
   description: string
   topics: string[]
+  /** Canonical website from the repository About field. */
+  homepage: string
+  /** Fallback category for newly published sites without editorial placement. */
+  automaticGroup?: string
   /** True when https://appautomaton.com/<name>/ answered 200. */
   hasSite: boolean
   /** The date that page was last built, from its Last-Modified header. */
@@ -36,8 +40,9 @@ export const repos: OrgRepo[] = [
       "gemini-cli",
       "mcp"
     ],
+    "homepage": "https://appautomaton.com/agent-designer/",
     "hasSite": true,
-    "lastmod": "2026-08-17",
+    "lastmod": "2026-09-10",
     "sitemap": "https://appautomaton.com/agent-designer/sitemap.xml"
   },
   {
@@ -53,9 +58,10 @@ export const repos: OrgRepo[] = [
       "llm",
       "opencode"
     ],
+    "homepage": "https://appautomaton.com/automaton/",
     "hasSite": true,
-    "lastmod": "2026-08-10",
-    "sitemap": null
+    "lastmod": "2026-09-10",
+    "sitemap": "https://appautomaton.com/automaton/sitemap.xml"
   },
   {
     "name": "docker-for-apple-container",
@@ -72,8 +78,9 @@ export const repos: OrgRepo[] = [
       "docker-shim",
       "macos"
     ],
+    "homepage": "https://appautomaton.com/docker-for-apple-container/",
     "hasSite": true,
-    "lastmod": "2026-09-05",
+    "lastmod": "2026-09-10",
     "sitemap": "https://appautomaton.com/docker-for-apple-container/sitemap.xml"
   },
   {
@@ -91,9 +98,10 @@ export const repos: OrgRepo[] = [
       "pdf-extraction",
       "pptx"
     ],
+    "homepage": "https://appautomaton.com/document-SKILLs/",
     "hasSite": true,
-    "lastmod": "2026-09-06",
-    "sitemap": null
+    "lastmod": "2026-09-10",
+    "sitemap": "https://appautomaton.com/document-SKILLs/sitemap.xml"
   },
   {
     "name": "latex-arxiv-SKILL",
@@ -120,9 +128,10 @@ export const repos: OrgRepo[] = [
       "review-paper",
       "scientific-writing"
     ],
+    "homepage": "https://appautomaton.com/latex-arxiv-SKILL/",
     "hasSite": true,
-    "lastmod": "2026-08-17",
-    "sitemap": null
+    "lastmod": "2026-09-10",
+    "sitemap": "https://appautomaton.com/latex-arxiv-SKILL/sitemap.xml"
   },
   {
     "name": "ltx-video-mlx",
@@ -138,6 +147,7 @@ export const repos: OrgRepo[] = [
       "text-to-video",
       "video-generation"
     ],
+    "homepage": "",
     "hasSite": false,
     "lastmod": null,
     "sitemap": null
@@ -164,9 +174,10 @@ export const repos: OrgRepo[] = [
       "rag",
       "web-scraping"
     ],
+    "homepage": "https://appautomaton.com/markmaton/",
     "hasSite": true,
-    "lastmod": "2026-08-14",
-    "sitemap": "https://appautomaton.renocrypt.com/markmaton/sitemap.xml"
+    "lastmod": "2026-09-10",
+    "sitemap": "https://appautomaton.com/markmaton/sitemap.xml"
   },
   {
     "name": "mlx-atomistic",
@@ -186,8 +197,9 @@ export const repos: OrgRepo[] = [
       "python",
       "scientific-computing"
     ],
+    "homepage": "https://appautomaton.com/mlx-atomistic/",
     "hasSite": true,
-    "lastmod": "2026-09-06",
+    "lastmod": "2026-09-10",
     "sitemap": "https://appautomaton.com/mlx-atomistic/sitemap-index.xml"
   },
   {
@@ -211,9 +223,10 @@ export const repos: OrgRepo[] = [
       "segment-anything",
       "visual-grounding"
     ],
+    "homepage": "https://appautomaton.com/mlx-cv/",
     "hasSite": true,
-    "lastmod": "2026-08-17",
-    "sitemap": "https://appautomaton.renocrypt.com/mlx-cv/sitemap.xml"
+    "lastmod": "2026-09-10",
+    "sitemap": "https://appautomaton.com/mlx-cv/sitemap.xml"
   },
   {
     "name": "mlx-h3",
@@ -228,9 +241,10 @@ export const repos: OrgRepo[] = [
       "text-to-video",
       "video-generation"
     ],
+    "homepage": "https://appautomaton.com/mlx-h3/",
     "hasSite": true,
-    "lastmod": "2026-08-17",
-    "sitemap": "https://appautomaton.renocrypt.com/mlx-h3/sitemap.xml"
+    "lastmod": "2026-09-10",
+    "sitemap": "https://appautomaton.com/mlx-h3/sitemap.xml"
   },
   {
     "name": "mlx-minimax-music3",
@@ -248,9 +262,10 @@ export const repos: OrgRepo[] = [
       "on-device-ai",
       "text-to-music"
     ],
+    "homepage": "https://appautomaton.com/mlx-minimax-music3/",
     "hasSite": true,
-    "lastmod": "2026-08-17",
-    "sitemap": "https://appautomaton.renocrypt.com/mlx-minimax-music3/sitemap.xml"
+    "lastmod": "2026-09-10",
+    "sitemap": "https://appautomaton.com/mlx-minimax-music3/sitemap.xml"
   },
   {
     "name": "mlx-spatial",
@@ -273,8 +288,9 @@ export const repos: OrgRepo[] = [
       "spatial-ai",
       "trellis"
     ],
+    "homepage": "https://appautomaton.com/mlx-spatial/",
     "hasSite": true,
-    "lastmod": "2026-08-17",
+    "lastmod": "2026-09-10",
     "sitemap": "https://appautomaton.com/mlx-spatial/sitemap.xml"
   },
   {
@@ -292,8 +308,9 @@ export const repos: OrgRepo[] = [
       "tts",
       "voice-cloning"
     ],
+    "homepage": "https://appautomaton.com/mlx-speech/",
     "hasSite": true,
-    "lastmod": "2026-09-05",
+    "lastmod": "2026-09-10",
     "sitemap": "https://appautomaton.com/mlx-speech/sitemap.xml"
   },
   {
@@ -310,6 +327,7 @@ export const repos: OrgRepo[] = [
       "time-series",
       "timesfm"
     ],
+    "homepage": "",
     "hasSite": false,
     "lastmod": null,
     "sitemap": null
@@ -327,6 +345,7 @@ export const repos: OrgRepo[] = [
       "pnpm",
       "termux"
     ],
+    "homepage": "",
     "hasSite": false,
     "lastmod": null,
     "sitemap": null
@@ -349,9 +368,10 @@ export const repos: OrgRepo[] = [
       "typescript",
       "vendoring"
     ],
+    "homepage": "https://appautomaton.com/pi-arcweld/",
     "hasSite": true,
-    "lastmod": "2026-08-17",
-    "sitemap": "https://appautomaton.renocrypt.com/pi-arcweld/sitemap.xml"
+    "lastmod": "2026-09-10",
+    "sitemap": "https://appautomaton.com/pi-arcweld/sitemap.xml"
   },
   {
     "name": "playwright-skill",
@@ -371,6 +391,7 @@ export const repos: OrgRepo[] = [
       "termux",
       "web-automation"
     ],
+    "homepage": "",
     "hasSite": false,
     "lastmod": null,
     "sitemap": null
@@ -379,6 +400,7 @@ export const repos: OrgRepo[] = [
     "name": "plexmaton",
     "description": "AI coding in your terminal, with clarity and control. Bring your models and skills, review tool actions, and return to conversations with their history intact.",
     "topics": [],
+    "homepage": "",
     "hasSite": false,
     "lastmod": null,
     "sitemap": null
@@ -397,9 +419,10 @@ export const repos: OrgRepo[] = [
       "presentation",
       "slides"
     ],
+    "homepage": "https://appautomaton.com/presentation/",
     "hasSite": true,
-    "lastmod": "2026-08-10",
-    "sitemap": null
+    "lastmod": "2026-09-10",
+    "sitemap": "https://appautomaton.com/presentation/sitemap.xml"
   },
   {
     "name": "setloom",
@@ -421,9 +444,10 @@ export const repos: OrgRepo[] = [
       "supercollider",
       "techno"
     ],
+    "homepage": "https://appautomaton.com/setloom/",
     "hasSite": true,
-    "lastmod": "2026-08-10",
-    "sitemap": null
+    "lastmod": "2026-09-10",
+    "sitemap": "https://appautomaton.com/setloom/sitemap.xml"
   },
   {
     "name": "tnt-asr",
@@ -444,9 +468,10 @@ export const repos: OrgRepo[] = [
       "voice-to-text",
       "whisper-alternative"
     ],
+    "homepage": "https://appautomaton.com/tnt-asr/",
     "hasSite": true,
-    "lastmod": "2026-09-06",
-    "sitemap": null
+    "lastmod": "2026-09-10",
+    "sitemap": "https://appautomaton.com/tnt-asr/sitemap.xml"
   },
   {
     "name": "webmaton",
@@ -466,6 +491,7 @@ export const repos: OrgRepo[] = [
       "web-research",
       "web-scraping"
     ],
+    "homepage": "",
     "hasSite": false,
     "lastmod": null,
     "sitemap": null

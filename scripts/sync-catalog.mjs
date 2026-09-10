@@ -1,5 +1,5 @@
 /* Pre-build sync: read what the org actually contains and write it to
-   src/data/org.generated.json.
+   src/data/org.generated.ts.
 
    Everything factual about a project already lives on GitHub or on the wire.
    Whether a repository exists, what it calls itself, whether it publishes a
@@ -16,95 +16,37 @@ import { writeFileSync, existsSync } from 'node:fs'
 import { join, dirname } from 'node:path'
 import { fileURLToPath, pathToFileURL } from 'node:url'
 import { serves } from './probe-response.mjs'
+import { readRepositories } from './github-repositories.mjs'
+import { homepageProblem, projectAddress, selectExhibits } from './catalog-policy.mjs'
+import { auditProjectPage } from './page-audit.mjs'
+const { shelves, notShown } = await import('../src/data/shelves.ts')
+const placed = new Set(shelves.flatMap(s => s.items.map(p => p.repo)))
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..')
-/* A TypeScript module rather than JSON: Vite, tsc, and Node's own loader all
-   read it the same way, where a .json import would need an import attribute
-   in one of them and not the others. */
+/* Node 24 reads the typed catalog directly at build time. */
 const OUT = join(ROOT, 'src', 'data', 'org.generated.ts')
 
 const ORG = 'appautomaton'
 const ORIGIN = 'https://appautomaton.com'
-/* The org site repo is this site; it is the root, not an exhibit. */
-const SITE_REPO = `${ORG}.github.io`
 
 const token = process.env.GITHUB_TOKEN ?? process.env.GH_TOKEN
 
-async function fetchRepos() {
-  const res = await fetch(
-    `https://api.github.com/orgs/${ORG}/repos?per_page=100&type=public&sort=full_name`,
-    {
-      headers: {
-        accept: 'application/vnd.github+json',
-        'user-agent': `${ORG}-landing-build`,
-        ...(token ? { authorization: `Bearer ${token}` } : {}),
-      },
-      signal: AbortSignal.timeout(20000),
-    },
-  )
-  if (!res.ok) throw new Error(`GitHub API returned ${res.status} ${res.statusText}`)
-  const all = await res.json()
-  if (all.length === 100) console.warn('warn: hit the first page limit, add pagination')
-  /* Templates stay: latex-arxiv-SKILL is marked one because it is meant to be
-     cloned, which makes it more of a project here rather than less. Only
-     archived work, forks of other people's code, and this site drop out. */
-  return all
-    .filter((r) => !r.archived && !r.fork && r.name !== SITE_REPO)
-    .map((r) => ({
-      name: r.name,
-      description: (r.description ?? '').trim(),
-      topics: r.topics ?? [],
-      homepage: (r.homepage ?? '').trim(),
-    }))
-}
+const fetchRepos = () => readRepositories(ORG, token)
 
-/* A project has a page when its address answers 200 here. Asking the wire
-   rather than the repo's homepage field means the flag cannot claim a site
-   that stopped being served, and a redirect is not a site: the address that
-   belongs in a link is the one that answered. */
-/* HEAD is enough to learn that an address answers. The page itself is fetched
-   with GET, because a HEAD response carries no body and the audit below reads
-   the markup. */
-/* Each project page is built in its own repository, so nothing here can keep
-   their markup right. What this can do is look, on every build, and say what
-   it saw. A canonical naming some other address is the one finding that stops
-   the build: it removes the page from the index outright, and it is never what
-   anyone meant. The rest are reported and left alone. */
-function audit(name, url, html) {
-  const problems = []
-  const warnings = []
+/* A configured About URL must answer successfully without a redirect.
+   GET also audits canonical and robot metadata. The expected Pages address
+   is probed for existing source-only exhibits to notice a newly published
+   site whose About field still needs configuration. */
 
-  const canonical = html.match(/<link[^>]+rel=["']canonical["'][^>]*>/i)?.[0]
-  const href = canonical?.match(/href=["']([^"']+)["']/i)?.[1]
-  if (!href) warnings.push('no canonical')
-  else if (href !== url) problems.push(`canonical points at ${href}, not ${url}`)
-
-  if (!/<title[^>]*>\s*\S/i.test(html)) warnings.push('no title')
-  if (!/<meta[^>]+name=["']description["']/i.test(html)) warnings.push('no meta description')
-  if (/content=["']https:\/\/appautomaton\.github\.io/i.test(html))
-    warnings.push('an og tag names the github.io address, which redirects here')
-
-  const strays = (html.match(/href=["']https:\/\/appautomaton\.github\.io/gi) ?? []).length
-  if (strays) warnings.push(`${strays} link(s) to the github.io address, which redirects here`)
-
-  /* The trailing slash is optional because a URL with an empty path and one
-     with "/" are the same address, and a page that writes it either way is
-     linking here. Requiring the slash reported a page as unlinked when it was
-     not, which is the expensive direction for a check like this to be wrong. */
-  if (!/href=["']https:\/\/appautomaton\.com\/?["']/i.test(html))
-    warnings.push('no link back to the catalog')
-
-  for (const w of warnings) console.warn(`warn: ${name} ${w}`)
-  return problems
-}
-
-async function probe(name) {
+async function probe(repo) {
+  const name=repo.name
   try {
-    const url = `${ORIGIN}/${name}/`
+    const url = repo.homepage || projectAddress(ORIGIN,name)
     const page = await serves(url, 'GET')
     if (!page) return { hasSite: false }
 
-    const problems = audit(name, url, await page.text())
+    const {problems,warnings} = auditProjectPage(url, await page.text(), page.headers)
+    for(const warning of warnings)console.warn(`warn: ${name} ${warning}`)
 
     /* GitHub Pages reports when it last wrote the document, which is the only
        honest lastmod available for a page built in another repository. */
@@ -118,8 +60,18 @@ async function probe(name) {
     let sitemap = null
     for (const name_ of ['sitemap-index.xml', 'sitemap.xml']) {
       const url = `${ORIGIN}/${name}/${name_}`
-      if (await serves(url)) {
-        sitemap = url
+      try {
+        const response=await serves(url,'GET')
+        if(response) {
+          const xml=await response.text()
+          if(!/^\s*(?:<\?xml[\s\S]*?\?>\s*)?(?:<!--[\s\S]*?-->\s*)*<(?:\w+:)?(?:urlset|sitemapindex)(?:\s|>)/.test(xml))problems.push(`${url} is not a sitemap XML document`)
+          sitemap=url
+          break
+        }
+      } catch(error) {
+        // A sitemap outage must not discard a page's already-detected errors.
+        sitemap=previous?.repos.find(repo=>repo.name===name)?.sitemap??null
+        console.warn(`warn: ${name} sitemap check unavailable, retained the previous map (${error})`)
         break
       }
     }
@@ -150,12 +102,14 @@ let repos
 try {
   repos = await fetchRepos()
 } catch (e) {
-  if (!previous) throw new Error(`cannot reach the GitHub API and no committed copy exists: ${e}`)
+  if (!previous || process.env.GITHUB_ACTIONS === 'true') throw new Error(`cannot refresh GitHub metadata; keeping the previous deployment: ${e}`)
   console.warn(`warn: keeping the committed org snapshot, the API was unreachable (${e})`)
   process.exit(0)
 }
 
-const probes = await Promise.all(repos.map((r) => probe(r.name)))
+const invalidHomepages=repos.filter(r=>!Object.hasOwn(notShown,r.name)).map(r=>homepageProblem(r,ORIGIN)).filter(Boolean)
+if(invalidHomepages.length)throw new Error(invalidHomepages.join('\n'))
+const probes = await Promise.all(repos.map(r => Object.hasOwn(notShown,r.name)||(!r.homepage&&!placed.has(r.name))?{hasSite:false}:probe(r)))
 
 /* A probe that could not complete says nothing about the project, so the
    last known answer stands rather than a repo silently losing its page. */
@@ -187,65 +141,18 @@ for (const name of unreachable) {
   console.warn(`warn: could not probe ${name}, kept the last answer (${probes[index].error})`)
 }
 
-const misCanonicalled = repos.flatMap((r, i) => (probes[i].problems ?? []).map((p) => `  ${r.name}: ${p}`))
-if (misCanonicalled.length)
-  throw new Error(`project pages name an address that is not their own:\n${misCanonicalled.join('\n')}`)
+const invalidPages = repos.flatMap((r, i) => (probes[i].problems ?? []).map((p) => `  ${r.name}: ${p}`))
+if (invalidPages.length)
+  throw new Error(`project page discovery checks failed:\n${invalidPages.join('\n')}`)
 
-/* The homepage field is what GitHub shows beside the repo and what a reader
-   follows from the org page, so it should name the address that serves the
-   project rather than one that redirects to it. */
-for (const r of merged) {
-  const want = r.hasSite ? `${ORIGIN}/${r.name}/` : ''
-  if (want && r.homepage !== want)
-    console.warn(`warn: ${r.name} homepage is "${r.homepage || 'unset'}", expected ${want}`)
-}
+// A serving page must be advertised at its canonical address in GitHub About.
+const missingHomepages=merged.filter(r=>r.hasSite&&!Object.hasOwn(notShown,r.name)&&!r.homepage)
+if(missingHomepages.length)throw new Error(`Published projects need their About URL configured: ${missingHomepages.map(r=>r.name).join(', ')}`)
+const selected=selectExhibits(merged,shelves,notShown)
+for(const repo of selected.filter(r=>r.automaticGroup))console.log(`auto: ${repo.name} placed in ${repo.automaticGroup}`)
 
-/* --- The gate ----------------------------------------------------------
-   Automation finds the repositories; a person decides what to do with each
-   one. What must never happen is the third thing: a project quietly absent
-   from the catalog because nobody noticed it shipped. Every repo is either
-   placed on a shelf or listed as deliberately unlisted, and anything in
-   neither stops the build here, before a page is rendered around it. */
-
-const { shelves, notShown } = await import('../src/data/shelves.ts')
-const placed = new Set(shelves.flatMap((s) => s.items.map((p) => p.repo)))
-const known = new Set([...placed, ...Object.keys(notShown)])
-
-const strays = merged.filter((r) => !known.has(r.name))
-if (strays.length) {
-  const lines = strays.map(
-    (r) =>
-      `  ${r.name}${r.hasSite ? `  (publishes ${ORIGIN}/${r.name}/)` : '  (no page)'}\n` +
-      `    ${r.description || 'no description'}`,
-  )
-  throw new Error(
-    `${strays.length} repository/repositories are in neither a shelf nor notShown:\n` +
-      `${lines.join('\n')}\n\n` +
-      `Add each to src/data/shelves.ts: to a shelf's items to exhibit it, or to\n` +
-      `notShown with a reason to leave it out on purpose.`,
-  )
-}
-
-const missing = [...placed].filter((name) => !merged.some((r) => r.name === name))
-if (missing.length)
-  throw new Error(
-    `src/data/shelves.ts places repositories the org no longer returns: ${missing.join(', ')}`,
-  )
-
-/* The gate above catches a project nobody placed. This catches the quieter
-   version of the same mistake: a project on a shelf that publishes no page.
-   From here those look identical whether the page is a to-do or was never
-   wanted, because hasSite is false either way. A placement carrying a noPage
-   reason is the difference, so an exhibit without one is named on every build
-   until somebody publishes the page or writes the reason down.
-
-   Warned rather than thrown. The page would be built in another repository,
-   and a hub that refuses to deploy over a decision it cannot make is a hub
-   nobody keeps.
-
-   The check runs both ways: a reason still sitting there after the page went
-   live is a stale reason, and a catalog that keeps stale reasons stops being
-   the place anyone looks. */
+/* Existing editorial entries may intentionally point only to source code.
+   Keep an unfinished website visible as a warning without inventing a reason. */
 const placementByRepo = new Map(shelves.flatMap((s) => s.items.map((p) => [p.repo, p])))
 
 for (const r of merged) {
@@ -259,12 +166,13 @@ for (const r of merged) {
     )
 }
 
-const exhibits = merged
-  .filter((r) => placed.has(r.name))
-  .map(({ name, description, topics, hasSite, lastmod, sitemap }) => ({
+const exhibits = selected
+  .map(({ name, description, topics, homepage, automaticGroup, hasSite, lastmod, sitemap }) => ({
     name,
     description,
     topics,
+    homepage,
+    ...(automaticGroup?{automaticGroup}:{}),
     hasSite,
     lastmod,
     sitemap,
@@ -283,6 +191,10 @@ export type OrgRepo = {
   /** The repository's own one-liner, as GitHub reports it. */
   description: string
   topics: string[]
+  /** Canonical website from the repository About field. */
+  homepage: string
+  /** Fallback category for newly published sites without editorial placement. */
+  automaticGroup?: string
   /** True when ${ORIGIN}/<name>/ answered 200. */
   hasSite: boolean
   /** The date that page was last built, from its Last-Modified header. */

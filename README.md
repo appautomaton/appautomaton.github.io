@@ -1,141 +1,93 @@
-<div align="center">
-
-<img src="./public/favicon.svg" alt="App Automaton" width="88" height="88">
-
 # App Automaton
 
-**Open-source research and engineering for collaborative agents, context-rich systems, and efficient machine intelligence.**
+An open workshop for coding agents, local intelligence, and creative tools.
 
-An [AppCubic](https://www.appcubic.com/) workshop.
+[Explore the website](https://appautomaton.com/) · [GitHub organization](https://github.com/appautomaton) · [RenoCrypt field guide](https://appautomaton.renocrypt.com/)
 
-[![Production](https://img.shields.io/badge/Production-appautomaton.com-315c52?style=flat-square)](https://appautomaton.com/)
-[![Deploy to GitHub Pages](https://github.com/appautomaton/appautomaton.github.io/actions/workflows/deploy.yml/badge.svg)](https://github.com/appautomaton/appautomaton.github.io/actions/workflows/deploy.yml)
-[![License: MIT](https://img.shields.io/badge/License-MIT-665f57?style=flat-square)](./LICENSE)
+## The website
 
-[Production](https://appautomaton.com/) · [GitHub](https://github.com/appautomaton) · [AppCubic](https://www.appcubic.com/) · [RenoCrypt](https://www.renocrypt.com/)
+The page is complete HTML, with original rendered sculptures and SVG interface marks,
+self-hosted Uncut Sans, day and night palettes, and optional motion. Browser
+JavaScript adds search, filtering, and presentation controls. There is no
+runtime framework, client-side catalog fetch, or hydration step.
 
-</div>
+A Node 24 build uses only the standard library. It renders the same catalog
+into the page, JSON-LD, `catalog.json`, `llms.txt`, and the discovery files.
+The browser receives compressed WebP images, not a 3D rendering engine.
+Blender is an optional artwork-authoring tool and is not needed for the site build.
 
----
+## Project discovery
 
-## Scope
+`scripts/sync-catalog.mjs` paginates GitHub's public organization API. The
+current catalog includes active, original repositories, excluding the
+organization site itself. `src/data/shelves.ts` holds editorial placement and
+explicit reasons for work that is not exhibited. New repositories with a valid About URL and a working page are included
+automatically, with a category derived from their name and topics. Editorial
+placements override that fallback; explicit exclusions remain excluded.
 
-App Automaton develops the working layers around model capability: coordination between agents, the construction of context, and efficient model execution on real hardware.
+Project page availability, canonical metadata, modification dates, and
+sitemaps are checked against the serving site. Definitive 404/410 responses
+remove a page link. Access blocks, rate limits, and outages retain the previous
+known result and report a warning. A missing or incorrect canonical, an indexing prohibition, or an incorrect
+GitHub About URL fails the build. URLs come from the verified About field. The GitHub credential is sent only to the GitHub API.
 
-Projects are released as reusable tools with inspectable interfaces, resumable workflows, and verifiable outputs.
+The daily publication must refresh the API successfully. An API failure in CI
+stops deployment, preserving the previous live site. Local work can use the
+committed snapshot. See [the discovery contract](docs/search-discovery.md).
 
-### Engineering focus
+## Local development
 
-**Collaborative agents.** Clear ownership, isolated execution, and durable state for work that spans multiple agents.
-
-**Context-rich systems.** Grounded retrieval, explicit provenance, and controlled context across the full workflow.
-
-**Efficient machine intelligence.** Model capability preserved through implementation, optimization, and integration.
-
-Verification is designed into each layer.
-
-## Selected work
-
-### Capabilities
-
-Portable skills for delegation, research, browser control, documents, presentations, and technical writing.
-
-[`agent-designer`](https://github.com/appautomaton/agent-designer) · [`document-SKILLs`](https://github.com/appautomaton/document-SKILLs) · [`presentation`](https://github.com/appautomaton/presentation) · [`webmaton`](https://github.com/appautomaton/webmaton) · [`playwright-skill`](https://github.com/appautomaton/playwright-skill) · [`latex-arxiv-SKILL`](https://github.com/appautomaton/latex-arxiv-SKILL)
-
-### Harnesses and runtimes
-
-Stage-gated execution, multi-agent worktrees, agent workspaces, data conversion, and native container operations.
-
-[`automaton`](https://github.com/appautomaton/automaton) · [`automux`](https://github.com/appautomaton/automux) · [`openclaw-monorepo`](https://github.com/appautomaton/openclaw-monorepo) · [`markmaton`](https://github.com/appautomaton/markmaton) · [`docker-for-apple-container`](https://github.com/appautomaton/docker-for-apple-container) · [`pi-arcweld`](https://github.com/appautomaton/pi-arcweld)
-
-### On-device intelligence
-
-Speech, vision, video, spatial, and atomistic systems implemented for Apple silicon.
-
-[`mlx-speech`](https://github.com/appautomaton/mlx-speech) · [`tnt-asr`](https://github.com/appautomaton/tnt-asr) · [`ltx-video-mlx`](https://github.com/appautomaton/ltx-video-mlx) · [`mlx-cv`](https://github.com/appautomaton/mlx-cv) · [`mlx-spatial`](https://github.com/appautomaton/mlx-spatial) · [`mlx-h3`](https://github.com/appautomaton/mlx-h3) · [`mlx-atomistic`](https://github.com/appautomaton/mlx-atomistic)
-
-### Creative systems
-
-Human-led production with the same explicit stages and inspectable artifacts.
-
-[`setloom`](https://github.com/appautomaton/setloom)
-
-The full index is maintained at **[appautomaton.com](https://appautomaton.com/)**.
-
-## This repository
-
-This repository is the organization’s presentation and discovery layer.
-
-| Layer | Source of truth |
-| --- | --- |
-| Project facts | `src/data/org.generated.ts`, written by `scripts/sync-catalog.mjs` from the org API |
-| Shelf placement and copy | `src/data/shelves.ts` |
-| Catalog and JSON-LD | `src/data/catalog.ts`, the join of the two above |
-| Visual system | `src/theme.ts` and Astryx design tokens |
-| Agent-readable index | `dist/llms.txt`, generated from the catalog by `scripts/prerender.mjs` |
-| Search discovery | `dist/sitemap.xml` and `dist/robots.txt`, generated by `scripts/prerender.mjs` |
-| Delivery | `.github/workflows/deploy.yml` |
-
-`llms.txt`, `sitemap.xml`, and `robots.txt` are build artifacts rather than checked-in
-files: the sitemap is derived from the links the rendered home page actually
-contains, so the two cannot disagree. The state of search discovery, what the
-daily build checks on its own, and what to look at next are recorded in
-[`docs/search-discovery.md`](./docs/search-discovery.md).
-
-The application uses React 19, TypeScript, and Vite. Production builds run type-checking and bundling before a Playwright prerender writes the complete catalog into `dist/index.html`, preserving meaningful HTML for crawlers and constrained clients.
-
-### Visual system
-
-`Cabinet Theater` is implemented as a token system, not a collection of page-level overrides. Astryx supplies the component vocabulary; `src/theme.ts` defines paired day and night palettes, typography, motion, and engraving treatments. Fonts are self-hosted with their licenses, and every historical plate is public domain or CC0 with provenance recorded in `src/plates/SOURCES.md`.
-
-## Development and delivery
+Use Node 24 or newer. No dependency installation is needed.
 
 ```sh
-npm install
 npm run dev
 ```
 
-Build the production artifact:
+This renders the committed catalog and serves `http://127.0.0.1:4174/`.
+After changing source, run `npm run build:offline` and reload the preview.
+For a fresh metadata build and publication checks:
 
 ```sh
-npx playwright install chromium
+npm test
+npm run lint
 npm run build
 ```
 
-Every push to `main` runs the [GitHub Pages workflow](./.github/workflows/deploy.yml): locked dependency installation, Chromium provisioning, type-checking, bundling, prerendering, artifact upload, and deployment.
+For a static fallback check, run `node scripts/serve.mjs --no-js` and open
+`http://127.0.0.1:4175/`. That local preview blocks page JavaScript with a
+Content Security Policy.
 
-Pull requests run the same build and catalog checks without deploying. Each run
-keeps a build summary and a `catalog-build-report` artifact for 30 days, including
-warnings and failures. These checks cover delivery and discovery metadata, not
-indexing decisions or search performance.
+The generated `dist/` directory is disposable. Edit source, never its output.
+The publication check verifies crawlable project entries, indexing metadata,
+sitemaps, local assets, unique IDs, and compressed CSS/JavaScript budgets.
 
-### Routing contract
+## Delivery and routing
 
-The organization site does not claim bare one-segment paths such as `/some-project/`. GitHub Pages reserves those paths for repository-owned project sites. New landing-site routes therefore live beneath an explicit namespace such as `/projects/<slug>/`.
+[Deploy to GitHub Pages](https://github.com/appautomaton/appautomaton.github.io/actions/workflows/deploy.yml) runs on pushes to main, pull requests, daily at
+05:17 UTC, and manual dispatch. Pull requests produce a downloadable static
+preview. Successful main builds deploy through GitHub Pages.
 
-## Related work
+Scheduled public workflows can be disabled after prolonged repository
+inactivity. GitHub schedules can also be delayed. A manual run is available
+when an immediate refresh is needed.
 
-- **[AppCubic](https://www.appcubic.com/)** carries applied AI research, systems, and ventures through to production.
-- **[RenoCrypt](https://www.renocrypt.com/)** publishes long-form work on machine learning, systems, and security, keeping derivations, benchmarks, and code close to the claims.
+This is the organization site. GitHub Pages serves separately maintained
+project websites beneath `/<repository>/`. The root site does not replace
+those directories. Its sitemap includes linked project homepages, and its
+robots.txt declares the project sitemaps discovered by the build.
 
-## License and provenance
+## Art and provenance
 
-The application code is released under the [MIT License](./LICENSE). League Gothic and Martian Mono retain their OFL terms; Gambetta retains the ITF Free Font License. Historical image sources and rights statements are recorded in `src/plates/SOURCES.md`.
+[Design notes](docs/design.md) describe the gallery and motion system.
+Uncut Sans by Kasper Nordkvist is served under the SIL Open Font License.
+The sculpture geometry, studio lighting, and SVG interface marks were authored
+for this website. [Asset provenance](site/assets/SOURCES.md) records their
+origins. Floema was a reference for spatial composition and editorial rhythm;
+its assets are not used here.
 
----
+Historical experiments remain under `prototypes/`. Their original fonts and
+engraving assets remain under `src/fonts/` and `src/plates/` so those prototypes
+can still be viewed. Production publishes assets only from `site/assets/`.
 
-<div align="center">
-
-[App Automaton](https://github.com/appautomaton) · An [AppCubic](https://www.appcubic.com/) workshop
-
-</div>
-
-## Project addresses
-
-The canonical host is `appautomaton.com`; `www` redirects here. GitHub Pages
-project sites inherit this host. The catalog audit rejects a project canonical
-that differs from its served URL, including one on the former hostname.
-
-Legacy project paths under `appautomaton.renocrypt.com` redirect here with paths
-and query strings preserved. That hostname's root now serves a separate
-RenoCrypt field guide.
+Application code and original artwork are released under the [MIT License](LICENSE).
+Font and historical-asset licenses retain their own terms.
