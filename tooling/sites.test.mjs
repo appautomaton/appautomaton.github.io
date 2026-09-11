@@ -128,3 +128,41 @@ test('preview serves directory routes, ranges, real 404s, and isolated external 
   await symlink(join(root, 'private.txt'), join(root, 'dist/leak.txt'))
   assert.equal((await fetch(url + '/leak.txt')).status, 403)
 })
+
+test('staged and central modules publish only through explicit ownership', async t => {
+  const {root, write} = await fixture(t)
+  const r = registry()
+  r.sites[1].publication = 'staged'
+  assert.throws(() => validateRegistry(r), /handoff phase/)
+  r.phase = 'publisher-handoff'
+  await buildWorkspace(root, r)
+  let files = await fileHashes(join(root, 'dist-production'))
+  assert(files['sound/index.html'])
+  assert(files['sound/.well-known/publisher.json'])
+  const before = files
+  await write('sites/sound/public/index.html', page('/sound/', '<section id="models">Models</section><img src="missing.svg" alt="Missing">'))
+  await assert.rejects(buildWorkspace(root, r), /Missing local destination/)
+  assert.deepEqual(await fileHashes(join(root, 'dist-production')), before)
+  await write('sites/sound/public/index.html', page('/sound/', '<section id="models">Models</section>'))
+  r.sites[1].publication = 'central'
+  assert.throws(() => validateRegistry(r), /publisher mismatch/)
+  r.sites[1].currentPublisher = 'appautomaton/appautomaton.github.io'
+  r.phase = 'modular-production'
+  await buildWorkspace(root, r)
+  const manifest = JSON.parse(await readFile(join(root, 'dist-production/release-manifest.json')))
+  assert.equal(manifest.scope, 'registered-site-modules')
+  assert.deepEqual(manifest.modules.map(site => site.id), ['home', 'sound'])
+  r.sites[2].publication = 'central'
+  assert.throws(() => validateRegistry(r), /local module/)
+})
+
+test('isolated routing markers are opt-in and excluded from the sitemap', async t => {
+  const {root} = await fixture(t)
+  await buildWorkspace(root, registry(), {routingProbe: true})
+  const probe = await readFile(join(root, 'dist-production/web-publisher-probe-20260911/index.html'), 'utf8')
+  assert(probe.includes('noindex,nofollow'))
+  assert(probe.includes('organization-root-marker'))
+  assert(!(await readFile(join(root, 'dist-production/sitemap.xml'), 'utf8')).includes('web-publisher-probe'))
+  await buildWorkspace(root, registry())
+  assert(!(await fileHashes(join(root, 'dist-production')))['web-publisher-probe-20260911/index.html'])
+})

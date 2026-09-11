@@ -12,6 +12,11 @@ on:
   schedule:
     - cron: "17 5 * * *"
   workflow_dispatch:
+    inputs:
+      routing_probe:
+        description: Include isolated noindex publication markers for the handoff test
+        type: boolean
+        default: false
 
 permissions:
   contents: read
@@ -49,6 +54,7 @@ jobs:
           fi
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          PAGES_ROUTING_PROBE: ${{ github.event_name == 'workflow_dispatch' && inputs.routing_probe }}
 
       - name: Summarize catalog checks
         if: always()
@@ -78,7 +84,7 @@ jobs:
       - uses: actions/upload-pages-artifact@v3
         if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request'
         with:
-          # Project publishers remain authoritative during the preview pilot.
+          # Only explicitly staged or centrally owned modules enter production.
           path: dist-production
 
   deploy:

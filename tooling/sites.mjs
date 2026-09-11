@@ -18,9 +18,11 @@ export function ownerFor(registry, pathname) {
     .sort((a, b) => b.publicPath.length - a.publicPath.length)[0]
 }
 
+export const inProduction = site => site.publicPath === '/' || ['staged', 'central'].includes(site.publication)
+
 export function validateRegistry(registry) {
   assert.equal(registry.version, 1, 'Unsupported site registry version')
-  assert.equal(registry.phase, 'preview-pilot', 'This publisher only supports the preview pilot')
+  assert(['preview-pilot', 'publisher-handoff', 'modular-production'].includes(registry.phase), 'Unknown publication phase')
   const origin = new URL(registry.origin)
   assert.equal(origin.origin, registry.origin, 'Origin must not contain a path')
   assert.equal(origin.protocol, 'https:', 'Production requires HTTPS')
@@ -33,6 +35,11 @@ export function validateRegistry(registry) {
     assert(!mounts.has(site.publicPath.toLowerCase()), `Duplicate public mount: ${site.publicPath}`)
     mounts.add(site.publicPath.toLowerCase())
     assert(/^appautomaton\/[a-z\d._-]+$/i.test(site.currentPublisher), `Missing current publisher: ${site.id}`)
+    assert(['external', 'staged', 'central'].includes(site.publication || 'external'), `Unknown publication state: ${site.id}`)
+    if (inProduction(site)) assert(site.sourceDir, `Production requires a local module: ${site.id}`)
+    if (site.publication === 'central') assert.equal(site.currentPublisher, 'appautomaton/appautomaton.github.io', `Central publisher mismatch: ${site.id}`)
+    if (site.publication === 'staged') assert.equal(registry.phase, 'publisher-handoff', `Staging requires the handoff phase: ${site.id}`)
+    if (registry.phase === 'preview-pilot') assert(site.publicPath === '/' || !inProduction(site), `Pilot cannot publish project modules: ${site.id}`)
     if (site.sourceDir) {
       assert(site.sourceDir.startsWith('sites/'), `Sources must be site modules: ${site.id}`)
       assert(site.sourceDir.split('/').every(part => part && part !== '.' && part !== '..') && !site.sourceDir.includes('\\'), `Source path must be normalized: ${site.id}`)
@@ -170,7 +177,7 @@ export async function validatePublication(root, registry, {production = false} =
     if (url.origin !== registry.origin) return
     const pathname = decodeURIComponent(url.pathname)
     const owner = ownerFor(registry, pathname)
-    if (!owner?.sourceDir || (production && owner.publicPath !== '/')) return
+    if (!owner?.sourceDir || (production && !inProduction(owner))) return
     const target = routeFile(pathname).slice(1)
     assert(files.has(target), `Missing local destination: ${from} -> ${address}`)
     if (anchor && url.hash && ids.has(target)) {
@@ -199,7 +206,7 @@ export async function validatePublication(root, registry, {production = false} =
   assert.equal(rootMap.type, 'urlset', 'The root content sitemap must remain a URL set')
   for (const site of registry.sites) {
     assert(rootMap.locations.includes(registry.origin + site.publicPath), `Root sitemap omits ${site.id}`)
-    if (!site.sourceDir || (production && site.publicPath !== '/')) continue
+    if (!site.sourceDir || (production && !inProduction(site))) continue
     for (const route of site.pages) {
       const file = routeFile(route).slice(1)
       const source = html.get(file)
@@ -223,9 +230,9 @@ export async function validatePublication(root, registry, {production = false} =
   assert(!/^Disallow:\s*\/$/mi.test(robots), 'The root crawler policy blocks all content')
   assert(robots.includes('Sitemap: ' + registry.origin + '/sitemap-index.xml'), 'Missing central sitemap declaration')
   if (production) for (const file of files) {
-    assert.equal(ownerFor(registry, '/' + file)?.publicPath, '/', `Pilot production claims a project route: ${file}`)
+    assert(inProduction(ownerFor(registry, '/' + file)), `Production claims an external project route: ${file}`)
   }
-  return {files: files.size, contentPages: registry.sites.filter(site => site.sourceDir && (!production || site.publicPath === '/')).reduce((n, site) => n + site.pages.length, 0), sitemaps: index.locations.length}
+  return {files: files.size, contentPages: registry.sites.filter(site => site.sourceDir && (!production || inProduction(site))).reduce((n, site) => n + site.pages.length, 0), sitemaps: index.locations.length}
 }
 
 export async function sourceOutput(root, site) {
