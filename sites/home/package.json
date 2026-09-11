@@ -1,0 +1,16 @@
+{
+  "name": "appautomaton-website",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "engines": { "node": ">=24" },
+  "scripts": {
+    "dev": "node scripts/build.mjs && node scripts/serve.mjs",
+    "sync": "node scripts/sync-catalog.mjs",
+    "build": "node scripts/sync-catalog.mjs && node scripts/build.mjs && node scripts/check-publication.mjs",
+    "build:offline": "node scripts/build.mjs && node scripts/check-publication.mjs",
+    "test": "node --test scripts/*.test.mjs",
+    "lint": "node scripts/check-source.mjs",
+    "preview": "node scripts/serve.mjs"
+  }
+}

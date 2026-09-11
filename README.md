@@ -1,130 +1,103 @@
-# App Automaton
+# App Automaton websites
 
-An open workshop for coding agents, local intelligence, and creative tools.
+Independent websites, maintained in one frontend repository. Each site owns its
+appearance and behavior; shared tools build, validate, preview, and publish the
+files. Application and library code stays in its original project repository.
 
-[Explore the website](https://appautomaton.com/) · [GitHub organization](https://github.com/appautomaton) · [RenoCrypt field guide](https://appautomaton.renocrypt.com/)
+## Current pilot
 
-## The website
+| Module | Public path | Presentation |
+| --- | --- | --- |
+| [Home](sites/home/README.md) | `/` | Material gallery and project catalog |
+| [MLX Speech](sites/mlx-speech/README.md) | `/mlx-speech/` | Animated audio studio |
+| [Pi Arcweld](sites/pi-arcweld/README.md) | `/pi-arcweld/` | Typographic welding field guide |
 
-The page is complete HTML, with a curated public 3D model collection, original sculptures, and SVG interface marks,
-self-hosted Uncut Sans, day and night palettes, and optional motion. Browser
-JavaScript adds search, filtering, and presentation controls. There is no
-runtime framework, client-side catalog fetch, or hydration step.
+The other 14 project websites retain their existing publishers. All 17 public
+mounts and sitemap sources are listed in [the site registry](registry/sites.json).
+No application runtime or model weights are included here.
 
-A Node 24 build uses only the standard library. It renders the same catalog
-into the page, JSON-LD, `catalog.json`, `llms.txt`, and the discovery files.
-The browser receives compressed WebP images, not a 3D rendering engine.
-Blender is an optional artwork-authoring tool and is not needed for the site build.
+## Develop and review
 
-## Project discovery
-
-`scripts/sync-catalog.mjs` paginates GitHub's public organization API. The
-current catalog includes active, original repositories, excluding the
-organization site itself. `src/data/shelves.ts` holds editorial placement and
-explicit reasons for work that is not exhibited. New repositories with a valid About URL and a working page are included
-automatically, with an initial category derived from their name and topics. Editorial
-placements override that fallback; explicit exclusions remain excluded.
-
-Display order never comes from API response order. The curated entries keep
-the order in `shelves.ts`. Automatic additions follow them within each field,
-in first-publication order. A successful build saves each repository ID,
-category, order, and artwork in `catalog-state.json`. The next build reads
-that published registry, so new projects, changed topics, and renamed automatic
-entries cannot rearrange existing artwork. The initial batch is ordered by
-creation date and repository ID. `site/artwork.json` remains the explicit art
-direction override.
-
-`src/data/catalog-state.json` is the checked-in offline checkpoint. Refresh it
-with `npm run sync`; do not hand-edit generated state. Scheduled builds carry
-the latest registry in their Pages artifact and diagnostic artifact without
-committing back to GitHub. Main deployments are serialized. A missing known
-repository or lost registry fails publication for review instead of silently
-removing a project or resetting its presentation.
-
-Project page availability, canonical metadata, modification dates, and
-sitemaps are checked against the serving site. Definitive 404/410 responses
-can remove a curated page link. An automatic entry becoming ineligible stops
-publication until its disposition is reviewed. Access blocks, rate limits, and outages retain the previous
-known result and report a warning. A missing or incorrect canonical, an indexing prohibition, or an incorrect
-GitHub About URL fails the build. URLs come from the verified About field. The GitHub credential is sent only to the GitHub API.
-
-The daily publication must refresh the API successfully. An API failure in CI
-stops deployment, preserving the previous live site. Local work can use the
-committed snapshot. See [the discovery contract](docs/search-discovery.md).
-
-## Local development
-
-Use Node 24 or newer. No dependency installation is needed.
+Use Node 24 or newer. No package installation is required.
 
 ```sh
 npm run dev
+# http://127.0.0.1:8748/
+# http://127.0.0.1:8748/mlx-speech/
+# http://127.0.0.1:8748/pi-arcweld/
 ```
 
-This renders the committed catalog and serves `http://127.0.0.1:4174/`.
-After changing source, run `npm run build:offline` and reload the preview.
-For a fresh metadata build and publication checks:
+The normal build uses checked-in catalog and sitemap inputs without network
+access. After an edit, run `npm run build` and reload. The local server changes
+only navigation anchors to the three imported sites; canonical and social
+metadata retain their production URLs. Other project links still lead to their
+live sites. Directory routes, byte ranges, and real missing-page responses work.
+Local responses carry an indexing prohibition. `node tooling/serve.mjs --no-js`
+also disables scripts through a response policy.
 
 ```sh
 npm test
 npm run lint
 npm run build
+npm run check
+npm run check:baseline
 ```
 
-For a static fallback check, run `node scripts/serve.mjs --no-js` and open
-`http://127.0.0.1:4175/`. That local preview blocks page JavaScript with a
-Content Security Policy.
+The baseline check compares module output against file hashes from successful
+deployment artifacts. It verifies an equivalent import; later intentional
+design work can legitimately differ from that historical reference. It does
+not play media or run inference. The homepage checkpoint includes the catalog
+and presentation registry actually used by the selected deployment.
 
-The generated `dist/` directory is disposable. Edit source, never its output.
-The publication check verifies crawlable project entries, indexing metadata,
-sitemaps, local assets, unique IDs, and compressed CSS/JavaScript budgets.
+## Structure and ownership
 
-## Delivery and routing
-
-[Deploy to GitHub Pages](https://github.com/appautomaton/appautomaton.github.io/actions/workflows/deploy.yml) runs on pushes to main, pull requests, daily at
-05:17 UTC, and manual dispatch. Pull requests produce a downloadable static
-preview. Successful main builds deploy through GitHub Pages.
-
-Scheduled public workflows can be disabled after prolonged repository
-inactivity. GitHub schedules can also be delayed. A manual run is available
-when an immediate refresh is needed.
-
-This is the organization site. GitHub Pages serves separately maintained
-project websites beneath `/<repository>/`. The root site does not replace
-those directories. Its sitemap includes linked project homepages, and its
-robots.txt declares the project sitemaps discovered by the build.
-
-## Art and provenance
-
-[Design notes](docs/design.md) describe the gallery and motion system.
-Uncut Sans by Kasper Nordkvist is served under the SIL Open Font License.
-The collection combines CC0 models from Poly Haven with original sculptures and SVG interface marks. All current project cards use distinct artwork; the larger library supplies spare objects for newly discovered projects. [Asset provenance](site/assets/SOURCES.md) records their
-origins. Floema was a reference for spatial composition and editorial rhythm;
-its assets are not used here.
-
-Historical experiments remain under `prototypes/`. Their original fonts and
-engraving assets remain under `src/fonts/` and `src/plates/` so those prototypes
-can still be viewed. Production publishes assets only from `site/assets/`.
-
-Application code and original artwork are released under the [MIT License](LICENSE).
-Font and historical-asset licenses retain their own terms.
-
-## Optional artwork authoring
-
-The website build never downloads models or invokes Blender. To recreate the
-public model renders, use a cache outside the public repository:
-
-```sh
-node scripts/fetch-art-models.mjs /path/to/private-model-cache
-blender --background --factory-startup --disable-autoexec --python scripts/render-model-library.py -- --manifest site/artwork.json --cache /path/to/private-model-cache --output /path/to/renders --hdri /path/to/studio_small_09_1k.hdr
+```text
+sites/home/                 Homepage source and existing Node build
+sites/mlx-speech/public/    Independent static HTML, styles, scripts, and assets
+sites/pi-arcweld/public/    Independent static HTML, styles, scripts, and assets
+registry/sites.json        Mounts, build adapters, sitemap leaves, publishers
+registry/baselines.json    Import revisions and deployed artifact hashes
+tooling/                   Assembly, validation, refresh, and preview
+dist/                      Complete three-site preview, generated
+dist-production/           Homepage and central discovery only, generated
 ```
 
-The downloader verifies the recorded source checksums and restricts model
-resources to their declared package. The renderer selects the intended mesh
-objects and fits their camera-space bounds without clipping. Rendering was
-verified with Blender 5.2.1. Image compression uses WebP at quality 82 in 320,
-480, and 720px variants.
+There is no shared browser application or global project stylesheet. Follow
+each site's design document before changing its presentation. Static modules
+do not need a framework or a package manifest. The homepage retains its own
+build and discovery regression checks.
 
-`site/artwork.json` controls the collection and explicit repository assignments.
-New repositories receive an unused object when one is available. If a future
-catalog outgrows the library, reuse is balanced so artwork never blocks a
-project from being published.
+## One sitemap entry point
+
+The build generates `/sitemap-index.xml` from the registry, with 17 leaf sitemap
+URLs. The root `/robots.txt` points to that index. Existing sitemap addresses,
+canonical URLs, and project routes remain valid. The MLX Atomistic sitemap
+index is expanded to its leaf sitemap so the root index does not nest indexes.
+
+After this change is published, `https://appautomaton.com/sitemap-index.xml` can
+be used as the common sitemap submission in the domain's Search Console property.
+The local preview is not a production submission, and an index does not establish
+that every listed page has been crawled or indexed. See [Google's sitemap-index
+documentation](https://developers.google.com/search/docs/crawling-indexing/sitemaps/large-sitemaps).
+
+`npm run sync` explicitly refreshes the GitHub catalog, checks sitemap sources,
+flattens indexes, and updates the registry. New eligible websites enter as
+external publishers; they do not silently acquire a local module. Failed refresh
+or build validation prevents publication and leaves the previous complete
+artifact available. Existing site removals or mount changes require review.
+
+## Publication boundary
+
+Pull requests build the aggregate preview and attach it as `website-preview`.
+Main, scheduled, and manual runs refresh inputs, then upload `dist-production/`
+to Pages. During this pilot that artifact contains the homepage and central
+discovery files, with no project subdirectories. Existing project workflows
+remain authoritative for their current routes.
+
+Do not switch the Pages upload to `dist/` until the route handoff has been tested.
+[Routing and rollback](docs/routing.md) records what is verified and the remaining
+production test. Builds validate a complete candidate before replacing either
+output directory. A failed project build cannot publish a partial site.
+
+The root [MIT license](LICENSE) covers shared tooling. Imported site licenses and
+asset provenance are retained in their modules.

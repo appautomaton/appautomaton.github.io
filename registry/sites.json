@@ -1,0 +1,193 @@
+{
+  "version": 1,
+  "phase": "preview-pilot",
+  "origin": "https://appautomaton.com",
+  "sites": [
+    {
+      "id": "home",
+      "publicPath": "/",
+      "currentPublisher": "appautomaton/appautomaton.github.io",
+      "sitemapSource": "https://appautomaton.com/sitemap.xml",
+      "sitemaps": [
+        "https://appautomaton.com/sitemap.xml"
+      ],
+      "sourceDir": "sites/home",
+      "build": {
+        "kind": "node",
+        "script": "scripts/build.mjs",
+        "check": "scripts/check-publication.mjs"
+      },
+      "outputDir": "dist",
+      "pages": [
+        "/",
+        "/colophon.html"
+      ]
+    },
+    {
+      "id": "agent-designer",
+      "publicPath": "/agent-designer/",
+      "currentPublisher": "appautomaton/agent-designer",
+      "sitemapSource": "https://appautomaton.com/agent-designer/sitemap.xml",
+      "sitemaps": [
+        "https://appautomaton.com/agent-designer/sitemap.xml"
+      ]
+    },
+    {
+      "id": "automaton",
+      "publicPath": "/automaton/",
+      "currentPublisher": "appautomaton/automaton",
+      "sitemapSource": "https://appautomaton.com/automaton/sitemap.xml",
+      "sitemaps": [
+        "https://appautomaton.com/automaton/sitemap.xml"
+      ]
+    },
+    {
+      "id": "docker-for-apple-container",
+      "publicPath": "/docker-for-apple-container/",
+      "currentPublisher": "appautomaton/docker-for-apple-container",
+      "sitemapSource": "https://appautomaton.com/docker-for-apple-container/sitemap.xml",
+      "sitemaps": [
+        "https://appautomaton.com/docker-for-apple-container/sitemap.xml"
+      ]
+    },
+    {
+      "id": "document-SKILLs",
+      "publicPath": "/document-SKILLs/",
+      "currentPublisher": "appautomaton/document-SKILLs",
+      "sitemapSource": "https://appautomaton.com/document-SKILLs/sitemap.xml",
+      "sitemaps": [
+        "https://appautomaton.com/document-SKILLs/sitemap.xml"
+      ]
+    },
+    {
+      "id": "latex-arxiv-SKILL",
+      "publicPath": "/latex-arxiv-SKILL/",
+      "currentPublisher": "appautomaton/latex-arxiv-SKILL",
+      "sitemapSource": "https://appautomaton.com/latex-arxiv-SKILL/sitemap.xml",
+      "sitemaps": [
+        "https://appautomaton.com/latex-arxiv-SKILL/sitemap.xml"
+      ]
+    },
+    {
+      "id": "markmaton",
+      "publicPath": "/markmaton/",
+      "currentPublisher": "appautomaton/markmaton",
+      "sitemapSource": "https://appautomaton.com/markmaton/sitemap.xml",
+      "sitemaps": [
+        "https://appautomaton.com/markmaton/sitemap.xml"
+      ]
+    },
+    {
+      "id": "mlx-atomistic",
+      "publicPath": "/mlx-atomistic/",
+      "currentPublisher": "appautomaton/mlx-atomistic",
+      "sitemapSource": "https://appautomaton.com/mlx-atomistic/sitemap-index.xml",
+      "sitemaps": [
+        "https://appautomaton.com/mlx-atomistic/sitemap-0.xml"
+      ]
+    },
+    {
+      "id": "mlx-cv",
+      "publicPath": "/mlx-cv/",
+      "currentPublisher": "appautomaton/mlx-cv",
+      "sitemapSource": "https://appautomaton.com/mlx-cv/sitemap.xml",
+      "sitemaps": [
+        "https://appautomaton.com/mlx-cv/sitemap.xml"
+      ]
+    },
+    {
+      "id": "mlx-h3",
+      "publicPath": "/mlx-h3/",
+      "currentPublisher": "appautomaton/mlx-h3",
+      "sitemapSource": "https://appautomaton.com/mlx-h3/sitemap.xml",
+      "sitemaps": [
+        "https://appautomaton.com/mlx-h3/sitemap.xml"
+      ]
+    },
+    {
+      "id": "mlx-minimax-music3",
+      "publicPath": "/mlx-minimax-music3/",
+      "currentPublisher": "appautomaton/mlx-minimax-music3",
+      "sitemapSource": "https://appautomaton.com/mlx-minimax-music3/sitemap.xml",
+      "sitemaps": [
+        "https://appautomaton.com/mlx-minimax-music3/sitemap.xml"
+      ]
+    },
+    {
+      "id": "mlx-spatial",
+      "publicPath": "/mlx-spatial/",
+      "currentPublisher": "appautomaton/mlx-spatial",
+      "sitemapSource": "https://appautomaton.com/mlx-spatial/sitemap.xml",
+      "sitemaps": [
+        "https://appautomaton.com/mlx-spatial/sitemap.xml"
+      ]
+    },
+    {
+      "id": "mlx-speech",
+      "publicPath": "/mlx-speech/",
+      "currentPublisher": "appautomaton/mlx-speech",
+      "sitemapSource": "https://appautomaton.com/mlx-speech/sitemap.xml",
+      "sitemaps": [
+        "https://appautomaton.com/mlx-speech/sitemap.xml"
+      ],
+      "sourceDir": "sites/mlx-speech/public",
+      "build": {
+        "kind": "static",
+        "exclude": [
+          ".nojekyll"
+        ]
+      },
+      "outputDir": ".",
+      "pages": [
+        "/mlx-speech/"
+      ]
+    },
+    {
+      "id": "pi-arcweld",
+      "publicPath": "/pi-arcweld/",
+      "currentPublisher": "appautomaton/pi-arcweld",
+      "sitemapSource": "https://appautomaton.com/pi-arcweld/sitemap.xml",
+      "sitemaps": [
+        "https://appautomaton.com/pi-arcweld/sitemap.xml"
+      ],
+      "sourceDir": "sites/pi-arcweld/public",
+      "build": {
+        "kind": "static",
+        "exclude": [
+          ".nojekyll"
+        ]
+      },
+      "outputDir": ".",
+      "pages": [
+        "/pi-arcweld/"
+      ]
+    },
+    {
+      "id": "presentation",
+      "publicPath": "/presentation/",
+      "currentPublisher": "appautomaton/presentation",
+      "sitemapSource": "https://appautomaton.com/presentation/sitemap.xml",
+      "sitemaps": [
+        "https://appautomaton.com/presentation/sitemap.xml"
+      ]
+    },
+    {
+      "id": "setloom",
+      "publicPath": "/setloom/",
+      "currentPublisher": "appautomaton/setloom",
+      "sitemapSource": "https://appautomaton.com/setloom/sitemap.xml",
+      "sitemaps": [
+        "https://appautomaton.com/setloom/sitemap.xml"
+      ]
+    },
+    {
+      "id": "tnt-asr",
+      "publicPath": "/tnt-asr/",
+      "currentPublisher": "appautomaton/tnt-asr",
+      "sitemapSource": "https://appautomaton.com/tnt-asr/sitemap.xml",
+      "sitemaps": [
+        "https://appautomaton.com/tnt-asr/sitemap.xml"
+      ]
+    }
+  ]
+}

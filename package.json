@@ -1,16 +1,19 @@
 {
-  "name": "appautomaton-website",
-  "private": true,
+  "name": "appautomaton-web",
   "version": "1.0.0",
+  "private": true,
   "type": "module",
   "engines": { "node": ">=24" },
   "scripts": {
-    "dev": "node scripts/build.mjs && node scripts/serve.mjs",
-    "sync": "node scripts/sync-catalog.mjs",
-    "build": "node scripts/sync-catalog.mjs && node scripts/build.mjs && node scripts/check-publication.mjs",
-    "build:offline": "node scripts/build.mjs && node scripts/check-publication.mjs",
-    "test": "node --test scripts/*.test.mjs",
-    "lint": "node scripts/check-source.mjs",
-    "preview": "node scripts/serve.mjs"
+    "dev": "npm run build && npm run preview",
+    "build": "node tooling/build.mjs",
+    "build:offline": "npm run build",
+    "build:fresh": "npm run sync && npm run build",
+    "sync": "npm --prefix sites/home run sync && node tooling/sync-registry.mjs",
+    "preview": "node tooling/serve.mjs",
+    "check": "node tooling/check.mjs",
+    "check:baseline": "node tooling/check-baseline.mjs",
+    "test": "npm --prefix sites/home test && node --test tooling/*.test.mjs",
+    "lint": "npm --prefix sites/home run lint && node tooling/lint.mjs"
   }
 }
