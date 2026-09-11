@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "phase": "publisher-handoff",
+  "phase": "modular-production",
   "origin": "https://appautomaton.com",
   "sites": [
     {
@@ -137,7 +137,7 @@
     {
       "id": "mlx-speech",
       "publicPath": "/mlx-speech/",
-      "currentPublisher": "appautomaton/mlx-speech",
+      "currentPublisher": "appautomaton/appautomaton.github.io",
       "sitemapSource": "https://appautomaton.com/mlx-speech/sitemap.xml",
       "sitemaps": [
         "https://appautomaton.com/mlx-speech/sitemap.xml"
@@ -153,12 +153,12 @@
       "pages": [
         "/mlx-speech/"
       ],
-      "publication": "staged"
+      "publication": "central"
     },
     {
       "id": "pi-arcweld",
       "publicPath": "/pi-arcweld/",
-      "currentPublisher": "appautomaton/pi-arcweld",
+      "currentPublisher": "appautomaton/appautomaton.github.io",
       "sitemapSource": "https://appautomaton.com/pi-arcweld/sitemap.xml",
       "sitemaps": [
         "https://appautomaton.com/pi-arcweld/sitemap.xml"
@@ -174,7 +174,7 @@
       "pages": [
         "/pi-arcweld/"
       ],
-      "publication": "staged"
+      "publication": "central"
     },
     {
       "id": "presentation",

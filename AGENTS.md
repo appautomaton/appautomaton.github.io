@@ -1,7 +1,7 @@
 # App Automaton websites
 
-This repository owns the homepage source and previews independent project
-websites. Each module under `sites/` owns its visual identity, content, fonts,
+This repository builds and publishes the homepage and registered independent
+project websites. Each module under `sites/` owns its visual identity, content, fonts,
 assets, styles, scripts, and build inputs. Keep application and library code in
 the original project repositories. Do not introduce a shared page shell or
 global project styles. Homepage guidance is in `sites/home/AGENTS.md`.
@@ -11,8 +11,8 @@ global project styles. Homepage guidance is in `sites/home/AGENTS.md`.
 - Publication ownership is explicit in `registry/sites.json`. `external` modules
   enter preview only; `staged` modules also enter the production artifact while
   their previous publisher remains active; `central` modules are served here.
-  Use `staged` only during `publisher-handoff`. A noindex, unlisted routing probe
-  may be enabled through a manual workflow run to verify the isolated test path.
+  Use `staged` only during `publisher-handoff`. The routing and restoration
+  sequence is documented in `docs/routing.md`.
   Pages always uploads the validated `dist-production/` artifact.
 - Build with Node 24 and the standard library. `npm run build` is offline.
   `npm run sync` explicitly refreshes catalog and sitemap inputs. Keep scheduled

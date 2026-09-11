@@ -24,7 +24,7 @@ async function promote(pairs, backupRoot) {
   }
 }
 
-export async function buildWorkspace(root = workspaceRoot, registry, {routingProbe = false} = {}) {
+export async function buildWorkspace(root = workspaceRoot, registry) {
   registry = validateRegistry(registry || await readJSON(join(root, 'registry/sites.json')))
   const scratch = join(root, '.build', randomUUID())
   const preview = join(scratch, 'preview'), production = join(scratch, 'production')
@@ -41,14 +41,6 @@ export async function buildWorkspace(root = workspaceRoot, registry, {routingPro
       await copyModule(source, preview, site, registry, previewClaims)
       if (inProduction(site)) await copyModule(source, production, site, registry, productionClaims)
       outputs.push({id: site.id, publicPath: site.publicPath, sourceDir: site.sourceDir})
-    }
-    if (routingProbe) for (const directory of [preview, production]) {
-      const probe = join(directory, 'web-publisher-probe-20260911')
-      await mkdir(join(probe, 'nested'), {recursive: true})
-      const page = marker => `<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="robots" content="noindex,nofollow"><title>Publication routing check</title></head><body><h1>${marker}</h1></body></html>`
-      await writeFile(join(probe, 'index.html'), page('organization-root-marker'))
-      await writeFile(join(probe, 'nested/index.html'), page('organization-nested-marker'))
-      await writeFile(join(probe, 'root-only.txt'), 'organization-only-marker\n')
     }
     const revision = spawnSync('git', ['rev-parse', 'HEAD'], {cwd: root, encoding: 'utf8'})
     for (const site of registry.sites.filter(site => site.sourceDir && site.publicPath !== '/' && inProduction(site))) {
@@ -81,4 +73,4 @@ export async function buildWorkspace(root = workspaceRoot, registry, {routingPro
   }
 }
 
-if (process.argv[1] && pathToFileURL(resolve(process.argv[1])).href === import.meta.url) await buildWorkspace(workspaceRoot, undefined, {routingProbe: process.env.PAGES_ROUTING_PROBE === 'true'})
+if (process.argv[1] && pathToFileURL(resolve(process.argv[1])).href === import.meta.url) await buildWorkspace()
