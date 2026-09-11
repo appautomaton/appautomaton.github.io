@@ -31,27 +31,28 @@ jobs:
         with:
           node-version: 24
 
-      # The build starts by reading the org, which is an authenticated call
-      # here only to stay clear of the anonymous rate limit that shared runner
-      # addresses reach on their own.
       - name: Check discovery helpers
         run: npm test
 
       - name: Lint
         run: npm run lint
 
-      - name: Build and audit catalog
+      - name: Build and validate website artifacts
         id: build
         shell: bash
         run: |
           set -o pipefail
-          npm run build 2>&1 | tee build.log
+          if [ "${{ github.event_name }}" = "pull_request" ]; then
+            npm run build 2>&1 | tee build.log
+          else
+            npm run build:fresh 2>&1 | tee build.log
+          fi
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Summarize catalog checks
         if: always()
-        run: node scripts/report-build.mjs '${{ steps.build.outcome }}'
+        run: node sites/home/scripts/report-build.mjs '${{ steps.build.outcome }}'
 
       - name: Save catalog report
         if: always()
@@ -61,8 +62,9 @@ jobs:
           path: |
             build.log
             build-report.json
-            src/data/catalog-state.json
-            src/data/org.generated.ts
+            sites/home/src/data/catalog-state.json
+            sites/home/src/data/org.generated.ts
+            registry/sites.json
           retention-days: 30
 
       - name: Save the static preview
@@ -76,7 +78,8 @@ jobs:
       - uses: actions/upload-pages-artifact@v3
         if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request'
         with:
-          path: dist
+          # Project publishers remain authoritative during the preview pilot.
+          path: dist-production
 
   deploy:
     needs: build

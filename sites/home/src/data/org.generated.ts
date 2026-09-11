@@ -353,7 +353,7 @@ export const repos: OrgRepo[] = [
     ],
     "homepage": "https://appautomaton.com/mlx-speech/",
     "hasSite": true,
-    "lastmod": "2026-09-10",
+    "lastmod": "2026-09-11",
     "sitemap": "https://appautomaton.com/mlx-speech/sitemap.xml"
   },
   {
@@ -422,7 +422,7 @@ export const repos: OrgRepo[] = [
     ],
     "homepage": "https://appautomaton.com/pi-arcweld/",
     "hasSite": true,
-    "lastmod": "2026-09-10",
+    "lastmod": "2026-09-11",
     "sitemap": "https://appautomaton.com/pi-arcweld/sitemap.xml"
   },
   {
@@ -510,7 +510,7 @@ export const repos: OrgRepo[] = [
     ],
     "homepage": "https://appautomaton.com/setloom/",
     "hasSite": true,
-    "lastmod": "2026-09-10",
+    "lastmod": "2026-09-11",
     "sitemap": "https://appautomaton.com/setloom/sitemap.xml"
   },
   {

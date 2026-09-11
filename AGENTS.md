@@ -1,30 +1,34 @@
-# App Automaton website
+# App Automaton websites
 
-This repository serves `https://appautomaton.com/`, the organization site for
-`appautomaton`. Repository-owned project sites share this hostname beneath
-`/<repository>/`. Preserve those routes; organization-page routes must not claim
-bare project directories.
+This repository owns the homepage source and previews independent project
+websites. Each module under `sites/` owns its visual identity, content, fonts,
+assets, styles, scripts, and build inputs. Keep application and library code in
+the original project repositories. Do not introduce a shared page shell or
+global project styles. Homepage guidance is in `sites/home/AGENTS.md`.
 
-- Production source is `site/assets/` and `scripts/build.mjs`. Generate complete
-  HTML with Node 24. Browser JavaScript is a progressive enhancement, with no
-  framework, runtime data fetch, or content hidden behind a loading animation.
-- Project facts come from `scripts/sync-catalog.mjs`; editorial placement lives
-  in `src/data/shelves.ts`. New public sites with a validated About URL and a
-  working page enter automatically through `scripts/catalog-policy.mjs`;
-  explicit placements and exclusions override the fallback classification. Use the joined catalog for visible links, structured
-  data, text output, and sitemaps. Do not invent project destinations.
-- Bind automatic presentation state to GitHub repository IDs. Curated order
-  lives in `shelves.ts`, explicit art direction in `site/artwork.json`, and
-  saved automatic order/category/artwork in the published `catalog-state.json`.
-  Refresh the checked-in checkpoint with `npm run sync`. Never sort published
-  entries by API response order or silently reset the registry.
-- Keep production indexable and project links normally followable. Preserve
-  discovery checks, API pagination, daily/manual refresh, and failure behavior.
-- Use original or appropriately licensed artwork and licensed local fonts. No Google Fonts. Retain asset
-  provenance. Historical fonts and plates under `src/` support the archived
-  prototypes and are not part of the production asset pipeline.
-- Keep scroll native, respect reduced motion, and provide keyboard access and
-  a persistent motion control. Verify performance on the deployed result.
-- Write precise, human copy without mid-sentence em dashes or habitual semicolons.
-- Keep private plans and account-only audit observations in the parent App
-  Automaton workspace, outside this public repository.
+- Read `registry/sites.json` before changing routes. It records public mounts,
+  current publishers, sitemap leaves, and imported modules.
+- The phase is `preview-pilot`. `dist/` contains the aggregate preview.
+  `dist-production/` contains only the homepage and shared discovery files.
+  Pages uploads must use `dist-production/`; it must not contain a separately
+  published project's directory during this phase.
+- Build with Node 24 and the standard library. `npm run build` is offline.
+  `npm run sync` explicitly refreshes catalog and sitemap inputs. Keep scheduled
+  refresh, durable project identities, and failure behavior intact.
+- Import from a successful publication, not an arbitrary local branch.
+  `registry/baselines.json` records initial deployed file hashes. Preserve
+  provenance and licenses; do not refresh hashes to conceal a mismatch.
+- Shared checks cover paths, links, metadata, and assembly. Typography, layout,
+  palette, motion, and component choices belong to each site. Preserve imported
+  choices during an equivalence migration.
+- Keep content in HTML, scrolling native, keyboard controls usable, and motion
+  optional. Never autoplay samples or play audio during automated review.
+- Run `npm test`, `npm run lint`, and `npm run build` for tooling changes.
+  `npm run check:baseline` verifies the initial import. Intentional later design
+  changes should document differences from that historical baseline.
+- Reuse the existing browser tab for preview. Do not create a browser window
+  or tab for review.
+- Write code, comments, and documents in English. Avoid the excluded terms
+  `SEO`, `GEO`, and `GO` in commit messages and PR titles or descriptions.
+- Keep private plans and account-only observations in the parent App Automaton
+  workspace, outside this public repository.
