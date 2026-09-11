@@ -155,14 +155,3 @@ test('staged and central modules publish only through explicit ownership', async
   r.sites[2].publication = 'central'
   assert.throws(() => validateRegistry(r), /local module/)
 })
-
-test('isolated routing markers are opt-in and excluded from the sitemap', async t => {
-  const {root} = await fixture(t)
-  await buildWorkspace(root, registry(), {routingProbe: true})
-  const probe = await readFile(join(root, 'dist-production/web-publisher-probe-20260911/index.html'), 'utf8')
-  assert(probe.includes('noindex,nofollow'))
-  assert(probe.includes('organization-root-marker'))
-  assert(!(await readFile(join(root, 'dist-production/sitemap.xml'), 'utf8')).includes('web-publisher-probe'))
-  await buildWorkspace(root, registry())
-  assert(!(await fileHashes(join(root, 'dist-production')))['web-publisher-probe-20260911/index.html'])
-})

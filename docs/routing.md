@@ -1,65 +1,63 @@
-# Project publisher handoff
+# Project publication ownership and handoff
 
-Current phase: `publisher-handoff`. The homepage is centrally published. Pi
-Arcweld and MLX Speech are `staged`: their unchanged files are included in the
-central artifact, while the original project publishers remain active.
+The homepage, Pi Arcweld, and MLX Speech are centrally published by
+`appautomaton/appautomaton.github.io`. Their existing public URLs are unchanged.
+Fourteen project websites retain external publishers.
 
 ## Publication states
 
-- `external`: preview module only; the original project repository owns delivery.
-- `staged`: the central production artifact contains the module, while the
-  original publisher remains active. Only valid during the handoff phase.
-- `central`: the module is published from this repository. The old publisher
-  has been retired and the public route verified.
+- `external`: preview module only; the project repository owns delivery.
+- `staged`: the central production artifact contains the module while the
+  original publisher remains active. Valid only during `publisher-handoff`.
+- `central`: this repository publishes the module. Its old publisher has been
+  retired and the public route verified.
 
-The production build validates every included module and records its files in
+The build validates every included module and records its files in
 `release-manifest.json`. Included project modules also receive
 `.well-known/publisher.json` with their source repository and revision. A failed
 candidate preserves the previous complete outputs.
 
-## Isolated routing test
+## Verified hosting behavior
 
-A manual `Deploy to GitHub Pages` run can temporarily set `routing_probe=true`.
-This adds unlisted, noindex markers at `/web-publisher-probe-20260911/` and a
-nested path, with a distinct organization-only file. The next ordinary build
-removes the test files. The temporary project repository has no About website,
-so it does not enter the project catalog or sitemaps.
+An isolated noindex test on September 11, 2026 confirmed that an active project
+publisher takes precedence over the same directory in the organization artifact,
+including nested paths. Missing project files return 404 rather than falling
+back to the organization directory. Removing the project Pages configuration
+allows the organization directory to serve the original path. Recreating the
+workflow configuration and republishing restored the project markers.
+Slashless paths redirected to the slash form throughout.
 
-Verify the root markers before enabling the project publisher. Publish distinct
-project markers, then record directory, nested, missing, and slashless responses.
-Delete only the test project's Pages configuration and verify root delivery.
-Recreate the same configuration and republish to prove rollback. Retire the
-probe after the result is recorded outside the public repository.
+Cached responses, including pre-transfer 404s, can persist briefly. Confirm the
+ordinary URL after propagation; a query string alone did not reliably bypass
+negative caching. Retain the old publisher's source until delivery is verified.
 
-## Observed routing behavior
+The same sequence transferred Pi Arcweld and MLX Speech. Their ordinary source
+markers identified this repository, and their original website files matched
+the staged artifact. Media was compared in the artifact without playback.
+The temporary routing fixture and its workflow input were removed afterward.
 
-The isolated test on September 11, 2026 confirmed that an active project
-publisher takes precedence over the organization directory, including nested
-paths. A file missing from the project returns 404 rather than falling back to
-the organization directory. Removing the project Pages configuration allows the
-organization directory to serve the original path; cached project responses can
-persist briefly. Both ordinary and cache-busted requests then returned the root
-markers. Recreating the workflow Pages configuration and republishing restored
-the project markers. Slashless paths redirected to the slash form throughout.
+## Transfer another project
 
-This evidence supports staging complete project files before retiring the old
-publisher. Verify both ordinary URLs and source-revision markers after each
-handoff, allowing for the observed cache delay.
+1. Preserve its Pages settings, publishing workflow, source revision, and last
+   successful artifact. Import the deployed website without changing its design.
+2. Set the registry phase to `publisher-handoff`, mark the module `staged`, and
+   deploy the complete validated artifact. Keep the old publisher active.
+3. Inspect the actual Pages artifact for every project file and its source marker.
+4. Disable the old website workflow and remove only that project's Pages
+   configuration. Verify its original page, assets, canonical, sitemap, slash
+   redirect, missing-page behavior, and ordinary publisher marker.
+5. If verification fails, recreate the saved Pages configuration, enable the
+   original workflow, and republish its retained source. Do not transfer another
+   project until the first is resolved.
+6. After verification succeeds, mark the module `central`, set its publisher to
+   this repository, and retire the old website-only source and workflow. Retain
+   technical documentation and runtime code in their owning project repository.
+7. Return to `modular-production` and update the ownership documentation.
 
-## Production sequence
+Before the cleanup merge, rollback uses the original source still on project
+main. After cleanup, restore the saved website and workflow from Git history
+before enabling that project publisher. Do not enable an empty publisher.
+Ordinary central releases retain the last successful Pages artifact and source
+revision for restoration.
 
-1. Preserve project Pages configuration and successful release artifacts.
-2. Prove routing and rollback through the isolated test above.
-3. Mark the two imported modules `staged`, build, and deploy the complete candidate.
-4. Confirm the candidate artifact contains every project file and publisher marker.
-5. Disable the old publishing workflow, retire one project's Pages configuration,
-   and verify its original URL, assets, canonical, sitemap, and publisher marker.
-6. Repeat for the second project only after the first succeeds.
-7. Mark both modules `central`, remove obsolete website publishing sources from
-   their project repositories, and point contributors to the new site modules.
-
-If delivery fails, recreate the saved Pages configuration, enable the original
-workflow, and republish the retained source. Do not remove another publisher.
-
-GitHub documents inherited project domains, but route precedence must be
-measured in this hosting arrangement. [GitHub custom-domain documentation](https://docs.github.com/en/pages/configuring-a-custom-domain-for-your-github-pages-site/about-custom-domains-and-github-pages).
+GitHub documents inherited project domains in its [custom-domain guidance](https://docs.github.com/en/pages/configuring-a-custom-domain-for-your-github-pages-site/about-custom-domains-and-github-pages).

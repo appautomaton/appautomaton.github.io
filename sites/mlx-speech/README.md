@@ -14,5 +14,7 @@ library repository. Runtime code, examples, and model weights remain there.
 The media source documentation is [available in the library repository](https://github.com/appautomaton/mlx-speech/blob/85c7995daf026e9640e1f57f91bc8a404890e7db/examples/audio/README.md).
 
 See [the design boundary](DESIGN.md), imported [license](LICENSE), and font
-licenses in `public/assets/fonts/`. The original project Pages publisher remains
-responsible for the production route during this preview pilot.
+licenses in `public/assets/fonts/`. The production route is now published by the frontend repository. Website
+catalog assertions live in `tooling/model-catalog.test.mjs`; README and model-guide
+checks stay with the library. Its old website copy and Pages workflow have been
+retired.

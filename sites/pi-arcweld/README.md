@@ -11,5 +11,6 @@ Use the root build and preview commands. `public/og-card.html` is the rendering
 source for the social card, not a content route for the sitemap. Runtime
 extensions and technical source stay in the Pi Arcweld repository.
 
-See [the design boundary](DESIGN.md) and imported [license](LICENSE). The original
-project Pages publisher remains authoritative during this preview pilot.
+See [the design boundary](DESIGN.md) and imported [license](LICENSE). The production route is now published by the frontend repository. The original
+project retains runtime code and instructions; its old website copy and Pages
+workflow have been retired.
