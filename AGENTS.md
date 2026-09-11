@@ -8,10 +8,12 @@ global project styles. Homepage guidance is in `sites/home/AGENTS.md`.
 
 - Read `registry/sites.json` before changing routes. It records public mounts,
   current publishers, sitemap leaves, and imported modules.
-- The phase is `preview-pilot`. `dist/` contains the aggregate preview.
-  `dist-production/` contains only the homepage and shared discovery files.
-  Pages uploads must use `dist-production/`; it must not contain a separately
-  published project's directory during this phase.
+- Publication ownership is explicit in `registry/sites.json`. `external` modules
+  enter preview only; `staged` modules also enter the production artifact while
+  their previous publisher remains active; `central` modules are served here.
+  Use `staged` only during `publisher-handoff`. A noindex, unlisted routing probe
+  may be enabled through a manual workflow run to verify the isolated test path.
+  Pages always uploads the validated `dist-production/` artifact.
 - Build with Node 24 and the standard library. `npm run build` is offline.
   `npm run sync` explicitly refreshes catalog and sitemap inputs. Keep scheduled
   refresh, durable project identities, and failure behavior intact.

@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "phase": "preview-pilot",
+  "phase": "publisher-handoff",
   "origin": "https://appautomaton.com",
   "sites": [
     {
@@ -21,7 +21,8 @@
       "pages": [
         "/",
         "/colophon.html"
-      ]
+      ],
+      "publication": "central"
     },
     {
       "id": "agent-designer",
@@ -30,7 +31,8 @@
       "sitemapSource": "https://appautomaton.com/agent-designer/sitemap.xml",
       "sitemaps": [
         "https://appautomaton.com/agent-designer/sitemap.xml"
-      ]
+      ],
+      "publication": "external"
     },
     {
       "id": "automaton",
@@ -39,7 +41,8 @@
       "sitemapSource": "https://appautomaton.com/automaton/sitemap.xml",
       "sitemaps": [
         "https://appautomaton.com/automaton/sitemap.xml"
-      ]
+      ],
+      "publication": "external"
     },
     {
       "id": "docker-for-apple-container",
@@ -48,7 +51,8 @@
       "sitemapSource": "https://appautomaton.com/docker-for-apple-container/sitemap.xml",
       "sitemaps": [
         "https://appautomaton.com/docker-for-apple-container/sitemap.xml"
-      ]
+      ],
+      "publication": "external"
     },
     {
       "id": "document-SKILLs",
@@ -57,7 +61,8 @@
       "sitemapSource": "https://appautomaton.com/document-SKILLs/sitemap.xml",
       "sitemaps": [
         "https://appautomaton.com/document-SKILLs/sitemap.xml"
-      ]
+      ],
+      "publication": "external"
     },
     {
       "id": "latex-arxiv-SKILL",
@@ -66,7 +71,8 @@
       "sitemapSource": "https://appautomaton.com/latex-arxiv-SKILL/sitemap.xml",
       "sitemaps": [
         "https://appautomaton.com/latex-arxiv-SKILL/sitemap.xml"
-      ]
+      ],
+      "publication": "external"
     },
     {
       "id": "markmaton",
@@ -75,7 +81,8 @@
       "sitemapSource": "https://appautomaton.com/markmaton/sitemap.xml",
       "sitemaps": [
         "https://appautomaton.com/markmaton/sitemap.xml"
-      ]
+      ],
+      "publication": "external"
     },
     {
       "id": "mlx-atomistic",
@@ -84,7 +91,8 @@
       "sitemapSource": "https://appautomaton.com/mlx-atomistic/sitemap-index.xml",
       "sitemaps": [
         "https://appautomaton.com/mlx-atomistic/sitemap-0.xml"
-      ]
+      ],
+      "publication": "external"
     },
     {
       "id": "mlx-cv",
@@ -93,7 +101,8 @@
       "sitemapSource": "https://appautomaton.com/mlx-cv/sitemap.xml",
       "sitemaps": [
         "https://appautomaton.com/mlx-cv/sitemap.xml"
-      ]
+      ],
+      "publication": "external"
     },
     {
       "id": "mlx-h3",
@@ -102,7 +111,8 @@
       "sitemapSource": "https://appautomaton.com/mlx-h3/sitemap.xml",
       "sitemaps": [
         "https://appautomaton.com/mlx-h3/sitemap.xml"
-      ]
+      ],
+      "publication": "external"
     },
     {
       "id": "mlx-minimax-music3",
@@ -111,7 +121,8 @@
       "sitemapSource": "https://appautomaton.com/mlx-minimax-music3/sitemap.xml",
       "sitemaps": [
         "https://appautomaton.com/mlx-minimax-music3/sitemap.xml"
-      ]
+      ],
+      "publication": "external"
     },
     {
       "id": "mlx-spatial",
@@ -120,7 +131,8 @@
       "sitemapSource": "https://appautomaton.com/mlx-spatial/sitemap.xml",
       "sitemaps": [
         "https://appautomaton.com/mlx-spatial/sitemap.xml"
-      ]
+      ],
+      "publication": "external"
     },
     {
       "id": "mlx-speech",
@@ -140,7 +152,8 @@
       "outputDir": ".",
       "pages": [
         "/mlx-speech/"
-      ]
+      ],
+      "publication": "external"
     },
     {
       "id": "pi-arcweld",
@@ -160,7 +173,8 @@
       "outputDir": ".",
       "pages": [
         "/pi-arcweld/"
-      ]
+      ],
+      "publication": "external"
     },
     {
       "id": "presentation",
@@ -169,7 +183,8 @@
       "sitemapSource": "https://appautomaton.com/presentation/sitemap.xml",
       "sitemaps": [
         "https://appautomaton.com/presentation/sitemap.xml"
-      ]
+      ],
+      "publication": "external"
     },
     {
       "id": "setloom",
@@ -178,7 +193,8 @@
       "sitemapSource": "https://appautomaton.com/setloom/sitemap.xml",
       "sitemaps": [
         "https://appautomaton.com/setloom/sitemap.xml"
-      ]
+      ],
+      "publication": "external"
     },
     {
       "id": "tnt-asr",
@@ -187,7 +203,8 @@
       "sitemapSource": "https://appautomaton.com/tnt-asr/sitemap.xml",
       "sitemaps": [
         "https://appautomaton.com/tnt-asr/sitemap.xml"
-      ]
+      ],
+      "publication": "external"
     }
   ]
 }
