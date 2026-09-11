@@ -1,7 +1,8 @@
 # Project publisher handoff
 
 Current phase: `publisher-handoff`. The homepage is centrally published. Pi
-Arcweld and MLX Speech remain `external` until the routing test succeeds.
+Arcweld and MLX Speech are `staged`: their unchanged files are included in the
+central artifact, while the original project publishers remain active.
 
 ## Publication states
 
@@ -29,6 +30,21 @@ project markers, then record directory, nested, missing, and slashless responses
 Delete only the test project's Pages configuration and verify root delivery.
 Recreate the same configuration and republish to prove rollback. Retire the
 probe after the result is recorded outside the public repository.
+
+## Observed routing behavior
+
+The isolated test on September 11, 2026 confirmed that an active project
+publisher takes precedence over the organization directory, including nested
+paths. A file missing from the project returns 404 rather than falling back to
+the organization directory. Removing the project Pages configuration allows the
+organization directory to serve the original path; cached project responses can
+persist briefly. Both ordinary and cache-busted requests then returned the root
+markers. Recreating the workflow Pages configuration and republishing restored
+the project markers. Slashless paths redirected to the slash form throughout.
+
+This evidence supports staging complete project files before retiring the old
+publisher. Verify both ordinary URLs and source-revision markers after each
+handoff, allowing for the observed cache delay.
 
 ## Production sequence
 
