@@ -1,0 +1,636 @@
+<!DOCTYPE html><html lang="en" dir="ltr" data-theme="dark" data-has-toc data-has-sidebar class="astro-bguv2lll"> <head><meta charset="utf-8"/><meta name="viewport" content="width=device-width, initial-scale=1"/><title>MLX-First MD Acceleration | mlx-atomistic</title><link rel="canonical" href="https://appautomaton.com/mlx-atomistic/mm/md-acceleration/"/><link rel="sitemap" href="/mlx-atomistic/sitemap-index.xml"/><script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Organization","@id":"https://appautomaton.com/#org","name":"App Automaton","url":"https://appautomaton.com","description":"Open skills, harnesses, and on-device tools for engineering with AI coding agents."},{"@type":"WebSite","@id":"https://appautomaton.com/mlx-atomistic/#website","url":"https://appautomaton.com/mlx-atomistic/","name":"mlx-atomistic","description":"Apple Silicon-native alpha molecular dynamics and density-functional-theory runtime built directly on MLX and Metal — it runs the GPU on your Mac, with no CUDA, server, or cloud.","inLanguage":"en","publisher":{"@id":"https://appautomaton.com/#org"},"isPartOf":{"@id":"https://appautomaton.com/#org"}},{"@type":"SoftwareSourceCode","@id":"https://appautomaton.com/mlx-atomistic/#project","name":"mlx-atomistic","alternateName":["MLX Atomistic","mlx atomistic"],"description":"Apple Silicon-native alpha molecular dynamics and density-functional-theory runtime built directly on MLX and Metal — it runs the GPU on your Mac, with no CUDA, server, or cloud.","url":"https://appautomaton.com/mlx-atomistic/","codeRepository":"https://github.com/appautomaton/mlx-atomistic","programmingLanguage":"Python","runtimePlatform":"MLX / Metal","operatingSystem":"macOS (Apple Silicon)","license":"https://opensource.org/licenses/MIT","keywords":["MLX","Apple Silicon","Metal","molecular dynamics","density functional theory","DFT","computational chemistry","atomistic simulation","GPU","Python"],"author":{"@id":"https://appautomaton.com/#org"},"maintainer":{"@id":"https://appautomaton.com/#org"},"isPartOf":{"@id":"https://appautomaton.com/#org"}}]}</script><link rel="shortcut icon" href="/mlx-atomistic/favicon.svg" type="image/svg+xml"/><meta name="generator" content="Astro v6.4.8"/><meta name="generator" content="Starlight v0.40.0"/><meta property="og:title" content="MLX-First MD Acceleration"/><meta property="og:type" content="article"/><meta property="og:url" content="https://appautomaton.com/mlx-atomistic/mm/md-acceleration/"/><meta property="og:locale" content="en"/><meta property="og:description" content="Apple Silicon-native atomistic simulation: MLX + Metal DFT and MD runtime."/><meta name="description" content="Apple Silicon-native atomistic simulation: MLX + Metal DFT and MD runtime."/><meta property="og:site_name" content="mlx-atomistic"/><meta property="og:image" content="https://appautomaton.com/mlx-atomistic/og.png"/><meta property="og:image:width" content="1200"/><meta property="og:image:height" content="630"/><meta property="og:image:alt" content="mlx-atomistic — Apple Silicon atomistic simulation"/><meta name="twitter:card" content="summary_large_image"/><meta name="twitter:image" content="https://appautomaton.com/mlx-atomistic/og.png"/><script>
+	window.StarlightThemeProvider = (() => {
+		const storedTheme =
+			typeof localStorage !== 'undefined' && localStorage.getItem('starlight-theme');
+		const theme =
+			storedTheme ||
+			(window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark');
+		document.documentElement.dataset.theme = theme === 'light' ? 'light' : 'dark';
+		return {
+			updatePickers(theme = storedTheme || 'auto') {
+				document.querySelectorAll('starlight-theme-select').forEach((picker) => {
+					const select = picker.querySelector('select');
+					if (select) select.value = theme;
+					/** @type {HTMLTemplateElement | null} */
+					const tmpl = document.querySelector(`#theme-icons`);
+					const newIcon = tmpl && tmpl.content.querySelector('.' + theme);
+					if (newIcon) {
+						const oldIcon = picker.querySelector('svg.label-icon');
+						if (oldIcon) {
+							oldIcon.replaceChildren(...newIcon.cloneNode(true).childNodes);
+						}
+					}
+				});
+			},
+		};
+	})();
+</script><template id="theme-icons"><svg aria-hidden="true" class="light astro-c6vsoqas" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1em;"><path d="M5 12a1 1 0 0 0-1-1H3a1 1 0 0 0 0 2h1a1 1 0 0 0 1-1Zm.64 5-.71.71a1 1 0 0 0 0 1.41 1 1 0 0 0 1.41 0l.71-.71A1 1 0 0 0 5.64 17ZM12 5a1 1 0 0 0 1-1V3a1 1 0 0 0-2 0v1a1 1 0 0 0 1 1Zm5.66 2.34a1 1 0 0 0 .7-.29l.71-.71a1 1 0 1 0-1.41-1.41l-.66.71a1 1 0 0 0 0 1.41 1 1 0 0 0 .66.29Zm-12-.29a1 1 0 0 0 1.41 0 1 1 0 0 0 0-1.41l-.71-.71a1.004 1.004 0 1 0-1.43 1.41l.73.71ZM21 11h-1a1 1 0 0 0 0 2h1a1 1 0 0 0 0-2Zm-2.64 6A1 1 0 0 0 17 18.36l.71.71a1 1 0 0 0 1.41 0 1 1 0 0 0 0-1.41l-.76-.66ZM12 6.5a5.5 5.5 0 1 0 5.5 5.5A5.51 5.51 0 0 0 12 6.5Zm0 9a3.5 3.5 0 1 1 0-7 3.5 3.5 0 0 1 0 7Zm0 3.5a1 1 0 0 0-1 1v1a1 1 0 0 0 2 0v-1a1 1 0 0 0-1-1Z"/></svg><svg aria-hidden="true" class="dark astro-c6vsoqas" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1em;"><path d="M21.64 13a1 1 0 0 0-1.05-.14 8.049 8.049 0 0 1-3.37.73 8.15 8.15 0 0 1-8.14-8.1 8.59 8.59 0 0 1 .25-2A1 1 0 0 0 8 2.36a10.14 10.14 0 1 0 14 11.69 1 1 0 0 0-.36-1.05Zm-9.5 6.69A8.14 8.14 0 0 1 7.08 5.22v.27a10.15 10.15 0 0 0 10.14 10.14 9.784 9.784 0 0 0 2.1-.22 8.11 8.11 0 0 1-7.18 4.32v-.04Z"/></svg><svg aria-hidden="true" class="auto astro-c6vsoqas" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1em;"><path d="M21 14h-1V7a3 3 0 0 0-3-3H7a3 3 0 0 0-3 3v7H3a1 1 0 0 0-1 1v2a3 3 0 0 0 3 3h14a3 3 0 0 0 3-3v-2a1 1 0 0 0-1-1ZM6 7a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v7H6V7Zm14 10a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1v-1h16v1Z"/></svg></template><link rel="stylesheet" href="/mlx-atomistic/_astro/print.DNXP8c50.css" media="print"><link rel="stylesheet" href="/mlx-atomistic/_astro/common.Dw9UgPrQ.css"><script type="module" src="/mlx-atomistic/_astro/page.B_tncCx8.js"></script></head> <body class="astro-bguv2lll"> <a href="#_top" class="astro-7q3lir66">Skip to content</a> <div class="page sl-flex astro-vrdttmbt"> <header class="header astro-vrdttmbt"><div class="header astro-kmkmnagf"> <div class="title-wrapper sl-flex astro-kmkmnagf"> <a href="/mlx-atomistic/" class="site-title sl-flex astro-m46x6ez3">  <img class="astro-m46x6ez3" alt src="/mlx-atomistic/_astro/logo.CMiYDOrE.svg" width="64" height="64">  <span class="astro-m46x6ez3" translate="no"> mlx-atomistic </span> </a> </div> <div class="sl-flex print:hidden astro-kmkmnagf"> <site-search class="astro-kmkmnagf astro-v37mnknz" data-translations="{&quot;placeholder&quot;:&quot;Search&quot;}"> <button data-open-modal disabled aria-label="Search" aria-keyshortcuts="Control+K" class="astro-v37mnknz"> <svg aria-hidden="true" class="astro-v37mnknz astro-c6vsoqas" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1em;"><path d="M21.71 20.29 18 16.61A9 9 0 1 0 16.61 18l3.68 3.68a.999.999 0 0 0 1.42 0 1 1 0 0 0 0-1.39ZM11 18a7 7 0 1 1 0-14 7 7 0 0 1 0 14Z"/></svg> <span class="sl-hidden md:sl-block astro-v37mnknz" aria-hidden="true">Search</span> <kbd class="sl-hidden md:sl-flex astro-v37mnknz" style="display: none;"> <kbd class="astro-v37mnknz">Ctrl</kbd><kbd class="astro-v37mnknz">K</kbd> </kbd> </button> <dialog style="padding:0" aria-label="Search" class="astro-v37mnknz"> <div class="dialog-frame sl-flex astro-v37mnknz">  <button data-close-modal class="sl-flex md:sl-hidden astro-v37mnknz"> Cancel </button> <div class="search-container astro-v37mnknz"> <div id="starlight__search" class="astro-v37mnknz"></div> </div> </div> </dialog> </site-search>  <script>
+	(() => {
+		const openBtn = document.querySelector('button[data-open-modal]');
+		const shortcut = openBtn?.querySelector('kbd');
+		if (!openBtn || !(shortcut instanceof HTMLElement)) return;
+		const platformKey = shortcut.querySelector('kbd');
+		if (platformKey && /(Mac|iPhone|iPod|iPad)/i.test(navigator.platform)) {
+			platformKey.textContent = '⌘';
+			openBtn.setAttribute('aria-keyshortcuts', 'Meta+K');
+		}
+		shortcut.style.display = '';
+	})();
+</script> <script type="module" src="/mlx-atomistic/_astro/Search.astro_astro_type_script_index_0_lang.C_Y3iPP-.js"></script>  </div> <div class="sl-hidden md:sl-flex print:hidden right-group astro-kmkmnagf"> <div class="sl-flex social-icons astro-kmkmnagf"> <a href="https://github.com/appautomaton/mlx-atomistic" rel="me" class="sl-flex astro-wy4te6ga"><span class="sr-only astro-wy4te6ga">GitHub</span><svg aria-hidden="true" class="astro-wy4te6ga astro-c6vsoqas" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1em;"><path d="M12 .3a12 12 0 0 0-3.8 23.38c.6.12.83-.26.83-.57L9 21.07c-3.34.72-4.04-1.61-4.04-1.61-.55-1.39-1.34-1.76-1.34-1.76-1.08-.74.09-.73.09-.73 1.2.09 1.83 1.24 1.83 1.24 1.08 1.83 2.81 1.3 3.5 1 .1-.78.42-1.31.76-1.61-2.67-.3-5.47-1.33-5.47-5.93 0-1.31.47-2.38 1.24-3.22-.14-.3-.54-1.52.1-3.18 0 0 1-.32 3.3 1.23a11.5 11.5 0 0 1 6 0c2.28-1.55 3.29-1.23 3.29-1.23.64 1.66.24 2.88.12 3.18a4.65 4.65 0 0 1 1.23 3.22c0 4.61-2.8 5.63-5.48 5.92.42.36.81 1.1.81 2.22l-.01 3.29c0 .31.2.69.82.57A12 12 0 0 0 12 .3Z"/></svg></a> </div> <starlight-theme-select>  <label style="--sl-select-width: 6.25em" class="astro-4yphtoen"> <span class="sr-only astro-4yphtoen">Select theme</span> <svg aria-hidden="true" class="icon label-icon astro-4yphtoen astro-c6vsoqas" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1em;"><path d="M21 14h-1V7a3 3 0 0 0-3-3H7a3 3 0 0 0-3 3v7H3a1 1 0 0 0-1 1v2a3 3 0 0 0 3 3h14a3 3 0 0 0 3-3v-2a1 1 0 0 0-1-1ZM6 7a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v7H6V7Zm14 10a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1v-1h16v1Z"/></svg> <select autocomplete="off" class="astro-4yphtoen"> <option value="dark" class="astro-4yphtoen">Dark</option><option value="light" class="astro-4yphtoen">Light</option><option value="auto" selected class="astro-4yphtoen">Auto</option> </select> <svg aria-hidden="true" class="icon caret astro-4yphtoen astro-c6vsoqas" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1em;"><path d="M17 9.17a1 1 0 0 0-1.41 0L12 12.71 8.46 9.17a1 1 0 1 0-1.41 1.42l4.24 4.24a1.002 1.002 0 0 0 1.42 0L17 10.59a1.002 1.002 0 0 0 0-1.42Z"/></svg> </label> </starlight-theme-select>  <script>
+	StarlightThemeProvider.updatePickers();
+</script> <script type="module">const r="starlight-theme",o=e=>e==="auto"||e==="dark"||e==="light"?e:"auto",c=()=>o(typeof localStorage<"u"&&localStorage.getItem(r));function n(e){typeof localStorage<"u"&&localStorage.setItem(r,e==="light"||e==="dark"?e:"")}const l=()=>matchMedia("(prefers-color-scheme: light)").matches?"light":"dark";function t(e){StarlightThemeProvider.updatePickers(e),document.documentElement.dataset.theme=e==="auto"?l():e,n(e)}matchMedia("(prefers-color-scheme: light)").addEventListener("change",()=>{c()==="auto"&&t("auto")});class s extends HTMLElement{constructor(){super(),t(c()),this.querySelector("select")?.addEventListener("change",a=>{a.currentTarget instanceof HTMLSelectElement&&t(o(a.currentTarget.value))})}}customElements.define("starlight-theme-select",s);</script> <script type="module">class s extends HTMLElement{constructor(){super();const e=this.querySelector("select");e&&(e.addEventListener("change",t=>{t.currentTarget instanceof HTMLSelectElement&&(window.location.pathname=t.currentTarget.value)}),window.addEventListener("pageshow",t=>{if(!t.persisted)return;const n=e.querySelector("option[selected]")?.index;n!==e.selectedIndex&&(e.selectedIndex=n??0)}))}}customElements.define("starlight-lang-select",s);</script> </div> </div></header> <nav class="sidebar print:hidden astro-vrdttmbt" aria-label="Main"> <starlight-menu-button class="print:hidden astro-jif73yzw"> <button aria-expanded="false" aria-label="Menu" aria-controls="starlight__sidebar" class="sl-flex md:sl-hidden astro-jif73yzw"> <svg aria-hidden="true" class="open-menu astro-jif73yzw astro-c6vsoqas" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1em;"><path d="M3 8h18a1 1 0 1 0 0-2H3a1 1 0 0 0 0 2Zm18 8H3a1 1 0 0 0 0 2h18a1 1 0 0 0 0-2Zm0-5H3a1 1 0 0 0 0 2h18a1 1 0 0 0 0-2Z"/></svg> <svg aria-hidden="true" class="close-menu astro-jif73yzw astro-c6vsoqas" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1em;"><path d="m13.41 12 6.3-6.29a1.004 1.004 0 1 0-1.42-1.42L12 10.59l-6.29-6.3a1.004 1.004 0 0 0-1.42 1.42l6.3 6.29-6.3 6.29a1 1 0 0 0 0 1.42.998.998 0 0 0 1.42 0l6.29-6.3 6.29 6.3a.999.999 0 0 0 1.42 0 1 1 0 0 0 0-1.42L13.41 12Z"/></svg> </button> </starlight-menu-button> <script type="module">class s extends HTMLElement{constructor(){super(),this.btn=this.querySelector("button"),this.btn.addEventListener("click",()=>this.toggleExpanded());const t=this.closest("nav");t&&t.addEventListener("keyup",e=>this.closeOnEscape(e))}setExpanded(t){this.setAttribute("aria-expanded",String(t)),document.body.toggleAttribute("data-mobile-menu-expanded",t)}toggleExpanded(){this.setExpanded(this.getAttribute("aria-expanded")!=="true")}closeOnEscape(t){t.code==="Escape"&&(this.setExpanded(!1),this.btn.focus())}}customElements.define("starlight-menu-button",s);</script>  <div id="starlight__sidebar" class="sidebar-pane astro-vrdttmbt"> <div class="sidebar-content sl-flex astro-vrdttmbt"> <sl-sidebar-state-persist data-hash="0n6hdyg" class="astro-kku4brbg"> <script aria-hidden="true">
+		(() => {
+			try {
+				if (!matchMedia('(min-width: 50em)').matches) return;
+				/** @type {HTMLElement | null} */
+				const target = document.querySelector('sl-sidebar-state-persist');
+				const state = JSON.parse(sessionStorage.getItem('sl-sidebar-state') || '0');
+				if (!target || !state || target.dataset.hash !== state.hash) return;
+				window._starlightScrollRestore = state.scroll;
+				customElements.define(
+					'sl-sidebar-restore',
+					class SidebarRestore extends HTMLElement {
+						connectedCallback() {
+							try {
+								const idx = parseInt(this.dataset.index || '');
+								const details = this.closest('details');
+								if (details && typeof state.open[idx] === 'boolean') details.open = state.open[idx];
+							} catch {}
+						}
+					}
+				);
+			} catch {}
+		})();
+	</script>  <ul class="top-level astro-3ii7xxms"> <li class="astro-3ii7xxms"> <a href="/mlx-atomistic/overview/" class="large astro-3ii7xxms"> <span class="astro-3ii7xxms">Overview</span>  </a> </li><li class="astro-3ii7xxms"> <details open class="astro-3ii7xxms"> <summary class="astro-3ii7xxms"> <span class="group-label astro-3ii7xxms"> <span class="large astro-3ii7xxms">Foundations</span>  </span> <svg aria-hidden="true" class="caret astro-3ii7xxms astro-c6vsoqas" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1.25rem;"><path d="m14.83 11.29-4.24-4.24a1 1 0 1 0-1.42 1.41L12.71 12l-3.54 3.54a1 1 0 0 0 0 1.41 1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.24-4.24a1.002 1.002 0 0 0 0-1.42Z"/></svg> </summary> <sl-sidebar-restore data-index="0"></sl-sidebar-restore> <ul class="astro-3ii7xxms"> <li class="astro-3ii7xxms"> <a href="/mlx-atomistic/foundations/dft-foundations/" class="astro-3ii7xxms"> <span class="astro-3ii7xxms">DFT Foundations</span>  </a> </li><li class="astro-3ii7xxms"> <a href="/mlx-atomistic/foundations/runtime-boundaries/" class="astro-3ii7xxms"> <span class="astro-3ii7xxms">Runtime Boundaries</span>  </a> </li><li class="astro-3ii7xxms"> <a href="/mlx-atomistic/foundations/testing/" class="astro-3ii7xxms"> <span class="astro-3ii7xxms">Testing</span>  </a> </li><li class="astro-3ii7xxms"> <a href="/mlx-atomistic/foundations/units/" class="astro-3ii7xxms"> <span class="astro-3ii7xxms">Units and MD Diagnostics</span>  </a> </li> </ul> </details> </li><li class="astro-3ii7xxms"> <details open class="astro-3ii7xxms"> <summary class="astro-3ii7xxms"> <span class="group-label astro-3ii7xxms"> <span class="large astro-3ii7xxms">Molecular Mechanics</span>  </span> <svg aria-hidden="true" class="caret astro-3ii7xxms astro-c6vsoqas" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1.25rem;"><path d="m14.83 11.29-4.24-4.24a1 1 0 1 0-1.42 1.41L12.71 12l-3.54 3.54a1 1 0 0 0 0 1.41 1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.24-4.24a1.002 1.002 0 0 0 0-1.42Z"/></svg> </summary> <sl-sidebar-restore data-index="1"></sl-sidebar-restore> <ul class="astro-3ii7xxms"> <li class="astro-3ii7xxms"> <a href="/mlx-atomistic/mm/md-acceleration/" aria-current="page" class="astro-3ii7xxms"> <span class="astro-3ii7xxms">MLX-First MD Acceleration</span>  </a> </li><li class="astro-3ii7xxms"> <a href="/mlx-atomistic/mm/metal-interaction-engine/" class="astro-3ii7xxms"> <span class="astro-3ii7xxms">Device-Resident 32-Atom Metal Interaction Engine</span>  </a> </li><li class="astro-3ii7xxms"> <a href="/mlx-atomistic/mm/molecular-mechanics/" class="astro-3ii7xxms"> <span class="astro-3ii7xxms">Molecular Mechanics Core</span>  </a> </li><li class="astro-3ii7xxms"> <a href="/mlx-atomistic/mm/production-md/" class="astro-3ii7xxms"> <span class="astro-3ii7xxms">Production MLX MD Boundary</span>  </a> </li><li class="astro-3ii7xxms"> <a href="/mlx-atomistic/mm/real-mm-core/" class="astro-3ii7xxms"> <span class="astro-3ii7xxms">Real Molecular Mechanics Core</span>  </a> </li> </ul> </details> </li><li class="astro-3ii7xxms"> <details open class="astro-3ii7xxms"> <summary class="astro-3ii7xxms"> <span class="group-label astro-3ii7xxms"> <span class="large astro-3ii7xxms">Density Functional Theory</span>  </span> <svg aria-hidden="true" class="caret astro-3ii7xxms astro-c6vsoqas" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1.25rem;"><path d="m14.83 11.29-4.24-4.24a1 1 0 1 0-1.42 1.41L12.71 12l-3.54 3.54a1 1 0 0 0 0 1.41 1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.24-4.24a1.002 1.002 0 0 0 0-1.42Z"/></svg> </summary> <sl-sidebar-restore data-index="2"></sl-sidebar-restore> <ul class="astro-3ii7xxms"> <li class="astro-3ii7xxms"> <a href="/mlx-atomistic/dft/dft-general-cell-geometry/" class="astro-3ii7xxms"> <span class="astro-3ii7xxms">DFT General Periodic Cell Geometry</span>  </a> </li><li class="astro-3ii7xxms"> <a href="/mlx-atomistic/dft/dft-geometry-optimization/" class="astro-3ii7xxms"> <span class="astro-3ii7xxms">Legacy DFT Geometry Optimization</span>  </a> </li><li class="astro-3ii7xxms"> <a href="/mlx-atomistic/dft/dft-metallic-validation/" class="astro-3ii7xxms"> <span class="astro-3ii7xxms">DFT Metallic Validation</span>  </a> </li><li class="astro-3ii7xxms"> <a href="/mlx-atomistic/dft/dft-numerics/" class="astro-3ii7xxms"> <span class="astro-3ii7xxms">DFT Numerics</span>  </a> </li><li class="astro-3ii7xxms"> <a href="/mlx-atomistic/dft/dft-periodic-relaxation/" class="astro-3ii7xxms"> <span class="astro-3ii7xxms">DFT Periodic Fixed-Cell Relaxation</span>  </a> </li><li class="astro-3ii7xxms"> <a href="/mlx-atomistic/dft/dft-production-core/" class="astro-3ii7xxms"> <span class="astro-3ii7xxms">DFT Production-Core Milestone</span>  </a> </li><li class="astro-3ii7xxms"> <a href="/mlx-atomistic/dft/dft-pseudopotentials/" class="astro-3ii7xxms"> <span class="astro-3ii7xxms">DFT Pseudopotentials</span>  </a> </li><li class="astro-3ii7xxms"> <a href="/mlx-atomistic/dft/dft-roadmap/" class="astro-3ii7xxms"> <span class="astro-3ii7xxms">DFT Roadmap</span>  </a> </li><li class="astro-3ii7xxms"> <a href="/mlx-atomistic/dft/dft-scf-core/" class="astro-3ii7xxms"> <span class="astro-3ii7xxms">DFT SCF Core</span>  </a> </li><li class="astro-3ii7xxms"> <a href="/mlx-atomistic/dft/dft-stress-variable-cell/" class="astro-3ii7xxms"> <span class="astro-3ii7xxms">DFT Stress And Variable-Cell Relaxation</span>  </a> </li> </ul> </details> </li><li class="astro-3ii7xxms"> <details open class="astro-3ii7xxms"> <summary class="astro-3ii7xxms"> <span class="group-label astro-3ii7xxms"> <span class="large astro-3ii7xxms">Benchmarks</span>  </span> <svg aria-hidden="true" class="caret astro-3ii7xxms astro-c6vsoqas" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1.25rem;"><path d="m14.83 11.29-4.24-4.24a1 1 0 1 0-1.42 1.41L12.71 12l-3.54 3.54a1 1 0 0 0 0 1.41 1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.24-4.24a1.002 1.002 0 0 0 0-1.42Z"/></svg> </summary> <sl-sidebar-restore data-index="3"></sl-sidebar-restore> <ul class="astro-3ii7xxms"> <li class="astro-3ii7xxms"> <a href="/mlx-atomistic/benchmarks/" class="astro-3ii7xxms"> <span class="astro-3ii7xxms">Benchmarks</span>  </a> </li><li class="astro-3ii7xxms"> <a href="/mlx-atomistic/benchmarks/benchmark-ladder/" class="astro-3ii7xxms"> <span class="astro-3ii7xxms">Benchmark Ladder</span>  </a> </li><li class="astro-3ii7xxms"> <a href="/mlx-atomistic/benchmarks/dft-material-validation/" class="astro-3ii7xxms"> <span class="astro-3ii7xxms">DFT Material Validation</span>  </a> </li><li class="astro-3ii7xxms"> <a href="/mlx-atomistic/benchmarks/dft-performance-decisions-m5max/" class="astro-3ii7xxms"> <span class="astro-3ii7xxms">DFT Performance Decision Ledger on Apple M5 Max</span>  </a> </li><li class="astro-3ii7xxms"> <a href="/mlx-atomistic/benchmarks/gpcrmd-729-pme-runtime-m5max/" class="astro-3ii7xxms"> <span class="astro-3ii7xxms">GPCRmd 729 PME Runtime Closure (M5 Max)</span>  </a> </li><li class="astro-3ii7xxms"> <a href="/mlx-atomistic/benchmarks/lammps-opencl-m5max/" class="astro-3ii7xxms"> <span class="astro-3ii7xxms">LAMMPS OpenCL on Apple M5 Max</span>  </a> </li><li class="astro-3ii7xxms"> <a href="/mlx-atomistic/benchmarks/m5max-reference-engines/" class="astro-3ii7xxms"> <span class="astro-3ii7xxms">M5 Max Reference Engines</span>  </a> </li><li class="astro-3ii7xxms"> <a href="/mlx-atomistic/benchmarks/md-left-grouped-neighbor-scatter-m5max/" class="astro-3ii7xxms"> <span class="astro-3ii7xxms">Adaptive Left-Grouped Neighbor Scatter on Apple M5 Max</span>  </a> </li><li class="astro-3ii7xxms"> <a href="/mlx-atomistic/benchmarks/md-performance-decisions-m5max/" class="astro-3ii7xxms"> <span class="astro-3ii7xxms">MD Performance Decision Ledger on Apple M5 Max</span>  </a> </li><li class="astro-3ii7xxms"> <a href="/mlx-atomistic/benchmarks/md-suite/" class="astro-3ii7xxms"> <span class="astro-3ii7xxms">Canonical MD Performance Suite</span>  </a> </li><li class="astro-3ii7xxms"> <a href="/mlx-atomistic/benchmarks/openmm-opencl-amber20/" class="astro-3ii7xxms"> <span class="astro-3ii7xxms">OpenMM OpenCL — Amber20 Cellulose &amp; STMV on Apple M5 Max</span>  </a> </li><li class="astro-3ii7xxms"> <a href="/mlx-atomistic/benchmarks/openmm-opencl-apoa1/" class="astro-3ii7xxms"> <span class="astro-3ii7xxms">OpenMM OpenCL — ApoA1 on Apple M5 Max</span>  </a> </li><li class="astro-3ii7xxms"> <a href="/mlx-atomistic/benchmarks/openmm-opencl-dhfr/" class="astro-3ii7xxms"> <span class="astro-3ii7xxms">OpenMM OpenCL — DHFR on Apple M5 Max</span>  </a> </li><li class="astro-3ii7xxms"> <a href="/mlx-atomistic/benchmarks/same-workload-lj-scaling-m5max/" class="astro-3ii7xxms"> <span class="astro-3ii7xxms">Same-Workload LJ Scaling: MLX vs OpenMM vs LAMMPS (M5 Max)</span>  </a> </li><li class="astro-3ii7xxms"> <a href="/mlx-atomistic/benchmarks/same-workload-openmm-comparison/" class="astro-3ii7xxms"> <span class="astro-3ii7xxms">Same-Workload OpenMM Comparison</span>  </a> </li><li class="astro-3ii7xxms"> <a href="/mlx-atomistic/benchmarks/scalable-charged-pme-runtime-m5max/" class="astro-3ii7xxms"> <span class="astro-3ii7xxms">Scalable Charged PME Runtime (M5 Max)</span>  </a> </li><li class="astro-3ii7xxms"> <a href="/mlx-atomistic/benchmarks/scalable-neighbor-nonbonded-runtime-m5max/" class="astro-3ii7xxms"> <span class="astro-3ii7xxms">Scalable Neighbor-Listed Nonbonded Runtime (M5 Max)</span>  </a> </li> </ul> </details> </li><li class="astro-3ii7xxms"> <details open class="astro-3ii7xxms"> <summary class="astro-3ii7xxms"> <span class="group-label astro-3ii7xxms"> <span class="large astro-3ii7xxms">Project</span>  </span> <svg aria-hidden="true" class="caret astro-3ii7xxms astro-c6vsoqas" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1.25rem;"><path d="m14.83 11.29-4.24-4.24a1 1 0 1 0-1.42 1.41L12.71 12l-3.54 3.54a1 1 0 0 0 0 1.41 1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.24-4.24a1.002 1.002 0 0 0 0-1.42Z"/></svg> </summary> <sl-sidebar-restore data-index="4"></sl-sidebar-restore> <ul class="astro-3ii7xxms"> <li class="astro-3ii7xxms"> <a href="/mlx-atomistic/project/release/" class="astro-3ii7xxms"> <span class="astro-3ii7xxms">Release checklist</span>  </a> </li><li class="astro-3ii7xxms"> <a href="/mlx-atomistic/project/validation-and-performance/" class="astro-3ii7xxms"> <span class="astro-3ii7xxms">Validation And Performance</span>  </a> </li> </ul> </details> </li><li class="astro-3ii7xxms"> <details class="astro-3ii7xxms"> <summary class="astro-3ii7xxms"> <span class="group-label astro-3ii7xxms"> <span class="large astro-3ii7xxms">API Reference</span>  </span> <svg aria-hidden="true" class="caret astro-3ii7xxms astro-c6vsoqas" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1.25rem;"><path d="m14.83 11.29-4.24-4.24a1 1 0 1 0-1.42 1.41L12.71 12l-3.54 3.54a1 1 0 0 0 0 1.41 1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.24-4.24a1.002 1.002 0 0 0 0-1.42Z"/></svg> </summary> <sl-sidebar-restore data-index="5"></sl-sidebar-restore> <ul class="astro-3ii7xxms"> <li class="astro-3ii7xxms"> <a href="/mlx-atomistic/api/" class="astro-3ii7xxms"> <span class="astro-3ii7xxms">API Reference</span>  </a> </li><li class="astro-3ii7xxms"> <a href="/mlx-atomistic/api/core/" class="astro-3ii7xxms"> <span class="astro-3ii7xxms">core</span>  </a> </li><li class="astro-3ii7xxms"> <a href="/mlx-atomistic/api/units/" class="astro-3ii7xxms"> <span class="astro-3ii7xxms">units</span>  </a> </li><li class="astro-3ii7xxms"> <a href="/mlx-atomistic/api/topology/" class="astro-3ii7xxms"> <span class="astro-3ii7xxms">topology</span>  </a> </li><li class="astro-3ii7xxms"> <a href="/mlx-atomistic/api/forcefields/" class="astro-3ii7xxms"> <span class="astro-3ii7xxms">forcefields</span>  </a> </li><li class="astro-3ii7xxms"> <a href="/mlx-atomistic/api/nonbonded/" class="astro-3ii7xxms"> <span class="astro-3ii7xxms">nonbonded</span>  </a> </li><li class="astro-3ii7xxms"> <a href="/mlx-atomistic/api/neighbors/" class="astro-3ii7xxms"> <span class="astro-3ii7xxms">neighbors</span>  </a> </li><li class="astro-3ii7xxms"> <a href="/mlx-atomistic/api/md/" class="astro-3ii7xxms"> <span class="astro-3ii7xxms">md</span>  </a> </li><li class="astro-3ii7xxms"> <a href="/mlx-atomistic/api/minimize/" class="astro-3ii7xxms"> <span class="astro-3ii7xxms">minimize</span>  </a> </li><li class="astro-3ii7xxms"> <a href="/mlx-atomistic/api/runtime/" class="astro-3ii7xxms"> <span class="astro-3ii7xxms">runtime</span>  </a> </li><li class="astro-3ii7xxms"> <a href="/mlx-atomistic/api/lj/" class="astro-3ii7xxms"> <span class="astro-3ii7xxms">lj</span>  </a> </li><li class="astro-3ii7xxms"> <a href="/mlx-atomistic/api/io/" class="astro-3ii7xxms"> <span class="astro-3ii7xxms">io</span>  </a> </li><li class="astro-3ii7xxms"> <a href="/mlx-atomistic/api/mm/" class="astro-3ii7xxms"> <span class="astro-3ii7xxms">mm</span>  </a> </li><li class="astro-3ii7xxms"> <a href="/mlx-atomistic/api/dft-xc/" class="astro-3ii7xxms"> <span class="astro-3ii7xxms">dft.xc</span>  </a> </li><li class="astro-3ii7xxms"> <a href="/mlx-atomistic/api/charmm_terms/" class="astro-3ii7xxms"> <span class="astro-3ii7xxms">charmm_terms</span>  </a> </li><li class="astro-3ii7xxms"> <a href="/mlx-atomistic/api/diagnostics/" class="astro-3ii7xxms"> <span class="astro-3ii7xxms">diagnostics</span>  </a> </li><li class="astro-3ii7xxms"> <a href="/mlx-atomistic/api/dft-gga/" class="astro-3ii7xxms"> <span class="astro-3ii7xxms">dft.gga</span>  </a> </li><li class="astro-3ii7xxms"> <a href="/mlx-atomistic/api/dft-band_unfolding/" class="astro-3ii7xxms"> <span class="astro-3ii7xxms">dft.band_unfolding</span>  </a> </li><li class="astro-3ii7xxms"> <a href="/mlx-atomistic/api/cell_list/" class="astro-3ii7xxms"> <span class="astro-3ii7xxms">cell_list</span>  </a> </li><li class="astro-3ii7xxms"> <a href="/mlx-atomistic/api/dft-occupations/" class="astro-3ii7xxms"> <span class="astro-3ii7xxms">dft.occupations</span>  </a> </li><li class="astro-3ii7xxms"> <a href="/mlx-atomistic/api/dft-density/" class="astro-3ii7xxms"> <span class="astro-3ii7xxms">dft.density</span>  </a> </li><li class="astro-3ii7xxms"> <a href="/mlx-atomistic/api/dft-scf/" class="astro-3ii7xxms"> <span class="astro-3ii7xxms">dft.scf</span>  </a> </li><li class="astro-3ii7xxms"> <a href="/mlx-atomistic/api/gbsa/" class="astro-3ii7xxms"> <span class="astro-3ii7xxms">gbsa</span>  </a> </li><li class="astro-3ii7xxms"> <a href="/mlx-atomistic/api/dft-plane_wave/" class="astro-3ii7xxms"> <span class="astro-3ii7xxms">dft.plane_wave</span>  </a> </li><li class="astro-3ii7xxms"> <a href="/mlx-atomistic/api/dft-references/" class="astro-3ii7xxms"> <span class="astro-3ii7xxms">dft.references</span>  </a> </li><li class="astro-3ii7xxms"> <a href="/mlx-atomistic/api/examples/" class="astro-3ii7xxms"> <span class="astro-3ii7xxms">examples</span>  </a> </li><li class="astro-3ii7xxms"> <a href="/mlx-atomistic/api/compatibility/" class="astro-3ii7xxms"> <span class="astro-3ii7xxms">compatibility</span>  </a> </li><li class="astro-3ii7xxms"> <a href="/mlx-atomistic/api/constraints/" class="astro-3ii7xxms"> <span class="astro-3ii7xxms">constraints</span>  </a> </li><li class="astro-3ii7xxms"> <a href="/mlx-atomistic/api/dft-fft/" class="astro-3ii7xxms"> <span class="astro-3ii7xxms">dft.fft</span>  </a> </li><li class="astro-3ii7xxms"> <a href="/mlx-atomistic/api/initialize/" class="astro-3ii7xxms"> <span class="astro-3ii7xxms">initialize</span>  </a> </li><li class="astro-3ii7xxms"> <a href="/mlx-atomistic/api/dft-grids/" class="astro-3ii7xxms"> <span class="astro-3ii7xxms">dft.grids</span>  </a> </li><li class="astro-3ii7xxms"> <a href="/mlx-atomistic/api/pme/" class="astro-3ii7xxms"> <span class="astro-3ii7xxms">pme</span>  </a> </li><li class="astro-3ii7xxms"> <a href="/mlx-atomistic/api/validation/" class="astro-3ii7xxms"> <span class="astro-3ii7xxms">validation</span>  </a> </li><li class="astro-3ii7xxms"> <a href="/mlx-atomistic/api/dft-operators/" class="astro-3ii7xxms"> <span class="astro-3ii7xxms">dft.operators</span>  </a> </li><li class="astro-3ii7xxms"> <a href="/mlx-atomistic/api/metal_kernels/" class="astro-3ii7xxms"> <span class="astro-3ii7xxms">metal_kernels</span>  </a> </li><li class="astro-3ii7xxms"> <a href="/mlx-atomistic/api/artifacts/" class="astro-3ii7xxms"> <span class="astro-3ii7xxms">artifacts</span>  </a> </li><li class="astro-3ii7xxms"> <a href="/mlx-atomistic/api/dft-forces/" class="astro-3ii7xxms"> <span class="astro-3ii7xxms">dft.forces</span>  </a> </li><li class="astro-3ii7xxms"> <a href="/mlx-atomistic/api/dft-periodic_cell_optimization/" class="astro-3ii7xxms"> <span class="astro-3ii7xxms">dft.periodic_cell_optimization</span>  </a> </li><li class="astro-3ii7xxms"> <a href="/mlx-atomistic/api/dft-periodic_convergence/" class="astro-3ii7xxms"> <span class="astro-3ii7xxms">dft.periodic_convergence</span>  </a> </li><li class="astro-3ii7xxms"> <a href="/mlx-atomistic/api/dft-periodic_density_volume/" class="astro-3ii7xxms"> <span class="astro-3ii7xxms">dft.periodic_density_volume</span>  </a> </li><li class="astro-3ii7xxms"> <a href="/mlx-atomistic/api/dft-periodic_electrostatics/" class="astro-3ii7xxms"> <span class="astro-3ii7xxms">dft.periodic_electrostatics</span>  </a> </li><li class="astro-3ii7xxms"> <a href="/mlx-atomistic/api/dft-periodic_forces/" class="astro-3ii7xxms"> <span class="astro-3ii7xxms">dft.periodic_forces</span>  </a> </li><li class="astro-3ii7xxms"> <a href="/mlx-atomistic/api/dft-periodic_gth/" class="astro-3ii7xxms"> <span class="astro-3ii7xxms">dft.periodic_gth</span>  </a> </li><li class="astro-3ii7xxms"> <a href="/mlx-atomistic/api/dft-periodic_observables/" class="astro-3ii7xxms"> <span class="astro-3ii7xxms">dft.periodic_observables</span>  </a> </li><li class="astro-3ii7xxms"> <a href="/mlx-atomistic/api/dft-periodic_optimization/" class="astro-3ii7xxms"> <span class="astro-3ii7xxms">dft.periodic_optimization</span>  </a> </li><li class="astro-3ii7xxms"> <a href="/mlx-atomistic/api/dft-periodic_phonon_persistence/" class="astro-3ii7xxms"> <span class="astro-3ii7xxms">dft.periodic_phonon_persistence</span>  </a> </li><li class="astro-3ii7xxms"> <a href="/mlx-atomistic/api/dft-periodic_phonons/" class="astro-3ii7xxms"> <span class="astro-3ii7xxms">dft.periodic_phonons</span>  </a> </li><li class="astro-3ii7xxms"> <a href="/mlx-atomistic/api/dft-periodic_scf/" class="astro-3ii7xxms"> <span class="astro-3ii7xxms">dft.periodic_scf</span>  </a> </li><li class="astro-3ii7xxms"> <a href="/mlx-atomistic/api/dft-periodic_stress/" class="astro-3ii7xxms"> <span class="astro-3ii7xxms">dft.periodic_stress</span>  </a> </li><li class="astro-3ii7xxms"> <a href="/mlx-atomistic/api/dft-periodic_upf/" class="astro-3ii7xxms"> <span class="astro-3ii7xxms">dft.periodic_upf</span>  </a> </li><li class="astro-3ii7xxms"> <a href="/mlx-atomistic/api/force_evaluation/" class="astro-3ii7xxms"> <span class="astro-3ii7xxms">force_evaluation</span>  </a> </li><li class="astro-3ii7xxms"> <a href="/mlx-atomistic/api/replica_exchange/" class="astro-3ii7xxms"> <span class="astro-3ii7xxms">replica_exchange</span>  </a> </li><li class="astro-3ii7xxms"> <a href="/mlx-atomistic/api/trajectory_adapters/" class="astro-3ii7xxms"> <span class="astro-3ii7xxms">trajectory_adapters</span>  </a> </li><li class="astro-3ii7xxms"> <a href="/mlx-atomistic/api/dft-pseudopotentials/" class="astro-3ii7xxms"> <span class="astro-3ii7xxms">dft.pseudopotentials</span>  </a> </li><li class="astro-3ii7xxms"> <a href="/mlx-atomistic/api/dft-kpoints/" class="astro-3ii7xxms"> <span class="astro-3ii7xxms">dft.kpoints</span>  </a> </li><li class="astro-3ii7xxms"> <a href="/mlx-atomistic/api/dft-restart/" class="astro-3ii7xxms"> <span class="astro-3ii7xxms">dft.restart</span>  </a> </li><li class="astro-3ii7xxms"> <a href="/mlx-atomistic/api/custom_force/" class="astro-3ii7xxms"> <span class="astro-3ii7xxms">custom_force</span>  </a> </li><li class="astro-3ii7xxms"> <a href="/mlx-atomistic/api/dft-nonlocal_pseudopotential/" class="astro-3ii7xxms"> <span class="astro-3ii7xxms">dft.nonlocal_pseudopotential</span>  </a> </li><li class="astro-3ii7xxms"> <a href="/mlx-atomistic/api/dft-spin_gga/" class="astro-3ii7xxms"> <span class="astro-3ii7xxms">dft.spin_gga</span>  </a> </li><li class="astro-3ii7xxms"> <a href="/mlx-atomistic/api/steering/" class="astro-3ii7xxms"> <span class="astro-3ii7xxms">steering</span>  </a> </li><li class="astro-3ii7xxms"> <a href="/mlx-atomistic/api/dft-mixing/" class="astro-3ii7xxms"> <span class="astro-3ii7xxms">dft.mixing</span>  </a> </li><li class="astro-3ii7xxms"> <a href="/mlx-atomistic/api/protocols/" class="astro-3ii7xxms"> <span class="astro-3ii7xxms">protocols</span>  </a> </li><li class="astro-3ii7xxms"> <a href="/mlx-atomistic/api/virtual_sites/" class="astro-3ii7xxms"> <span class="astro-3ii7xxms">virtual_sites</span>  </a> </li><li class="astro-3ii7xxms"> <a href="/mlx-atomistic/api/visualization/" class="astro-3ii7xxms"> <span class="astro-3ii7xxms">visualization</span>  </a> </li><li class="astro-3ii7xxms"> <a href="/mlx-atomistic/api/dft-optimization/" class="astro-3ii7xxms"> <span class="astro-3ii7xxms">dft.optimization</span>  </a> </li><li class="astro-3ii7xxms"> <a href="/mlx-atomistic/api/dft-optimize/" class="astro-3ii7xxms"> <span class="astro-3ii7xxms">dft.optimize</span>  </a> </li><li class="astro-3ii7xxms"> <a href="/mlx-atomistic/api/dft-potentials/" class="astro-3ii7xxms"> <span class="astro-3ii7xxms">dft.potentials</span>  </a> </li><li class="astro-3ii7xxms"> <a href="/mlx-atomistic/api/dft-runtime_state/" class="astro-3ii7xxms"> <span class="astro-3ii7xxms">dft.runtime_state</span>  </a> </li><li class="astro-3ii7xxms"> <a href="/mlx-atomistic/api/dft-stress/" class="astro-3ii7xxms"> <span class="astro-3ii7xxms">dft.stress</span>  </a> </li><li class="astro-3ii7xxms"> <a href="/mlx-atomistic/api/dft-system/" class="astro-3ii7xxms"> <span class="astro-3ii7xxms">dft.system</span>  </a> </li> </ul> </details> </li> </ul>  <script aria-hidden="true">
+		(() => {
+			const scroller = document.getElementById('starlight__sidebar');
+			if (!window._starlightScrollRestore || !scroller) return;
+			scroller.scrollTop = window._starlightScrollRestore;
+			delete window._starlightScrollRestore;
+		})();
+	</script> </sl-sidebar-state-persist> <div class="md:sl-hidden"> <div class="mobile-preferences sl-flex astro-wu23bvmt"> <div class="social-icons astro-wu23bvmt"> <a href="https://github.com/appautomaton/mlx-atomistic" rel="me" class="sl-flex astro-wy4te6ga"><span class="sr-only astro-wy4te6ga">GitHub</span><svg aria-hidden="true" class="astro-wy4te6ga astro-c6vsoqas" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1em;"><path d="M12 .3a12 12 0 0 0-3.8 23.38c.6.12.83-.26.83-.57L9 21.07c-3.34.72-4.04-1.61-4.04-1.61-.55-1.39-1.34-1.76-1.34-1.76-1.08-.74.09-.73.09-.73 1.2.09 1.83 1.24 1.83 1.24 1.08 1.83 2.81 1.3 3.5 1 .1-.78.42-1.31.76-1.61-2.67-.3-5.47-1.33-5.47-5.93 0-1.31.47-2.38 1.24-3.22-.14-.3-.54-1.52.1-3.18 0 0 1-.32 3.3 1.23a11.5 11.5 0 0 1 6 0c2.28-1.55 3.29-1.23 3.29-1.23.64 1.66.24 2.88.12 3.18a4.65 4.65 0 0 1 1.23 3.22c0 4.61-2.8 5.63-5.48 5.92.42.36.81 1.1.81 2.22l-.01 3.29c0 .31.2.69.82.57A12 12 0 0 0 12 .3Z"/></svg></a> </div> <starlight-theme-select>  <label style="--sl-select-width: 6.25em" class="astro-4yphtoen"> <span class="sr-only astro-4yphtoen">Select theme</span> <svg aria-hidden="true" class="icon label-icon astro-4yphtoen astro-c6vsoqas" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1em;"><path d="M21 14h-1V7a3 3 0 0 0-3-3H7a3 3 0 0 0-3 3v7H3a1 1 0 0 0-1 1v2a3 3 0 0 0 3 3h14a3 3 0 0 0 3-3v-2a1 1 0 0 0-1-1ZM6 7a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v7H6V7Zm14 10a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1v-1h16v1Z"/></svg> <select autocomplete="off" class="astro-4yphtoen"> <option value="dark" class="astro-4yphtoen">Dark</option><option value="light" class="astro-4yphtoen">Light</option><option value="auto" selected class="astro-4yphtoen">Auto</option> </select> <svg aria-hidden="true" class="icon caret astro-4yphtoen astro-c6vsoqas" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1em;"><path d="M17 9.17a1 1 0 0 0-1.41 0L12 12.71 8.46 9.17a1 1 0 1 0-1.41 1.42l4.24 4.24a1.002 1.002 0 0 0 1.42 0L17 10.59a1.002 1.002 0 0 0 0-1.42Z"/></svg> </label> </starlight-theme-select>  <script>
+	StarlightThemeProvider.updatePickers();
+</script>   </div> </div> </div> </div> </nav> <div class="main-frame astro-vrdttmbt">  <script type="module">const a=document.getElementById("starlight__sidebar"),n=a?.querySelector("sl-sidebar-state-persist"),o="sl-sidebar-state",i=()=>{let t=[];const e=n?.dataset.hash||"";try{const s=sessionStorage.getItem(o),r=JSON.parse(s||"{}");Array.isArray(r.open)&&r.hash===e&&(t=r.open)}catch{}return{hash:e,open:t,scroll:a?.scrollTop||0}},c=t=>{try{sessionStorage.setItem(o,JSON.stringify(t))}catch{}},d=()=>c(i()),l=(t,e)=>{const s=i();s.open[e]=t,c(s)};n?.addEventListener("click",t=>{if(!(t.target instanceof Element))return;const e=t.target.closest("summary")?.closest("details");if(!e)return;const s=e.querySelector("sl-sidebar-restore"),r=parseInt(s?.dataset.index||"");isNaN(r)||l(!e.open,r)});addEventListener("visibilitychange",()=>{document.visibilityState==="hidden"&&d()});addEventListener("pageHide",d);</script> <div class="lg:sl-flex astro-67yu43on"> <aside class="right-sidebar-container print:hidden astro-67yu43on"> <div class="right-sidebar astro-67yu43on"> <div class="lg:sl-hidden astro-pb3aqygn"><mobile-starlight-toc data-min-h="2" data-max-h="3" class="astro-doynk5tl"><nav aria-labelledby="starlight__on-this-page--mobile" class="astro-doynk5tl"><details id="starlight__mobile-toc" class="astro-doynk5tl"><summary id="starlight__on-this-page--mobile" class="sl-flex astro-doynk5tl"><span class="toggle sl-flex astro-doynk5tl">On this page<svg aria-hidden="true" class="caret astro-doynk5tl astro-c6vsoqas" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1rem;"><path d="m14.83 11.29-4.24-4.24a1 1 0 1 0-1.42 1.41L12.71 12l-3.54 3.54a1 1 0 0 0 0 1.41 1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.24-4.24a1.002 1.002 0 0 0 0-1.42Z"/></svg></span><span class="display-current astro-doynk5tl"></span></summary><div class="dropdown astro-doynk5tl"><ul class="isMobile astro-gnoq344e" style="--depth: 0;"> <li class="astro-gnoq344e" style="--depth: 0;"> <a href="#_top" class="astro-gnoq344e" style="--depth: 0;"> <span class="astro-gnoq344e" style="--depth: 0;">Overview</span> </a>  </li><li class="astro-gnoq344e" style="--depth: 0;"> <a href="#scope" class="astro-gnoq344e" style="--depth: 0;"> <span class="astro-gnoq344e" style="--depth: 0;">Scope</span> </a>  </li><li class="astro-gnoq344e" style="--depth: 0;"> <a href="#production-step" class="astro-gnoq344e" style="--depth: 0;"> <span class="astro-gnoq344e" style="--depth: 0;">Production Step</span> </a>  </li><li class="astro-gnoq344e" style="--depth: 0;"> <a href="#neighbor-representations" class="astro-gnoq344e" style="--depth: 0;"> <span class="astro-gnoq344e" style="--depth: 0;">Neighbor Representations</span> </a>  </li><li class="astro-gnoq344e" style="--depth: 0;"> <a href="#direct-and-reciprocal-forces" class="astro-gnoq344e" style="--depth: 0;"> <span class="astro-gnoq344e" style="--depth: 0;">Direct and Reciprocal Forces</span> </a>  </li><li class="astro-gnoq344e" style="--depth: 0;"> <a href="#bonded-and-constraint-work" class="astro-gnoq344e" style="--depth: 0;"> <span class="astro-gnoq344e" style="--depth: 0;">Bonded and Constraint Work</span> </a>  </li><li class="astro-gnoq344e" style="--depth: 0;"> <a href="#current-evidence" class="astro-gnoq344e" style="--depth: 0;"> <span class="astro-gnoq344e" style="--depth: 0;">Current Evidence</span> </a> <ul class="isMobile astro-gnoq344e" style="--depth: 1;"> <li class="astro-gnoq344e" style="--depth: 1;"> <a href="#host-and-native-extension-boundary" class="astro-gnoq344e" style="--depth: 1;"> <span class="astro-gnoq344e" style="--depth: 1;">Host and native-extension boundary</span> </a>  </li> </ul> </li><li class="astro-gnoq344e" style="--depth: 0;"> <a href="#measurement-rules" class="astro-gnoq344e" style="--depth: 0;"> <span class="astro-gnoq344e" style="--depth: 0;">Measurement Rules</span> </a>  </li><li class="astro-gnoq344e" style="--depth: 0;"> <a href="#current-bottleneck-direction" class="astro-gnoq344e" style="--depth: 0;"> <span class="astro-gnoq344e" style="--depth: 0;">Current Bottleneck Direction</span> </a>  </li> </ul></div></details></nav></mobile-starlight-toc><script type="module" src="/mlx-atomistic/_astro/MobileTableOfContents.astro_astro_type_script_index_0_lang.hwBsy0Mo.js"></script></div><div class="right-sidebar-panel sl-hidden lg:sl-block astro-pb3aqygn"><div class="sl-container astro-pb3aqygn"><starlight-toc data-min-h="2" data-max-h="3"><nav aria-labelledby="starlight__on-this-page"><h2 id="starlight__on-this-page">On this page</h2><ul class="astro-gnoq344e" style="--depth: 0;"> <li class="astro-gnoq344e" style="--depth: 0;"> <a href="#_top" class="astro-gnoq344e" style="--depth: 0;"> <span class="astro-gnoq344e" style="--depth: 0;">Overview</span> </a>  </li><li class="astro-gnoq344e" style="--depth: 0;"> <a href="#scope" class="astro-gnoq344e" style="--depth: 0;"> <span class="astro-gnoq344e" style="--depth: 0;">Scope</span> </a>  </li><li class="astro-gnoq344e" style="--depth: 0;"> <a href="#production-step" class="astro-gnoq344e" style="--depth: 0;"> <span class="astro-gnoq344e" style="--depth: 0;">Production Step</span> </a>  </li><li class="astro-gnoq344e" style="--depth: 0;"> <a href="#neighbor-representations" class="astro-gnoq344e" style="--depth: 0;"> <span class="astro-gnoq344e" style="--depth: 0;">Neighbor Representations</span> </a>  </li><li class="astro-gnoq344e" style="--depth: 0;"> <a href="#direct-and-reciprocal-forces" class="astro-gnoq344e" style="--depth: 0;"> <span class="astro-gnoq344e" style="--depth: 0;">Direct and Reciprocal Forces</span> </a>  </li><li class="astro-gnoq344e" style="--depth: 0;"> <a href="#bonded-and-constraint-work" class="astro-gnoq344e" style="--depth: 0;"> <span class="astro-gnoq344e" style="--depth: 0;">Bonded and Constraint Work</span> </a>  </li><li class="astro-gnoq344e" style="--depth: 0;"> <a href="#current-evidence" class="astro-gnoq344e" style="--depth: 0;"> <span class="astro-gnoq344e" style="--depth: 0;">Current Evidence</span> </a> <ul class="astro-gnoq344e" style="--depth: 1;"> <li class="astro-gnoq344e" style="--depth: 1;"> <a href="#host-and-native-extension-boundary" class="astro-gnoq344e" style="--depth: 1;"> <span class="astro-gnoq344e" style="--depth: 1;">Host and native-extension boundary</span> </a>  </li> </ul> </li><li class="astro-gnoq344e" style="--depth: 0;"> <a href="#measurement-rules" class="astro-gnoq344e" style="--depth: 0;"> <span class="astro-gnoq344e" style="--depth: 0;">Measurement Rules</span> </a>  </li><li class="astro-gnoq344e" style="--depth: 0;"> <a href="#current-bottleneck-direction" class="astro-gnoq344e" style="--depth: 0;"> <span class="astro-gnoq344e" style="--depth: 0;">Current Bottleneck Direction</span> </a>  </li> </ul></nav></starlight-toc><script type="module" src="/mlx-atomistic/_astro/TableOfContents.astro_astro_type_script_index_0_lang.FuRcXuRY.js"></script></div></div> </div> </aside> <div class="main-pane astro-67yu43on">  <main data-pagefind-body class="astro-bguv2lll" lang="en" dir="ltr">    <div class="content-panel astro-7nkwcw3z"> <div class="sl-container astro-7nkwcw3z"> <h1 id="_top" class="astro-j6tvhyss">MLX-First MD Acceleration</h1> </div> </div> <div class="content-panel astro-7nkwcw3z"> <div class="sl-container astro-7nkwcw3z"> <div class="sl-markdown-content"> <!-- Generated by scripts/sync_site_docs.py; do not edit. -->
+<p>This page describes the current production Molecular Dynamics (MD) execution
+path. Historical experiments and their retain/reject decisions live in the
+<a href="/mlx-atomistic/benchmarks/md-performance-decisions-m5max/">MD performance decision ledger</a>.
+Raw benchmark output remains local under gitignored <code dir="auto">results/</code>.</p>
+<div class="sl-heading-wrapper level-h2"><h2 id="scope">Scope</h2><a class="sl-anchor-link" href="#scope"><span aria-hidden="true" class="sl-anchor-icon"><svg width="16" height="16" viewBox="0 0 24 24"><path fill="currentcolor" d="m12.11 15.39-3.88 3.88a2.52 2.52 0 0 1-3.5 0 2.47 2.47 0 0 1 0-3.5l3.88-3.88a1 1 0 0 0-1.42-1.42l-3.88 3.89a4.48 4.48 0 0 0 6.33 6.33l3.89-3.88a1 1 0 1 0-1.42-1.42Zm8.58-12.08a4.49 4.49 0 0 0-6.33 0l-3.89 3.88a1 1 0 0 0 1.42 1.42l3.88-3.88a2.52 2.52 0 0 1 3.5 0 2.47 2.47 0 0 1 0 3.5l-3.88 3.88a1 1 0 1 0 1.42 1.42l3.88-3.89a4.49 4.49 0 0 0 0-6.33ZM8.83 15.17a1 1 0 0 0 1.1.22 1 1 0 0 0 .32-.22l4.92-4.92a1 1 0 0 0-1.42-1.42l-4.92 4.92a1 1 0 0 0 0 1.42Z"></path></svg></span><span class="sr-only" data-pagefind-ignore="">Section titled “Scope”</span></a></div>
+<p><code dir="auto">mlx_atomistic</code> is the runtime. OpenMM and LAMMPS are reference and validation
+surfaces only. The optimized path stays within Python, MLX, and focused Metal
+kernels on Apple Silicon.</p>
+<p>The primary performance target is recurring fixed-cell, constrained,
+Particle Mesh Ewald (PME) simulation. Energy diagnostics, unsupported force
+terms, CPU execution, and non-orthorhombic cells retain conservative fallback
+routes.</p>
+<div class="sl-heading-wrapper level-h2"><h2 id="production-step">Production Step</h2><a class="sl-anchor-link" href="#production-step"><span aria-hidden="true" class="sl-anchor-icon"><svg width="16" height="16" viewBox="0 0 24 24"><path fill="currentcolor" d="m12.11 15.39-3.88 3.88a2.52 2.52 0 0 1-3.5 0 2.47 2.47 0 0 1 0-3.5l3.88-3.88a1 1 0 0 0-1.42-1.42l-3.88 3.89a4.48 4.48 0 0 0 6.33 6.33l3.89-3.88a1 1 0 1 0-1.42-1.42Zm8.58-12.08a4.49 4.49 0 0 0-6.33 0l-3.89 3.88a1 1 0 0 0 1.42 1.42l3.88-3.88a2.52 2.52 0 0 1 3.5 0 2.47 2.47 0 0 1 0 3.5l-3.88 3.88a1 1 0 1 0 1.42 1.42l3.88-3.89a4.49 4.49 0 0 0 0-6.33ZM8.83 15.17a1 1 0 0 0 1.1.22 1 1 0 0 0 .32-.22l4.92-4.92a1 1 0 0 0-1.42-1.42l-4.92 4.92a1 1 0 0 0 0 1.42Z"></path></svg></span><span class="sr-only" data-pagefind-ignore="">Section titled “Production Step”</span></a></div>
+<p>A constrained Langevin step currently follows this ownership order:</p>
+<ol>
+<li>Drift positions and apply position constraints.</li>
+<li>Apply the pre-force velocity projection.</li>
+<li>On ordinary prepared Metal steps, submit the device displacement probe and
+then queue force work against the current Neighbor generation.</li>
+<li>Commit the exact Neighbor decision. Reuse the queued force when the binding
+is unchanged; otherwise rebuild or switch schedules, rebind, and recompute.</li>
+<li>Apply the final kick and velocity constraints.</li>
+<li>Materialize state only for an explicit diagnostic, sample, failure check, or
+final result.</li>
+</ol>
+<p>Prepared PME plans, constraint schedules, force parameters, and topology
+records persist across steps. Runtime synchronization is recorded by reason so
+an apparent Neighbor wait can be separated from completion of earlier Metal
+work.</p>
+<p>This ordering removes the idle queue gap before ordinary force submission
+without weakening the Verlet decision or accumulating multi-step graphs. A
+three-repeat 750-step comparison improved throughput by 37.92% on 5DFR, 8.77%
+on JAC, and 7.75% on GPCRmd. The six-system release suite and 53 related Metal
+tests passed. Raw evidence is under
+<code dir="auto">results/md-suite/speculative-admission-{screen,release}-2026-08-20/</code>.</p>
+<div class="sl-heading-wrapper level-h2"><h2 id="neighbor-representations">Neighbor Representations</h2><a class="sl-anchor-link" href="#neighbor-representations"><span aria-hidden="true" class="sl-anchor-icon"><svg width="16" height="16" viewBox="0 0 24 24"><path fill="currentcolor" d="m12.11 15.39-3.88 3.88a2.52 2.52 0 0 1-3.5 0 2.47 2.47 0 0 1 0-3.5l3.88-3.88a1 1 0 0 0-1.42-1.42l-3.88 3.89a4.48 4.48 0 0 0 6.33 6.33l3.89-3.88a1 1 0 1 0-1.42-1.42Zm8.58-12.08a4.49 4.49 0 0 0-6.33 0l-3.89 3.88a1 1 0 0 0 1.42 1.42l3.88-3.88a2.52 2.52 0 0 1 3.5 0 2.47 2.47 0 0 1 0 3.5l-3.88 3.88a1 1 0 1 0 1.42 1.42l3.88-3.89a4.49 4.49 0 0 0 0-6.33ZM8.83 15.17a1 1 0 0 0 1.1.22 1 1 0 0 0 .32-.22l4.92-4.92a1 1 0 0 0-1.42-1.42l-4.92 4.92a1 1 0 0 0 0 1.42Z"></path></svg></span><span class="sr-only" data-pagefind-ignore="">Section titled “Neighbor Representations”</span></a></div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Backend</th><th>Intended use</th><th>Representation</th></tr></thead><tbody><tr><td><code dir="auto">mlx_dense_pairs</code></td><td>small periodic systems</td><td>exact explicit pairs</td></tr><tr><td><code dir="auto">mlx_cell_pairs</code></td><td>general large orthorhombic systems</td><td>device-built exact pairs</td></tr><tr><td><code dir="auto">mlx_cell_blocks</code></td><td>fixed-shape compatibility and diagnostics</td><td>padded blocks</td></tr><tr><td><code dir="auto">mlx_cell_tiles</code></td><td>explicit/checkpoint-compatible Metal fallback</td><td>exact masked 4-by-4 force tiles</td></tr><tr><td><code dir="auto">mlx_interaction32</code></td><td>measured fixed-cell Metal PME default</td><td>retained device-built 32-atom schedule</td></tr></tbody></table>
+<p>The general <code dir="auto">auto</code> policy selects dense pairs below its atom limit and cell
+pairs above it. The prepared production selector chooses <code dir="auto">mlx_interaction32</code>
+only inside the validated fixed-cell PME envelope. Unsupported devices, cells,
+PME settings, topology surfaces, and atom counts retain tiles or compact pairs.</p>
+<p>The tile builder now has four distinct granularities:</p>
+<ul>
+<li>a spatial cell template prunes geometry;</li>
+<li>coarse 8-by-8 atom tiles evaluate exact cutoff-plus-skin membership;</li>
+<li>non-empty 4-by-4 tiles become the recurring execution representation;</li>
+<li>one 32-lane single-instruction, multiple-data (SIMD) group consumes up to 32
+active right-atom columns sharing one four-atom left block.</li>
+</ul>
+<p>Cell occupancy, task counts, candidate offsets, exact membership, and force
+schedule construction remain on device. A 32-lane Metal membership kernel
+loads the 16 coarse-tile atoms once and constructs four exact masks without
+threadgroup scratch.</p>
+<p>Small exact-tile inventories compact and sort by left block. Above three
+million coarse candidates, normally occupied cells use a left-grouped Metal
+count/scatter path that avoids a global <code dir="auto">mx.argsort</code>. Cells with more than
+eight coarse blocks use the older parallel route to prevent one thread from
+serializing pathological occupancy. See the
+<a href="/mlx-atomistic/benchmarks/md-left-grouped-neighbor-scatter-m5max/">adaptive scatter report</a>.</p>
+<p>Exact diagnostic pairs are deferred. They are materialized only when a public
+pair consumer, pressure diagnostic, or unsupported force term requests them.</p>
+<div class="sl-heading-wrapper level-h2"><h2 id="direct-and-reciprocal-forces">Direct and Reciprocal Forces</h2><a class="sl-anchor-link" href="#direct-and-reciprocal-forces"><span aria-hidden="true" class="sl-anchor-icon"><svg width="16" height="16" viewBox="0 0 24 24"><path fill="currentcolor" d="m12.11 15.39-3.88 3.88a2.52 2.52 0 0 1-3.5 0 2.47 2.47 0 0 1 0-3.5l3.88-3.88a1 1 0 0 0-1.42-1.42l-3.88 3.89a4.48 4.48 0 0 0 6.33 6.33l3.89-3.88a1 1 0 1 0-1.42-1.42Zm8.58-12.08a4.49 4.49 0 0 0-6.33 0l-3.89 3.88a1 1 0 0 0 1.42 1.42l3.88-3.88a2.52 2.52 0 0 1 3.5 0 2.47 2.47 0 0 1 0 3.5l-3.88 3.88a1 1 0 1 0 1.42 1.42l3.88-3.89a4.49 4.49 0 0 0 0-6.33ZM8.83 15.17a1 1 0 0 0 1.1.22 1 1 0 0 0 .32-.22l4.92-4.92a1 1 0 0 0-1.42-1.42l-4.92 4.92a1 1 0 0 0 0 1.42Z"></path></svg></span><span class="sr-only" data-pagefind-ignore="">Section titled “Direct and Reciprocal Forces”</span></a></div>
+<p>The production Direct Space kernel fuses Lennard-Jones and screened Coulomb
+work over spatial tiles. It uses:</p>
+<ul>
+<li>packed column descriptors carrying four membership bits;</li>
+<li>atom-local compressed sparse row (CSR) exclusion and 1-4 lookup;</li>
+<li>CHARMM pair-specific NBFIX overrides where present;</li>
+<li>four-left-atom register accumulation and SIMD reduction before global force
+writes.</li>
+</ul>
+<p>The order-five reciprocal PME route retains one charge-spread Metal dispatch,
+MLX fast Fourier transforms, influence multiplication, and one analytic
+B-spline derivative interpolation dispatch. Its recurring force-only route now
+uses a real forward transform, stores only the last-axis half-spectrum, applies
+the matching half-spectrum influence view, and produces a normalized real
+inverse-transform grid. The Metal interpolation kernel applies the transform
+normalization once per atom instead of scaling the complete grid. Energy and
+diagnostic paths retain the conservative full complex transform. Alternative
+spread launch geometries did not improve the complete reciprocal graph and
+were rejected.</p>
+<p>Sparse PME exclusions, exceptions, and 1-4 corrections share the fused bonded
+Metal force buffer when that owner is available. The hottest Direct Space
+kernel is deliberately not enlarged by this work.</p>
+<div class="sl-heading-wrapper level-h2"><h2 id="bonded-and-constraint-work">Bonded and Constraint Work</h2><a class="sl-anchor-link" href="#bonded-and-constraint-work"><span aria-hidden="true" class="sl-anchor-icon"><svg width="16" height="16" viewBox="0 0 24 24"><path fill="currentcolor" d="m12.11 15.39-3.88 3.88a2.52 2.52 0 0 1-3.5 0 2.47 2.47 0 0 1 0-3.5l3.88-3.88a1 1 0 0 0-1.42-1.42l-3.88 3.89a4.48 4.48 0 0 0 6.33 6.33l3.89-3.88a1 1 0 1 0-1.42-1.42Zm8.58-12.08a4.49 4.49 0 0 0-6.33 0l-3.89 3.88a1 1 0 0 0 1.42 1.42l3.88-3.88a2.52 2.52 0 0 1 3.5 0 2.47 2.47 0 0 1 0 3.5l-3.88 3.88a1 1 0 1 0 1.42 1.42l3.88-3.89a4.49 4.49 0 0 0 0-6.33ZM8.83 15.17a1 1 0 0 0 1.1.22 1 1 0 0 0 .32-.22l4.92-4.92a1 1 0 0 0-1.42-1.42l-4.92 4.92a1 1 0 0 0 0 1.42Z"></path></svg></span><span class="sr-only" data-pagefind-ignore="">Section titled “Bonded and Constraint Work”</span></a></div>
+<p>The recurring bonded Metal dispatch covers standard bonds, angles, periodic
+torsions, impropers, Urey-Bradley 1-3 terms, and prepared CHARMM correction map
+(CMAP) forces. The CMAP worker evaluates both signed dihedrals and differentiates
+the prepared periodic bicubic patch analytically. Diagnostic energy retains the
+established MLX implementation.</p>
+<p>Constraint topology is partitioned once:</p>
+<ul>
+<li>rigid water uses analytical SETTLE;</li>
+<li>artifacts without molecule identifiers recover rigid water only when the
+water mask and constraint graph prove a complete set of disjoint O-H-H
+triangles; ambiguous graphs fail closed to the existing generic route;</li>
+<li>disjoint central-atom clusters use specialized SHAKE/RATTLE kernels;</li>
+<li>independent components up to four atoms and three edges use a component-owned
+Metal solver;</li>
+<li>larger or overlapping graphs retain the generic MLX fallback.</li>
+</ul>
+<p>Combining already-dependent constraint dispatches produced isolated wins but
+did not transfer reliably to sustained JAC trajectories. Those prototypes are
+closed in the decision ledger.</p>
+<p>The GPCRmd 729 artifact has no molecule identifiers but does have a complete
+water mask and constraint graph. Topology recovery proves 19,944 disjoint
+rigid waters, covering all 59,832 marked water atoms, then leaves 19,064
+non-water constraint pairs in 9,709 SHAKE clusters. This replaces one
+29,653-component, 20-iteration route with analytical SETTLE plus the existing
+dense composite path. A same-context position-balanced 1,000-step diagnostic
+improved both directions by 5.31% and 32.37%, with an 18.82% balanced median.
+Because the machine changed Metal performance states between independent
+processes, the retained claim is the conservative 5.1-5.3% complete-wall gain.
+The passing profile and A/B artifacts are under
+<code dir="auto">results/md-suite/gpcrmd-water-topology-settle-{profile,shared-context}-2026-08-15/</code>.</p>
+<div class="sl-heading-wrapper level-h2"><h2 id="current-evidence">Current Evidence</h2><a class="sl-anchor-link" href="#current-evidence"><span aria-hidden="true" class="sl-anchor-icon"><svg width="16" height="16" viewBox="0 0 24 24"><path fill="currentcolor" d="m12.11 15.39-3.88 3.88a2.52 2.52 0 0 1-3.5 0 2.47 2.47 0 0 1 0-3.5l3.88-3.88a1 1 0 0 0-1.42-1.42l-3.88 3.89a4.48 4.48 0 0 0 6.33 6.33l3.89-3.88a1 1 0 1 0-1.42-1.42Zm8.58-12.08a4.49 4.49 0 0 0-6.33 0l-3.89 3.88a1 1 0 0 0 1.42 1.42l3.88-3.88a2.52 2.52 0 0 1 3.5 0 2.47 2.47 0 0 1 0 3.5l-3.88 3.88a1 1 0 1 0 1.42 1.42l3.88-3.89a4.49 4.49 0 0 0 0-6.33ZM8.83 15.17a1 1 0 0 0 1.1.22 1 1 0 0 0 .32-.22l4.92-4.92a1 1 0 0 0-1.42-1.42l-4.92 4.92a1 1 0 0 0 0 1.42Z"></path></svg></span><span class="sr-only" data-pagefind-ignore="">Section titled “Current Evidence”</span></a></div>
+<p>The initial clean, position-balanced 750-step comparison on 2026-08-15 measured
+<code dir="auto">mlx_interaction32</code> against the former production tile route:</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Workload</th><th align="right">Atoms</th><th align="right">Control</th><th align="right">Current</th><th align="right">Result</th></tr></thead><tbody><tr><td>5DFR</td><td align="right">23,558</td><td align="right">1.7496 ms/step</td><td align="right">1.5992 ms/step</td><td align="right">8.60% faster</td></tr><tr><td>JAC 4-cell</td><td align="right">94,232</td><td align="right">6.8322 ms/step</td><td align="right">5.9439 ms/step</td><td align="right">13.00% faster</td></tr><tr><td>GPCRmd 729</td><td align="right">92,001</td><td align="right">7.8329 ms/step</td><td align="right">7.4761 ms/step</td><td align="right">4.56% faster</td></tr></tbody></table>
+<p>The comparison used two processes per arm, ten warmup steps, Low Power Mode,
+and a balanced control/candidate/candidate/control order. It is not a same-date
+OpenMM ratio. Reference-engine comparisons must use a matched
+manifest, platform, precision, protocol, power state, and measurement window.</p>
+<p>A fresh current-main snapshot on commit <code dir="auto">1bd476b</code> measured sustained absolute
+throughput under Low Power Mode. Each row used a 75-step rehearsal, three
+independent repeats, ten warmup steps, and 750 measured steps:</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Workload</th><th align="right">Atoms</th><th align="right">Wall</th><th align="right">Throughput</th><th align="right">Timing spread</th></tr></thead><tbody><tr><td>5DFR</td><td align="right">23,558</td><td align="right">1.2533 ms/step</td><td align="right">275.75 ns/day</td><td align="right">1.60%</td></tr><tr><td>JAC 4-cell</td><td align="right">94,232</td><td align="right">4.2450 ms/step</td><td align="right">81.41 ns/day</td><td align="right">1.23%</td></tr><tr><td>TIP3P 30k</td><td align="right">30,000</td><td align="right">1.5720 ms/step</td><td align="right">219.85 ns/day</td><td align="right">1.11%</td></tr><tr><td>TIP3P 90k</td><td align="right">90,000</td><td align="right">4.3517 ms/step</td><td align="right">79.42 ns/day</td><td align="right">6.81%</td></tr><tr><td>ApoA1</td><td align="right">92,224</td><td align="right">4.8183 ms/step</td><td align="right">71.73 ns/day</td><td align="right">5.18%</td></tr><tr><td>GPCRmd 729</td><td align="right">92,001</td><td align="right">5.3984 ms/step</td><td align="right">64.02 ns/day</td><td align="right">0.97%</td></tr></tbody></table>
+<p>Five rows passed in the release-suite run. JAC narrowly missed the spread gate
+at 10.42% because its first sample was slow; an immediate three-repeat
+supplement produced the passing row above. These numbers describe one
+throttled measurement window, not an expected peak-throughput claim.</p>
+<p>A separate manifest-matched JAC comparison in the same Low Power Mode window
+used 94,232 atoms, a 4 fs timestep, a 9 A cutoff, a <code dir="auto">128x128x64</code> PME mesh, the
+same constraints and seed, and 750 measured steps. MLX measured 4.6834 ms/step
+and OpenMM OpenCL measured 2.4161 ms/step across two independent processes per
+engine. The remaining matched wall ratio was <code dir="auto">1.9385x</code>, so MLX delivered 51.6%
+of OpenMM throughput on that protocol. This ratio is not transferred to any
+other row or power state.</p>
+<p>The promotion follow-up added force parity and a 750-step trajectory smoke gate
+for all six release systems. Every trajectory passed with no fallback and
+20—40 measured Neighbor rebuilds. Isolated, position-balanced low-power runs
+for the newly covered systems measured 28.2—33.2% improvements on 30k TIP3P
+water, 30.9—33.8% on 90k TIP3P water, and 17.4—27.6% on ApoA1. The unstable
+47,116-atom JAC midpoint remains on <code dir="auto">mlx_cell_tiles</code>, so default promotion is
+bounded to the measured 23,000—31,000 and 90,000—100,000 atom windows.</p>
+<p>The canonical local performance gate is documented in
+<a href="/mlx-atomistic/benchmarks/md-suite/"><code dir="auto">md-suite.md</code></a>. Long-form physics and reference
+evidence remains in the JAC, GPCRmd, and same-workload reports indexed from the
+<a href="/mlx-atomistic/benchmarks/">benchmark directory</a>.</p>
+<p>The subsequent real-transform PME checkpoint reduced a <code dir="auto">128x128x64</code> JAC force
+spectrum to <code dir="auto">128x128x33</code>. Same-process old/new reciprocal-graph ABBA measured
+1.4438 to 0.6359 ms on JAC and 0.6349 to 0.5115 ms on GPCRmd, improvements of
+55.96% and 19.44%. Maximum force deltas against the former complex path were
+<code dir="auto">2.50e-5</code> and <code dir="auto">3.72e-5 kJ/(mol A)</code>, respectively. Even- and odd-sized mesh GPU
+parity tests also pass against the unchanged energy-plus-force path.</p>
+<p>Two independent 750-step canonical comparisons passed the complete-wall gate
+in both directions. Directional gains were 2.91% and 23.29% on 5DFR, and 28.09%
+and 19.86% on JAC. Absolute walls changed substantially with the machine’s
+Metal performance state, so these figures are retained as directional evidence
+and are not averaged into a single expected speedup. GPCRmd whole-step arms
+were even less stable, ranging from 11.92 to 27.63 ms/step and changing
+direction across balanced pairs. Its reciprocal-graph improvement is retained,
+but no GPCRmd whole-step claim is made from that run. Raw JSON is under
+<code dir="auto">results/md-suite/pme-real-fft-*-2026-08-15/</code>.</p>
+<p>The next Direct audit closed the remaining easy branches. Full,
+Lennard-Jones-only, and Coulomb-only kernels attributed 66—84% of elapsed time
+to common geometry, traversal, reduction, and force ownership. Morton ordering
+increased scheduled lanes by about 5%, while all six linear axis permutations
+stayed within 0.21% and did not select one cross-system winner. A useful-pair
+compaction prepass and cross-tile reduction batching both reduced their target
+work but lost more time to an extra pass or register pressure. The next bounded
+target is therefore the remaining reciprocal FFT cost, not another small Direct
+formula branch.</p>
+<p>A fresh reciprocal profile then measured the complete force-only graph at
+0.615 ms on JAC and 0.510 ms on GPCRmd. Synchronized charge spread, forward
+FFT, inverse FFT, and interpolation probes all sat near the same 0.26—0.31 ms
+launch-and-completion floor, so none remained a dominant substage. Sharing
+B-spline weights across spread workers produced no directional win. Splitting
+each atom’s 125 interpolation reads across five workers regressed JAC by
+2.4—5.6% and GPCRmd by 5.2—13.0%. The retained one-thread interpolation and
+five-thread spread therefore remain the measured layouts.</p>
+<p>The apparent diagnostics share in a short whole-step profile is not a new
+per-step hotspot. <code dir="auto">diagnostics_reporting</code> runs only at the initial and final
+boundaries and intentionally evaluates the full energy/force report. Its
+per-step contribution falls by roughly an order of magnitude in the 750-step
+canonical gate.</p>
+<p>A subsequent six-system release profile changed the next-priority decision.
+Direct Space was the largest synchronized stage on every release workload and
+owned a 34.19% cross-system median share. Reciprocal PME followed at 14.04%,
+the Neighbor lifecycle at 11.31%, constraints at 10.95%, and integration at
+9.93%. Integration/constraint fusion therefore remains a secondary candidate.</p>
+<p>The next Direct experiment targeted complete SIMD work items rather than
+repeating rejected lane branches or formula specialization. Release schedules
+contained 41.1—44.4% more padded lanes than exact cutoff-plus-skin membership,
+but that builder padding was not itself removable force work. At a 9 A force
+cutoff, rebuild positions left 26.3—27.7% of ordinary groups fully inactive,
+or 14.8—15.3% of their scheduled lanes. Weighting the same test by the real
+750-step Neighbor lifecycle reduced the mean fully inactive-group lane share to
+1.84% on JAC and 1.98% on GPCRmd; the medians were only 0.05—0.06%. A static
+group-skip kernel would therefore have less than about 0.7% whole-step upside
+before paying for metadata and branching. The candidate is closed, and the
+next bounded attribution returns to the integration/constraint interface.</p>
+<p>That attribution split the three formerly aggregated integration barriers.
+On JAC, drift/thermostat and the final force kick measured 0.253 and 0.219
+ms/step, while the three constraint projections totaled 0.746 ms/step. On
+GPCRmd they measured 0.348, 0.267, and 1.017 ms/step respectively. The post-step
+state assembly was only 0.008—0.014 ms/step on those workloads. Replacing the
+pre-force dense write with a sparse SHAKE scatter changed direction in an ABBA
+screen and was rejected.</p>
+<p>5DFR exposed a separate protocol-specific cost because it runs
+<code dir="auto">CMMotionRemover</code> every step. Its post-step route measured 0.224 ms/step.
+Reusing the invariant total mass removed one repeated reduction. Two
+independent-process 3,000-step pairs improved complete wall by 4.20% and 2.26%,
+with a 3.24% median reduction from 1.3702 to 1.3258 ms/step. This gain applies
+only when center-of-mass motion removal is enabled; it is not attributed to JAC
+or GPCRmd.</p>
+<p>Three execution-layout follow-ups did not pass. Generation-owned arrays for
+stable Interaction32 parameters and dispatch counts regressed a fixed-input JAC
+median by 3.17%. Transient spatial packing made the interaction itself about
+0.086 ms faster, but pack and scatter added about 0.50 ms; a same-schedule ABBA
+regressed in both positions. Finally, assigning Direct Space and reciprocal PME
+to separate MLX Metal streams increased fixed-input JAC calls by 27—65%.
+OpenMM’s persistent records and separate PME stream remain architectural
+references, but neither maps to a per-step MLX copy or manual stream split.</p>
+<p>Constraint dispatch fusion also reached its boundary. Fixed-input attribution
+put the theoretical SETTLE/SHAKE launch-saving ceiling near 0.14—0.15 ms/step
+on JAC and GPCRmd. A combined Metal kernel produced bitwise-identical deltas,
+but complete 750-step ABBA runs did not retain that ceiling. GPCRmd’s candidate
+median regressed 0.31%, while JAC’s warm adjacent pair regressed 0.17%; the
+larger JAC median movement was a first-control power-state artifact. Separate
+family kernels therefore remain the production path under MLX’s lazy graph.</p>
+<p>The same rule applies to force-array aggregation. Folding the Direct force
+array into the order-five PME interpolation write preserved force parity and
+removed one explicit full-array addition, but it made the interpolation depend
+on Direct Space earlier in the graph. Complete ABBA runs regressed 4.7% on
+5DFR, produced only a 0.8% warm adjacent gain on JAC, and were neutral on
+GPCRmd. The explicit lazy addition remains because it gives MLX more scheduling
+freedom than the apparently more fused kernel.</p>
+<p>Approximate arithmetic is also screened at the complete-kernel boundary before
+it reaches trajectories. <code dir="auto">metal::fast::exp</code> in the shared Ewald helper changed
+sampled forces by only about 3e-7 relative to the largest force, but fixed-input
+timing regressed in both adjacent JAC comparisons and was unstable on GPCRmd.
+The precise <code dir="auto">metal::exp</code> remains canonical because the approximation supplied no
+portable performance benefit.</p>
+<div class="sl-heading-wrapper level-h3"><h3 id="host-and-native-extension-boundary">Host and native-extension boundary</h3><a class="sl-anchor-link" href="#host-and-native-extension-boundary"><span aria-hidden="true" class="sl-anchor-icon"><svg width="16" height="16" viewBox="0 0 24 24"><path fill="currentcolor" d="m12.11 15.39-3.88 3.88a2.52 2.52 0 0 1-3.5 0 2.47 2.47 0 0 1 0-3.5l3.88-3.88a1 1 0 0 0-1.42-1.42l-3.88 3.89a4.48 4.48 0 0 0 6.33 6.33l3.89-3.88a1 1 0 1 0-1.42-1.42Zm8.58-12.08a4.49 4.49 0 0 0-6.33 0l-3.89 3.88a1 1 0 0 0 1.42 1.42l3.88-3.88a2.52 2.52 0 0 1 3.5 0 2.47 2.47 0 0 1 0 3.5l-3.88 3.88a1 1 0 1 0 1.42 1.42l3.88-3.89a4.49 4.49 0 0 0 0-6.33ZM8.83 15.17a1 1 0 0 0 1.1.22 1 1 0 0 0 .32-.22l4.92-4.92a1 1 0 0 0-1.42-1.42l-4.92 4.92a1 1 0 0 0 0 1.42Z"></path></svg></span><span class="sr-only" data-pagefind-ignore="">Section titled “Host and native-extension boundary”</span></a></div>
+<p>The charged-PME runtime now records main-thread and whole-process CPU clocks
+around the clean measured interval. CPU clocks exclude time blocked on Metal
+completion, but overlap GPU execution. They are upper bounds on host activity,
+not additive pieces of trajectory wall and not direct speedup estimates.</p>
+<p>After a reported device-state change, a fresh Low Power Mode boundary used
+three independent 1,500-step repeats and twenty warmup steps:</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Workload</th><th align="right">Wall</th><th align="right">Main-thread CPU</th><th align="right">Main-thread/wall</th><th align="right">Process CPU</th><th align="right">Process/wall</th></tr></thead><tbody><tr><td>5DFR</td><td align="right">1.2883 ms/step</td><td align="right">0.4082 ms/step</td><td align="right">31.9%</td><td align="right">0.6376 ms/step</td><td align="right">49.9%</td></tr><tr><td>JAC 4-cell</td><td align="right">4.4883 ms/step</td><td align="right">0.4635 ms/step</td><td align="right">10.3%</td><td align="right">0.7324 ms/step</td><td align="right">16.3%</td></tr></tbody></table>
+<p>The nearly fixed main-thread cost matters proportionally on the smaller 5DFR
+system, but it is not the primary production-scale JAC bottleneck. The JAC
+main-thread value includes Python, MLX graph construction, kernel submission,
+and synchronous MLX host work; eliminating all of it would still cap the
+theoretical gain near 10%, while a real C++ primitive could remove only part of
+that value. A Python <code dir="auto">cProfile</code> run also assigned Metal completion waits inside
+<code dir="auto">_needs_rebuild_mlx_scalar</code> to its Python caller, demonstrating why ordinary
+cumulative profiles cannot separate Python from device time. These measurements
+do not authorize a nanobind/C++ extension. Revisit that boundary only when a
+clean trace identifies host queue starvation or a specific Python/MLX graph
+route with a material, non-overlapped wall ceiling.</p>
+<p>One feature-specific Direct Space screen followed. GPCRmd has 83 atom types but
+only six participate in its five NBFIX overrides. Compressing the two dense
+NBFIX tables from <code dir="auto">83x83</code> to <code dir="auto">7x7</code> preserved the lookup contract, but a
+<code dir="auto">control, candidate, candidate, control</code> 750-step run was neutral: the candidate
+was 0.16% slower in the first adjacent pair and 0.17% faster in the second. All
+arms passed, and the candidate was removed. The table footprint was not a
+measurable bottleneck on this workload; compaction is not the next Direct lever.</p>
+<p>An Xcode GPU Replay then resolved the current Interaction32 compiler profile.
+Two JAC force dispatches took 1.95 ms each, and the 382-instruction profile was
+dominated by arithmetic logic unit work rather than memory, control flow, or
+synchronization. Xcode did not expose occupancy or a usable live-register peak
+for the just-in-time MLX custom kernel. Removing one derived-index threadgroup
+buffer nevertheless tested the memory hypothesis directly. It preserved force
+parity and improved fixed-schedule blocks on all three systems, but an isolated
+1,500-step JAC trajectory improved only 0.46% against a contemporaneous control.
+The source change was removed because it missed the 3% whole-step gate. The
+next Direct candidate must reduce useful-pair arithmetic or complete SIMD work,
+not merely move index traffic out of threadgroup memory.</p>
+<p>Three follow-up arithmetic screens tightened that boundary. Factoring the
+Lennard-Jones expression in OpenMM’s form regressed the fixed-schedule JAC
+kernel by 0.97%. Replacing the shared screened-Coulomb expression with a 4,097
+entry, 16 KiB linear-interpolation table regressed it by 0.83%, despite a
+<code dir="auto">9.8e-8</code> offline maximum force-factor error. Hoisting the invariant
+<code dir="auto">coulomb_constant * right_charge</code> product regressed by 0.52%, indicating that
+the compiler already performs the useful loop-invariant motion. Every prototype
+preserved the existing force-parity scale and was removed before trajectory
+testing.</p>
+<p>The earlier component attribution explains the result: geometry, traversal,
+cutoff checks, SIMD reductions, and writes account for 66-84% of Direct time,
+whereas Lennard-Jones accounts for 13-23% and Coulomb for 3-15%. Atomic output
+attribution caps global force writes at 0.9-3.2%. A larger design therefore had
+to remove complete scheduled work. The retained two-level Verlet lifecycle
+keeps the current 5.5 A outer schedule for correctness and compacts a 3.0 A
+inner force schedule once at the same generation reference. The force path uses
+the inner schedule only while the maximum displacement is at most 1.5 A, then
+falls back to the same-generation outer schedule until the ordinary 2.75 A
+rebuild boundary. It never derives a fresh inner list from stale outer
+candidates.</p>
+<p>The compactor is two Metal passes: one classifies outer right entries at the
+inner radius and caches their half-interaction mode, and one scatters retained
+entries into the generation-owned capacity. Both schedules share atom order,
+special topology, and generation identity. This removes about 40% of ordinary
+pair lanes from the early part of each large-system generation without adding
+a C++ build dependency.</p>
+<p>Generation lifetime is the runtime admission boundary. After at least three
+complete two-level generations, the engine evaluates their cumulative mean. If
+they average fewer than 24 updates, later rebuilds return to the original outer
+builder. This changed the
+90k TIP3P water result from an 8.2% regression to a 0.33% difference from
+control, while retaining sustained improvements on slower-generation systems.
+In 750-step runs, adaptive JAC measured 4.091 ms/step against adjacent controls
+at 4.362 and 4.403 ms/step; GPCRmd measured 5.267 ms/step against controls at
+5.412 ms/step. ApoA1 improved by 2.5% before the adaptive follow-up. The 5DFR
+case is below the 80,000-atom admission boundary and remains on its unchanged
+single schedule.</p>
+<p>A fresh post-promotion whole-step profile at <code dir="auto">e334398</code> keeps Direct Space as
+the next target. Its synchronized wall fractions were 19.06%, 29.17%, and
+32.34% on 5DFR, JAC, and GPCRmd. The corresponding reciprocal PME fractions
+were 10.26%, 10.79%, and 9.08%; Neighbor lifecycle fractions were 9.13%,
+10.01%, and 14.85%. Direct Space therefore has a 29.17% cross-system median,
+about 2.8 times the 10.26% reciprocal-PME median.</p>
+<p>The same run now reports the adaptive boundary explicitly. A 750-step probe
+kept JAC admitted at 34.76 updates per observed generation. GPCRmd and 90k
+TIP3P water returned to the single outer schedule after means of 21.67 and
+20.00 updates. Their close lifetimes rule out lowering the 24-update threshold
+to retain GPCRmd without risking the measured water regression. The next
+Direct experiment must therefore improve work shared by the admitted inner and
+production outer schedules; another admission-threshold adjustment is not a
+valid optimization target.</p>
+<p>The retained inline active-right compaction does that without another schedule
+or dispatch. Each ordinary SIMD group unwraps its current left slice, proves
+right atoms outside the cutoff from the left axis-aligned bounding box, compacts
+the survivors in threadgroup memory, and transposes the pair loop. Pair
+arithmetic and column reductions therefore follow active right records instead
+of the 32-lane padded row. Special topology work keeps its existing masks and
+ownership. Fixed-input Direct blocks improved 23.1-28.3% across 5DFR, JAC,
+GPCRmd, 30k/90k water, and ApoA1. Both 750-step 5DFR/JAC A-B-A comparisons
+passed; throughput improved 12.78% and 7.24% in the two 5DFR directions, and
+3.93% and 8.86% on JAC. The final six-system release run passed every runtime
+check with at most 2.9% within-case timing spread. Raw evidence is under
+<code dir="auto">results/md-suite/inline-active-compaction-{fixed,admission,release}-2026-08-19/</code>.</p>
+<div class="sl-heading-wrapper level-h2"><h2 id="measurement-rules">Measurement Rules</h2><a class="sl-anchor-link" href="#measurement-rules"><span aria-hidden="true" class="sl-anchor-icon"><svg width="16" height="16" viewBox="0 0 24 24"><path fill="currentcolor" d="m12.11 15.39-3.88 3.88a2.52 2.52 0 0 1-3.5 0 2.47 2.47 0 0 1 0-3.5l3.88-3.88a1 1 0 0 0-1.42-1.42l-3.88 3.89a4.48 4.48 0 0 0 6.33 6.33l3.89-3.88a1 1 0 1 0-1.42-1.42Zm8.58-12.08a4.49 4.49 0 0 0-6.33 0l-3.89 3.88a1 1 0 0 0 1.42 1.42l3.88-3.88a2.52 2.52 0 0 1 3.5 0 2.47 2.47 0 0 1 0 3.5l-3.88 3.88a1 1 0 1 0 1.42 1.42l3.88-3.89a4.49 4.49 0 0 0 0-6.33ZM8.83 15.17a1 1 0 0 0 1.1.22 1 1 0 0 0 .32-.22l4.92-4.92a1 1 0 0 0-1.42-1.42l-4.92 4.92a1 1 0 0 0 0 1.42Z"></path></svg></span><span class="sr-only" data-pagefind-ignore="">Section titled “Measurement Rules”</span></a></div>
+<ul>
+<li>Measure complete trajectory wall before retaining a kernel optimization.</li>
+<li>Use independent processes and a position-balanced order such as
+<code dir="auto">control, candidate, candidate, control, control, candidate</code>.</li>
+<li>Hold seed, timestep, cutoff, skin, diagnostics, sampling, Neighbor cadence,
+prepared artifact, and power state fixed.</li>
+<li>Require every arm to pass finite-state, constraints, topology, memory,
+Neighbor representation, and PME-plan reuse checks.</li>
+<li>Treat synchronized stage profiles as structural attribution, not clean
+throughput.</li>
+<li>Report rebuild counts and memory with wall time. Floating-point reduction
+order can alter later rebuild timing in chaotic trajectories.</li>
+</ul>
+<div class="sl-heading-wrapper level-h2"><h2 id="current-bottleneck-direction">Current Bottleneck Direction</h2><a class="sl-anchor-link" href="#current-bottleneck-direction"><span aria-hidden="true" class="sl-anchor-icon"><svg width="16" height="16" viewBox="0 0 24 24"><path fill="currentcolor" d="m12.11 15.39-3.88 3.88a2.52 2.52 0 0 1-3.5 0 2.47 2.47 0 0 1 0-3.5l3.88-3.88a1 1 0 0 0-1.42-1.42l-3.88 3.89a4.48 4.48 0 0 0 6.33 6.33l3.89-3.88a1 1 0 1 0-1.42-1.42Zm8.58-12.08a4.49 4.49 0 0 0-6.33 0l-3.89 3.88a1 1 0 0 0 1.42 1.42l3.88-3.88a2.52 2.52 0 0 1 3.5 0 2.47 2.47 0 0 1 0 3.5l-3.88 3.88a1 1 0 1 0 1.42 1.42l3.88-3.89a4.49 4.49 0 0 0 0-6.33ZM8.83 15.17a1 1 0 0 0 1.1.22 1 1 0 0 0 .32-.22l4.92-4.92a1 1 0 0 0-1.42-1.42l-4.92 4.92a1 1 0 0 0 0 1.42Z"></path></svg></span><span class="sr-only" data-pagefind-ignore="">Section titled “Current Bottleneck Direction”</span></a></div>
+<p>The 32-atom Direct Space route and its Neighbor builder beat the production
+tile route on 5DFR, JAC, and GPCRmd. An immutable topology snapshot first
+removed repeated host topology preparation. A subsequent fresh whole-step
+profile identified Direct Space as 16.87%, 32.94%, and 36.11% of synchronized
+wall on the three systems. The Neighbor lifecycle remained material at 11.79%,
+14.18%, and 15.03%, but was not the leading stage.</p>
+<p>Builder attribution then showed that ordinary count/prefix plus ordinary
+scatter owned about 78% of 5DFR rebuild wall and 91% of JAC and GPCRmd rebuild
+wall. Both stages recomputed the same periodic block and atom memberships. The
+count kernel now retains each membership mode in two bits, and scatter decodes
+that temporary cache instead of repeating the geometry. Median rebuild time
+fell from 6.47 to 2.91 ms on 5DFR, 27.20 to 12.41 ms on JAC, and 26.73 to
+12.61 ms on GPCRmd. Position-balanced 750-step complete walls improved in both
+directions on every system, by 1.53-4.80%.</p>
+<p>The cache is admitted only when it is at most 64 MiB. Larger systems retain the
+original sparse two-pass builder, preserving the runtime’s scalable memory
+boundary. Capacity admission remains a microsecond-scale host operation and
+does not justify a native C++ MLX primitive. A new whole-step profile, rather
+than another builder micro-optimization, selected constraints as the next
+tractable target. After recovered SETTLE, a passing GPCRmd profile ranks Direct
+Space first at 38.71% of synchronized wall, followed by the Neighbor lifecycle
+at 14.06%, with PME and constraints both near 12.78%. The next experiment must
+therefore return to Direct Space or PME rather than extending the builder.</p>
+<p>A follow-up Direct Space component profile separated ordinary and special work
+on the same retained schedule. After subtracting a separate zero-output
+baseline, ordinary work remained about three times larger than special work on
+both 5DFR and NBFIX-bearing GPCRmd. A zero-epsilon LJ arithmetic branch then
+improved isolated 5DFR and 30k TIP3P blocks, but regressed ApoA1 and GPCRmd and
+changed sign across the two JAC 94k directions. The prototype was removed.
+Together with the earlier rejected owner-computes, lane-rotation, grouping, and
+special-write variants, this closes another Direct Space screen without
+claiming a runtime gain. That evidence selected Reciprocal PME as the next
+bounded profiling target.</p>
+<p>That bounded PME target is now complete. The retained force-only route uses a
+real half-spectrum and a normalized-real Metal consumer. The subsequent
+three-system whole-step profile ranks Direct Space first at a 22.41% median
+instrumented share and reciprocal PME second at 17.74%.</p>
+<p>Follow-up attribution prevents several false starts. A three-force-array sum is
+only about 0.13-0.16 ms in isolation, so its larger synchronized profile share
+mostly belongs to a preceding barrier. An arithmetic-preserving checksum shows
+that Direct force atomics account for only 0.87-3.18% of the kernel. Spatially
+ordered static parameters, PME mesh sorting after amortization, and right-lane
+AABB culling all fail the cross-system transfer gate. The AABB test is the most
+instructive: it can reject 52-54% of logical pair lanes, yet still regresses all
+three systems because the SIMD loop and reductions remain. Future Direct work
+must remove complete SIMD work items or improve useful-pair arithmetic rather
+than add divergent lane-level branches. Builder capacity admission remains too
+small to justify native C++ work.</p>
+<p>The 32-atom engine is now the default inside the bounded, measured fixed-cell
+Metal PME envelope. Existing checkpoints continue to pin their recorded
+backend, and every unsupported configuration retains the previous fallback.
+See
+<a href="/mlx-atomistic/mm/metal-interaction-engine/"><code dir="auto">metal-interaction-engine.md</code></a>.</p> </div> <footer class="sl-flex astro-3yyafb3n"> <div class="meta sl-flex astro-3yyafb3n">   </div> <div class="pagination-links print:hidden astro-u2l5gyhi" dir="ltr"> <a href="/mlx-atomistic/foundations/units/" rel="prev" class="astro-u2l5gyhi"> <svg aria-hidden="true" class="astro-u2l5gyhi astro-c6vsoqas" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1.5rem;"><path d="M17 11H9.41l3.3-3.29a1.004 1.004 0 1 0-1.42-1.42l-5 5a1 1 0 0 0-.21.33 1 1 0 0 0 0 .76 1 1 0 0 0 .21.33l5 5a1.002 1.002 0 0 0 1.639-.325 1 1 0 0 0-.219-1.095L9.41 13H17a1 1 0 0 0 0-2Z"/></svg> <span class="astro-u2l5gyhi"> Previous <br class="astro-u2l5gyhi"> <span class="link-title astro-u2l5gyhi">Units and MD Diagnostics</span> </span> </a> <a href="/mlx-atomistic/mm/metal-interaction-engine/" rel="next" class="astro-u2l5gyhi"> <svg aria-hidden="true" class="astro-u2l5gyhi astro-c6vsoqas" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1.5rem;"><path d="M17.92 11.62a1.001 1.001 0 0 0-.21-.33l-5-5a1.003 1.003 0 1 0-1.42 1.42l3.3 3.29H7a1 1 0 0 0 0 2h7.59l-3.3 3.29a1.002 1.002 0 0 0 .325 1.639 1 1 0 0 0 1.095-.219l5-5a1 1 0 0 0 .21-.33 1 1 0 0 0 0-.76Z"/></svg> <span class="astro-u2l5gyhi"> Next <br class="astro-u2l5gyhi"> <span class="link-title astro-u2l5gyhi">Device-Resident 32-Atom Metal Interaction Engine</span> </span> </a> </div>  </footer> </div> </div>  </main> </div> </div> </div> </div> </body></html>

@@ -4,7 +4,7 @@ Independent websites, maintained in one frontend repository. Each site owns its
 appearance and behavior; shared tools build, validate, preview, and publish the
 files. Application and library code stays in its original project repository.
 
-## Published modules
+## Registered site modules
 
 | Module | Public path | Presentation |
 | --- | --- | --- |
@@ -13,15 +13,22 @@ files. Application and library code stays in its original project repository.
 | Automaton | `/automaton/` | Portable stage-gated agent harness |
 | Document Skills | `/document-SKILLs/` | DOCX, PDF, PPTX, and XLSX skills |
 | Docker for Apple Container | `/docker-for-apple-container/` | Docker CLI translator guide |
+| LaTeX arXiv Review Harness | `/latex-arxiv-SKILL/` | arXiv paper-review skill landing page |
 | Markmaton | `/markmaton/` | CLI output transformation guide |
+| MLX Atomistic | `/mlx-atomistic/` | Apple Silicon atomistic simulation site |
+| MLX CV | `/mlx-cv/` | Apple Silicon computer vision guide |
+| MLX H3 | `/mlx-h3/` | Geospatial indexing library guide |
+| MLX MiniMax Music 3 | `/mlx-minimax-music3/` | MiniMax Music 3 in pure MLX |
 | [MLX Speech](sites/mlx-speech/README.md) | `/mlx-speech/` | Animated audio studio |
+| MLX Spatial | `/mlx-spatial/` | Spatial data guide for Apple Silicon |
 | [Pi Arcweld](sites/pi-arcweld/README.md) | `/pi-arcweld/` | Typographic welding field guide |
 | Presentation | `/presentation/` | Presentation skills landing page |
 | [Setloom](sites/setloom/README.md) | `/setloom/` | Woven-thread music production site |
+| TNT ASR | `/tnt-asr/` | Terminal voice-to-text for Apple Silicon |
 
-These ten modules are published by this repository. The other seven project
-websites retain external publishers. All 17 public mounts and sitemap sources
-are listed in [the site registry](registry/sites.json).
+Ten modules are centrally owned. Seven more are staged in this publication
+candidate while their existing project publishers remain active. All 17 public
+mounts and sitemap sources are listed in [the site registry](registry/sites.json).
 No application runtime or model weights are included here.
 
 ## Develop and review
@@ -40,6 +47,13 @@ npm run dev
 # http://127.0.0.1:8748/mlx-speech/
 # http://127.0.0.1:8748/pi-arcweld/
 # http://127.0.0.1:8748/setloom/
+# http://127.0.0.1:8748/mlx-cv/
+# http://127.0.0.1:8748/mlx-h3/
+# http://127.0.0.1:8748/mlx-spatial/
+# http://127.0.0.1:8748/latex-arxiv-SKILL/
+# http://127.0.0.1:8748/mlx-atomistic/
+# http://127.0.0.1:8748/mlx-minimax-music3/
+# http://127.0.0.1:8748/tnt-asr/
 ```
 
 The normal build uses checked-in catalog and sitemap inputs without network
@@ -75,11 +89,18 @@ sites/agent-designer/public/  Independent static HTML, styles, scripts, and asse
 sites/automaton/public/       Independent static HTML, styles, and assets
 sites/document-SKILLs/public/ Independent static HTML and sitemap
 sites/docker-for-apple-container/public/ Static HTML, styles, scripts, and assets
+sites/latex-arxiv-SKILL/public/ Static paper-review landing page and social-card helpers
 sites/markmaton/public/       Independent static HTML, styles, scripts, and assets
+sites/mlx-atomistic/public/  Deployed Astro output, API and narrative pages, and Pagefind assets
+sites/mlx-cv/public/         Independent static HTML, scripts, assets, and social-card helpers
+sites/mlx-h3/public/         Independent static HTML, styles, scripts, and assets
+sites/mlx-minimax-music3/public/ MiniMax Music 3 site, styles, and browser script
+sites/mlx-spatial/public/    Independent static HTML, social-card helper, and assets
 sites/mlx-speech/public/      Independent static HTML, styles, scripts, and assets
 sites/pi-arcweld/public/     Independent static HTML, styles, scripts, and assets
 sites/presentation/public/   Static presentation-skills landing page
 sites/setloom/public/        Woven-thread music production site
+sites/tnt-asr/public/       Terminal voice-to-text landing page
 registry/sites.json        Mounts, build adapters, sitemap leaves, publishers
 registry/baselines.json    Import revisions and deployed artifact hashes
 tooling/                   Assembly, validation, refresh, and preview
@@ -117,14 +138,16 @@ Pull requests build the aggregate preview and attach it as `website-preview`.
 Main, scheduled, and manual runs refresh inputs, then upload the complete
 validated `dist-production/` artifact to Pages. The homepage, Agent Designer,
 Automaton, Document Skills, Docker for Apple Container, Markmaton, MLX Speech,
-Pi Arcweld, Presentation, and Setloom are centrally published. Their original
-public paths remain unchanged. The latest three transfers passed artifact and
-route checks before their former Pages settings were removed. Cleanup PRs remove
-only website-specific source; technical documentation and runtime code remain
-in the owning repositories. Setloom's former Pages configuration, website
-workflow, and website-only source have already been retired. Edit centrally
-published site modules here; keep application and library code in their project
-repositories.
+Pi Arcweld, Presentation, and Setloom are centrally owned. LaTeX arXiv Review
+Harness, MLX Atomistic, MLX CV, MLX H3, MLX MiniMax Music 3, MLX Spatial, and TNT
+ASR are staged in this candidate with their previous publishers still active.
+Their original public paths remain unchanged. Earlier transfers passed artifact
+and route checks before their former Pages settings were removed. Cleanup PRs
+remove only website-specific source; technical documentation and runtime code
+remain in the owning repositories. Setloom's former Pages configuration,
+website workflow, and website-only source have already been retired. Edit
+centrally published site modules here; keep application and library code in
+their project repositories.
 
 The site registry distinguishes `external`, `staged`, and `central` modules.
 External modules enter preview only. During an explicit handoff, staging puts a
