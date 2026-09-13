@@ -95,6 +95,10 @@ validated `dist-production/` artifact to Pages. The homepage, MLX Speech, and
 Pi Arcweld are centrally published. Their original project Pages configurations
 and website publishing workflows have been retired; edit these modules here.
 
+Setloom is staged in the central artifact while its existing project publisher
+continues to serve `/setloom/`. Keep both publishers until the staged files and
+ordinary source marker have been verified on the route.
+
 The site registry distinguishes `external`, `staged`, and `central` modules.
 External modules enter preview only. During an explicit handoff, staging puts a
 complete module in the central artifact before its old publisher is retired.
