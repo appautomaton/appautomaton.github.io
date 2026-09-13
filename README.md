@@ -31,6 +31,9 @@ npm run dev
 # http://127.0.0.1:8748/agent-designer/
 # http://127.0.0.1:8748/automaton/
 # http://127.0.0.1:8748/document-SKILLs/
+# http://127.0.0.1:8748/docker-for-apple-container/
+# http://127.0.0.1:8748/markmaton/
+# http://127.0.0.1:8748/presentation/
 # http://127.0.0.1:8748/mlx-speech/
 # http://127.0.0.1:8748/pi-arcweld/
 # http://127.0.0.1:8748/setloom/
@@ -61,17 +64,20 @@ and presentation registry actually used by the selected deployment.
 ## Structure and ownership
 
 ```text
-sites/home/                 Homepage source and existing Node build
-sites/agent-designer/public/ Independent static HTML, styles, scripts, and assets
-sites/automaton/public/      Independent static HTML, styles, and assets
+sites/home/                  Homepage source and existing Node build
+sites/agent-designer/public/  Independent static HTML, styles, scripts, and assets
+sites/automaton/public/       Independent static HTML, styles, and assets
 sites/document-SKILLs/public/ Independent static HTML and sitemap
-sites/mlx-speech/public/     Independent static HTML, styles, scripts, and assets
+sites/docker-for-apple-container/public/ Static HTML, styles, scripts, and assets
+sites/markmaton/public/       Independent static HTML, styles, scripts, and assets
+sites/mlx-speech/public/      Independent static HTML, styles, scripts, and assets
 sites/pi-arcweld/public/     Independent static HTML, styles, scripts, and assets
+sites/presentation/public/   Static presentation-skills landing page
 sites/setloom/public/        Woven-thread music production site
 registry/sites.json        Mounts, build adapters, sitemap leaves, publishers
 registry/baselines.json    Import revisions and deployed artifact hashes
 tooling/                   Assembly, validation, refresh, and preview
-dist/                      Complete seven-module preview, generated
+dist/                       Preview of registered site modules, generated
 dist-production/           Registered production modules and discovery, generated
 ```
 
