@@ -1,8 +1,8 @@
 # Project publication ownership and handoff
 
-The homepage and nine project websites are centrally published by
+The homepage and all sixteen project websites are centrally published by
 `appautomaton/appautomaton.github.io`. Their existing public URLs are unchanged.
-Seven other project websites retain external publishers.
+No registered project website retains an external publisher.
 
 ## Publication states
 
@@ -32,8 +32,9 @@ ordinary URL after propagation; a query string alone did not reliably bypass
 negative caching. Retain the old publisher's source until delivery is verified.
 
 The same sequence transferred Pi Arcweld, MLX Speech, Setloom, agent-designer,
-Automaton, Document Skills, Presentation, Markmaton, and Docker for Apple
-Container. Their ordinary source markers identify this repository, and their
+Automaton, Document Skills, Presentation, Markmaton, Docker for Apple Container,
+MLX Spatial, MLX H3, MLX CV, MiniMax Music 3, TNT ASR, LaTeX arXiv Skill, and
+MLX Atomistic. Their ordinary source markers identify this repository, and their
 website files matched the central artifact. Setloom's nine files also matched
 over the ordinary route after cutover. Its former Pages configuration, website
 workflow, and website-only source were retired after verification. The temporary
@@ -44,6 +45,13 @@ Docker for Apple Container's deployed version stamp is maintained in this
 repository at `sites/docker-for-apple-container/public/`. After a validated
 runtime release, update its JSON-LD version, footer date, and sitemap `lastmod`
 together. The Docker site test checks that those fields stay in sync.
+
+MLX Atomistic's 263-file initial snapshot includes its generated technical
+documentation and Pagefind search assets. Its project repository retains the
+canonical documentation, docstrings, generator scripts, and Astro inputs;
+only its project Pages workflow is retired. A new validated build is submitted
+as a complete snapshot to the central module. See
+[the refresh guide](../sites/mlx-atomistic/README.md).
 
 ## Transfer another project
 

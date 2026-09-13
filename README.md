@@ -17,7 +17,7 @@ files. Application and library code stays in its original project repository.
 | Markmaton | `/markmaton/` | CLI output transformation guide |
 | MLX Atomistic | `/mlx-atomistic/` | Apple Silicon atomistic simulation site |
 | MLX CV | `/mlx-cv/` | Apple Silicon computer vision guide |
-| MLX H3 | `/mlx-h3/` | Geospatial indexing library guide |
+| MLX H3 | `/mlx-h3/` | MiniMax H3 video and stereo audio generation guide |
 | MLX MiniMax Music 3 | `/mlx-minimax-music3/` | MiniMax Music 3 in pure MLX |
 | [MLX Speech](sites/mlx-speech/README.md) | `/mlx-speech/` | Animated audio studio |
 | MLX Spatial | `/mlx-spatial/` | Spatial data guide for Apple Silicon |
@@ -26,9 +26,9 @@ files. Application and library code stays in its original project repository.
 | [Setloom](sites/setloom/README.md) | `/setloom/` | Woven-thread music production site |
 | TNT ASR | `/tnt-asr/` | Terminal voice-to-text for Apple Silicon |
 
-Ten modules are centrally owned. Seven more are staged in this publication
-candidate while their existing project publishers remain active. All 17 public
-mounts and sitemap sources are listed in [the site registry](registry/sites.json).
+All 17 modules are centrally published. Their public mounts and sitemap sources
+are listed in [the site registry](registry/sites.json); none of these project
+websites retains a separate publisher.
 No application runtime or model weights are included here.
 
 ## Develop and review
@@ -136,18 +136,18 @@ artifact available. Existing site removals or mount changes require review.
 
 Pull requests build the aggregate preview and attach it as `website-preview`.
 Main, scheduled, and manual runs refresh inputs, then upload the complete
-validated `dist-production/` artifact to Pages. The homepage, Agent Designer,
-Automaton, Document Skills, Docker for Apple Container, Markmaton, MLX Speech,
-Pi Arcweld, Presentation, and Setloom are centrally owned. LaTeX arXiv Review
-Harness, MLX Atomistic, MLX CV, MLX H3, MLX MiniMax Music 3, MLX Spatial, and TNT
-ASR are staged in this candidate with their previous publishers still active.
-Their original public paths remain unchanged. Earlier transfers passed artifact
-and route checks before their former Pages settings were removed. Cleanup PRs
-remove only website-specific source; technical documentation and runtime code
-remain in the owning repositories. Setloom's former Pages configuration,
-website workflow, and website-only source have already been retired. Edit
-centrally published site modules here; keep application and library code in
-their project repositories.
+validated `dist-production/` artifact to Pages. All 17 registered modules are
+centrally owned. Each project's original public path is unchanged, and its
+former Pages configuration was retired after artifact and ordinary-route checks.
+Cleanup changes remove website-only publishing workflows and redundant static
+source while preserving application code, package release workflows, and
+technical documentation in their owning repositories.
+
+MLX Atomistic retains its canonical documentation, docstrings, generators, and
+Astro build inputs in the project repository. Its central module is a validated
+generated snapshot. Follow [its refresh guide](sites/mlx-atomistic/README.md) to
+replace that complete snapshot, including the matching Pagefind search files.
+Edit other centrally published static site modules here.
 
 The site registry distinguishes `external`, `staged`, and `central` modules.
 External modules enter preview only. During an explicit handoff, staging puts a
