@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "phase": "modular-production",
+  "phase": "publisher-handoff",
   "origin": "https://appautomaton.com",
   "sites": [
     {
@@ -32,7 +32,18 @@
       "sitemaps": [
         "https://appautomaton.com/agent-designer/sitemap.xml"
       ],
-      "publication": "external"
+      "publication": "staged",
+      "sourceDir": "sites/agent-designer/public",
+      "build": {
+        "kind": "static"
+      },
+      "outputDir": ".",
+      "pages": [
+        "/agent-designer/"
+      ],
+      "knownMissingLinks": [
+        "https://appautomaton.com/BACKLOG.md"
+      ]
     },
     {
       "id": "automaton",
@@ -42,7 +53,15 @@
       "sitemaps": [
         "https://appautomaton.com/automaton/sitemap.xml"
       ],
-      "publication": "external"
+      "publication": "staged",
+      "sourceDir": "sites/automaton/public",
+      "build": {
+        "kind": "static"
+      },
+      "outputDir": ".",
+      "pages": [
+        "/automaton/"
+      ]
     },
     {
       "id": "docker-for-apple-container",
@@ -62,7 +81,15 @@
       "sitemaps": [
         "https://appautomaton.com/document-SKILLs/sitemap.xml"
       ],
-      "publication": "external"
+      "publication": "staged",
+      "sourceDir": "sites/document-SKILLs/public",
+      "build": {
+        "kind": "static"
+      },
+      "outputDir": ".",
+      "pages": [
+        "/document-SKILLs/"
+      ]
     },
     {
       "id": "latex-arxiv-SKILL",

@@ -94,6 +94,26 @@ test('a failed module preserves both complete artifacts and root output cannot t
   assert.deepEqual(await fileHashes(join(root, 'dist-production')), production)
 })
 
+test('commented-out local links do not claim published assets', async t => {
+  const {root, write} = await fixture(t)
+  await write('sites/sound/public/index.html', page('/sound/', '<section id="models">Models</section><!-- <link rel="stylesheet" href="missing.css"><img src="missing.svg" alt="commented"> -->'))
+  await buildWorkspace(root, registry())
+  const files = await fileHashes(join(root, 'dist'))
+  assert(files['sound/index.html'])
+  assert(!files['sound/missing.css'])
+  assert(!files['sound/missing.svg'])
+})
+
+test('known missing routes are scoped to their source site', async t => {
+  const {root, write} = await fixture(t)
+  const r = registry()
+  r.sites[1].knownMissingLinks = [origin + '/BACKLOG.md']
+  await write('sites/sound/public/index.html', page('/sound/', '<section id="models">Models</section><a href="../BACKLOG.md">Backlog</a>'))
+  await buildWorkspace(root, r)
+  delete r.sites[1].knownMissingLinks
+  await assert.rejects(buildWorkspace(root, r), /Missing local destination/)
+})
+
 test('preview serves directory routes, ranges, real 404s, and isolated external sites', async t => {
   const {root, write} = await fixture(t)
   await buildWorkspace(root, registry())

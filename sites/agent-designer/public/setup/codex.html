@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+<!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>Codex CLI setup | agent-designer</title>
+<meta name="generator" content="Jekyll v3.10.0" />
+<meta property="og:title" content="Codex CLI setup" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Portable SKILLs workspace for Claude Code, Codex, and Gemini — issue-driven workflows and cross-agent collaboration via bridge scripts with session continuity." />
+<meta property="og:description" content="Portable SKILLs workspace for Claude Code, Codex, and Gemini — issue-driven workflows and cross-agent collaboration via bridge scripts with session continuity." />
+<link rel="canonical" href="https://appautomaton.com/agent-designer/setup/codex.html" />
+<meta property="og:url" content="https://appautomaton.com/agent-designer/setup/codex.html" />
+<meta property="og:site_name" content="agent-designer" />
+<meta property="og:type" content="website" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Codex CLI setup" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebPage","description":"Portable SKILLs workspace for Claude Code, Codex, and Gemini — issue-driven workflows and cross-agent collaboration via bridge scripts with session continuity.","headline":"Codex CLI setup","url":"https://appautomaton.com/agent-designer/setup/codex.html"}</script>
+<!-- End Jekyll SEO tag -->
+
+    <link rel="stylesheet" href="/agent-designer/assets/css/style.css?v=8d64ac52be88a860b89cdf1730158aa6f6c335cb">
+    <!-- start custom head snippets, customize with your own _includes/head-custom.html file -->
+
+<!-- Setup Google Analytics -->
+
+
+
+<!-- You can set your favicon here -->
+<!-- link rel="shortcut icon" type="image/x-icon" href="/agent-designer/favicon.ico" -->
+
+<!-- end custom head snippets -->
+
+  </head>
+  <body>
+    <div class="container-lg px-3 my-5 markdown-body">
+      
+      <h1><a href="https://appautomaton.com/agent-designer/">agent-designer</a></h1>
+      
+
+      <h1 id="codex-cli-setup">Codex CLI setup</h1>
+
+<p>This runbook installs skills from this repo into Codex CLI. Execute it literally: every step states the command to run and the result to expect. Replace <code class="language-plaintext highlighter-rouge">&lt;skill-name&gt;</code> with one of <code class="language-plaintext highlighter-rouge">collaborating-with-claude</code>, <code class="language-plaintext highlighter-rouge">collaborating-with-grok</code>, <code class="language-plaintext highlighter-rouge">collaborating-with-antigravity</code>, or <code class="language-plaintext highlighter-rouge">issue-driven-workflow</code>. Skip <code class="language-plaintext highlighter-rouge">collaborating-with-codex</code> on Codex hosts in most cases, because Codex delegating to Codex rarely adds value.</p>
+
+<h2 id="1-prerequisites">1. Prerequisites</h2>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">git</code> and <code class="language-plaintext highlighter-rouge">python3</code> (3.9 or newer) on PATH.</li>
+  <li>Codex CLI installed and signed in (<code class="language-plaintext highlighter-rouge">codex login</code>).</li>
+  <li>For each bridge skill, the child CLI it delegates to must be installed and authenticated: <code class="language-plaintext highlighter-rouge">claude</code> for collaborating-with-claude (run <code class="language-plaintext highlighter-rouge">claude</code> then <code class="language-plaintext highlighter-rouge">/login</code>, or set <code class="language-plaintext highlighter-rouge">ANTHROPIC_API_KEY</code>), <code class="language-plaintext highlighter-rouge">grok</code> for collaborating-with-grok, <code class="language-plaintext highlighter-rouge">agy</code> for collaborating-with-antigravity.</li>
+  <li><code class="language-plaintext highlighter-rouge">issue-driven-workflow</code> needs only <code class="language-plaintext highlighter-rouge">python3</code>.</li>
+</ul>
+
+<h2 id="2-install">2. Install</h2>
+
+<p>Clone once, then install each skill you want. Copy for a stable install, or symlink to track your clone.</p>
+
+<p>Global install, available in every project:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git clone https://github.com/appautomaton/agent-designer.git ~/src/agent-designer
+<span class="nb">mkdir</span> <span class="nt">-p</span> ~/.codex/skills
+<span class="nb">cp</span> <span class="nt">-R</span> ~/src/agent-designer/skills/&lt;skill-name&gt; ~/.codex/skills/
+<span class="nb">rm</span> <span class="nt">-rf</span> ~/.codex/skills/&lt;skill-name&gt;/scripts/__pycache__
+</code></pre></div></div>
+
+<p>Symlink variant, where <code class="language-plaintext highlighter-rouge">git pull</code> in the clone updates the install:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">ln</span> <span class="nt">-s</span> ~/src/agent-designer/skills/&lt;skill-name&gt; ~/.codex/skills/&lt;skill-name&gt;
+</code></pre></div></div>
+
+<p>Project install, committed with the project and shared with teammates:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">mkdir</span> <span class="nt">-p</span> &lt;project&gt;/.codex/skills
+<span class="nb">cp</span> <span class="nt">-R</span> ~/src/agent-designer/skills/&lt;skill-name&gt; &lt;project&gt;/.codex/skills/
+<span class="nb">rm</span> <span class="nt">-rf</span> &lt;project&gt;/.codex/skills/&lt;skill-name&gt;/scripts/__pycache__
+</code></pre></div></div>
+
+<h2 id="3-approve">3. Approve</h2>
+
+<p>Codex has no settings allowlist equivalent to Claude Code’s <code class="language-plaintext highlighter-rouge">permissions.allow</code>, so two gates matter instead.</p>
+
+<ul>
+  <li>Approval gate: <code class="language-plaintext highlighter-rouge">codex exec</code> is non-interactive, and nothing can be approved mid-run. A gated bridge call fails on the spot rather than prompting. In interactive sessions, approve the escalation when Codex asks. In <code class="language-plaintext highlighter-rouge">codex exec</code> runs, grant what the call needs up front.</li>
+  <li>
+    <p>Sandbox gate: both <code class="language-plaintext highlighter-rouge">read-only</code> and <code class="language-plaintext highlighter-rouge">workspace-write</code> block shell network, and every child CLI needs API network to reach its backend. Grant shell network to the session that runs bridges:</p>
+
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>codex <span class="nt">--sandbox</span> workspace-write <span class="nt">-c</span> <span class="s1">'sandbox_workspace_write.network_access=true'</span>
+</code></pre></div>    </div>
+
+    <p>Expected: bridge calls inside that session reach the child CLI’s API. In an externally sandboxed environment, <code class="language-plaintext highlighter-rouge">--sandbox danger-full-access</code> also works.</p>
+  </li>
+</ul>
+
+<p>For collaborating-with-claude specifically: the child <code class="language-plaintext highlighter-rouge">claude</code> must be signed in before the first bridge call. The <code class="language-plaintext highlighter-rouge">--help</code> smoke test in Verify confirms the wiring without any network grant.</p>
+
+<h2 id="4-verify">4. Verify</h2>
+
+<ol>
+  <li>
+    <p>Confirm the install location:</p>
+
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">ls</span> ~/.codex/skills/&lt;skill-name&gt;/SKILL.md
+</code></pre></div>    </div>
+
+    <p>Expected: the path prints with no error.</p>
+  </li>
+  <li>
+    <p>Start a new Codex session and ask “what skills are available”. Expected: the reply lists <code class="language-plaintext highlighter-rouge">&lt;skill-name&gt;</code>.</p>
+  </li>
+  <li>
+    <p>For a bridge skill, run its help check, for example:</p>
+
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>python3 ~/.codex/skills/collaborating-with-claude/scripts/claude_bridge.py <span class="nt">--help</span>
+</code></pre></div>    </div>
+
+    <p>Expected: a usage block starting with <code class="language-plaintext highlighter-rouge">usage: claude_bridge.py</code>.</p>
+  </li>
+</ol>
+
+<h2 id="5-update-and-uninstall">5. Update and uninstall</h2>
+
+<ul>
+  <li>Update a copied install by re-copying from a pulled clone. A symlinked install updates with <code class="language-plaintext highlighter-rouge">git pull</code> alone.</li>
+  <li>Uninstall by deleting the skill directory.</li>
+</ul>
+
+<h2 id="what-you-can-do-now">What you can do now</h2>
+
+<ul>
+  <li>“Hand this refactor to Claude Code in plan mode and report its findings.”</li>
+  <li>“Have Claude Code review this diff and return a unified patch.”</li>
+  <li>“Use collaborating-with-grok to run a live X search on <code class="language-plaintext highlighter-rouge">&lt;topic&gt;</code> with cited URLs.”</li>
+  <li>“Ask antigravity for a second opinion on this design tradeoff.”</li>
+  <li>“Create a plan and issue CSV for <code class="language-plaintext highlighter-rouge">&lt;goal&gt;</code>, then execute it row by row.”</li>
+</ul>
+
+
+      
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/anchor-js/4.1.0/anchor.min.js" integrity="sha256-lZaRhKri35AyJSypXXs4o6OPFTbTmUoltBbDCbdzegg=" crossorigin="anonymous"></script>
+    <script>anchors.add();</script>
+</body>
+</html>

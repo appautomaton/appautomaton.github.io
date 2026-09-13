@@ -36,6 +36,11 @@ export function validateRegistry(registry) {
     mounts.add(site.publicPath.toLowerCase())
     assert(/^appautomaton\/[a-z\d._-]+$/i.test(site.currentPublisher), `Missing current publisher: ${site.id}`)
     assert(['external', 'staged', 'central'].includes(site.publication || 'external'), `Unknown publication state: ${site.id}`)
+    for (const address of site.knownMissingLinks || []) {
+      const url = new URL(address)
+      assert.equal(url.origin, registry.origin, `Known missing link leaves the production origin: ${address}`)
+      assert(!url.hash && !url.search, `Known missing link must identify a stable path: ${address}`)
+    }
     if (inProduction(site)) assert(site.sourceDir, `Production requires a local module: ${site.id}`)
     if (site.publication === 'central') assert.equal(site.currentPublisher, 'appautomaton/appautomaton.github.io', `Central publisher mismatch: ${site.id}`)
     if (site.publication === 'staged') assert.equal(registry.phase, 'publisher-handoff', `Staging requires the handoff phase: ${site.id}`)
@@ -176,6 +181,8 @@ export async function validatePublication(root, registry, {production = false} =
     const url = new URL(address, registry.origin + '/' + from)
     if (url.origin !== registry.origin) return
     const pathname = decodeURIComponent(url.pathname)
+    const sourceSite = ownerFor(registry, '/' + from)
+    if (sourceSite?.knownMissingLinks?.includes(url.origin + pathname)) return
     const owner = ownerFor(registry, pathname)
     if (!owner?.sourceDir || (production && !inProduction(owner))) return
     const target = routeFile(pathname).slice(1)
@@ -185,12 +192,13 @@ export async function validatePublication(root, registry, {production = false} =
     }
   }
   for (const [file, source] of html) {
-    for (const match of source.matchAll(/<(?:a|link|script|img|source|audio|video|use)\b[^>]*>/gi)) {
+    const visibleMarkup = source.replace(/<!--[\s\S]*?-->/g, '')
+    for (const match of visibleMarkup.matchAll(/<(?:a|link|script|img|source|audio|video|use)\b[^>]*>/gi)) {
       const attrs = attributes(match[0])
       for (const key of ['href', 'src', 'poster', 'xlink:href']) if (attrs[key]) reference(attrs[key], file, {anchor: /^<a\b/i.test(match[0])})
       if (attrs.srcset) for (const value of attrs.srcset.split(',')) reference(value.trim().split(/\s+/)[0], file)
     }
-    for (const match of source.matchAll(/<meta\b[^>]*>/gi)) {
+    for (const match of visibleMarkup.matchAll(/<meta\b[^>]*>/gi)) {
       const attrs = attributes(match[0])
       if (['og:image', 'twitter:image'].includes(attrs.property || attrs.name)) reference(attrs.content, file)
     }
