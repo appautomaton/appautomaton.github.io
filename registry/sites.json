@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "phase": "modular-production",
+  "phase": "publisher-handoff",
   "origin": "https://appautomaton.com",
   "sites": [
     {
@@ -71,7 +71,18 @@
       "sitemaps": [
         "https://appautomaton.com/docker-for-apple-container/sitemap.xml"
       ],
-      "publication": "external"
+      "publication": "staged",
+      "sourceDir": "sites/docker-for-apple-container/public",
+      "build": {
+        "kind": "static",
+        "exclude": [
+          ".nojekyll"
+        ]
+      },
+      "outputDir": ".",
+      "pages": [
+        "/docker-for-apple-container/"
+      ]
     },
     {
       "id": "document-SKILLs",
@@ -109,7 +120,15 @@
       "sitemaps": [
         "https://appautomaton.com/markmaton/sitemap.xml"
       ],
-      "publication": "external"
+      "publication": "staged",
+      "sourceDir": "sites/markmaton/public",
+      "build": {
+        "kind": "static"
+      },
+      "outputDir": ".",
+      "pages": [
+        "/markmaton/"
+      ]
     },
     {
       "id": "mlx-atomistic",
@@ -211,7 +230,15 @@
       "sitemaps": [
         "https://appautomaton.com/presentation/sitemap.xml"
       ],
-      "publication": "external"
+      "publication": "staged",
+      "sourceDir": "sites/presentation/public",
+      "build": {
+        "kind": "static"
+      },
+      "outputDir": ".",
+      "pages": [
+        "/presentation/"
+      ]
     },
     {
       "id": "setloom",
