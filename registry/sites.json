@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "phase": "modular-production",
+  "phase": "publisher-handoff",
   "origin": "https://appautomaton.com",
   "sites": [
     {
@@ -194,7 +194,18 @@
       "sitemaps": [
         "https://appautomaton.com/setloom/sitemap.xml"
       ],
-      "publication": "external"
+      "sourceDir": "sites/setloom/public",
+      "build": {
+        "kind": "static",
+        "exclude": [
+          ".nojekyll"
+        ]
+      },
+      "outputDir": ".",
+      "pages": [
+        "/setloom/"
+      ],
+      "publication": "staged"
     },
     {
       "id": "tnt-asr",

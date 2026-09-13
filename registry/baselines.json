@@ -280,6 +280,22 @@
         "robots.txt": "970e52608337de94a439048756dfdba4ac9da544d2ad7d74396d8cffac27f6e3",
         "sitemap.xml": "ff1da6b132315abb8aea5ba97b24dee256424ff82bef8dd322e75dbda64a0531"
       }
+    },
+    "setloom": {
+      "repository": "appautomaton/setloom",
+      "commit": "ff29f4e20328d565da3cc8728556219b340a8dcf",
+      "run": "https://github.com/appautomaton/setloom/actions/runs/34728403349",
+      "files": {
+        "assets/main.js": "57aa544e030e4871ac699af9e7b5fd9a6a62891231185b8144d66819f00e0e60",
+        "assets/mark.svg": "1d288bf9e6780d6a7de3f9cbabfd04709032076c5dc3983ec4df33531fc1ea54",
+        "assets/style.css": "e290c2a13649d41bca5bc306246b646ead8166b296f8d6a1e3d15c6bcd8e8fe2",
+        "assets/touch-icon.png": "be6b7654a8c3ab315e601f2938dad535bc084c4faafacbd0e109eecbbe9f9d6b",
+        "index.html": "899955d84f038c3f8da5ac475f553d292a17a1f982c0a0f523501254df1c8490",
+        "llms.txt": "1630af9323f8b79de360e98cb33442949a59075feaab0e0737c635c257e9d02a",
+        "og-card.html": "288096319787a0448e3e688d7a4b1faed490381127bf70d55bc6b76cadc26771",
+        "og-card.png": "33faf2da3e7212db9138055550b357257368a8eadabd8408ec6dacd059e9532b",
+        "sitemap.xml": "b4b63f46928276263041f6cfd4d323a309ea65a348093befbc7b880f4e8283c8"
+      }
     }
   }
 }

@@ -2,7 +2,8 @@
 
 The homepage, Pi Arcweld, and MLX Speech are centrally published by
 `appautomaton/appautomaton.github.io`. Their existing public URLs are unchanged.
-Fourteen project websites retain external publishers.
+Setloom is staged at `/setloom/` while its existing publisher remains active.
+Thirteen other project websites retain external publishers.
 
 ## Publication states
 
