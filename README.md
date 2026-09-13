@@ -40,6 +40,9 @@ npm run dev
 # http://127.0.0.1:8748/mlx-speech/
 # http://127.0.0.1:8748/pi-arcweld/
 # http://127.0.0.1:8748/setloom/
+# http://127.0.0.1:8748/mlx-cv/
+# http://127.0.0.1:8748/mlx-h3/
+# http://127.0.0.1:8748/mlx-spatial/
 ```
 
 The normal build uses checked-in catalog and sitemap inputs without network
@@ -76,6 +79,9 @@ sites/automaton/public/       Independent static HTML, styles, and assets
 sites/document-SKILLs/public/ Independent static HTML and sitemap
 sites/docker-for-apple-container/public/ Static HTML, styles, scripts, and assets
 sites/markmaton/public/       Independent static HTML, styles, scripts, and assets
+sites/mlx-cv/public/         Independent static HTML, scripts, assets, and social-card helpers
+sites/mlx-h3/public/         Independent static HTML, styles, scripts, and assets
+sites/mlx-spatial/public/    Independent static HTML, social-card helper, and assets
 sites/mlx-speech/public/      Independent static HTML, styles, scripts, and assets
 sites/pi-arcweld/public/     Independent static HTML, styles, scripts, and assets
 sites/presentation/public/   Static presentation-skills landing page

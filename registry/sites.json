@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "phase": "modular-production",
+  "phase": "publisher-handoff",
   "origin": "https://appautomaton.com",
   "sites": [
     {
@@ -148,7 +148,18 @@
       "sitemaps": [
         "https://appautomaton.com/mlx-cv/sitemap.xml"
       ],
-      "publication": "external"
+      "publication": "staged",
+      "sourceDir": "sites/mlx-cv/public",
+      "build": {
+        "kind": "static",
+        "exclude": [
+          ".nojekyll"
+        ]
+      },
+      "outputDir": ".",
+      "pages": [
+        "/mlx-cv/"
+      ]
     },
     {
       "id": "mlx-h3",
@@ -158,7 +169,15 @@
       "sitemaps": [
         "https://appautomaton.com/mlx-h3/sitemap.xml"
       ],
-      "publication": "external"
+      "publication": "staged",
+      "sourceDir": "sites/mlx-h3/public",
+      "build": {
+        "kind": "static"
+      },
+      "outputDir": ".",
+      "pages": [
+        "/mlx-h3/"
+      ]
     },
     {
       "id": "mlx-minimax-music3",
@@ -178,7 +197,18 @@
       "sitemaps": [
         "https://appautomaton.com/mlx-spatial/sitemap.xml"
       ],
-      "publication": "external"
+      "publication": "staged",
+      "sourceDir": "sites/mlx-spatial/public",
+      "build": {
+        "kind": "static",
+        "exclude": [
+          ".nojekyll"
+        ]
+      },
+      "outputDir": ".",
+      "pages": [
+        "/mlx-spatial/"
+      ]
     },
     {
       "id": "mlx-speech",
