@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "phase": "publisher-handoff",
+  "phase": "modular-production",
   "origin": "https://appautomaton.com",
   "sites": [
     {
@@ -66,12 +66,12 @@
     {
       "id": "docker-for-apple-container",
       "publicPath": "/docker-for-apple-container/",
-      "currentPublisher": "appautomaton/docker-for-apple-container",
+      "currentPublisher": "appautomaton/appautomaton.github.io",
       "sitemapSource": "https://appautomaton.com/docker-for-apple-container/sitemap.xml",
       "sitemaps": [
         "https://appautomaton.com/docker-for-apple-container/sitemap.xml"
       ],
-      "publication": "staged",
+      "publication": "central",
       "sourceDir": "sites/docker-for-apple-container/public",
       "build": {
         "kind": "static",
@@ -115,12 +115,12 @@
     {
       "id": "markmaton",
       "publicPath": "/markmaton/",
-      "currentPublisher": "appautomaton/markmaton",
+      "currentPublisher": "appautomaton/appautomaton.github.io",
       "sitemapSource": "https://appautomaton.com/markmaton/sitemap.xml",
       "sitemaps": [
         "https://appautomaton.com/markmaton/sitemap.xml"
       ],
-      "publication": "staged",
+      "publication": "central",
       "sourceDir": "sites/markmaton/public",
       "build": {
         "kind": "static"
@@ -225,12 +225,12 @@
     {
       "id": "presentation",
       "publicPath": "/presentation/",
-      "currentPublisher": "appautomaton/presentation",
+      "currentPublisher": "appautomaton/appautomaton.github.io",
       "sitemapSource": "https://appautomaton.com/presentation/sitemap.xml",
       "sitemaps": [
         "https://appautomaton.com/presentation/sitemap.xml"
       ],
-      "publication": "staged",
+      "publication": "central",
       "sourceDir": "sites/presentation/public",
       "build": {
         "kind": "static"

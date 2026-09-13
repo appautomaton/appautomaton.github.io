@@ -1,8 +1,8 @@
 # Project publication ownership and handoff
 
-The homepage and six project websites are centrally published by
+The homepage and nine project websites are centrally published by
 `appautomaton/appautomaton.github.io`. Their existing public URLs are unchanged.
-Ten other project websites retain external publishers.
+Seven other project websites retain external publishers.
 
 ## Publication states
 
@@ -32,13 +32,18 @@ ordinary URL after propagation; a query string alone did not reliably bypass
 negative caching. Retain the old publisher's source until delivery is verified.
 
 The same sequence transferred Pi Arcweld, MLX Speech, Setloom, agent-designer,
-Automaton, and Document Skills. Their ordinary source markers identify this
-repository, and their website files matched the central artifact. Setloom's nine
-files also matched over the ordinary route after cutover. Its former Pages
-configuration, website workflow, and website-only source were retired after
-verification. The temporary routing fixture and its workflow input were removed
-afterward. The first three additional transfers preserved technical documentation
-and runtime code in their owning repositories.
+Automaton, Document Skills, Presentation, Markmaton, and Docker for Apple
+Container. Their ordinary source markers identify this repository, and their
+website files matched the central artifact. Setloom's nine files also matched
+over the ordinary route after cutover. Its former Pages configuration, website
+workflow, and website-only source were retired after verification. The temporary
+routing fixture and its workflow input were removed afterward. The other transfers
+preserved technical documentation and runtime code in their owning repositories.
+
+Docker for Apple Container's deployed version stamp is maintained in this
+repository at `sites/docker-for-apple-container/public/`. After a validated
+runtime release, update its JSON-LD version, footer date, and sitemap `lastmod`
+together. The Docker site test checks that those fields stay in sync.
 
 ## Transfer another project
 

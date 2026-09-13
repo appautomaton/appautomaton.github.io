@@ -12,11 +12,14 @@ files. Application and library code stays in its original project repository.
 | Agent Designer | `/agent-designer/` | Agent design guide |
 | Automaton | `/automaton/` | Portable stage-gated agent harness |
 | Document Skills | `/document-SKILLs/` | DOCX, PDF, PPTX, and XLSX skills |
+| Docker for Apple Container | `/docker-for-apple-container/` | Docker CLI translator guide |
+| Markmaton | `/markmaton/` | CLI output transformation guide |
 | [MLX Speech](sites/mlx-speech/README.md) | `/mlx-speech/` | Animated audio studio |
 | [Pi Arcweld](sites/pi-arcweld/README.md) | `/pi-arcweld/` | Typographic welding field guide |
+| Presentation | `/presentation/` | Presentation skills landing page |
 | [Setloom](sites/setloom/README.md) | `/setloom/` | Woven-thread music production site |
 
-These seven modules are published by this repository. The other ten project
+These ten modules are published by this repository. The other seven project
 websites retain external publishers. All 17 public mounts and sitemap sources
 are listed in [the site registry](registry/sites.json).
 No application runtime or model weights are included here.
@@ -60,6 +63,9 @@ deployment artifacts. It verifies an equivalent import; later intentional
 design work can legitimately differ from that historical reference. It does
 not play media or run inference. The homepage checkpoint includes the catalog
 and presentation registry actually used by the selected deployment.
+The Docker for Apple Container site keeps its release version, modification
+date, footer, and sitemap date together in its central module. After a validated
+runtime release, update those fields and run the Docker site consistency test.
 
 ## Structure and ownership
 
@@ -110,14 +116,15 @@ artifact available. Existing site removals or mount changes require review.
 Pull requests build the aggregate preview and attach it as `website-preview`.
 Main, scheduled, and manual runs refresh inputs, then upload the complete
 validated `dist-production/` artifact to Pages. The homepage, Agent Designer,
-Automaton, Document Skills, MLX Speech, Pi Arcweld, and Setloom are centrally
-published. Their original public paths remain unchanged. The latest three
-transfers passed artifact and route checks before their former Pages settings
-were removed. Cleanup PRs remove only website-specific source; setup, runtime,
-and technical documentation remain in the owning repositories. Setloom's
-former Pages configuration, website workflow, and website-only source have
-already been retired. Edit centrally published site modules here; keep
-application and library code in their project repositories.
+Automaton, Document Skills, Docker for Apple Container, Markmaton, MLX Speech,
+Pi Arcweld, Presentation, and Setloom are centrally published. Their original
+public paths remain unchanged. The latest three transfers passed artifact and
+route checks before their former Pages settings were removed. Cleanup PRs remove
+only website-specific source; technical documentation and runtime code remain
+in the owning repositories. Setloom's former Pages configuration, website
+workflow, and website-only source have already been retired. Edit centrally
+published site modules here; keep application and library code in their project
+repositories.
 
 The site registry distinguishes `external`, `staged`, and `central` modules.
 External modules enter preview only. During an explicit handoff, staging puts a
