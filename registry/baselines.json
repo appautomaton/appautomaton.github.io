@@ -296,6 +296,46 @@
         "og-card.png": "33faf2da3e7212db9138055550b357257368a8eadabd8408ec6dacd059e9532b",
         "sitemap.xml": "b4b63f46928276263041f6cfd4d323a309ea65a348093befbc7b880f4e8283c8"
       }
+    },
+    "agent-designer": {
+      "repository": "appautomaton/agent-designer",
+      "commit": "8d64ac52be88a860b89cdf1730158aa6f6c335cb",
+      "run": "https://github.com/appautomaton/agent-designer/actions/runs/34426736829",
+      "files": {
+        "assets/css/style.css": "38ec41b2a4c4765872f17ff3b131f560da97704113ee4f7dc884a643c8628fca",
+        "favicon.svg": "dc81dbe5d637d6c6f1302ee397c7551eb2c034b2b7c120ae55fed35dd9cd4f19",
+        "index.html": "3684690c32847d4b6309d009d35b4f23ccf67ddba8dd6774bb87356320841ff9",
+        "llms.txt": "b14ef55e6dbe9fa521efcbe1473452c52a9ededfe8c5aae8c4463b20ea596eab",
+        "robots.txt": "51936afb884c4458c0d852814d45bc2f3a0fd671e86f048a6bbfc3640658c165",
+        "script.js": "023ab96c417bb97cdd8c9c11b95315bd2e2db0f1d446f61e83c20ac4db2fe875",
+        "setup/README.md": "9a00907961112d47de1042c229c08274e9b88f295b920777d82917ab8ebe1063",
+        "setup/claude-code.html": "01232f96f9c8b24b9c6f33224e9c2005e44dae642ffe8a0f1f6f909c8c4c39b1",
+        "setup/claude-code.md": "638209e8e38876f6b677dd71af9f494ef4ee484ad3623e72205e462e6aa47b00",
+        "setup/codex.html": "9a2233a98295ba60994314a5f8e0f7b095d86dffb91f695f19723a7a1105f9e5",
+        "setup/codex.md": "cbe78d6f181dfe1389b1439c5f70059a49285d96b451b4d23af5826c5300c52a",
+        "setup/index.html": "865fe9571b4482eb5dd1962bb3d80fd8f15fa271e750417ac36d82c5a1546c1f",
+        "sitemap.xml": "4c6b01eaba0ced3cc95cac40e46f54a7ce14a2a0a37e450959d01fa230c0e4ac",
+        "styles.css": "df154aa63b373583137b3905aa1c1b565364c7f8543c6f74e2e7a160a88ae17a"
+      }
+    },
+    "automaton": {
+      "repository": "appautomaton/automaton",
+      "commit": "30dd88be97990f98c0011c380459999b93a25ad5",
+      "run": "https://github.com/appautomaton/automaton/actions/runs/34430711449",
+      "files": {
+        "index.html": "919d7c044032b0a26b05365c8a8d1dc5728df4cb98592c401484743e135c25d8",
+        "sitemap.xml": "f9e2ee0efecbea819c70ccf22c97f7f1aeda59a09d77c647f0f0b08740fefaf2",
+        "styles.css": "aeae887a7081e7f68a000f2f5dd72febc6f8967ff48d89467aa986de240b2739"
+      }
+    },
+    "document-SKILLs": {
+      "repository": "appautomaton/document-SKILLs",
+      "commit": "15fdf5cfe210cd778246c800cf37d9648684e54e",
+      "run": "https://github.com/appautomaton/document-SKILLs/actions/runs/34426740177",
+      "files": {
+        "index.html": "0bd9ff39dc67cf7c5226c9c6cd94dc5f39748a8fe27826008f52efd446a7fe8f",
+        "sitemap.xml": "e4bc5baec6ce8406ccd843174b4d41413fd93a327b6018c0876117c75df6f68d"
+      }
     }
   }
 }

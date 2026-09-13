@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+<!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>Setup | agent-designer</title>
+<meta name="generator" content="Jekyll v3.10.0" />
+<meta property="og:title" content="Setup" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Portable SKILLs workspace for Claude Code, Codex, and Gemini — issue-driven workflows and cross-agent collaboration via bridge scripts with session continuity." />
+<meta property="og:description" content="Portable SKILLs workspace for Claude Code, Codex, and Gemini — issue-driven workflows and cross-agent collaboration via bridge scripts with session continuity." />
+<link rel="canonical" href="https://appautomaton.com/agent-designer/setup/" />
+<meta property="og:url" content="https://appautomaton.com/agent-designer/setup/" />
+<meta property="og:site_name" content="agent-designer" />
+<meta property="og:type" content="website" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Setup" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebPage","description":"Portable SKILLs workspace for Claude Code, Codex, and Gemini — issue-driven workflows and cross-agent collaboration via bridge scripts with session continuity.","headline":"Setup","url":"https://appautomaton.com/agent-designer/setup/"}</script>
+<!-- End Jekyll SEO tag -->
+
+    <link rel="stylesheet" href="/agent-designer/assets/css/style.css?v=8d64ac52be88a860b89cdf1730158aa6f6c335cb">
+    <!-- start custom head snippets, customize with your own _includes/head-custom.html file -->
+
+<!-- Setup Google Analytics -->
+
+
+
+<!-- You can set your favicon here -->
+<!-- link rel="shortcut icon" type="image/x-icon" href="/agent-designer/favicon.ico" -->
+
+<!-- end custom head snippets -->
+
+  </head>
+  <body>
+    <div class="container-lg px-3 my-5 markdown-body">
+      
+      <h1><a href="https://appautomaton.com/agent-designer/">agent-designer</a></h1>
+      
+
+      <h1 id="setup">Setup</h1>
+
+<p>Install skills from this repo into the agent harness you already use. Each skill is a self-contained directory holding a <code class="language-plaintext highlighter-rouge">SKILL.md</code> playbook plus <code class="language-plaintext highlighter-rouge">scripts/</code>, <code class="language-plaintext highlighter-rouge">references/</code>, and <code class="language-plaintext highlighter-rouge">assets/</code>. Pick the skills you want, place them where your harness discovers skills, and set up approvals the way your harness’s runbook describes.</p>
+
+<h2 id="runbooks">Runbooks</h2>
+
+<ul>
+  <li><a href="/agent-designer/setup/claude-code.html">Claude Code</a></li>
+  <li><a href="/agent-designer/setup/codex.html">Codex CLI</a></li>
+</ul>
+
+<p>Each runbook is written to be executed literally, by you or by your agent. Every step states the command to run and the result to expect.</p>
+
+<h2 id="which-skills-fit-which-host">Which skills fit which host</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>Skill</th>
+      <th>Claude Code host</th>
+      <th>Codex host</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">collaborating-with-claude</code></td>
+      <td>Skip. Claude delegating to Claude adds nothing.</td>
+      <td>Yes</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">collaborating-with-codex</code></td>
+      <td>Yes</td>
+      <td>Skip in most cases</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">collaborating-with-grok</code></td>
+      <td>Yes</td>
+      <td>Yes</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">collaborating-with-antigravity</code></td>
+      <td>Yes</td>
+      <td>Yes</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">issue-driven-workflow</code></td>
+      <td>Yes</td>
+      <td>Yes</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="placement">Placement</h2>
+
+<p>A global install makes a skill available in every project. A project install lives inside one repo and travels with it to teammates.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Host</th>
+      <th>Global</th>
+      <th>Project</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Claude Code</td>
+      <td><code class="language-plaintext highlighter-rouge">~/.claude/skills/&lt;skill-name&gt;</code></td>
+      <td><code class="language-plaintext highlighter-rouge">&lt;project&gt;/.claude/skills/&lt;skill-name&gt;</code></td>
+    </tr>
+    <tr>
+      <td>Codex</td>
+      <td><code class="language-plaintext highlighter-rouge">~/.codex/skills/&lt;skill-name&gt;</code></td>
+      <td><code class="language-plaintext highlighter-rouge">&lt;project&gt;/.codex/skills/&lt;skill-name&gt;</code></td>
+    </tr>
+  </tbody>
+</table>
+
+<p>Grok CLI also discovers a project’s <code class="language-plaintext highlighter-rouge">.claude/skills/</code>, so a Claude Code project install serves Grok hosts too. Dedicated Grok and Antigravity host runbooks are tracked in <a href="../../BACKLOG.md">BACKLOG.md</a>.</p>
+
+
+      
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/anchor-js/4.1.0/anchor.min.js" integrity="sha256-lZaRhKri35AyJSypXXs4o6OPFTbTmUoltBbDCbdzegg=" crossorigin="anonymous"></script>
+    <script>anchors.add();</script>
+</body>
+</html>
