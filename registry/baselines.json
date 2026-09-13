@@ -375,6 +375,46 @@
         "robots.txt": "ac6576e269f636c1f4596743bcdb8c06221a939948d93d56f443f256b3e66bc0",
         "sitemap.xml": "af6da202e1f3ab2d4aa8abbaf42eb7b83fb158328b4e14a86a50d9ec801b276a"
       }
+    },
+    "mlx-spatial": {
+      "repository": "appautomaton/mlx-spatial",
+      "commit": "63e22d4dd6828c2c5f9b366a1992cf857d24e188",
+      "run": "https://github.com/appautomaton/mlx-spatial/actions/runs/34430741032",
+      "files": {
+        "README.md": "4c58d7ccb816080fdf82a84ee855a97aabc2edb4d39e5bb837ef5859ec14225a",
+        "assets/og.html": "48f1ab93ff2b3f10aac310a0e4f3a8f83ef5a34e1b4e4ef3082d61af29ce5a3d",
+        "assets/og.png": "31180372c45fb00774eaf31bac358b3b441d3aa1da498ec485b7b041edf52548",
+        "favicon.svg": "786824f71d2f72d0b1a3a3a62f28174a0fa16e3f9b7bc2d0a34f784cfa791706",
+        "index.html": "c596b88912c3797fef701115b0160fb2c986a9047fd53fcdb41bd2b500d2fda1",
+        "robots.txt": "489c824910f21f5b9df07f299d40bcc38e3b0f1223e7cb6e2b413b369c80241d",
+        "sitemap.xml": "266cf00101d568e7e36d7aaa360eeb70aa75d0312363fb4d3385fda23cc16c0c"
+      }
+    },
+    "mlx-h3": {
+      "repository": "appautomaton/mlx-h3",
+      "commit": "275f3fd311a4aaad40b93712e3e694b55577f364",
+      "run": "https://github.com/appautomaton/mlx-h3/actions/runs/34430732844",
+      "files": {
+        "app.js": "9b523b21d80f1d01c38580b72b52b58178a9400374f57ed04f89f5d79fada23d",
+        "favicon.svg": "491cf047ccc909227ed7ee27a53351d316b88f345747cd0dbed433f04d656023",
+        "index.html": "dd7c5f9d9558b81a7b688668d592469c39e482a6714aa5ae666e4540a24205e0",
+        "sitemap.xml": "175f1cfe141089496e9f8fcb0e89ee4788961533e679d592595baade882b4676",
+        "styles.css": "a6ef3c24d546c4939659878522f5c1adc9986cdd4e034f1fbb9adf3da0e18917"
+      }
+    },
+    "mlx-cv": {
+      "repository": "appautomaton/mlx-cv",
+      "commit": "6bebbe508ef34699a2c94cea82506d7a50c6e395",
+      "run": "https://github.com/appautomaton/mlx-cv/actions/runs/34430729643",
+      "files": {
+        "README.md": "0d67bbb065d4ea6ddc1fb7fcac585b88087595df5b003bc5f4a33a8543343a1b",
+        "assets/og.html": "de4dc63134c56e78af6705c606df2bdb60b5f0bbf855c2460f665db1ca8b0a28",
+        "assets/og.png": "167123f38bc672c4decbaf50986d499f375c98e32c8e44752ee4caf53ea69bdd",
+        "favicon.svg": "5b65ed4eeddcbf00bdeeb19747422efbbac7eee64a66bd4c891b13888fdfdc24",
+        "index.html": "9ac7ee022cb7ec72b2b996b014216a36588906bc430f527bf995bc3c66d82641",
+        "robots.txt": "b51dd6220ca87b4693a8fe1439d6df72baa6ce236b3bf7105daa1843af0ba930",
+        "sitemap.xml": "3eb1e62c3cc5e3e4040cbc4c70abeeac4f13a0669986c8b914728c5f6ecde698"
+      }
     }
   }
 }
