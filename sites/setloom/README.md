@@ -8,6 +8,7 @@ copy revision from PR #10. The artifact's nine published files match the hashes
 in `registry/baselines.json`.
 
 Use the root build and preview commands. `public/og-card.html` is the social-card
-source, not a content route. Runtime code and technical documentation stay in
-the Setloom repository. During this staged handoff, the existing project
-publisher remains active. See the imported [license](LICENSE).
+source, not a content route. Setloom is now centrally published at `/setloom/`.
+Its former Pages configuration, website workflow, and website-only source were
+retired after the route was verified. Runtime code and technical documentation
+stay in the Setloom repository. See the imported [license](LICENSE).

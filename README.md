@@ -11,8 +11,9 @@ files. Application and library code stays in its original project repository.
 | [Home](sites/home/README.md) | `/` | Material gallery and project catalog |
 | [MLX Speech](sites/mlx-speech/README.md) | `/mlx-speech/` | Animated audio studio |
 | [Pi Arcweld](sites/pi-arcweld/README.md) | `/pi-arcweld/` | Typographic welding field guide |
+| [Setloom](sites/setloom/README.md) | `/setloom/` | Woven-thread music production site |
 
-These three modules are published by this repository. The other 14 project
+These four modules are published by this repository. The other 13 project
 websites retain their existing publishers. All 17 public
 mounts and sitemap sources are listed in [the site registry](registry/sites.json).
 No application runtime or model weights are included here.
@@ -26,13 +27,14 @@ npm run dev
 # http://127.0.0.1:8748/
 # http://127.0.0.1:8748/mlx-speech/
 # http://127.0.0.1:8748/pi-arcweld/
+# http://127.0.0.1:8748/setloom/
 ```
 
 The normal build uses checked-in catalog and sitemap inputs without network
-access. After an edit, run `npm run build` and reload. The local server changes
-only navigation anchors to the three imported sites; canonical and social
-metadata retain their production URLs. Other project links still lead to their
-live sites. Directory routes, byte ranges, and real missing-page responses work.
+access. After an edit, run `npm run build` and reload. The local server routes
+imported project links into the preview while canonical and social metadata
+retain their production URLs. Other project links still lead to their live
+sites. Directory routes, byte ranges, and real missing-page responses work.
 Local responses carry an indexing prohibition. `node tooling/serve.mjs --no-js`
 also disables scripts through a response policy.
 
@@ -56,10 +58,11 @@ and presentation registry actually used by the selected deployment.
 sites/home/                 Homepage source and existing Node build
 sites/mlx-speech/public/    Independent static HTML, styles, scripts, and assets
 sites/pi-arcweld/public/    Independent static HTML, styles, scripts, and assets
+sites/setloom/public/       Woven-thread music production site
 registry/sites.json        Mounts, build adapters, sitemap leaves, publishers
 registry/baselines.json    Import revisions and deployed artifact hashes
 tooling/                   Assembly, validation, refresh, and preview
-dist/                      Complete three-site preview, generated
+dist/                      Complete four-site preview, generated
 dist-production/           Registered production modules and discovery, generated
 ```
 
@@ -91,13 +94,11 @@ artifact available. Existing site removals or mount changes require review.
 
 Pull requests build the aggregate preview and attach it as `website-preview`.
 Main, scheduled, and manual runs refresh inputs, then upload the complete
-validated `dist-production/` artifact to Pages. The homepage, MLX Speech, and
-Pi Arcweld are centrally published. Their original project Pages configurations
-and website publishing workflows have been retired; edit these modules here.
-
-Setloom is staged in the central artifact while its existing project publisher
-continues to serve `/setloom/`. Keep both publishers until the staged files and
-ordinary source marker have been verified on the route.
+validated `dist-production/` artifact to Pages. The homepage, MLX Speech, Pi
+Arcweld, and Setloom are centrally published. Setloom's former Pages
+configuration, website workflow, and website-only source have been retired
+after route verification. Edit its site module here; runtime code and technical
+documentation remain in the Setloom repository.
 
 The site registry distinguishes `external`, `staged`, and `central` modules.
 External modules enter preview only. During an explicit handoff, staging puts a

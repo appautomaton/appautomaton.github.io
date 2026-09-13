@@ -1,8 +1,7 @@
 # Project publication ownership and handoff
 
-The homepage, Pi Arcweld, and MLX Speech are centrally published by
+The homepage, Pi Arcweld, MLX Speech, and Setloom are centrally published by
 `appautomaton/appautomaton.github.io`. Their existing public URLs are unchanged.
-Setloom is staged at `/setloom/` while its existing publisher remains active.
 Thirteen other project websites retain external publishers.
 
 ## Publication states
@@ -32,10 +31,12 @@ Cached responses, including pre-transfer 404s, can persist briefly. Confirm the
 ordinary URL after propagation; a query string alone did not reliably bypass
 negative caching. Retain the old publisher's source until delivery is verified.
 
-The same sequence transferred Pi Arcweld and MLX Speech. Their ordinary source
-markers identified this repository, and their original website files matched
-the staged artifact. Media was compared in the artifact without playback.
-The temporary routing fixture and its workflow input were removed afterward.
+The same sequence transferred Pi Arcweld, MLX Speech, and Setloom. Their ordinary
+source markers identify this repository, and their website files matched the
+central artifact. Setloom's nine files also matched over the ordinary route after
+cutover. Its former Pages configuration, website workflow, and website-only
+source were retired after verification. The temporary routing fixture and its
+workflow input were removed afterward.
 
 ## Transfer another project
 
