@@ -1,0 +1,660 @@
+<!DOCTYPE html><html lang="en" dir="ltr" data-theme="dark" data-has-toc data-has-sidebar class="astro-bguv2lll"> <head><meta charset="utf-8"/><meta name="viewport" content="width=device-width, initial-scale=1"/><title>dft.pseudopotentials | mlx-atomistic</title><link rel="canonical" href="https://appautomaton.com/mlx-atomistic/api/dft-pseudopotentials/"/><link rel="sitemap" href="/mlx-atomistic/sitemap-index.xml"/><script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Organization","@id":"https://appautomaton.com/#org","name":"App Automaton","url":"https://appautomaton.com","description":"Open skills, harnesses, and on-device tools for engineering with AI coding agents."},{"@type":"WebSite","@id":"https://appautomaton.com/mlx-atomistic/#website","url":"https://appautomaton.com/mlx-atomistic/","name":"mlx-atomistic","description":"Apple Silicon-native alpha molecular dynamics and density-functional-theory runtime built directly on MLX and Metal — it runs the GPU on your Mac, with no CUDA, server, or cloud.","inLanguage":"en","publisher":{"@id":"https://appautomaton.com/#org"},"isPartOf":{"@id":"https://appautomaton.com/#org"}},{"@type":"SoftwareSourceCode","@id":"https://appautomaton.com/mlx-atomistic/#project","name":"mlx-atomistic","alternateName":["MLX Atomistic","mlx atomistic"],"description":"Apple Silicon-native alpha molecular dynamics and density-functional-theory runtime built directly on MLX and Metal — it runs the GPU on your Mac, with no CUDA, server, or cloud.","url":"https://appautomaton.com/mlx-atomistic/","codeRepository":"https://github.com/appautomaton/mlx-atomistic","programmingLanguage":"Python","runtimePlatform":"MLX / Metal","operatingSystem":"macOS (Apple Silicon)","license":"https://opensource.org/licenses/MIT","keywords":["MLX","Apple Silicon","Metal","molecular dynamics","density functional theory","DFT","computational chemistry","atomistic simulation","GPU","Python"],"author":{"@id":"https://appautomaton.com/#org"},"maintainer":{"@id":"https://appautomaton.com/#org"},"isPartOf":{"@id":"https://appautomaton.com/#org"}}]}</script><link rel="shortcut icon" href="/mlx-atomistic/favicon.svg" type="image/svg+xml"/><meta name="generator" content="Astro v6.4.8"/><meta name="generator" content="Starlight v0.40.0"/><meta property="og:title" content="dft.pseudopotentials"/><meta property="og:type" content="article"/><meta property="og:url" content="https://appautomaton.com/mlx-atomistic/api/dft-pseudopotentials/"/><meta property="og:locale" content="en"/><meta property="og:description" content="API reference for mlx_atomistic.dft.pseudopotentials."/><meta name="description" content="API reference for mlx_atomistic.dft.pseudopotentials."/><meta property="og:site_name" content="mlx-atomistic"/><meta property="og:image" content="https://appautomaton.com/mlx-atomistic/og.png"/><meta property="og:image:width" content="1200"/><meta property="og:image:height" content="630"/><meta property="og:image:alt" content="mlx-atomistic — Apple Silicon atomistic simulation"/><meta name="twitter:card" content="summary_large_image"/><meta name="twitter:image" content="https://appautomaton.com/mlx-atomistic/og.png"/><meta name="robots" content="noindex, follow"/><script>
+	window.StarlightThemeProvider = (() => {
+		const storedTheme =
+			typeof localStorage !== 'undefined' && localStorage.getItem('starlight-theme');
+		const theme =
+			storedTheme ||
+			(window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark');
+		document.documentElement.dataset.theme = theme === 'light' ? 'light' : 'dark';
+		return {
+			updatePickers(theme = storedTheme || 'auto') {
+				document.querySelectorAll('starlight-theme-select').forEach((picker) => {
+					const select = picker.querySelector('select');
+					if (select) select.value = theme;
+					/** @type {HTMLTemplateElement | null} */
+					const tmpl = document.querySelector(`#theme-icons`);
+					const newIcon = tmpl && tmpl.content.querySelector('.' + theme);
+					if (newIcon) {
+						const oldIcon = picker.querySelector('svg.label-icon');
+						if (oldIcon) {
+							oldIcon.replaceChildren(...newIcon.cloneNode(true).childNodes);
+						}
+					}
+				});
+			},
+		};
+	})();
+</script><template id="theme-icons"><svg aria-hidden="true" class="light astro-c6vsoqas" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1em;"><path d="M5 12a1 1 0 0 0-1-1H3a1 1 0 0 0 0 2h1a1 1 0 0 0 1-1Zm.64 5-.71.71a1 1 0 0 0 0 1.41 1 1 0 0 0 1.41 0l.71-.71A1 1 0 0 0 5.64 17ZM12 5a1 1 0 0 0 1-1V3a1 1 0 0 0-2 0v1a1 1 0 0 0 1 1Zm5.66 2.34a1 1 0 0 0 .7-.29l.71-.71a1 1 0 1 0-1.41-1.41l-.66.71a1 1 0 0 0 0 1.41 1 1 0 0 0 .66.29Zm-12-.29a1 1 0 0 0 1.41 0 1 1 0 0 0 0-1.41l-.71-.71a1.004 1.004 0 1 0-1.43 1.41l.73.71ZM21 11h-1a1 1 0 0 0 0 2h1a1 1 0 0 0 0-2Zm-2.64 6A1 1 0 0 0 17 18.36l.71.71a1 1 0 0 0 1.41 0 1 1 0 0 0 0-1.41l-.76-.66ZM12 6.5a5.5 5.5 0 1 0 5.5 5.5A5.51 5.51 0 0 0 12 6.5Zm0 9a3.5 3.5 0 1 1 0-7 3.5 3.5 0 0 1 0 7Zm0 3.5a1 1 0 0 0-1 1v1a1 1 0 0 0 2 0v-1a1 1 0 0 0-1-1Z"/></svg><svg aria-hidden="true" class="dark astro-c6vsoqas" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1em;"><path d="M21.64 13a1 1 0 0 0-1.05-.14 8.049 8.049 0 0 1-3.37.73 8.15 8.15 0 0 1-8.14-8.1 8.59 8.59 0 0 1 .25-2A1 1 0 0 0 8 2.36a10.14 10.14 0 1 0 14 11.69 1 1 0 0 0-.36-1.05Zm-9.5 6.69A8.14 8.14 0 0 1 7.08 5.22v.27a10.15 10.15 0 0 0 10.14 10.14 9.784 9.784 0 0 0 2.1-.22 8.11 8.11 0 0 1-7.18 4.32v-.04Z"/></svg><svg aria-hidden="true" class="auto astro-c6vsoqas" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1em;"><path d="M21 14h-1V7a3 3 0 0 0-3-3H7a3 3 0 0 0-3 3v7H3a1 1 0 0 0-1 1v2a3 3 0 0 0 3 3h14a3 3 0 0 0 3-3v-2a1 1 0 0 0-1-1ZM6 7a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v7H6V7Zm14 10a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1v-1h16v1Z"/></svg></template><link rel="stylesheet" href="/mlx-atomistic/_astro/print.DNXP8c50.css" media="print"><link rel="stylesheet" href="/mlx-atomistic/_astro/common.Dw9UgPrQ.css"><script type="module" src="/mlx-atomistic/_astro/page.B_tncCx8.js"></script></head> <body class="astro-bguv2lll"> <a href="#_top" class="astro-7q3lir66">Skip to content</a> <div class="page sl-flex astro-vrdttmbt"> <header class="header astro-vrdttmbt"><div class="header astro-kmkmnagf"> <div class="title-wrapper sl-flex astro-kmkmnagf"> <a href="/mlx-atomistic/" class="site-title sl-flex astro-m46x6ez3">  <img class="astro-m46x6ez3" alt src="/mlx-atomistic/_astro/logo.CMiYDOrE.svg" width="64" height="64">  <span class="astro-m46x6ez3" translate="no"> mlx-atomistic </span> </a> </div> <div class="sl-flex print:hidden astro-kmkmnagf"> <site-search class="astro-kmkmnagf astro-v37mnknz" data-translations="{&quot;placeholder&quot;:&quot;Search&quot;}"> <button data-open-modal disabled aria-label="Search" aria-keyshortcuts="Control+K" class="astro-v37mnknz"> <svg aria-hidden="true" class="astro-v37mnknz astro-c6vsoqas" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1em;"><path d="M21.71 20.29 18 16.61A9 9 0 1 0 16.61 18l3.68 3.68a.999.999 0 0 0 1.42 0 1 1 0 0 0 0-1.39ZM11 18a7 7 0 1 1 0-14 7 7 0 0 1 0 14Z"/></svg> <span class="sl-hidden md:sl-block astro-v37mnknz" aria-hidden="true">Search</span> <kbd class="sl-hidden md:sl-flex astro-v37mnknz" style="display: none;"> <kbd class="astro-v37mnknz">Ctrl</kbd><kbd class="astro-v37mnknz">K</kbd> </kbd> </button> <dialog style="padding:0" aria-label="Search" class="astro-v37mnknz"> <div class="dialog-frame sl-flex astro-v37mnknz">  <button data-close-modal class="sl-flex md:sl-hidden astro-v37mnknz"> Cancel </button> <div class="search-container astro-v37mnknz"> <div id="starlight__search" class="astro-v37mnknz"></div> </div> </div> </dialog> </site-search>  <script>
+	(() => {
+		const openBtn = document.querySelector('button[data-open-modal]');
+		const shortcut = openBtn?.querySelector('kbd');
+		if (!openBtn || !(shortcut instanceof HTMLElement)) return;
+		const platformKey = shortcut.querySelector('kbd');
+		if (platformKey && /(Mac|iPhone|iPod|iPad)/i.test(navigator.platform)) {
+			platformKey.textContent = '⌘';
+			openBtn.setAttribute('aria-keyshortcuts', 'Meta+K');
+		}
+		shortcut.style.display = '';
+	})();
+</script> <script type="module" src="/mlx-atomistic/_astro/Search.astro_astro_type_script_index_0_lang.C_Y3iPP-.js"></script>  </div> <div class="sl-hidden md:sl-flex print:hidden right-group astro-kmkmnagf"> <div class="sl-flex social-icons astro-kmkmnagf"> <a href="https://github.com/appautomaton/mlx-atomistic" rel="me" class="sl-flex astro-wy4te6ga"><span class="sr-only astro-wy4te6ga">GitHub</span><svg aria-hidden="true" class="astro-wy4te6ga astro-c6vsoqas" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1em;"><path d="M12 .3a12 12 0 0 0-3.8 23.38c.6.12.83-.26.83-.57L9 21.07c-3.34.72-4.04-1.61-4.04-1.61-.55-1.39-1.34-1.76-1.34-1.76-1.08-.74.09-.73.09-.73 1.2.09 1.83 1.24 1.83 1.24 1.08 1.83 2.81 1.3 3.5 1 .1-.78.42-1.31.76-1.61-2.67-.3-5.47-1.33-5.47-5.93 0-1.31.47-2.38 1.24-3.22-.14-.3-.54-1.52.1-3.18 0 0 1-.32 3.3 1.23a11.5 11.5 0 0 1 6 0c2.28-1.55 3.29-1.23 3.29-1.23.64 1.66.24 2.88.12 3.18a4.65 4.65 0 0 1 1.23 3.22c0 4.61-2.8 5.63-5.48 5.92.42.36.81 1.1.81 2.22l-.01 3.29c0 .31.2.69.82.57A12 12 0 0 0 12 .3Z"/></svg></a> </div> <starlight-theme-select>  <label style="--sl-select-width: 6.25em" class="astro-4yphtoen"> <span class="sr-only astro-4yphtoen">Select theme</span> <svg aria-hidden="true" class="icon label-icon astro-4yphtoen astro-c6vsoqas" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1em;"><path d="M21 14h-1V7a3 3 0 0 0-3-3H7a3 3 0 0 0-3 3v7H3a1 1 0 0 0-1 1v2a3 3 0 0 0 3 3h14a3 3 0 0 0 3-3v-2a1 1 0 0 0-1-1ZM6 7a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v7H6V7Zm14 10a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1v-1h16v1Z"/></svg> <select autocomplete="off" class="astro-4yphtoen"> <option value="dark" class="astro-4yphtoen">Dark</option><option value="light" class="astro-4yphtoen">Light</option><option value="auto" selected class="astro-4yphtoen">Auto</option> </select> <svg aria-hidden="true" class="icon caret astro-4yphtoen astro-c6vsoqas" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1em;"><path d="M17 9.17a1 1 0 0 0-1.41 0L12 12.71 8.46 9.17a1 1 0 1 0-1.41 1.42l4.24 4.24a1.002 1.002 0 0 0 1.42 0L17 10.59a1.002 1.002 0 0 0 0-1.42Z"/></svg> </label> </starlight-theme-select>  <script>
+	StarlightThemeProvider.updatePickers();
+</script> <script type="module">const r="starlight-theme",o=e=>e==="auto"||e==="dark"||e==="light"?e:"auto",c=()=>o(typeof localStorage<"u"&&localStorage.getItem(r));function n(e){typeof localStorage<"u"&&localStorage.setItem(r,e==="light"||e==="dark"?e:"")}const l=()=>matchMedia("(prefers-color-scheme: light)").matches?"light":"dark";function t(e){StarlightThemeProvider.updatePickers(e),document.documentElement.dataset.theme=e==="auto"?l():e,n(e)}matchMedia("(prefers-color-scheme: light)").addEventListener("change",()=>{c()==="auto"&&t("auto")});class s extends HTMLElement{constructor(){super(),t(c()),this.querySelector("select")?.addEventListener("change",a=>{a.currentTarget instanceof HTMLSelectElement&&t(o(a.currentTarget.value))})}}customElements.define("starlight-theme-select",s);</script> <script type="module">class s extends HTMLElement{constructor(){super();const e=this.querySelector("select");e&&(e.addEventListener("change",t=>{t.currentTarget instanceof HTMLSelectElement&&(window.location.pathname=t.currentTarget.value)}),window.addEventListener("pageshow",t=>{if(!t.persisted)return;const n=e.querySelector("option[selected]")?.index;n!==e.selectedIndex&&(e.selectedIndex=n??0)}))}}customElements.define("starlight-lang-select",s);</script> </div> </div></header> <nav class="sidebar print:hidden astro-vrdttmbt" aria-label="Main"> <starlight-menu-button class="print:hidden astro-jif73yzw"> <button aria-expanded="false" aria-label="Menu" aria-controls="starlight__sidebar" class="sl-flex md:sl-hidden astro-jif73yzw"> <svg aria-hidden="true" class="open-menu astro-jif73yzw astro-c6vsoqas" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1em;"><path d="M3 8h18a1 1 0 1 0 0-2H3a1 1 0 0 0 0 2Zm18 8H3a1 1 0 0 0 0 2h18a1 1 0 0 0 0-2Zm0-5H3a1 1 0 0 0 0 2h18a1 1 0 0 0 0-2Z"/></svg> <svg aria-hidden="true" class="close-menu astro-jif73yzw astro-c6vsoqas" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1em;"><path d="m13.41 12 6.3-6.29a1.004 1.004 0 1 0-1.42-1.42L12 10.59l-6.29-6.3a1.004 1.004 0 0 0-1.42 1.42l6.3 6.29-6.3 6.29a1 1 0 0 0 0 1.42.998.998 0 0 0 1.42 0l6.29-6.3 6.29 6.3a.999.999 0 0 0 1.42 0 1 1 0 0 0 0-1.42L13.41 12Z"/></svg> </button> </starlight-menu-button> <script type="module">class s extends HTMLElement{constructor(){super(),this.btn=this.querySelector("button"),this.btn.addEventListener("click",()=>this.toggleExpanded());const t=this.closest("nav");t&&t.addEventListener("keyup",e=>this.closeOnEscape(e))}setExpanded(t){this.setAttribute("aria-expanded",String(t)),document.body.toggleAttribute("data-mobile-menu-expanded",t)}toggleExpanded(){this.setExpanded(this.getAttribute("aria-expanded")!=="true")}closeOnEscape(t){t.code==="Escape"&&(this.setExpanded(!1),this.btn.focus())}}customElements.define("starlight-menu-button",s);</script>  <div id="starlight__sidebar" class="sidebar-pane astro-vrdttmbt"> <div class="sidebar-content sl-flex astro-vrdttmbt"> <sl-sidebar-state-persist data-hash="0n6hdyg" class="astro-kku4brbg"> <script aria-hidden="true">
+		(() => {
+			try {
+				if (!matchMedia('(min-width: 50em)').matches) return;
+				/** @type {HTMLElement | null} */
+				const target = document.querySelector('sl-sidebar-state-persist');
+				const state = JSON.parse(sessionStorage.getItem('sl-sidebar-state') || '0');
+				if (!target || !state || target.dataset.hash !== state.hash) return;
+				window._starlightScrollRestore = state.scroll;
+				customElements.define(
+					'sl-sidebar-restore',
+					class SidebarRestore extends HTMLElement {
+						connectedCallback() {
+							try {
+								const idx = parseInt(this.dataset.index || '');
+								const details = this.closest('details');
+								if (details && typeof state.open[idx] === 'boolean') details.open = state.open[idx];
+							} catch {}
+						}
+					}
+				);
+			} catch {}
+		})();
+	</script>  <ul class="top-level astro-3ii7xxms"> <li class="astro-3ii7xxms"> <a href="/mlx-atomistic/overview/" class="large astro-3ii7xxms"> <span class="astro-3ii7xxms">Overview</span>  </a> </li><li class="astro-3ii7xxms"> <details open class="astro-3ii7xxms"> <summary class="astro-3ii7xxms"> <span class="group-label astro-3ii7xxms"> <span class="large astro-3ii7xxms">Foundations</span>  </span> <svg aria-hidden="true" class="caret astro-3ii7xxms astro-c6vsoqas" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1.25rem;"><path d="m14.83 11.29-4.24-4.24a1 1 0 1 0-1.42 1.41L12.71 12l-3.54 3.54a1 1 0 0 0 0 1.41 1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.24-4.24a1.002 1.002 0 0 0 0-1.42Z"/></svg> </summary> <sl-sidebar-restore data-index="0"></sl-sidebar-restore> <ul class="astro-3ii7xxms"> <li class="astro-3ii7xxms"> <a href="/mlx-atomistic/foundations/dft-foundations/" class="astro-3ii7xxms"> <span class="astro-3ii7xxms">DFT Foundations</span>  </a> </li><li class="astro-3ii7xxms"> <a href="/mlx-atomistic/foundations/runtime-boundaries/" class="astro-3ii7xxms"> <span class="astro-3ii7xxms">Runtime Boundaries</span>  </a> </li><li class="astro-3ii7xxms"> <a href="/mlx-atomistic/foundations/testing/" class="astro-3ii7xxms"> <span class="astro-3ii7xxms">Testing</span>  </a> </li><li class="astro-3ii7xxms"> <a href="/mlx-atomistic/foundations/units/" class="astro-3ii7xxms"> <span class="astro-3ii7xxms">Units and MD Diagnostics</span>  </a> </li> </ul> </details> </li><li class="astro-3ii7xxms"> <details open class="astro-3ii7xxms"> <summary class="astro-3ii7xxms"> <span class="group-label astro-3ii7xxms"> <span class="large astro-3ii7xxms">Molecular Mechanics</span>  </span> <svg aria-hidden="true" class="caret astro-3ii7xxms astro-c6vsoqas" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1.25rem;"><path d="m14.83 11.29-4.24-4.24a1 1 0 1 0-1.42 1.41L12.71 12l-3.54 3.54a1 1 0 0 0 0 1.41 1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.24-4.24a1.002 1.002 0 0 0 0-1.42Z"/></svg> </summary> <sl-sidebar-restore data-index="1"></sl-sidebar-restore> <ul class="astro-3ii7xxms"> <li class="astro-3ii7xxms"> <a href="/mlx-atomistic/mm/md-acceleration/" class="astro-3ii7xxms"> <span class="astro-3ii7xxms">MLX-First MD Acceleration</span>  </a> </li><li class="astro-3ii7xxms"> <a href="/mlx-atomistic/mm/metal-interaction-engine/" class="astro-3ii7xxms"> <span class="astro-3ii7xxms">Device-Resident 32-Atom Metal Interaction Engine</span>  </a> </li><li class="astro-3ii7xxms"> <a href="/mlx-atomistic/mm/molecular-mechanics/" class="astro-3ii7xxms"> <span class="astro-3ii7xxms">Molecular Mechanics Core</span>  </a> </li><li class="astro-3ii7xxms"> <a href="/mlx-atomistic/mm/production-md/" class="astro-3ii7xxms"> <span class="astro-3ii7xxms">Production MLX MD Boundary</span>  </a> </li><li class="astro-3ii7xxms"> <a href="/mlx-atomistic/mm/real-mm-core/" class="astro-3ii7xxms"> <span class="astro-3ii7xxms">Real Molecular Mechanics Core</span>  </a> </li> </ul> </details> </li><li class="astro-3ii7xxms"> <details open class="astro-3ii7xxms"> <summary class="astro-3ii7xxms"> <span class="group-label astro-3ii7xxms"> <span class="large astro-3ii7xxms">Density Functional Theory</span>  </span> <svg aria-hidden="true" class="caret astro-3ii7xxms astro-c6vsoqas" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1.25rem;"><path d="m14.83 11.29-4.24-4.24a1 1 0 1 0-1.42 1.41L12.71 12l-3.54 3.54a1 1 0 0 0 0 1.41 1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.24-4.24a1.002 1.002 0 0 0 0-1.42Z"/></svg> </summary> <sl-sidebar-restore data-index="2"></sl-sidebar-restore> <ul class="astro-3ii7xxms"> <li class="astro-3ii7xxms"> <a href="/mlx-atomistic/dft/dft-general-cell-geometry/" class="astro-3ii7xxms"> <span class="astro-3ii7xxms">DFT General Periodic Cell Geometry</span>  </a> </li><li class="astro-3ii7xxms"> <a href="/mlx-atomistic/dft/dft-geometry-optimization/" class="astro-3ii7xxms"> <span class="astro-3ii7xxms">Legacy DFT Geometry Optimization</span>  </a> </li><li class="astro-3ii7xxms"> <a href="/mlx-atomistic/dft/dft-metallic-validation/" class="astro-3ii7xxms"> <span class="astro-3ii7xxms">DFT Metallic Validation</span>  </a> </li><li class="astro-3ii7xxms"> <a href="/mlx-atomistic/dft/dft-numerics/" class="astro-3ii7xxms"> <span class="astro-3ii7xxms">DFT Numerics</span>  </a> </li><li class="astro-3ii7xxms"> <a href="/mlx-atomistic/dft/dft-periodic-relaxation/" class="astro-3ii7xxms"> <span class="astro-3ii7xxms">DFT Periodic Fixed-Cell Relaxation</span>  </a> </li><li class="astro-3ii7xxms"> <a href="/mlx-atomistic/dft/dft-production-core/" class="astro-3ii7xxms"> <span class="astro-3ii7xxms">DFT Production-Core Milestone</span>  </a> </li><li class="astro-3ii7xxms"> <a href="/mlx-atomistic/dft/dft-pseudopotentials/" class="astro-3ii7xxms"> <span class="astro-3ii7xxms">DFT Pseudopotentials</span>  </a> </li><li class="astro-3ii7xxms"> <a href="/mlx-atomistic/dft/dft-roadmap/" class="astro-3ii7xxms"> <span class="astro-3ii7xxms">DFT Roadmap</span>  </a> </li><li class="astro-3ii7xxms"> <a href="/mlx-atomistic/dft/dft-scf-core/" class="astro-3ii7xxms"> <span class="astro-3ii7xxms">DFT SCF Core</span>  </a> </li><li class="astro-3ii7xxms"> <a href="/mlx-atomistic/dft/dft-stress-variable-cell/" class="astro-3ii7xxms"> <span class="astro-3ii7xxms">DFT Stress And Variable-Cell Relaxation</span>  </a> </li> </ul> </details> </li><li class="astro-3ii7xxms"> <details open class="astro-3ii7xxms"> <summary class="astro-3ii7xxms"> <span class="group-label astro-3ii7xxms"> <span class="large astro-3ii7xxms">Benchmarks</span>  </span> <svg aria-hidden="true" class="caret astro-3ii7xxms astro-c6vsoqas" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1.25rem;"><path d="m14.83 11.29-4.24-4.24a1 1 0 1 0-1.42 1.41L12.71 12l-3.54 3.54a1 1 0 0 0 0 1.41 1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.24-4.24a1.002 1.002 0 0 0 0-1.42Z"/></svg> </summary> <sl-sidebar-restore data-index="3"></sl-sidebar-restore> <ul class="astro-3ii7xxms"> <li class="astro-3ii7xxms"> <a href="/mlx-atomistic/benchmarks/" class="astro-3ii7xxms"> <span class="astro-3ii7xxms">Benchmarks</span>  </a> </li><li class="astro-3ii7xxms"> <a href="/mlx-atomistic/benchmarks/benchmark-ladder/" class="astro-3ii7xxms"> <span class="astro-3ii7xxms">Benchmark Ladder</span>  </a> </li><li class="astro-3ii7xxms"> <a href="/mlx-atomistic/benchmarks/dft-material-validation/" class="astro-3ii7xxms"> <span class="astro-3ii7xxms">DFT Material Validation</span>  </a> </li><li class="astro-3ii7xxms"> <a href="/mlx-atomistic/benchmarks/dft-performance-decisions-m5max/" class="astro-3ii7xxms"> <span class="astro-3ii7xxms">DFT Performance Decision Ledger on Apple M5 Max</span>  </a> </li><li class="astro-3ii7xxms"> <a href="/mlx-atomistic/benchmarks/gpcrmd-729-pme-runtime-m5max/" class="astro-3ii7xxms"> <span class="astro-3ii7xxms">GPCRmd 729 PME Runtime Closure (M5 Max)</span>  </a> </li><li class="astro-3ii7xxms"> <a href="/mlx-atomistic/benchmarks/lammps-opencl-m5max/" class="astro-3ii7xxms"> <span class="astro-3ii7xxms">LAMMPS OpenCL on Apple M5 Max</span>  </a> </li><li class="astro-3ii7xxms"> <a href="/mlx-atomistic/benchmarks/m5max-reference-engines/" class="astro-3ii7xxms"> <span class="astro-3ii7xxms">M5 Max Reference Engines</span>  </a> </li><li class="astro-3ii7xxms"> <a href="/mlx-atomistic/benchmarks/md-left-grouped-neighbor-scatter-m5max/" class="astro-3ii7xxms"> <span class="astro-3ii7xxms">Adaptive Left-Grouped Neighbor Scatter on Apple M5 Max</span>  </a> </li><li class="astro-3ii7xxms"> <a href="/mlx-atomistic/benchmarks/md-performance-decisions-m5max/" class="astro-3ii7xxms"> <span class="astro-3ii7xxms">MD Performance Decision Ledger on Apple M5 Max</span>  </a> </li><li class="astro-3ii7xxms"> <a href="/mlx-atomistic/benchmarks/md-suite/" class="astro-3ii7xxms"> <span class="astro-3ii7xxms">Canonical MD Performance Suite</span>  </a> </li><li class="astro-3ii7xxms"> <a href="/mlx-atomistic/benchmarks/openmm-opencl-amber20/" class="astro-3ii7xxms"> <span class="astro-3ii7xxms">OpenMM OpenCL — Amber20 Cellulose &amp; STMV on Apple M5 Max</span>  </a> </li><li class="astro-3ii7xxms"> <a href="/mlx-atomistic/benchmarks/openmm-opencl-apoa1/" class="astro-3ii7xxms"> <span class="astro-3ii7xxms">OpenMM OpenCL — ApoA1 on Apple M5 Max</span>  </a> </li><li class="astro-3ii7xxms"> <a href="/mlx-atomistic/benchmarks/openmm-opencl-dhfr/" class="astro-3ii7xxms"> <span class="astro-3ii7xxms">OpenMM OpenCL — DHFR on Apple M5 Max</span>  </a> </li><li class="astro-3ii7xxms"> <a href="/mlx-atomistic/benchmarks/same-workload-lj-scaling-m5max/" class="astro-3ii7xxms"> <span class="astro-3ii7xxms">Same-Workload LJ Scaling: MLX vs OpenMM vs LAMMPS (M5 Max)</span>  </a> </li><li class="astro-3ii7xxms"> <a href="/mlx-atomistic/benchmarks/same-workload-openmm-comparison/" class="astro-3ii7xxms"> <span class="astro-3ii7xxms">Same-Workload OpenMM Comparison</span>  </a> </li><li class="astro-3ii7xxms"> <a href="/mlx-atomistic/benchmarks/scalable-charged-pme-runtime-m5max/" class="astro-3ii7xxms"> <span class="astro-3ii7xxms">Scalable Charged PME Runtime (M5 Max)</span>  </a> </li><li class="astro-3ii7xxms"> <a href="/mlx-atomistic/benchmarks/scalable-neighbor-nonbonded-runtime-m5max/" class="astro-3ii7xxms"> <span class="astro-3ii7xxms">Scalable Neighbor-Listed Nonbonded Runtime (M5 Max)</span>  </a> </li> </ul> </details> </li><li class="astro-3ii7xxms"> <details open class="astro-3ii7xxms"> <summary class="astro-3ii7xxms"> <span class="group-label astro-3ii7xxms"> <span class="large astro-3ii7xxms">Project</span>  </span> <svg aria-hidden="true" class="caret astro-3ii7xxms astro-c6vsoqas" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1.25rem;"><path d="m14.83 11.29-4.24-4.24a1 1 0 1 0-1.42 1.41L12.71 12l-3.54 3.54a1 1 0 0 0 0 1.41 1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.24-4.24a1.002 1.002 0 0 0 0-1.42Z"/></svg> </summary> <sl-sidebar-restore data-index="4"></sl-sidebar-restore> <ul class="astro-3ii7xxms"> <li class="astro-3ii7xxms"> <a href="/mlx-atomistic/project/release/" class="astro-3ii7xxms"> <span class="astro-3ii7xxms">Release checklist</span>  </a> </li><li class="astro-3ii7xxms"> <a href="/mlx-atomistic/project/validation-and-performance/" class="astro-3ii7xxms"> <span class="astro-3ii7xxms">Validation And Performance</span>  </a> </li> </ul> </details> </li><li class="astro-3ii7xxms"> <details open class="astro-3ii7xxms"> <summary class="astro-3ii7xxms"> <span class="group-label astro-3ii7xxms"> <span class="large astro-3ii7xxms">API Reference</span>  </span> <svg aria-hidden="true" class="caret astro-3ii7xxms astro-c6vsoqas" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1.25rem;"><path d="m14.83 11.29-4.24-4.24a1 1 0 1 0-1.42 1.41L12.71 12l-3.54 3.54a1 1 0 0 0 0 1.41 1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.24-4.24a1.002 1.002 0 0 0 0-1.42Z"/></svg> </summary> <sl-sidebar-restore data-index="5"></sl-sidebar-restore> <ul class="astro-3ii7xxms"> <li class="astro-3ii7xxms"> <a href="/mlx-atomistic/api/" class="astro-3ii7xxms"> <span class="astro-3ii7xxms">API Reference</span>  </a> </li><li class="astro-3ii7xxms"> <a href="/mlx-atomistic/api/core/" class="astro-3ii7xxms"> <span class="astro-3ii7xxms">core</span>  </a> </li><li class="astro-3ii7xxms"> <a href="/mlx-atomistic/api/units/" class="astro-3ii7xxms"> <span class="astro-3ii7xxms">units</span>  </a> </li><li class="astro-3ii7xxms"> <a href="/mlx-atomistic/api/topology/" class="astro-3ii7xxms"> <span class="astro-3ii7xxms">topology</span>  </a> </li><li class="astro-3ii7xxms"> <a href="/mlx-atomistic/api/forcefields/" class="astro-3ii7xxms"> <span class="astro-3ii7xxms">forcefields</span>  </a> </li><li class="astro-3ii7xxms"> <a href="/mlx-atomistic/api/nonbonded/" class="astro-3ii7xxms"> <span class="astro-3ii7xxms">nonbonded</span>  </a> </li><li class="astro-3ii7xxms"> <a href="/mlx-atomistic/api/neighbors/" class="astro-3ii7xxms"> <span class="astro-3ii7xxms">neighbors</span>  </a> </li><li class="astro-3ii7xxms"> <a href="/mlx-atomistic/api/md/" class="astro-3ii7xxms"> <span class="astro-3ii7xxms">md</span>  </a> </li><li class="astro-3ii7xxms"> <a href="/mlx-atomistic/api/minimize/" class="astro-3ii7xxms"> <span class="astro-3ii7xxms">minimize</span>  </a> </li><li class="astro-3ii7xxms"> <a href="/mlx-atomistic/api/runtime/" class="astro-3ii7xxms"> <span class="astro-3ii7xxms">runtime</span>  </a> </li><li class="astro-3ii7xxms"> <a href="/mlx-atomistic/api/lj/" class="astro-3ii7xxms"> <span class="astro-3ii7xxms">lj</span>  </a> </li><li class="astro-3ii7xxms"> <a href="/mlx-atomistic/api/io/" class="astro-3ii7xxms"> <span class="astro-3ii7xxms">io</span>  </a> </li><li class="astro-3ii7xxms"> <a href="/mlx-atomistic/api/mm/" class="astro-3ii7xxms"> <span class="astro-3ii7xxms">mm</span>  </a> </li><li class="astro-3ii7xxms"> <a href="/mlx-atomistic/api/dft-xc/" class="astro-3ii7xxms"> <span class="astro-3ii7xxms">dft.xc</span>  </a> </li><li class="astro-3ii7xxms"> <a href="/mlx-atomistic/api/charmm_terms/" class="astro-3ii7xxms"> <span class="astro-3ii7xxms">charmm_terms</span>  </a> </li><li class="astro-3ii7xxms"> <a href="/mlx-atomistic/api/diagnostics/" class="astro-3ii7xxms"> <span class="astro-3ii7xxms">diagnostics</span>  </a> </li><li class="astro-3ii7xxms"> <a href="/mlx-atomistic/api/dft-gga/" class="astro-3ii7xxms"> <span class="astro-3ii7xxms">dft.gga</span>  </a> </li><li class="astro-3ii7xxms"> <a href="/mlx-atomistic/api/dft-band_unfolding/" class="astro-3ii7xxms"> <span class="astro-3ii7xxms">dft.band_unfolding</span>  </a> </li><li class="astro-3ii7xxms"> <a href="/mlx-atomistic/api/cell_list/" class="astro-3ii7xxms"> <span class="astro-3ii7xxms">cell_list</span>  </a> </li><li class="astro-3ii7xxms"> <a href="/mlx-atomistic/api/dft-occupations/" class="astro-3ii7xxms"> <span class="astro-3ii7xxms">dft.occupations</span>  </a> </li><li class="astro-3ii7xxms"> <a href="/mlx-atomistic/api/dft-density/" class="astro-3ii7xxms"> <span class="astro-3ii7xxms">dft.density</span>  </a> </li><li class="astro-3ii7xxms"> <a href="/mlx-atomistic/api/dft-scf/" class="astro-3ii7xxms"> <span class="astro-3ii7xxms">dft.scf</span>  </a> </li><li class="astro-3ii7xxms"> <a href="/mlx-atomistic/api/gbsa/" class="astro-3ii7xxms"> <span class="astro-3ii7xxms">gbsa</span>  </a> </li><li class="astro-3ii7xxms"> <a href="/mlx-atomistic/api/dft-plane_wave/" class="astro-3ii7xxms"> <span class="astro-3ii7xxms">dft.plane_wave</span>  </a> </li><li class="astro-3ii7xxms"> <a href="/mlx-atomistic/api/dft-references/" class="astro-3ii7xxms"> <span class="astro-3ii7xxms">dft.references</span>  </a> </li><li class="astro-3ii7xxms"> <a href="/mlx-atomistic/api/examples/" class="astro-3ii7xxms"> <span class="astro-3ii7xxms">examples</span>  </a> </li><li class="astro-3ii7xxms"> <a href="/mlx-atomistic/api/compatibility/" class="astro-3ii7xxms"> <span class="astro-3ii7xxms">compatibility</span>  </a> </li><li class="astro-3ii7xxms"> <a href="/mlx-atomistic/api/constraints/" class="astro-3ii7xxms"> <span class="astro-3ii7xxms">constraints</span>  </a> </li><li class="astro-3ii7xxms"> <a href="/mlx-atomistic/api/dft-fft/" class="astro-3ii7xxms"> <span class="astro-3ii7xxms">dft.fft</span>  </a> </li><li class="astro-3ii7xxms"> <a href="/mlx-atomistic/api/initialize/" class="astro-3ii7xxms"> <span class="astro-3ii7xxms">initialize</span>  </a> </li><li class="astro-3ii7xxms"> <a href="/mlx-atomistic/api/dft-grids/" class="astro-3ii7xxms"> <span class="astro-3ii7xxms">dft.grids</span>  </a> </li><li class="astro-3ii7xxms"> <a href="/mlx-atomistic/api/pme/" class="astro-3ii7xxms"> <span class="astro-3ii7xxms">pme</span>  </a> </li><li class="astro-3ii7xxms"> <a href="/mlx-atomistic/api/validation/" class="astro-3ii7xxms"> <span class="astro-3ii7xxms">validation</span>  </a> </li><li class="astro-3ii7xxms"> <a href="/mlx-atomistic/api/dft-operators/" class="astro-3ii7xxms"> <span class="astro-3ii7xxms">dft.operators</span>  </a> </li><li class="astro-3ii7xxms"> <a href="/mlx-atomistic/api/metal_kernels/" class="astro-3ii7xxms"> <span class="astro-3ii7xxms">metal_kernels</span>  </a> </li><li class="astro-3ii7xxms"> <a href="/mlx-atomistic/api/artifacts/" class="astro-3ii7xxms"> <span class="astro-3ii7xxms">artifacts</span>  </a> </li><li class="astro-3ii7xxms"> <a href="/mlx-atomistic/api/dft-forces/" class="astro-3ii7xxms"> <span class="astro-3ii7xxms">dft.forces</span>  </a> </li><li class="astro-3ii7xxms"> <a href="/mlx-atomistic/api/dft-periodic_cell_optimization/" class="astro-3ii7xxms"> <span class="astro-3ii7xxms">dft.periodic_cell_optimization</span>  </a> </li><li class="astro-3ii7xxms"> <a href="/mlx-atomistic/api/dft-periodic_convergence/" class="astro-3ii7xxms"> <span class="astro-3ii7xxms">dft.periodic_convergence</span>  </a> </li><li class="astro-3ii7xxms"> <a href="/mlx-atomistic/api/dft-periodic_density_volume/" class="astro-3ii7xxms"> <span class="astro-3ii7xxms">dft.periodic_density_volume</span>  </a> </li><li class="astro-3ii7xxms"> <a href="/mlx-atomistic/api/dft-periodic_electrostatics/" class="astro-3ii7xxms"> <span class="astro-3ii7xxms">dft.periodic_electrostatics</span>  </a> </li><li class="astro-3ii7xxms"> <a href="/mlx-atomistic/api/dft-periodic_forces/" class="astro-3ii7xxms"> <span class="astro-3ii7xxms">dft.periodic_forces</span>  </a> </li><li class="astro-3ii7xxms"> <a href="/mlx-atomistic/api/dft-periodic_gth/" class="astro-3ii7xxms"> <span class="astro-3ii7xxms">dft.periodic_gth</span>  </a> </li><li class="astro-3ii7xxms"> <a href="/mlx-atomistic/api/dft-periodic_observables/" class="astro-3ii7xxms"> <span class="astro-3ii7xxms">dft.periodic_observables</span>  </a> </li><li class="astro-3ii7xxms"> <a href="/mlx-atomistic/api/dft-periodic_optimization/" class="astro-3ii7xxms"> <span class="astro-3ii7xxms">dft.periodic_optimization</span>  </a> </li><li class="astro-3ii7xxms"> <a href="/mlx-atomistic/api/dft-periodic_phonon_persistence/" class="astro-3ii7xxms"> <span class="astro-3ii7xxms">dft.periodic_phonon_persistence</span>  </a> </li><li class="astro-3ii7xxms"> <a href="/mlx-atomistic/api/dft-periodic_phonons/" class="astro-3ii7xxms"> <span class="astro-3ii7xxms">dft.periodic_phonons</span>  </a> </li><li class="astro-3ii7xxms"> <a href="/mlx-atomistic/api/dft-periodic_scf/" class="astro-3ii7xxms"> <span class="astro-3ii7xxms">dft.periodic_scf</span>  </a> </li><li class="astro-3ii7xxms"> <a href="/mlx-atomistic/api/dft-periodic_stress/" class="astro-3ii7xxms"> <span class="astro-3ii7xxms">dft.periodic_stress</span>  </a> </li><li class="astro-3ii7xxms"> <a href="/mlx-atomistic/api/dft-periodic_upf/" class="astro-3ii7xxms"> <span class="astro-3ii7xxms">dft.periodic_upf</span>  </a> </li><li class="astro-3ii7xxms"> <a href="/mlx-atomistic/api/force_evaluation/" class="astro-3ii7xxms"> <span class="astro-3ii7xxms">force_evaluation</span>  </a> </li><li class="astro-3ii7xxms"> <a href="/mlx-atomistic/api/replica_exchange/" class="astro-3ii7xxms"> <span class="astro-3ii7xxms">replica_exchange</span>  </a> </li><li class="astro-3ii7xxms"> <a href="/mlx-atomistic/api/trajectory_adapters/" class="astro-3ii7xxms"> <span class="astro-3ii7xxms">trajectory_adapters</span>  </a> </li><li class="astro-3ii7xxms"> <a href="/mlx-atomistic/api/dft-pseudopotentials/" aria-current="page" class="astro-3ii7xxms"> <span class="astro-3ii7xxms">dft.pseudopotentials</span>  </a> </li><li class="astro-3ii7xxms"> <a href="/mlx-atomistic/api/dft-kpoints/" class="astro-3ii7xxms"> <span class="astro-3ii7xxms">dft.kpoints</span>  </a> </li><li class="astro-3ii7xxms"> <a href="/mlx-atomistic/api/dft-restart/" class="astro-3ii7xxms"> <span class="astro-3ii7xxms">dft.restart</span>  </a> </li><li class="astro-3ii7xxms"> <a href="/mlx-atomistic/api/custom_force/" class="astro-3ii7xxms"> <span class="astro-3ii7xxms">custom_force</span>  </a> </li><li class="astro-3ii7xxms"> <a href="/mlx-atomistic/api/dft-nonlocal_pseudopotential/" class="astro-3ii7xxms"> <span class="astro-3ii7xxms">dft.nonlocal_pseudopotential</span>  </a> </li><li class="astro-3ii7xxms"> <a href="/mlx-atomistic/api/dft-spin_gga/" class="astro-3ii7xxms"> <span class="astro-3ii7xxms">dft.spin_gga</span>  </a> </li><li class="astro-3ii7xxms"> <a href="/mlx-atomistic/api/steering/" class="astro-3ii7xxms"> <span class="astro-3ii7xxms">steering</span>  </a> </li><li class="astro-3ii7xxms"> <a href="/mlx-atomistic/api/dft-mixing/" class="astro-3ii7xxms"> <span class="astro-3ii7xxms">dft.mixing</span>  </a> </li><li class="astro-3ii7xxms"> <a href="/mlx-atomistic/api/protocols/" class="astro-3ii7xxms"> <span class="astro-3ii7xxms">protocols</span>  </a> </li><li class="astro-3ii7xxms"> <a href="/mlx-atomistic/api/virtual_sites/" class="astro-3ii7xxms"> <span class="astro-3ii7xxms">virtual_sites</span>  </a> </li><li class="astro-3ii7xxms"> <a href="/mlx-atomistic/api/visualization/" class="astro-3ii7xxms"> <span class="astro-3ii7xxms">visualization</span>  </a> </li><li class="astro-3ii7xxms"> <a href="/mlx-atomistic/api/dft-optimization/" class="astro-3ii7xxms"> <span class="astro-3ii7xxms">dft.optimization</span>  </a> </li><li class="astro-3ii7xxms"> <a href="/mlx-atomistic/api/dft-optimize/" class="astro-3ii7xxms"> <span class="astro-3ii7xxms">dft.optimize</span>  </a> </li><li class="astro-3ii7xxms"> <a href="/mlx-atomistic/api/dft-potentials/" class="astro-3ii7xxms"> <span class="astro-3ii7xxms">dft.potentials</span>  </a> </li><li class="astro-3ii7xxms"> <a href="/mlx-atomistic/api/dft-runtime_state/" class="astro-3ii7xxms"> <span class="astro-3ii7xxms">dft.runtime_state</span>  </a> </li><li class="astro-3ii7xxms"> <a href="/mlx-atomistic/api/dft-stress/" class="astro-3ii7xxms"> <span class="astro-3ii7xxms">dft.stress</span>  </a> </li><li class="astro-3ii7xxms"> <a href="/mlx-atomistic/api/dft-system/" class="astro-3ii7xxms"> <span class="astro-3ii7xxms">dft.system</span>  </a> </li> </ul> </details> </li> </ul>  <script aria-hidden="true">
+		(() => {
+			const scroller = document.getElementById('starlight__sidebar');
+			if (!window._starlightScrollRestore || !scroller) return;
+			scroller.scrollTop = window._starlightScrollRestore;
+			delete window._starlightScrollRestore;
+		})();
+	</script> </sl-sidebar-state-persist> <div class="md:sl-hidden"> <div class="mobile-preferences sl-flex astro-wu23bvmt"> <div class="social-icons astro-wu23bvmt"> <a href="https://github.com/appautomaton/mlx-atomistic" rel="me" class="sl-flex astro-wy4te6ga"><span class="sr-only astro-wy4te6ga">GitHub</span><svg aria-hidden="true" class="astro-wy4te6ga astro-c6vsoqas" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1em;"><path d="M12 .3a12 12 0 0 0-3.8 23.38c.6.12.83-.26.83-.57L9 21.07c-3.34.72-4.04-1.61-4.04-1.61-.55-1.39-1.34-1.76-1.34-1.76-1.08-.74.09-.73.09-.73 1.2.09 1.83 1.24 1.83 1.24 1.08 1.83 2.81 1.3 3.5 1 .1-.78.42-1.31.76-1.61-2.67-.3-5.47-1.33-5.47-5.93 0-1.31.47-2.38 1.24-3.22-.14-.3-.54-1.52.1-3.18 0 0 1-.32 3.3 1.23a11.5 11.5 0 0 1 6 0c2.28-1.55 3.29-1.23 3.29-1.23.64 1.66.24 2.88.12 3.18a4.65 4.65 0 0 1 1.23 3.22c0 4.61-2.8 5.63-5.48 5.92.42.36.81 1.1.81 2.22l-.01 3.29c0 .31.2.69.82.57A12 12 0 0 0 12 .3Z"/></svg></a> </div> <starlight-theme-select>  <label style="--sl-select-width: 6.25em" class="astro-4yphtoen"> <span class="sr-only astro-4yphtoen">Select theme</span> <svg aria-hidden="true" class="icon label-icon astro-4yphtoen astro-c6vsoqas" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1em;"><path d="M21 14h-1V7a3 3 0 0 0-3-3H7a3 3 0 0 0-3 3v7H3a1 1 0 0 0-1 1v2a3 3 0 0 0 3 3h14a3 3 0 0 0 3-3v-2a1 1 0 0 0-1-1ZM6 7a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v7H6V7Zm14 10a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1v-1h16v1Z"/></svg> <select autocomplete="off" class="astro-4yphtoen"> <option value="dark" class="astro-4yphtoen">Dark</option><option value="light" class="astro-4yphtoen">Light</option><option value="auto" selected class="astro-4yphtoen">Auto</option> </select> <svg aria-hidden="true" class="icon caret astro-4yphtoen astro-c6vsoqas" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1em;"><path d="M17 9.17a1 1 0 0 0-1.41 0L12 12.71 8.46 9.17a1 1 0 1 0-1.41 1.42l4.24 4.24a1.002 1.002 0 0 0 1.42 0L17 10.59a1.002 1.002 0 0 0 0-1.42Z"/></svg> </label> </starlight-theme-select>  <script>
+	StarlightThemeProvider.updatePickers();
+</script>   </div> </div> </div> </div> </nav> <div class="main-frame astro-vrdttmbt">  <script type="module">const a=document.getElementById("starlight__sidebar"),n=a?.querySelector("sl-sidebar-state-persist"),o="sl-sidebar-state",i=()=>{let t=[];const e=n?.dataset.hash||"";try{const s=sessionStorage.getItem(o),r=JSON.parse(s||"{}");Array.isArray(r.open)&&r.hash===e&&(t=r.open)}catch{}return{hash:e,open:t,scroll:a?.scrollTop||0}},c=t=>{try{sessionStorage.setItem(o,JSON.stringify(t))}catch{}},d=()=>c(i()),l=(t,e)=>{const s=i();s.open[e]=t,c(s)};n?.addEventListener("click",t=>{if(!(t.target instanceof Element))return;const e=t.target.closest("summary")?.closest("details");if(!e)return;const s=e.querySelector("sl-sidebar-restore"),r=parseInt(s?.dataset.index||"");isNaN(r)||l(!e.open,r)});addEventListener("visibilitychange",()=>{document.visibilityState==="hidden"&&d()});addEventListener("pageHide",d);</script> <div class="lg:sl-flex astro-67yu43on"> <aside class="right-sidebar-container print:hidden astro-67yu43on"> <div class="right-sidebar astro-67yu43on"> <div class="lg:sl-hidden astro-pb3aqygn"><mobile-starlight-toc data-min-h="2" data-max-h="3" class="astro-doynk5tl"><nav aria-labelledby="starlight__on-this-page--mobile" class="astro-doynk5tl"><details id="starlight__mobile-toc" class="astro-doynk5tl"><summary id="starlight__on-this-page--mobile" class="sl-flex astro-doynk5tl"><span class="toggle sl-flex astro-doynk5tl">On this page<svg aria-hidden="true" class="caret astro-doynk5tl astro-c6vsoqas" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1rem;"><path d="m14.83 11.29-4.24-4.24a1 1 0 1 0-1.42 1.41L12.71 12l-3.54 3.54a1 1 0 0 0 0 1.41 1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.24-4.24a1.002 1.002 0 0 0 0-1.42Z"/></svg></span><span class="display-current astro-doynk5tl"></span></summary><div class="dropdown astro-doynk5tl"><ul class="isMobile astro-gnoq344e" style="--depth: 0;"> <li class="astro-gnoq344e" style="--depth: 0;"> <a href="#_top" class="astro-gnoq344e" style="--depth: 0;"> <span class="astro-gnoq344e" style="--depth: 0;">Overview</span> </a>  </li><li class="astro-gnoq344e" style="--depth: 0;"> <a href="#classes" class="astro-gnoq344e" style="--depth: 0;"> <span class="astro-gnoq344e" style="--depth: 0;">Classes</span> </a> <ul class="isMobile astro-gnoq344e" style="--depth: 1;"> <li class="astro-gnoq344e" style="--depth: 1;"> <a href="#gthprojectorchannel" class="astro-gnoq344e" style="--depth: 1;"> <span class="astro-gnoq344e" style="--depth: 1;">GTHProjectorChannel</span> </a>  </li><li class="astro-gnoq344e" style="--depth: 1;"> <a href="#ion" class="astro-gnoq344e" style="--depth: 1;"> <span class="astro-gnoq344e" style="--depth: 1;">Ion</span> </a>  </li><li class="astro-gnoq344e" style="--depth: 1;"> <a href="#ioncollection" class="astro-gnoq344e" style="--depth: 1;"> <span class="astro-gnoq344e" style="--depth: 1;">IonCollection</span> </a>  </li><li class="astro-gnoq344e" style="--depth: 1;"> <a href="#localpseudopotentialfield" class="astro-gnoq344e" style="--depth: 1;"> <span class="astro-gnoq344e" style="--depth: 1;">LocalPseudopotentialField</span> </a>  </li><li class="astro-gnoq344e" style="--depth: 1;"> <a href="#nonlocalprojectordata" class="astro-gnoq344e" style="--depth: 1;"> <span class="astro-gnoq344e" style="--depth: 1;">NonlocalProjectorData</span> </a>  </li><li class="astro-gnoq344e" style="--depth: 1;"> <a href="#pseudopotentialdata" class="astro-gnoq344e" style="--depth: 1;"> <span class="astro-gnoq344e" style="--depth: 1;">PseudopotentialData</span> </a>  </li><li class="astro-gnoq344e" style="--depth: 1;"> <a href="#pseudopotentialformat" class="astro-gnoq344e" style="--depth: 1;"> <span class="astro-gnoq344e" style="--depth: 1;">PseudopotentialFormat</span> </a>  </li><li class="astro-gnoq344e" style="--depth: 1;"> <a href="#radialgrid" class="astro-gnoq344e" style="--depth: 1;"> <span class="astro-gnoq344e" style="--depth: 1;">RadialGrid</span> </a>  </li> </ul> </li><li class="astro-gnoq344e" style="--depth: 0;"> <a href="#functions" class="astro-gnoq344e" style="--depth: 0;"> <span class="astro-gnoq344e" style="--depth: 0;">Functions</span> </a> <ul class="isMobile astro-gnoq344e" style="--depth: 1;"> <li class="astro-gnoq344e" style="--depth: 1;"> <a href="#read_gth" class="astro-gnoq344e" style="--depth: 1;"> <span class="astro-gnoq344e" style="--depth: 1;">read_gth</span> </a>  </li><li class="astro-gnoq344e" style="--depth: 1;"> <a href="#read_upf" class="astro-gnoq344e" style="--depth: 1;"> <span class="astro-gnoq344e" style="--depth: 1;">read_upf</span> </a>  </li> </ul> </li> </ul></div></details></nav></mobile-starlight-toc><script type="module" src="/mlx-atomistic/_astro/MobileTableOfContents.astro_astro_type_script_index_0_lang.hwBsy0Mo.js"></script></div><div class="right-sidebar-panel sl-hidden lg:sl-block astro-pb3aqygn"><div class="sl-container astro-pb3aqygn"><starlight-toc data-min-h="2" data-max-h="3"><nav aria-labelledby="starlight__on-this-page"><h2 id="starlight__on-this-page">On this page</h2><ul class="astro-gnoq344e" style="--depth: 0;"> <li class="astro-gnoq344e" style="--depth: 0;"> <a href="#_top" class="astro-gnoq344e" style="--depth: 0;"> <span class="astro-gnoq344e" style="--depth: 0;">Overview</span> </a>  </li><li class="astro-gnoq344e" style="--depth: 0;"> <a href="#classes" class="astro-gnoq344e" style="--depth: 0;"> <span class="astro-gnoq344e" style="--depth: 0;">Classes</span> </a> <ul class="astro-gnoq344e" style="--depth: 1;"> <li class="astro-gnoq344e" style="--depth: 1;"> <a href="#gthprojectorchannel" class="astro-gnoq344e" style="--depth: 1;"> <span class="astro-gnoq344e" style="--depth: 1;">GTHProjectorChannel</span> </a>  </li><li class="astro-gnoq344e" style="--depth: 1;"> <a href="#ion" class="astro-gnoq344e" style="--depth: 1;"> <span class="astro-gnoq344e" style="--depth: 1;">Ion</span> </a>  </li><li class="astro-gnoq344e" style="--depth: 1;"> <a href="#ioncollection" class="astro-gnoq344e" style="--depth: 1;"> <span class="astro-gnoq344e" style="--depth: 1;">IonCollection</span> </a>  </li><li class="astro-gnoq344e" style="--depth: 1;"> <a href="#localpseudopotentialfield" class="astro-gnoq344e" style="--depth: 1;"> <span class="astro-gnoq344e" style="--depth: 1;">LocalPseudopotentialField</span> </a>  </li><li class="astro-gnoq344e" style="--depth: 1;"> <a href="#nonlocalprojectordata" class="astro-gnoq344e" style="--depth: 1;"> <span class="astro-gnoq344e" style="--depth: 1;">NonlocalProjectorData</span> </a>  </li><li class="astro-gnoq344e" style="--depth: 1;"> <a href="#pseudopotentialdata" class="astro-gnoq344e" style="--depth: 1;"> <span class="astro-gnoq344e" style="--depth: 1;">PseudopotentialData</span> </a>  </li><li class="astro-gnoq344e" style="--depth: 1;"> <a href="#pseudopotentialformat" class="astro-gnoq344e" style="--depth: 1;"> <span class="astro-gnoq344e" style="--depth: 1;">PseudopotentialFormat</span> </a>  </li><li class="astro-gnoq344e" style="--depth: 1;"> <a href="#radialgrid" class="astro-gnoq344e" style="--depth: 1;"> <span class="astro-gnoq344e" style="--depth: 1;">RadialGrid</span> </a>  </li> </ul> </li><li class="astro-gnoq344e" style="--depth: 0;"> <a href="#functions" class="astro-gnoq344e" style="--depth: 0;"> <span class="astro-gnoq344e" style="--depth: 0;">Functions</span> </a> <ul class="astro-gnoq344e" style="--depth: 1;"> <li class="astro-gnoq344e" style="--depth: 1;"> <a href="#read_gth" class="astro-gnoq344e" style="--depth: 1;"> <span class="astro-gnoq344e" style="--depth: 1;">read_gth</span> </a>  </li><li class="astro-gnoq344e" style="--depth: 1;"> <a href="#read_upf" class="astro-gnoq344e" style="--depth: 1;"> <span class="astro-gnoq344e" style="--depth: 1;">read_upf</span> </a>  </li> </ul> </li> </ul></nav></starlight-toc><script type="module" src="/mlx-atomistic/_astro/TableOfContents.astro_astro_type_script_index_0_lang.FuRcXuRY.js"></script></div></div> </div> </aside> <div class="main-pane astro-67yu43on">  <main data-pagefind-body class="astro-bguv2lll" lang="en" dir="ltr">    <div class="content-panel astro-7nkwcw3z"> <div class="sl-container astro-7nkwcw3z"> <h1 id="_top" class="astro-j6tvhyss">dft.pseudopotentials</h1> </div> </div> <div class="content-panel astro-7nkwcw3z"> <div class="sl-container astro-7nkwcw3z"> <div class="sl-markdown-content"> <p>Pseudopotential and ion models for the DFT prototype.</p>
+<blockquote>
+<p><code dir="auto">import mlx_atomistic.dft.pseudopotentials</code></p>
+</blockquote>
+<div class="sl-heading-wrapper level-h2"><h2 id="classes">Classes</h2><a class="sl-anchor-link" href="#classes"><span aria-hidden="true" class="sl-anchor-icon"><svg width="16" height="16" viewBox="0 0 24 24"><path fill="currentcolor" d="m12.11 15.39-3.88 3.88a2.52 2.52 0 0 1-3.5 0 2.47 2.47 0 0 1 0-3.5l3.88-3.88a1 1 0 0 0-1.42-1.42l-3.88 3.89a4.48 4.48 0 0 0 6.33 6.33l3.89-3.88a1 1 0 1 0-1.42-1.42Zm8.58-12.08a4.49 4.49 0 0 0-6.33 0l-3.89 3.88a1 1 0 0 0 1.42 1.42l3.88-3.88a2.52 2.52 0 0 1 3.5 0 2.47 2.47 0 0 1 0 3.5l-3.88 3.88a1 1 0 1 0 1.42 1.42l3.88-3.89a4.49 4.49 0 0 0 0-6.33ZM8.83 15.17a1 1 0 0 0 1.1.22 1 1 0 0 0 .32-.22l4.92-4.92a1 1 0 0 0-1.42-1.42l-4.92 4.92a1 1 0 0 0 0 1.42Z"></path></svg></span><span class="sr-only" data-pagefind-ignore="">Section titled “Classes”</span></a></div>
+<div class="sl-heading-wrapper level-h3"><h3 id="gthprojectorchannel"><code dir="auto">GTHProjectorChannel</code></h3><a class="sl-anchor-link" href="#gthprojectorchannel"><span aria-hidden="true" class="sl-anchor-icon"><svg width="16" height="16" viewBox="0 0 24 24"><path fill="currentcolor" d="m12.11 15.39-3.88 3.88a2.52 2.52 0 0 1-3.5 0 2.47 2.47 0 0 1 0-3.5l3.88-3.88a1 1 0 0 0-1.42-1.42l-3.88 3.89a4.48 4.48 0 0 0 6.33 6.33l3.89-3.88a1 1 0 1 0-1.42-1.42Zm8.58-12.08a4.49 4.49 0 0 0-6.33 0l-3.89 3.88a1 1 0 0 0 1.42 1.42l3.88-3.88a2.52 2.52 0 0 1 3.5 0 2.47 2.47 0 0 1 0 3.5l-3.88 3.88a1 1 0 1 0 1.42 1.42l3.88-3.89a4.49 4.49 0 0 0 0-6.33ZM8.83 15.17a1 1 0 0 0 1.1.22 1 1 0 0 0 .32-.22l4.92-4.92a1 1 0 0 0-1.42-1.42l-4.92 4.92a1 1 0 0 0 0 1.42Z"></path></svg></span><span class="sr-only" data-pagefind-ignore="">Section titled “GTHProjectorChannel”</span></a></div>
+<div class="expressive-code"><link rel="stylesheet" href="/mlx-atomistic/_astro/ec.v4551.css"><script type="module" src="/mlx-atomistic/_astro/ec.0vx5m.js"></script><figure class="frame not-content"><figcaption class="header"></figcaption><pre data-language="python"><code><div class="ec-line"><div class="code"><span style="--0:#C792EA;--1:#8844AE">class</span><span style="--0:#D6DEEB;--1:#403F53"> GTHProjectorChannel</span></div></div><div class="ec-line"><div class="code"><span class="indent">    </span><span style="--0:#C792EA;--1:#8844AE">def</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#C5E478;--1:#3B61B0">__init__</span><span style="--0:#D9F5DD;--1:#111111">(</span><span style="--0:#7FDBCA;--1:#096E72">angular_momentum</span><span style="--0:#D6DEEB;--1:#403F53">: </span><span style="--0:#C5E478;--1:#3B61B0">int</span><span style="--0:#D6DEEB;--1:#403F53">, </span><span style="--0:#7FDBCA;--1:#096E72">radius</span><span style="--0:#D6DEEB;--1:#403F53">: </span><span style="--0:#C5E478;--1:#3B61B0">float</span><span style="--0:#D6DEEB;--1:#403F53">, </span><span style="--0:#7FDBCA;--1:#096E72">coupling_matrix</span><span style="--0:#D6DEEB;--1:#403F53">: Sequence[Sequence[</span><span style="--0:#C5E478;--1:#3B61B0">float</span><span style="--0:#D6DEEB;--1:#403F53">]]</span><span style="--0:#D9F5DD;--1:#111111">)</span></div></div></code></pre><div class="copy"><div aria-live="polite"></div><button title="Copy to clipboard" data-copied="Copied!" data-code="class GTHProjectorChannel    def __init__(angular_momentum: int, radius: float, coupling_matrix: Sequence[Sequence[float]])"><div></div></button></div></figure></div>
+<p>Complete GTH nonlocal channel with its symmetric coupling matrix.</p>
+<p><strong>Parameters</strong></p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Name</th><th>Type</th><th>Default</th><th>Description</th></tr></thead><tbody><tr><td><code dir="auto">angular_momentum</code></td><td><code dir="auto">int</code></td><td></td><td></td></tr><tr><td><code dir="auto">radius</code></td><td><code dir="auto">float</code></td><td></td><td></td></tr><tr><td><code dir="auto">coupling_matrix</code></td><td><code dir="auto">Sequence[Sequence[float]]</code></td><td></td><td></td></tr></tbody></table>
+<p><strong>Properties</strong></p>
+<ul>
+<li><code dir="auto">projector_count</code> <code dir="auto">int</code> — Number of radial projectors in this channel.</li>
+</ul>
+<div class="sl-heading-wrapper level-h3"><h3 id="ion"><code dir="auto">Ion</code></h3><a class="sl-anchor-link" href="#ion"><span aria-hidden="true" class="sl-anchor-icon"><svg width="16" height="16" viewBox="0 0 24 24"><path fill="currentcolor" d="m12.11 15.39-3.88 3.88a2.52 2.52 0 0 1-3.5 0 2.47 2.47 0 0 1 0-3.5l3.88-3.88a1 1 0 0 0-1.42-1.42l-3.88 3.89a4.48 4.48 0 0 0 6.33 6.33l3.89-3.88a1 1 0 1 0-1.42-1.42Zm8.58-12.08a4.49 4.49 0 0 0-6.33 0l-3.89 3.88a1 1 0 0 0 1.42 1.42l3.88-3.88a2.52 2.52 0 0 1 3.5 0 2.47 2.47 0 0 1 0 3.5l-3.88 3.88a1 1 0 1 0 1.42 1.42l3.88-3.89a4.49 4.49 0 0 0 0-6.33ZM8.83 15.17a1 1 0 0 0 1.1.22 1 1 0 0 0 .32-.22l4.92-4.92a1 1 0 0 0-1.42-1.42l-4.92 4.92a1 1 0 0 0 0 1.42Z"></path></svg></span><span class="sr-only" data-pagefind-ignore="">Section titled “Ion”</span></a></div>
+<div class="expressive-code"><figure class="frame not-content"><figcaption class="header"></figcaption><pre data-language="python"><code><div class="ec-line"><div class="code"><span style="--0:#C792EA;--1:#8844AE">class</span><span style="--0:#D6DEEB;--1:#403F53"> Ion</span></div></div><div class="ec-line"><div class="code"><span class="indent">    </span><span style="--0:#C792EA;--1:#8844AE">def</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#C5E478;--1:#3B61B0">__init__</span><span style="--0:#D9F5DD;--1:#111111">(</span><span style="--0:#7FDBCA;--1:#096E72">symbol</span><span style="--0:#D6DEEB;--1:#403F53">: </span><span style="--0:#C5E478;--1:#3B61B0">str</span><span style="--0:#D6DEEB;--1:#403F53">, </span><span style="--0:#7FDBCA;--1:#096E72">position</span><span style="--0:#D6DEEB;--1:#403F53">: Sequence[</span><span style="--0:#C5E478;--1:#3B61B0">float</span><span style="--0:#D6DEEB;--1:#403F53">], </span><span style="--0:#7FDBCA;--1:#096E72">pseudopotential</span><span style="--0:#D6DEEB;--1:#403F53">: PseudopotentialData</span><span style="--0:#D9F5DD;--1:#111111">)</span></div></div></code></pre><div class="copy"><div aria-live="polite"></div><button title="Copy to clipboard" data-copied="Copied!" data-code="class Ion    def __init__(symbol: str, position: Sequence[float], pseudopotential: PseudopotentialData)"><div></div></button></div></figure></div>
+<p>Ion center with a parsed pseudopotential.</p>
+<p><strong>Parameters</strong></p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Name</th><th>Type</th><th>Default</th><th>Description</th></tr></thead><tbody><tr><td><code dir="auto">symbol</code></td><td><code dir="auto">str</code></td><td></td><td></td></tr><tr><td><code dir="auto">position</code></td><td><code dir="auto">Sequence[float]</code></td><td></td><td></td></tr><tr><td><code dir="auto">pseudopotential</code></td><td><code dir="auto">PseudopotentialData</code></td><td></td><td></td></tr></tbody></table>
+<p><strong>Properties</strong></p>
+<ul>
+<li><code dir="auto">charge</code> <code dir="auto">float</code> — Valence charge represented by this pseudopotential.</li>
+</ul>
+<div class="sl-heading-wrapper level-h3"><h3 id="ioncollection"><code dir="auto">IonCollection</code></h3><a class="sl-anchor-link" href="#ioncollection"><span aria-hidden="true" class="sl-anchor-icon"><svg width="16" height="16" viewBox="0 0 24 24"><path fill="currentcolor" d="m12.11 15.39-3.88 3.88a2.52 2.52 0 0 1-3.5 0 2.47 2.47 0 0 1 0-3.5l3.88-3.88a1 1 0 0 0-1.42-1.42l-3.88 3.89a4.48 4.48 0 0 0 6.33 6.33l3.89-3.88a1 1 0 1 0-1.42-1.42Zm8.58-12.08a4.49 4.49 0 0 0-6.33 0l-3.89 3.88a1 1 0 0 0 1.42 1.42l3.88-3.88a2.52 2.52 0 0 1 3.5 0 2.47 2.47 0 0 1 0 3.5l-3.88 3.88a1 1 0 1 0 1.42 1.42l3.88-3.89a4.49 4.49 0 0 0 0-6.33ZM8.83 15.17a1 1 0 0 0 1.1.22 1 1 0 0 0 .32-.22l4.92-4.92a1 1 0 0 0-1.42-1.42l-4.92 4.92a1 1 0 0 0 0 1.42Z"></path></svg></span><span class="sr-only" data-pagefind-ignore="">Section titled “IonCollection”</span></a></div>
+<div class="expressive-code"><figure class="frame not-content"><figcaption class="header"></figcaption><pre data-language="python"><code><div class="ec-line"><div class="code"><span style="--0:#C792EA;--1:#8844AE">class</span><span style="--0:#D6DEEB;--1:#403F53"> IonCollection</span></div></div><div class="ec-line"><div class="code"><span class="indent">    </span><span style="--0:#C792EA;--1:#8844AE">def</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#C5E478;--1:#3B61B0">__init__</span><span style="--0:#D9F5DD;--1:#111111">(</span><span style="--0:#7FDBCA;--1:#096E72">ions</span><span style="--0:#D6DEEB;--1:#403F53">: Sequence[Ion]</span><span style="--0:#D9F5DD;--1:#111111">)</span></div></div></code></pre><div class="copy"><div aria-live="polite"></div><button title="Copy to clipboard" data-copied="Copied!" data-code="class IonCollection    def __init__(ions: Sequence[Ion])"><div></div></button></div></figure></div>
+<p>Collection of ions and their pseudopotentials.</p>
+<p><strong>Parameters</strong></p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Name</th><th>Type</th><th>Default</th><th>Description</th></tr></thead><tbody><tr><td><code dir="auto">ions</code></td><td><code dir="auto">Sequence[Ion]</code></td><td></td><td></td></tr></tbody></table>
+<p><strong>Properties</strong></p>
+<ul>
+<li><code dir="auto">centers</code> <code dir="auto">mx.array</code> — Ion center coordinates.</li>
+<li><code dir="auto">charges</code> <code dir="auto">tuple[float, ...]</code> — Valence charges.</li>
+<li><code dir="auto">formats</code> <code dir="auto">tuple[str, ...]</code> — Pseudopotential formats in ion order.</li>
+<li><code dir="auto">nonlocal_available</code> <code dir="auto">bool</code> — Whether any ion has parsed nonlocal projectors.</li>
+<li><code dir="auto">symbols</code> <code dir="auto">tuple[str, ...]</code> — Ion symbols.</li>
+<li><code dir="auto">valence_electron_count</code> <code dir="auto">float</code> — Neutral valence electron count.</li>
+</ul>
+<p><strong>Methods</strong></p>
+<div class="sl-heading-wrapper level-h4"><h4 id="with_positions"><code dir="auto">with_positions</code></h4><a class="sl-anchor-link" href="#with_positions"><span aria-hidden="true" class="sl-anchor-icon"><svg width="16" height="16" viewBox="0 0 24 24"><path fill="currentcolor" d="m12.11 15.39-3.88 3.88a2.52 2.52 0 0 1-3.5 0 2.47 2.47 0 0 1 0-3.5l3.88-3.88a1 1 0 0 0-1.42-1.42l-3.88 3.89a4.48 4.48 0 0 0 6.33 6.33l3.89-3.88a1 1 0 1 0-1.42-1.42Zm8.58-12.08a4.49 4.49 0 0 0-6.33 0l-3.89 3.88a1 1 0 0 0 1.42 1.42l3.88-3.88a2.52 2.52 0 0 1 3.5 0 2.47 2.47 0 0 1 0 3.5l-3.88 3.88a1 1 0 1 0 1.42 1.42l3.88-3.89a4.49 4.49 0 0 0 0-6.33ZM8.83 15.17a1 1 0 0 0 1.1.22 1 1 0 0 0 .32-.22l4.92-4.92a1 1 0 0 0-1.42-1.42l-4.92 4.92a1 1 0 0 0 0 1.42Z"></path></svg></span><span class="sr-only" data-pagefind-ignore="">Section titled “with_positions”</span></a></div>
+<div class="expressive-code"><figure class="frame not-content"><figcaption class="header"></figcaption><pre data-language="python"><code><div class="ec-line"><div class="code"><span style="--0:#C792EA;--1:#8844AE">def</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#82AAFF;--1:#3B61B0">with_positions</span><span style="--0:#D9F5DD;--1:#111111">(</span><span style="--0:#7FDBCA;--1:#096E72">positions</span><span style="--0:#D6DEEB;--1:#403F53">: Sequence[Sequence[</span><span style="--0:#C5E478;--1:#3B61B0">float</span><span style="--0:#D6DEEB;--1:#403F53">]]</span><span style="--0:#D9F5DD;--1:#111111">)</span><span style="--0:#D6DEEB;--1:#403F53"> -> IonCollection</span></div></div></code></pre><div class="copy"><div aria-live="polite"></div><button title="Copy to clipboard" data-copied="Copied!" data-code="def with_positions(positions: Sequence[Sequence[float]]) -> IonCollection"><div></div></button></div></figure></div>
+<p>Return a copy with updated positions.</p>
+<p><strong>Parameters</strong></p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Name</th><th>Type</th><th>Default</th><th>Description</th></tr></thead><tbody><tr><td><code dir="auto">positions</code></td><td><code dir="auto">Sequence[Sequence[float]]</code></td><td></td><td></td></tr></tbody></table>
+<p><strong>Returns</strong></p>
+<ul>
+<li><code dir="auto">IonCollection</code></li>
+</ul>
+<div class="sl-heading-wrapper level-h3"><h3 id="localpseudopotentialfield"><code dir="auto">LocalPseudopotentialField</code></h3><a class="sl-anchor-link" href="#localpseudopotentialfield"><span aria-hidden="true" class="sl-anchor-icon"><svg width="16" height="16" viewBox="0 0 24 24"><path fill="currentcolor" d="m12.11 15.39-3.88 3.88a2.52 2.52 0 0 1-3.5 0 2.47 2.47 0 0 1 0-3.5l3.88-3.88a1 1 0 0 0-1.42-1.42l-3.88 3.89a4.48 4.48 0 0 0 6.33 6.33l3.89-3.88a1 1 0 1 0-1.42-1.42Zm8.58-12.08a4.49 4.49 0 0 0-6.33 0l-3.89 3.88a1 1 0 0 0 1.42 1.42l3.88-3.88a2.52 2.52 0 0 1 3.5 0 2.47 2.47 0 0 1 0 3.5l-3.88 3.88a1 1 0 1 0 1.42 1.42l3.88-3.89a4.49 4.49 0 0 0 0-6.33ZM8.83 15.17a1 1 0 0 0 1.1.22 1 1 0 0 0 .32-.22l4.92-4.92a1 1 0 0 0-1.42-1.42l-4.92 4.92a1 1 0 0 0 0 1.42Z"></path></svg></span><span class="sr-only" data-pagefind-ignore="">Section titled “LocalPseudopotentialField”</span></a></div>
+<div class="expressive-code"><figure class="frame not-content"><figcaption class="header"></figcaption><pre data-language="python"><code><div class="ec-line"><div class="code"><span style="--0:#C792EA;--1:#8844AE">class</span><span style="--0:#D6DEEB;--1:#403F53"> LocalPseudopotentialField</span></div></div><div class="ec-line"><div class="code"><span class="indent">    </span><span style="--0:#C792EA;--1:#8844AE">def</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#C5E478;--1:#3B61B0">__init__</span><span style="--0:#D9F5DD;--1:#111111">(</span><span style="--0:#7FDBCA;--1:#096E72">ions</span><span style="--0:#D6DEEB;--1:#403F53">: IonCollection</span><span style="--0:#D9F5DD;--1:#111111">)</span></div></div></code></pre><div class="copy"><div aria-live="polite"></div><button title="Copy to clipboard" data-copied="Copied!" data-code="class LocalPseudopotentialField    def __init__(ions: IonCollection)"><div></div></button></div></figure></div>
+<p>Real-space local potential generated by an <code dir="auto">IonCollection</code>.</p>
+<p><strong>Parameters</strong></p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Name</th><th>Type</th><th>Default</th><th>Description</th></tr></thead><tbody><tr><td><code dir="auto">ions</code></td><td><code dir="auto">IonCollection</code></td><td></td><td></td></tr></tbody></table>
+<p><strong>Properties</strong></p>
+<ul>
+<li><code dir="auto">centers</code> <code dir="auto">mx.array</code> — Ion center coordinates.</li>
+<li><code dir="auto">nonlocal_available</code> <code dir="auto">bool</code> — Whether nonlocal metadata is present.</li>
+</ul>
+<p><strong>Methods</strong></p>
+<div class="sl-heading-wrapper level-h4"><h4 id="field"><code dir="auto">field</code></h4><a class="sl-anchor-link" href="#field"><span aria-hidden="true" class="sl-anchor-icon"><svg width="16" height="16" viewBox="0 0 24 24"><path fill="currentcolor" d="m12.11 15.39-3.88 3.88a2.52 2.52 0 0 1-3.5 0 2.47 2.47 0 0 1 0-3.5l3.88-3.88a1 1 0 0 0-1.42-1.42l-3.88 3.89a4.48 4.48 0 0 0 6.33 6.33l3.89-3.88a1 1 0 1 0-1.42-1.42Zm8.58-12.08a4.49 4.49 0 0 0-6.33 0l-3.89 3.88a1 1 0 0 0 1.42 1.42l3.88-3.88a2.52 2.52 0 0 1 3.5 0 2.47 2.47 0 0 1 0 3.5l-3.88 3.88a1 1 0 1 0 1.42 1.42l3.88-3.89a4.49 4.49 0 0 0 0-6.33ZM8.83 15.17a1 1 0 0 0 1.1.22 1 1 0 0 0 .32-.22l4.92-4.92a1 1 0 0 0-1.42-1.42l-4.92 4.92a1 1 0 0 0 0 1.42Z"></path></svg></span><span class="sr-only" data-pagefind-ignore="">Section titled “field”</span></a></div>
+<div class="expressive-code"><figure class="frame not-content"><figcaption class="header"></figcaption><pre data-language="python"><code><div class="ec-line"><div class="code"><span style="--0:#C792EA;--1:#8844AE">def</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#82AAFF;--1:#3B61B0">field</span><span style="--0:#D9F5DD;--1:#111111">(</span><span style="--0:#7FDBCA;--1:#096E72">grid</span><span style="--0:#D6DEEB;--1:#403F53">: RealSpaceGrid</span><span style="--0:#D9F5DD;--1:#111111">)</span><span style="--0:#D6DEEB;--1:#403F53"> -> mx.array</span></div></div></code></pre><div class="copy"><div aria-live="polite"></div><button title="Copy to clipboard" data-copied="Copied!" data-code="def field(grid: RealSpaceGrid) -> mx.array"><div></div></button></div></figure></div>
+<p>Evaluate the total local ion potential on a real-space grid.</p>
+<p><strong>Parameters</strong></p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Name</th><th>Type</th><th>Default</th><th>Description</th></tr></thead><tbody><tr><td><code dir="auto">grid</code></td><td><code dir="auto">RealSpaceGrid</code></td><td></td><td></td></tr></tbody></table>
+<p><strong>Returns</strong></p>
+<ul>
+<li><code dir="auto">mx.array</code></li>
+</ul>
+<div class="sl-heading-wrapper level-h4"><h4 id="forces"><code dir="auto">forces</code></h4><a class="sl-anchor-link" href="#forces"><span aria-hidden="true" class="sl-anchor-icon"><svg width="16" height="16" viewBox="0 0 24 24"><path fill="currentcolor" d="m12.11 15.39-3.88 3.88a2.52 2.52 0 0 1-3.5 0 2.47 2.47 0 0 1 0-3.5l3.88-3.88a1 1 0 0 0-1.42-1.42l-3.88 3.89a4.48 4.48 0 0 0 6.33 6.33l3.89-3.88a1 1 0 1 0-1.42-1.42Zm8.58-12.08a4.49 4.49 0 0 0-6.33 0l-3.89 3.88a1 1 0 0 0 1.42 1.42l3.88-3.88a2.52 2.52 0 0 1 3.5 0 2.47 2.47 0 0 1 0 3.5l-3.88 3.88a1 1 0 1 0 1.42 1.42l3.88-3.89a4.49 4.49 0 0 0 0-6.33ZM8.83 15.17a1 1 0 0 0 1.1.22 1 1 0 0 0 .32-.22l4.92-4.92a1 1 0 0 0-1.42-1.42l-4.92 4.92a1 1 0 0 0 0 1.42Z"></path></svg></span><span class="sr-only" data-pagefind-ignore="">Section titled “forces”</span></a></div>
+<div class="expressive-code"><figure class="frame not-content"><figcaption class="header"></figcaption><pre data-language="python"><code><div class="ec-line"><div class="code"><span style="--0:#C792EA;--1:#8844AE">def</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#82AAFF;--1:#3B61B0">forces</span><span style="--0:#D9F5DD;--1:#111111">(</span><span style="--0:#7FDBCA;--1:#096E72">density</span><span style="--0:#D6DEEB;--1:#403F53">: mx.array, </span><span style="--0:#7FDBCA;--1:#096E72">grid</span><span style="--0:#D6DEEB;--1:#403F53">: RealSpaceGrid</span><span style="--0:#D9F5DD;--1:#111111">)</span><span style="--0:#D6DEEB;--1:#403F53"> -> mx.array</span></div></div></code></pre><div class="copy"><div aria-live="polite"></div><button title="Copy to clipboard" data-copied="Copied!" data-code="def forces(density: mx.array, grid: RealSpaceGrid) -> mx.array"><div></div></button></div></figure></div>
+<p>Return local electron-ion forces from a density.</p>
+<p><strong>Parameters</strong></p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Name</th><th>Type</th><th>Default</th><th>Description</th></tr></thead><tbody><tr><td><code dir="auto">density</code></td><td><code dir="auto">mx.array</code></td><td></td><td></td></tr><tr><td><code dir="auto">grid</code></td><td><code dir="auto">RealSpaceGrid</code></td><td></td><td></td></tr></tbody></table>
+<p><strong>Returns</strong></p>
+<ul>
+<li><code dir="auto">mx.array</code></li>
+</ul>
+<div class="sl-heading-wrapper level-h3"><h3 id="nonlocalprojectordata"><code dir="auto">NonlocalProjectorData</code></h3><a class="sl-anchor-link" href="#nonlocalprojectordata"><span aria-hidden="true" class="sl-anchor-icon"><svg width="16" height="16" viewBox="0 0 24 24"><path fill="currentcolor" d="m12.11 15.39-3.88 3.88a2.52 2.52 0 0 1-3.5 0 2.47 2.47 0 0 1 0-3.5l3.88-3.88a1 1 0 0 0-1.42-1.42l-3.88 3.89a4.48 4.48 0 0 0 6.33 6.33l3.89-3.88a1 1 0 1 0-1.42-1.42Zm8.58-12.08a4.49 4.49 0 0 0-6.33 0l-3.89 3.88a1 1 0 0 0 1.42 1.42l3.88-3.88a2.52 2.52 0 0 1 3.5 0 2.47 2.47 0 0 1 0 3.5l-3.88 3.88a1 1 0 1 0 1.42 1.42l3.88-3.89a4.49 4.49 0 0 0 0-6.33ZM8.83 15.17a1 1 0 0 0 1.1.22 1 1 0 0 0 .32-.22l4.92-4.92a1 1 0 0 0-1.42-1.42l-4.92 4.92a1 1 0 0 0 0 1.42Z"></path></svg></span><span class="sr-only" data-pagefind-ignore="">Section titled “NonlocalProjectorData”</span></a></div>
+<div class="expressive-code"><figure class="frame not-content"><figcaption class="header"></figcaption><pre data-language="python"><code><div class="ec-line"><div class="code"><span style="--0:#C792EA;--1:#8844AE">class</span><span style="--0:#D6DEEB;--1:#403F53"> NonlocalProjectorData</span></div></div><div class="ec-line"><div class="code"><span class="indent">    </span><span style="--0:#C792EA;--1:#8844AE">def</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#C5E478;--1:#3B61B0">__init__</span><span style="--0:#D9F5DD;--1:#111111">(</span><span style="--0:#7FDBCA;--1:#096E72">angular_momentum</span><span style="--0:#D6DEEB;--1:#403F53">: </span><span style="--0:#C5E478;--1:#3B61B0">int</span><span style="--0:#D6DEEB;--1:#403F53">, </span><span style="--0:#7FDBCA;--1:#096E72">values</span><span style="--0:#D6DEEB;--1:#403F53">: tuple[</span><span style="--0:#C5E478;--1:#3B61B0">float</span><span style="--0:#D6DEEB;--1:#403F53">, </span><span style="--0:#82AAFF;--1:#3B61B0">...</span><span style="--0:#D6DEEB;--1:#403F53">] </span><span style="--0:#C792EA;--1:#8844AE">=</span><span style="--0:#D6DEEB;--1:#403F53"> (), </span><span style="--0:#7FDBCA;--1:#096E72">radial_grid</span><span style="--0:#D6DEEB;--1:#403F53">: RadialGrid </span><span style="--0:#C792EA;--1:#8844AE">|</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#FF6A83;--1:#A24848">None</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#C792EA;--1:#8844AE">=</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#FF6A83;--1:#A24848">None</span><span style="--0:#D6DEEB;--1:#403F53">, </span><span style="--0:#7FDBCA;--1:#096E72">cutoff_radius</span><span style="--0:#D6DEEB;--1:#403F53">: </span><span style="--0:#C5E478;--1:#3B61B0">float</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#C792EA;--1:#8844AE">|</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#FF6A83;--1:#A24848">None</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#C792EA;--1:#8844AE">=</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#FF6A83;--1:#A24848">None</span><span style="--0:#D6DEEB;--1:#403F53">, </span><span style="--0:#7FDBCA;--1:#096E72">coefficients</span><span style="--0:#D6DEEB;--1:#403F53">: tuple[</span><span style="--0:#C5E478;--1:#3B61B0">float</span><span style="--0:#D6DEEB;--1:#403F53">, </span><span style="--0:#82AAFF;--1:#3B61B0">...</span><span style="--0:#D6DEEB;--1:#403F53">] </span><span style="--0:#C792EA;--1:#8844AE">=</span><span style="--0:#D6DEEB;--1:#403F53"> (), </span><span style="--0:#7FDBCA;--1:#096E72">coupling</span><span style="--0:#D6DEEB;--1:#403F53">: </span><span style="--0:#C5E478;--1:#3B61B0">float</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#C792EA;--1:#8844AE">=</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#F78C6C;--1:#AA0982">0.0</span><span style="--0:#D6DEEB;--1:#403F53">, </span><span style="--0:#7FDBCA;--1:#096E72">metadata</span><span style="--0:#D6DEEB;--1:#403F53">: dict[</span><span style="--0:#C5E478;--1:#3B61B0">str</span><span style="--0:#D6DEEB;--1:#403F53">, </span><span style="--0:#C5E478;--1:#3B61B0">str</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#C792EA;--1:#8844AE">|</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#C5E478;--1:#3B61B0">int</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#C792EA;--1:#8844AE">|</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#C5E478;--1:#3B61B0">float</span><span style="--0:#D6DEEB;--1:#403F53">] </span><span style="--0:#C792EA;--1:#8844AE">|</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#FF6A83;--1:#A24848">None</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#C792EA;--1:#8844AE">=</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#FF6A83;--1:#A24848">None</span><span style="--0:#D9F5DD;--1:#111111">)</span></div></div></code></pre><div class="copy"><div aria-live="polite"></div><button title="Copy to clipboard" data-copied="Copied!" data-code="class NonlocalProjectorData    def __init__(angular_momentum: int, values: tuple[float, ...] = (), radial_grid: RadialGrid | None = None, cutoff_radius: float | None = None, coefficients: tuple[float, ...] = (), coupling: float = 0.0, metadata: dict[str, str | int | float] | None = None)"><div></div></button></div></figure></div>
+<p>Parsed nonlocal projector metadata for ion-aware operator application.</p>
+<p><strong>Parameters</strong></p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Name</th><th>Type</th><th>Default</th><th>Description</th></tr></thead><tbody><tr><td><code dir="auto">angular_momentum</code></td><td><code dir="auto">int</code></td><td></td><td></td></tr><tr><td><code dir="auto">values</code></td><td><code dir="auto">tuple[float, ...]</code></td><td><code dir="auto">()</code></td><td></td></tr><tr><td><code dir="auto">radial_grid</code></td><td><code dir="auto">RadialGrid | None</code></td><td><code dir="auto">None</code></td><td></td></tr><tr><td><code dir="auto">cutoff_radius</code></td><td><code dir="auto">float | None</code></td><td><code dir="auto">None</code></td><td></td></tr><tr><td><code dir="auto">coefficients</code></td><td><code dir="auto">tuple[float, ...]</code></td><td><code dir="auto">()</code></td><td></td></tr><tr><td><code dir="auto">coupling</code></td><td><code dir="auto">float</code></td><td><code dir="auto">0.0</code></td><td></td></tr><tr><td><code dir="auto">metadata</code></td><td><code dir="auto">dict[str, str | int | float] | None</code></td><td><code dir="auto">None</code></td><td></td></tr></tbody></table>
+<div class="sl-heading-wrapper level-h3"><h3 id="pseudopotentialdata"><code dir="auto">PseudopotentialData</code></h3><a class="sl-anchor-link" href="#pseudopotentialdata"><span aria-hidden="true" class="sl-anchor-icon"><svg width="16" height="16" viewBox="0 0 24 24"><path fill="currentcolor" d="m12.11 15.39-3.88 3.88a2.52 2.52 0 0 1-3.5 0 2.47 2.47 0 0 1 0-3.5l3.88-3.88a1 1 0 0 0-1.42-1.42l-3.88 3.89a4.48 4.48 0 0 0 6.33 6.33l3.89-3.88a1 1 0 1 0-1.42-1.42Zm8.58-12.08a4.49 4.49 0 0 0-6.33 0l-3.89 3.88a1 1 0 0 0 1.42 1.42l3.88-3.88a2.52 2.52 0 0 1 3.5 0 2.47 2.47 0 0 1 0 3.5l-3.88 3.88a1 1 0 1 0 1.42 1.42l3.88-3.89a4.49 4.49 0 0 0 0-6.33ZM8.83 15.17a1 1 0 0 0 1.1.22 1 1 0 0 0 .32-.22l4.92-4.92a1 1 0 0 0-1.42-1.42l-4.92 4.92a1 1 0 0 0 0 1.42Z"></path></svg></span><span class="sr-only" data-pagefind-ignore="">Section titled “PseudopotentialData”</span></a></div>
+<div class="expressive-code"><figure class="frame not-content"><figcaption class="header"></figcaption><pre data-language="python"><code><div class="ec-line"><div class="code"><span style="--0:#C792EA;--1:#8844AE">class</span><span style="--0:#D6DEEB;--1:#403F53"> PseudopotentialData</span></div></div><div class="ec-line"><div class="code"><span class="indent">    </span><span style="--0:#C792EA;--1:#8844AE">def</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#C5E478;--1:#3B61B0">__init__</span><span style="--0:#D9F5DD;--1:#111111">(</span><span style="--0:#7FDBCA;--1:#096E72">element</span><span style="--0:#D6DEEB;--1:#403F53">: </span><span style="--0:#C5E478;--1:#3B61B0">str</span><span style="--0:#D6DEEB;--1:#403F53">, </span><span style="--0:#7FDBCA;--1:#096E72">format</span><span style="--0:#D6DEEB;--1:#403F53">: PseudopotentialFormat, </span><span style="--0:#7FDBCA;--1:#096E72">valence_charge</span><span style="--0:#D6DEEB;--1:#403F53">: </span><span style="--0:#C5E478;--1:#3B61B0">float</span><span style="--0:#D6DEEB;--1:#403F53">, </span><span style="--0:#7FDBCA;--1:#096E72">local_grid</span><span style="--0:#D6DEEB;--1:#403F53">: RadialGrid </span><span style="--0:#C792EA;--1:#8844AE">|</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#FF6A83;--1:#A24848">None</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#C792EA;--1:#8844AE">=</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#FF6A83;--1:#A24848">None</span><span style="--0:#D6DEEB;--1:#403F53">, </span><span style="--0:#7FDBCA;--1:#096E72">gth_rloc</span><span style="--0:#D6DEEB;--1:#403F53">: </span><span style="--0:#C5E478;--1:#3B61B0">float</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#C792EA;--1:#8844AE">|</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#FF6A83;--1:#A24848">None</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#C792EA;--1:#8844AE">=</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#FF6A83;--1:#A24848">None</span><span style="--0:#D6DEEB;--1:#403F53">, </span><span style="--0:#7FDBCA;--1:#096E72">gth_coefficients</span><span style="--0:#D6DEEB;--1:#403F53">: tuple[</span><span style="--0:#C5E478;--1:#3B61B0">float</span><span style="--0:#D6DEEB;--1:#403F53">, </span><span style="--0:#82AAFF;--1:#3B61B0">...</span><span style="--0:#D6DEEB;--1:#403F53">] </span><span style="--0:#C792EA;--1:#8844AE">=</span><span style="--0:#D6DEEB;--1:#403F53"> (), </span><span style="--0:#7FDBCA;--1:#096E72">gth_channels</span><span style="--0:#D6DEEB;--1:#403F53">: tuple[GTHProjectorChannel, </span><span style="--0:#82AAFF;--1:#3B61B0">...</span><span style="--0:#D6DEEB;--1:#403F53">] </span><span style="--0:#C792EA;--1:#8844AE">=</span><span style="--0:#D6DEEB;--1:#403F53"> (), </span><span style="--0:#7FDBCA;--1:#096E72">nonlocal_projectors</span><span style="--0:#D6DEEB;--1:#403F53">: tuple[NonlocalProjectorData, </span><span style="--0:#82AAFF;--1:#3B61B0">...</span><span style="--0:#D6DEEB;--1:#403F53">] </span><span style="--0:#C792EA;--1:#8844AE">=</span><span style="--0:#D6DEEB;--1:#403F53"> (), </span><span style="--0:#7FDBCA;--1:#096E72">nonlocal_coupling_matrix</span><span style="--0:#D6DEEB;--1:#403F53">: tuple[tuple[</span><span style="--0:#C5E478;--1:#3B61B0">float</span><span style="--0:#D6DEEB;--1:#403F53">, </span><span style="--0:#82AAFF;--1:#3B61B0">...</span><span style="--0:#D6DEEB;--1:#403F53">], </span><span style="--0:#82AAFF;--1:#3B61B0">...</span><span style="--0:#D6DEEB;--1:#403F53">] </span><span style="--0:#C792EA;--1:#8844AE">=</span><span style="--0:#D6DEEB;--1:#403F53"> (), </span><span style="--0:#7FDBCA;--1:#096E72">metadata</span><span style="--0:#D6DEEB;--1:#403F53">: dict[</span><span style="--0:#C5E478;--1:#3B61B0">str</span><span style="--0:#D6DEEB;--1:#403F53">, </span><span style="--0:#C5E478;--1:#3B61B0">str</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#C792EA;--1:#8844AE">|</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#C5E478;--1:#3B61B0">int</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#C792EA;--1:#8844AE">|</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#C5E478;--1:#3B61B0">float</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#C792EA;--1:#8844AE">|</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#C5E478;--1:#3B61B0">bool</span><span style="--0:#D6DEEB;--1:#403F53">] </span><span style="--0:#C792EA;--1:#8844AE">|</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#FF6A83;--1:#A24848">None</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#C792EA;--1:#8844AE">=</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#FF6A83;--1:#A24848">None</span><span style="--0:#D9F5DD;--1:#111111">)</span></div></div></code></pre><div class="copy"><div aria-live="polite"></div><button title="Copy to clipboard" data-copied="Copied!" data-code="class PseudopotentialData    def __init__(element: str, format: PseudopotentialFormat, valence_charge: float, local_grid: RadialGrid | None = None, gth_rloc: float | None = None, gth_coefficients: tuple[float, ...] = (), gth_channels: tuple[GTHProjectorChannel, ...] = (), nonlocal_projectors: tuple[NonlocalProjectorData, ...] = (), nonlocal_coupling_matrix: tuple[tuple[float, ...], ...] = (), metadata: dict[str, str | int | float | bool] | None = None)"><div></div></button></div></figure></div>
+<p>Parsed pseudopotential data used by ion-centered local fields.</p>
+<p><strong>Parameters</strong></p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Name</th><th>Type</th><th>Default</th><th>Description</th></tr></thead><tbody><tr><td><code dir="auto">element</code></td><td><code dir="auto">str</code></td><td></td><td></td></tr><tr><td><code dir="auto">format</code></td><td><code dir="auto">PseudopotentialFormat</code></td><td></td><td></td></tr><tr><td><code dir="auto">valence_charge</code></td><td><code dir="auto">float</code></td><td></td><td></td></tr><tr><td><code dir="auto">local_grid</code></td><td><code dir="auto">RadialGrid | None</code></td><td><code dir="auto">None</code></td><td></td></tr><tr><td><code dir="auto">gth_rloc</code></td><td><code dir="auto">float | None</code></td><td><code dir="auto">None</code></td><td></td></tr><tr><td><code dir="auto">gth_coefficients</code></td><td><code dir="auto">tuple[float, ...]</code></td><td><code dir="auto">()</code></td><td></td></tr><tr><td><code dir="auto">gth_channels</code></td><td><code dir="auto">tuple[GTHProjectorChannel, ...]</code></td><td><code dir="auto">()</code></td><td></td></tr><tr><td><code dir="auto">nonlocal_projectors</code></td><td><code dir="auto">tuple[NonlocalProjectorData, ...]</code></td><td><code dir="auto">()</code></td><td></td></tr><tr><td><code dir="auto">nonlocal_coupling_matrix</code></td><td><code dir="auto">tuple[tuple[float, ...], ...]</code></td><td><code dir="auto">()</code></td><td></td></tr><tr><td><code dir="auto">metadata</code></td><td><code dir="auto">dict[str, str | int | float | bool] | None</code></td><td><code dir="auto">None</code></td><td></td></tr></tbody></table>
+<p><strong>Properties</strong></p>
+<ul>
+<li><code dir="auto">nonlocal_available</code> <code dir="auto">bool</code> — Whether the source file contained nonlocal projector metadata.</li>
+<li><code dir="auto">periodic_upf_compatible</code> <code dir="auto">bool</code> — Whether this UPF is within the scalar norm-conserving core boundary.</li>
+</ul>
+<p><strong>Methods</strong></p>
+<div class="sl-heading-wrapper level-h4"><h4 id="local_derivative"><code dir="auto">local_derivative</code></h4><a class="sl-anchor-link" href="#local_derivative"><span aria-hidden="true" class="sl-anchor-icon"><svg width="16" height="16" viewBox="0 0 24 24"><path fill="currentcolor" d="m12.11 15.39-3.88 3.88a2.52 2.52 0 0 1-3.5 0 2.47 2.47 0 0 1 0-3.5l3.88-3.88a1 1 0 0 0-1.42-1.42l-3.88 3.89a4.48 4.48 0 0 0 6.33 6.33l3.89-3.88a1 1 0 1 0-1.42-1.42Zm8.58-12.08a4.49 4.49 0 0 0-6.33 0l-3.89 3.88a1 1 0 0 0 1.42 1.42l3.88-3.88a2.52 2.52 0 0 1 3.5 0 2.47 2.47 0 0 1 0 3.5l-3.88 3.88a1 1 0 1 0 1.42 1.42l3.88-3.89a4.49 4.49 0 0 0 0-6.33ZM8.83 15.17a1 1 0 0 0 1.1.22 1 1 0 0 0 .32-.22l4.92-4.92a1 1 0 0 0-1.42-1.42l-4.92 4.92a1 1 0 0 0 0 1.42Z"></path></svg></span><span class="sr-only" data-pagefind-ignore="">Section titled “local_derivative”</span></a></div>
+<div class="expressive-code"><figure class="frame not-content"><figcaption class="header"></figcaption><pre data-language="python"><code><div class="ec-line"><div class="code"><span style="--0:#C792EA;--1:#8844AE">def</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#82AAFF;--1:#3B61B0">local_derivative</span><span style="--0:#D9F5DD;--1:#111111">(</span><span style="--0:#7FDBCA;--1:#096E72">radius</span><span style="--0:#D6DEEB;--1:#403F53">: np.ndarray</span><span style="--0:#D9F5DD;--1:#111111">)</span><span style="--0:#D6DEEB;--1:#403F53"> -> np.ndarray</span></div></div></code></pre><div class="copy"><div aria-live="polite"></div><button title="Copy to clipboard" data-copied="Copied!" data-code="def local_derivative(radius: np.ndarray) -> np.ndarray"><div></div></button></div></figure></div>
+<p>Evaluate <code dir="auto">dV_local/dr</code> in Hartree/bohr.</p>
+<p><strong>Parameters</strong></p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Name</th><th>Type</th><th>Default</th><th>Description</th></tr></thead><tbody><tr><td><code dir="auto">radius</code></td><td><code dir="auto">np.ndarray</code></td><td></td><td></td></tr></tbody></table>
+<p><strong>Returns</strong></p>
+<ul>
+<li><code dir="auto">np.ndarray</code></li>
+</ul>
+<div class="sl-heading-wrapper level-h4"><h4 id="local_potential"><code dir="auto">local_potential</code></h4><a class="sl-anchor-link" href="#local_potential"><span aria-hidden="true" class="sl-anchor-icon"><svg width="16" height="16" viewBox="0 0 24 24"><path fill="currentcolor" d="m12.11 15.39-3.88 3.88a2.52 2.52 0 0 1-3.5 0 2.47 2.47 0 0 1 0-3.5l3.88-3.88a1 1 0 0 0-1.42-1.42l-3.88 3.89a4.48 4.48 0 0 0 6.33 6.33l3.89-3.88a1 1 0 1 0-1.42-1.42Zm8.58-12.08a4.49 4.49 0 0 0-6.33 0l-3.89 3.88a1 1 0 0 0 1.42 1.42l3.88-3.88a2.52 2.52 0 0 1 3.5 0 2.47 2.47 0 0 1 0 3.5l-3.88 3.88a1 1 0 1 0 1.42 1.42l3.88-3.89a4.49 4.49 0 0 0 0-6.33ZM8.83 15.17a1 1 0 0 0 1.1.22 1 1 0 0 0 .32-.22l4.92-4.92a1 1 0 0 0-1.42-1.42l-4.92 4.92a1 1 0 0 0 0 1.42Z"></path></svg></span><span class="sr-only" data-pagefind-ignore="">Section titled “local_potential”</span></a></div>
+<div class="expressive-code"><figure class="frame not-content"><figcaption class="header"></figcaption><pre data-language="python"><code><div class="ec-line"><div class="code"><span style="--0:#C792EA;--1:#8844AE">def</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#82AAFF;--1:#3B61B0">local_potential</span><span style="--0:#D9F5DD;--1:#111111">(</span><span style="--0:#7FDBCA;--1:#096E72">radius</span><span style="--0:#D6DEEB;--1:#403F53">: np.ndarray</span><span style="--0:#D9F5DD;--1:#111111">)</span><span style="--0:#D6DEEB;--1:#403F53"> -> np.ndarray</span></div></div></code></pre><div class="copy"><div aria-live="polite"></div><button title="Copy to clipboard" data-copied="Copied!" data-code="def local_potential(radius: np.ndarray) -> np.ndarray"><div></div></button></div></figure></div>
+<p>Evaluate the local potential in Hartree on radii in bohr.</p>
+<p><strong>Parameters</strong></p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Name</th><th>Type</th><th>Default</th><th>Description</th></tr></thead><tbody><tr><td><code dir="auto">radius</code></td><td><code dir="auto">np.ndarray</code></td><td></td><td></td></tr></tbody></table>
+<p><strong>Returns</strong></p>
+<ul>
+<li><code dir="auto">np.ndarray</code></li>
+</ul>
+<div class="sl-heading-wrapper level-h3"><h3 id="pseudopotentialformat"><code dir="auto">PseudopotentialFormat</code></h3><a class="sl-anchor-link" href="#pseudopotentialformat"><span aria-hidden="true" class="sl-anchor-icon"><svg width="16" height="16" viewBox="0 0 24 24"><path fill="currentcolor" d="m12.11 15.39-3.88 3.88a2.52 2.52 0 0 1-3.5 0 2.47 2.47 0 0 1 0-3.5l3.88-3.88a1 1 0 0 0-1.42-1.42l-3.88 3.89a4.48 4.48 0 0 0 6.33 6.33l3.89-3.88a1 1 0 1 0-1.42-1.42Zm8.58-12.08a4.49 4.49 0 0 0-6.33 0l-3.89 3.88a1 1 0 0 0 1.42 1.42l3.88-3.88a2.52 2.52 0 0 1 3.5 0 2.47 2.47 0 0 1 0 3.5l-3.88 3.88a1 1 0 1 0 1.42 1.42l3.88-3.89a4.49 4.49 0 0 0 0-6.33ZM8.83 15.17a1 1 0 0 0 1.1.22 1 1 0 0 0 .32-.22l4.92-4.92a1 1 0 0 0-1.42-1.42l-4.92 4.92a1 1 0 0 0 0 1.42Z"></path></svg></span><span class="sr-only" data-pagefind-ignore="">Section titled “PseudopotentialFormat”</span></a></div>
+<div class="expressive-code"><figure class="frame not-content"><figcaption class="header"></figcaption><pre data-language="python"><code><div class="ec-line"><div class="code"><span style="--0:#C792EA;--1:#8844AE">class</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#FFCB8B;--1:#111111">PseudopotentialFormat</span><span style="--0:#D6DEEB;--1:#403F53">(</span><span style="--0:#C5E478;--1:#3B61B0">StrEnum</span><span style="--0:#D6DEEB;--1:#403F53">)</span></div></div></code></pre><div class="copy"><div aria-live="polite"></div><button title="Copy to clipboard" data-copied="Copied!" data-code="class PseudopotentialFormat(StrEnum)"><div></div></button></div></figure></div>
+<p>Supported pseudopotential file families.</p>
+<div class="sl-heading-wrapper level-h3"><h3 id="radialgrid"><code dir="auto">RadialGrid</code></h3><a class="sl-anchor-link" href="#radialgrid"><span aria-hidden="true" class="sl-anchor-icon"><svg width="16" height="16" viewBox="0 0 24 24"><path fill="currentcolor" d="m12.11 15.39-3.88 3.88a2.52 2.52 0 0 1-3.5 0 2.47 2.47 0 0 1 0-3.5l3.88-3.88a1 1 0 0 0-1.42-1.42l-3.88 3.89a4.48 4.48 0 0 0 6.33 6.33l3.89-3.88a1 1 0 1 0-1.42-1.42Zm8.58-12.08a4.49 4.49 0 0 0-6.33 0l-3.89 3.88a1 1 0 0 0 1.42 1.42l3.88-3.88a2.52 2.52 0 0 1 3.5 0 2.47 2.47 0 0 1 0 3.5l-3.88 3.88a1 1 0 1 0 1.42 1.42l3.88-3.89a4.49 4.49 0 0 0 0-6.33ZM8.83 15.17a1 1 0 0 0 1.1.22 1 1 0 0 0 .32-.22l4.92-4.92a1 1 0 0 0-1.42-1.42l-4.92 4.92a1 1 0 0 0 0 1.42Z"></path></svg></span><span class="sr-only" data-pagefind-ignore="">Section titled “RadialGrid”</span></a></div>
+<div class="expressive-code"><figure class="frame not-content"><figcaption class="header"></figcaption><pre data-language="python"><code><div class="ec-line"><div class="code"><span style="--0:#C792EA;--1:#8844AE">class</span><span style="--0:#D6DEEB;--1:#403F53"> RadialGrid</span></div></div><div class="ec-line"><div class="code"><span class="indent">    </span><span style="--0:#C792EA;--1:#8844AE">def</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#C5E478;--1:#3B61B0">__init__</span><span style="--0:#D9F5DD;--1:#111111">(</span><span style="--0:#7FDBCA;--1:#096E72">radii</span><span style="--0:#D6DEEB;--1:#403F53">: Sequence[</span><span style="--0:#C5E478;--1:#3B61B0">float</span><span style="--0:#D6DEEB;--1:#403F53">], </span><span style="--0:#7FDBCA;--1:#096E72">values</span><span style="--0:#D6DEEB;--1:#403F53">: Sequence[</span><span style="--0:#C5E478;--1:#3B61B0">float</span><span style="--0:#D6DEEB;--1:#403F53">], </span><span style="--0:#7FDBCA;--1:#096E72">*</span><span style="--0:#D6DEEB;--1:#403F53">, </span><span style="--0:#7FDBCA;--1:#096E72">integration_weights</span><span style="--0:#D6DEEB;--1:#403F53">: Sequence[</span><span style="--0:#C5E478;--1:#3B61B0">float</span><span style="--0:#D6DEEB;--1:#403F53">] </span><span style="--0:#C792EA;--1:#8844AE">|</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#FF6A83;--1:#A24848">None</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#C792EA;--1:#8844AE">=</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#FF6A83;--1:#A24848">None</span><span style="--0:#D9F5DD;--1:#111111">)</span></div></div></code></pre><div class="copy"><div aria-live="polite"></div><button title="Copy to clipboard" data-copied="Copied!" data-code="class RadialGrid    def __init__(radii: Sequence[float], values: Sequence[float], *, integration_weights: Sequence[float] | None = None)"><div></div></button></div></figure></div>
+<p>Radial samples and optional quadrature weights.</p>
+<p><strong>Parameters</strong></p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Name</th><th>Type</th><th>Default</th><th>Description</th></tr></thead><tbody><tr><td><code dir="auto">radii</code></td><td><code dir="auto">Sequence[float]</code></td><td></td><td></td></tr><tr><td><code dir="auto">values</code></td><td><code dir="auto">Sequence[float]</code></td><td></td><td></td></tr><tr><td><code dir="auto">integration_weights</code></td><td><code dir="auto">Sequence[float] | None</code></td><td><code dir="auto">None</code></td><td></td></tr></tbody></table>
+<p><strong>Properties</strong></p>
+<ul>
+<li><code dir="auto">size</code> <code dir="auto">int</code> — Number of radial samples.</li>
+</ul>
+<p><strong>Methods</strong></p>
+<div class="sl-heading-wrapper level-h4"><h4 id="derivative"><code dir="auto">derivative</code></h4><a class="sl-anchor-link" href="#derivative"><span aria-hidden="true" class="sl-anchor-icon"><svg width="16" height="16" viewBox="0 0 24 24"><path fill="currentcolor" d="m12.11 15.39-3.88 3.88a2.52 2.52 0 0 1-3.5 0 2.47 2.47 0 0 1 0-3.5l3.88-3.88a1 1 0 0 0-1.42-1.42l-3.88 3.89a4.48 4.48 0 0 0 6.33 6.33l3.89-3.88a1 1 0 1 0-1.42-1.42Zm8.58-12.08a4.49 4.49 0 0 0-6.33 0l-3.89 3.88a1 1 0 0 0 1.42 1.42l3.88-3.88a2.52 2.52 0 0 1 3.5 0 2.47 2.47 0 0 1 0 3.5l-3.88 3.88a1 1 0 1 0 1.42 1.42l3.88-3.89a4.49 4.49 0 0 0 0-6.33ZM8.83 15.17a1 1 0 0 0 1.1.22 1 1 0 0 0 .32-.22l4.92-4.92a1 1 0 0 0-1.42-1.42l-4.92 4.92a1 1 0 0 0 0 1.42Z"></path></svg></span><span class="sr-only" data-pagefind-ignore="">Section titled “derivative”</span></a></div>
+<div class="expressive-code"><figure class="frame not-content"><figcaption class="header"></figcaption><pre data-language="python"><code><div class="ec-line"><div class="code"><span style="--0:#C792EA;--1:#8844AE">def</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#82AAFF;--1:#3B61B0">derivative</span><span style="--0:#D9F5DD;--1:#111111">(</span><span style="--0:#7FDBCA;--1:#096E72">r</span><span style="--0:#D6DEEB;--1:#403F53">: np.ndarray, </span><span style="--0:#7FDBCA;--1:#096E72">*</span><span style="--0:#D6DEEB;--1:#403F53">, </span><span style="--0:#7FDBCA;--1:#096E72">tail_charge</span><span style="--0:#D6DEEB;--1:#403F53">: </span><span style="--0:#C5E478;--1:#3B61B0">float</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#C792EA;--1:#8844AE">|</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#FF6A83;--1:#A24848">None</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#C792EA;--1:#8844AE">=</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#FF6A83;--1:#A24848">None</span><span style="--0:#D9F5DD;--1:#111111">)</span><span style="--0:#D6DEEB;--1:#403F53"> -> np.ndarray</span></div></div></code></pre><div class="copy"><div aria-live="polite"></div><button title="Copy to clipboard" data-copied="Copied!" data-code="def derivative(r: np.ndarray, *, tail_charge: float | None = None) -> np.ndarray"><div></div></button></div></figure></div>
+<p>Interpolate <code dir="auto">dV/dr</code> at radius <code dir="auto">r</code>.</p>
+<p><strong>Parameters</strong></p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Name</th><th>Type</th><th>Default</th><th>Description</th></tr></thead><tbody><tr><td><code dir="auto">r</code></td><td><code dir="auto">np.ndarray</code></td><td></td><td></td></tr><tr><td><code dir="auto">tail_charge</code></td><td><code dir="auto">float | None</code></td><td><code dir="auto">None</code></td><td></td></tr></tbody></table>
+<p><strong>Returns</strong></p>
+<ul>
+<li><code dir="auto">np.ndarray</code></li>
+</ul>
+<div class="sl-heading-wrapper level-h4"><h4 id="interpolate"><code dir="auto">interpolate</code></h4><a class="sl-anchor-link" href="#interpolate"><span aria-hidden="true" class="sl-anchor-icon"><svg width="16" height="16" viewBox="0 0 24 24"><path fill="currentcolor" d="m12.11 15.39-3.88 3.88a2.52 2.52 0 0 1-3.5 0 2.47 2.47 0 0 1 0-3.5l3.88-3.88a1 1 0 0 0-1.42-1.42l-3.88 3.89a4.48 4.48 0 0 0 6.33 6.33l3.89-3.88a1 1 0 1 0-1.42-1.42Zm8.58-12.08a4.49 4.49 0 0 0-6.33 0l-3.89 3.88a1 1 0 0 0 1.42 1.42l3.88-3.88a2.52 2.52 0 0 1 3.5 0 2.47 2.47 0 0 1 0 3.5l-3.88 3.88a1 1 0 1 0 1.42 1.42l3.88-3.89a4.49 4.49 0 0 0 0-6.33ZM8.83 15.17a1 1 0 0 0 1.1.22 1 1 0 0 0 .32-.22l4.92-4.92a1 1 0 0 0-1.42-1.42l-4.92 4.92a1 1 0 0 0 0 1.42Z"></path></svg></span><span class="sr-only" data-pagefind-ignore="">Section titled “interpolate”</span></a></div>
+<div class="expressive-code"><figure class="frame not-content"><figcaption class="header"></figcaption><pre data-language="python"><code><div class="ec-line"><div class="code"><span style="--0:#C792EA;--1:#8844AE">def</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#82AAFF;--1:#3B61B0">interpolate</span><span style="--0:#D9F5DD;--1:#111111">(</span><span style="--0:#7FDBCA;--1:#096E72">r</span><span style="--0:#D6DEEB;--1:#403F53">: np.ndarray, </span><span style="--0:#7FDBCA;--1:#096E72">*</span><span style="--0:#D6DEEB;--1:#403F53">, </span><span style="--0:#7FDBCA;--1:#096E72">tail_charge</span><span style="--0:#D6DEEB;--1:#403F53">: </span><span style="--0:#C5E478;--1:#3B61B0">float</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#C792EA;--1:#8844AE">|</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#FF6A83;--1:#A24848">None</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#C792EA;--1:#8844AE">=</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#FF6A83;--1:#A24848">None</span><span style="--0:#D9F5DD;--1:#111111">)</span><span style="--0:#D6DEEB;--1:#403F53"> -> np.ndarray</span></div></div></code></pre><div class="copy"><div aria-live="polite"></div><button title="Copy to clipboard" data-copied="Copied!" data-code="def interpolate(r: np.ndarray, *, tail_charge: float | None = None) -> np.ndarray"><div></div></button></div></figure></div>
+<p>Interpolate values at radius <code dir="auto">r</code> with a Coulomb tail fallback.</p>
+<p><strong>Parameters</strong></p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Name</th><th>Type</th><th>Default</th><th>Description</th></tr></thead><tbody><tr><td><code dir="auto">r</code></td><td><code dir="auto">np.ndarray</code></td><td></td><td></td></tr><tr><td><code dir="auto">tail_charge</code></td><td><code dir="auto">float | None</code></td><td><code dir="auto">None</code></td><td></td></tr></tbody></table>
+<p><strong>Returns</strong></p>
+<ul>
+<li><code dir="auto">np.ndarray</code></li>
+</ul>
+<div class="sl-heading-wrapper level-h2"><h2 id="functions">Functions</h2><a class="sl-anchor-link" href="#functions"><span aria-hidden="true" class="sl-anchor-icon"><svg width="16" height="16" viewBox="0 0 24 24"><path fill="currentcolor" d="m12.11 15.39-3.88 3.88a2.52 2.52 0 0 1-3.5 0 2.47 2.47 0 0 1 0-3.5l3.88-3.88a1 1 0 0 0-1.42-1.42l-3.88 3.89a4.48 4.48 0 0 0 6.33 6.33l3.89-3.88a1 1 0 1 0-1.42-1.42Zm8.58-12.08a4.49 4.49 0 0 0-6.33 0l-3.89 3.88a1 1 0 0 0 1.42 1.42l3.88-3.88a2.52 2.52 0 0 1 3.5 0 2.47 2.47 0 0 1 0 3.5l-3.88 3.88a1 1 0 1 0 1.42 1.42l3.88-3.89a4.49 4.49 0 0 0 0-6.33ZM8.83 15.17a1 1 0 0 0 1.1.22 1 1 0 0 0 .32-.22l4.92-4.92a1 1 0 0 0-1.42-1.42l-4.92 4.92a1 1 0 0 0 0 1.42Z"></path></svg></span><span class="sr-only" data-pagefind-ignore="">Section titled “Functions”</span></a></div>
+<div class="sl-heading-wrapper level-h3"><h3 id="read_gth"><code dir="auto">read_gth</code></h3><a class="sl-anchor-link" href="#read_gth"><span aria-hidden="true" class="sl-anchor-icon"><svg width="16" height="16" viewBox="0 0 24 24"><path fill="currentcolor" d="m12.11 15.39-3.88 3.88a2.52 2.52 0 0 1-3.5 0 2.47 2.47 0 0 1 0-3.5l3.88-3.88a1 1 0 0 0-1.42-1.42l-3.88 3.89a4.48 4.48 0 0 0 6.33 6.33l3.89-3.88a1 1 0 1 0-1.42-1.42Zm8.58-12.08a4.49 4.49 0 0 0-6.33 0l-3.89 3.88a1 1 0 0 0 1.42 1.42l3.88-3.88a2.52 2.52 0 0 1 3.5 0 2.47 2.47 0 0 1 0 3.5l-3.88 3.88a1 1 0 1 0 1.42 1.42l3.88-3.89a4.49 4.49 0 0 0 0-6.33ZM8.83 15.17a1 1 0 0 0 1.1.22 1 1 0 0 0 .32-.22l4.92-4.92a1 1 0 0 0-1.42-1.42l-4.92 4.92a1 1 0 0 0 0 1.42Z"></path></svg></span><span class="sr-only" data-pagefind-ignore="">Section titled “read_gth”</span></a></div>
+<div class="expressive-code"><figure class="frame not-content"><figcaption class="header"></figcaption><pre data-language="python"><code><div class="ec-line"><div class="code"><span style="--0:#C792EA;--1:#8844AE">def</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#82AAFF;--1:#3B61B0">read_gth</span><span style="--0:#D9F5DD;--1:#111111">(</span><span style="--0:#7FDBCA;--1:#096E72">path_or_database</span><span style="--0:#D6DEEB;--1:#403F53">: </span><span style="--0:#C5E478;--1:#3B61B0">str</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#C792EA;--1:#8844AE">|</span><span style="--0:#D6DEEB;--1:#403F53"> Path, </span><span style="--0:#7FDBCA;--1:#096E72">*</span><span style="--0:#D6DEEB;--1:#403F53">, </span><span style="--0:#7FDBCA;--1:#096E72">element</span><span style="--0:#D6DEEB;--1:#403F53">: </span><span style="--0:#C5E478;--1:#3B61B0">str</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#C792EA;--1:#8844AE">|</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#FF6A83;--1:#A24848">None</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#C792EA;--1:#8844AE">=</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#FF6A83;--1:#A24848">None</span><span style="--0:#D6DEEB;--1:#403F53">, </span><span style="--0:#7FDBCA;--1:#096E72">name</span><span style="--0:#D6DEEB;--1:#403F53">: </span><span style="--0:#C5E478;--1:#3B61B0">str</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#C792EA;--1:#8844AE">|</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#FF6A83;--1:#A24848">None</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#C792EA;--1:#8844AE">=</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#FF6A83;--1:#A24848">None</span><span style="--0:#D9F5DD;--1:#111111">)</span><span style="--0:#D6DEEB;--1:#403F53"> -> PseudopotentialData</span></div></div></code></pre><div class="copy"><div aria-live="polite"></div><button title="Copy to clipboard" data-copied="Copied!" data-code="def read_gth(path_or_database: str | Path, *, element: str | None = None, name: str | None = None) -> PseudopotentialData"><div></div></button></div></figure></div>
+<p>Read a single GTH file or one entry from a CP2K-style GTH database.</p>
+<p><strong>Parameters</strong></p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Name</th><th>Type</th><th>Default</th><th>Description</th></tr></thead><tbody><tr><td><code dir="auto">path_or_database</code></td><td><code dir="auto">str | Path</code></td><td></td><td></td></tr><tr><td><code dir="auto">element</code></td><td><code dir="auto">str | None</code></td><td><code dir="auto">None</code></td><td></td></tr><tr><td><code dir="auto">name</code></td><td><code dir="auto">str | None</code></td><td><code dir="auto">None</code></td><td></td></tr></tbody></table>
+<p><strong>Returns</strong></p>
+<ul>
+<li><code dir="auto">PseudopotentialData</code></li>
+</ul>
+<div class="sl-heading-wrapper level-h3"><h3 id="read_upf"><code dir="auto">read_upf</code></h3><a class="sl-anchor-link" href="#read_upf"><span aria-hidden="true" class="sl-anchor-icon"><svg width="16" height="16" viewBox="0 0 24 24"><path fill="currentcolor" d="m12.11 15.39-3.88 3.88a2.52 2.52 0 0 1-3.5 0 2.47 2.47 0 0 1 0-3.5l3.88-3.88a1 1 0 0 0-1.42-1.42l-3.88 3.89a4.48 4.48 0 0 0 6.33 6.33l3.89-3.88a1 1 0 1 0-1.42-1.42Zm8.58-12.08a4.49 4.49 0 0 0-6.33 0l-3.89 3.88a1 1 0 0 0 1.42 1.42l3.88-3.88a2.52 2.52 0 0 1 3.5 0 2.47 2.47 0 0 1 0 3.5l-3.88 3.88a1 1 0 1 0 1.42 1.42l3.88-3.89a4.49 4.49 0 0 0 0-6.33ZM8.83 15.17a1 1 0 0 0 1.1.22 1 1 0 0 0 .32-.22l4.92-4.92a1 1 0 0 0-1.42-1.42l-4.92 4.92a1 1 0 0 0 0 1.42Z"></path></svg></span><span class="sr-only" data-pagefind-ignore="">Section titled “read_upf”</span></a></div>
+<div class="expressive-code"><figure class="frame not-content"><figcaption class="header"></figcaption><pre data-language="python"><code><div class="ec-line"><div class="code"><span style="--0:#C792EA;--1:#8844AE">def</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#82AAFF;--1:#3B61B0">read_upf</span><span style="--0:#D9F5DD;--1:#111111">(</span><span style="--0:#7FDBCA;--1:#096E72">path</span><span style="--0:#D6DEEB;--1:#403F53">: </span><span style="--0:#C5E478;--1:#3B61B0">str</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#C792EA;--1:#8844AE">|</span><span style="--0:#D6DEEB;--1:#403F53"> Path</span><span style="--0:#D9F5DD;--1:#111111">)</span><span style="--0:#D6DEEB;--1:#403F53"> -> PseudopotentialData</span></div></div></code></pre><div class="copy"><div aria-live="polite"></div><button title="Copy to clipboard" data-copied="Copied!" data-code="def read_upf(path: str | Path) -> PseudopotentialData"><div></div></button></div></figure></div>
+<p>Read a UPF v2-style pseudopotential file.</p>
+<p><strong>Parameters</strong></p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Name</th><th>Type</th><th>Default</th><th>Description</th></tr></thead><tbody><tr><td><code dir="auto">path</code></td><td><code dir="auto">str | Path</code></td><td></td><td></td></tr></tbody></table>
+<p><strong>Returns</strong></p>
+<ul>
+<li><code dir="auto">PseudopotentialData</code></li>
+</ul> </div> <footer class="sl-flex astro-3yyafb3n"> <div class="meta sl-flex astro-3yyafb3n">   </div> <div class="pagination-links print:hidden astro-u2l5gyhi" dir="ltr"> <a href="/mlx-atomistic/api/trajectory_adapters/" rel="prev" class="astro-u2l5gyhi"> <svg aria-hidden="true" class="astro-u2l5gyhi astro-c6vsoqas" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1.5rem;"><path d="M17 11H9.41l3.3-3.29a1.004 1.004 0 1 0-1.42-1.42l-5 5a1 1 0 0 0-.21.33 1 1 0 0 0 0 .76 1 1 0 0 0 .21.33l5 5a1.002 1.002 0 0 0 1.639-.325 1 1 0 0 0-.219-1.095L9.41 13H17a1 1 0 0 0 0-2Z"/></svg> <span class="astro-u2l5gyhi"> Previous <br class="astro-u2l5gyhi"> <span class="link-title astro-u2l5gyhi">trajectory_adapters</span> </span> </a> <a href="/mlx-atomistic/api/dft-kpoints/" rel="next" class="astro-u2l5gyhi"> <svg aria-hidden="true" class="astro-u2l5gyhi astro-c6vsoqas" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1.5rem;"><path d="M17.92 11.62a1.001 1.001 0 0 0-.21-.33l-5-5a1.003 1.003 0 1 0-1.42 1.42l3.3 3.29H7a1 1 0 0 0 0 2h7.59l-3.3 3.29a1.002 1.002 0 0 0 .325 1.639 1 1 0 0 0 1.095-.219l5-5a1 1 0 0 0 .21-.33 1 1 0 0 0 0-.76Z"/></svg> <span class="astro-u2l5gyhi"> Next <br class="astro-u2l5gyhi"> <span class="link-title astro-u2l5gyhi">dft.kpoints</span> </span> </a> </div>  </footer> </div> </div>  </main> </div> </div> </div> </div> </body></html>

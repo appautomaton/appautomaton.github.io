@@ -1,0 +1,13 @@
+# mlx-atomistic
+
+> Apple Silicon-native atomistic simulation: an MLX + Metal DFT and MD runtime that runs the GPU on your Mac.
+
+## Documentation Sets
+
+- [Abridged documentation](https://appautomaton.com/mlx-atomistic/llms-small.txt): a compact version of the documentation for mlx-atomistic, with non-essential content removed
+- [Complete documentation](https://appautomaton.com/mlx-atomistic/llms-full.txt): the full documentation for mlx-atomistic
+
+## Notes
+
+- The complete documentation includes all content from the official documentation
+- The content is automatically generated from the same source as the official documentation

@@ -110,7 +110,18 @@
       "sitemaps": [
         "https://appautomaton.com/latex-arxiv-SKILL/sitemap.xml"
       ],
-      "publication": "external"
+      "publication": "staged",
+      "sourceDir": "sites/latex-arxiv-SKILL/public",
+      "build": {
+        "kind": "static",
+        "exclude": [
+          ".nojekyll"
+        ]
+      },
+      "outputDir": ".",
+      "pages": [
+        "/latex-arxiv-SKILL/"
+      ]
     },
     {
       "id": "markmaton",
@@ -138,7 +149,58 @@
       "sitemaps": [
         "https://appautomaton.com/mlx-atomistic/sitemap-0.xml"
       ],
-      "publication": "external"
+      "publication": "staged",
+      "sourceDir": "sites/mlx-atomistic/public",
+      "build": {
+        "kind": "static"
+      },
+      "outputDir": ".",
+      "pages": [
+        "/mlx-atomistic/",
+        "/mlx-atomistic/api/",
+        "/mlx-atomistic/benchmarks/",
+        "/mlx-atomistic/benchmarks/benchmark-ladder/",
+        "/mlx-atomistic/benchmarks/dft-material-validation/",
+        "/mlx-atomistic/benchmarks/dft-performance-decisions-m5max/",
+        "/mlx-atomistic/benchmarks/gpcrmd-729-pme-runtime-m5max/",
+        "/mlx-atomistic/benchmarks/lammps-opencl-m5max/",
+        "/mlx-atomistic/benchmarks/m5max-reference-engines/",
+        "/mlx-atomistic/benchmarks/md-left-grouped-neighbor-scatter-m5max/",
+        "/mlx-atomistic/benchmarks/md-performance-decisions-m5max/",
+        "/mlx-atomistic/benchmarks/md-suite/",
+        "/mlx-atomistic/benchmarks/openmm-opencl-amber20/",
+        "/mlx-atomistic/benchmarks/openmm-opencl-apoa1/",
+        "/mlx-atomistic/benchmarks/openmm-opencl-dhfr/",
+        "/mlx-atomistic/benchmarks/same-workload-lj-scaling-m5max/",
+        "/mlx-atomistic/benchmarks/same-workload-openmm-comparison/",
+        "/mlx-atomistic/benchmarks/scalable-charged-pme-runtime-m5max/",
+        "/mlx-atomistic/benchmarks/scalable-neighbor-nonbonded-runtime-m5max/",
+        "/mlx-atomistic/dft/dft-general-cell-geometry/",
+        "/mlx-atomistic/dft/dft-geometry-optimization/",
+        "/mlx-atomistic/dft/dft-metallic-validation/",
+        "/mlx-atomistic/dft/dft-numerics/",
+        "/mlx-atomistic/dft/dft-periodic-relaxation/",
+        "/mlx-atomistic/dft/dft-production-core/",
+        "/mlx-atomistic/dft/dft-pseudopotentials/",
+        "/mlx-atomistic/dft/dft-roadmap/",
+        "/mlx-atomistic/dft/dft-scf-core/",
+        "/mlx-atomistic/dft/dft-stress-variable-cell/",
+        "/mlx-atomistic/foundations/dft-foundations/",
+        "/mlx-atomistic/foundations/runtime-boundaries/",
+        "/mlx-atomistic/foundations/testing/",
+        "/mlx-atomistic/foundations/units/",
+        "/mlx-atomistic/mm/md-acceleration/",
+        "/mlx-atomistic/mm/metal-interaction-engine/",
+        "/mlx-atomistic/mm/molecular-mechanics/",
+        "/mlx-atomistic/mm/production-md/",
+        "/mlx-atomistic/mm/real-mm-core/",
+        "/mlx-atomistic/overview/",
+        "/mlx-atomistic/project/release/",
+        "/mlx-atomistic/project/validation-and-performance/"
+      ],
+      "knownMissingLinks": [
+        "https://appautomaton.com/mlx-atomistic/404/"
+      ]
     },
     {
       "id": "mlx-cv",
@@ -187,7 +249,15 @@
       "sitemaps": [
         "https://appautomaton.com/mlx-minimax-music3/sitemap.xml"
       ],
-      "publication": "external"
+      "publication": "staged",
+      "sourceDir": "sites/mlx-minimax-music3/public",
+      "build": {
+        "kind": "static"
+      },
+      "outputDir": ".",
+      "pages": [
+        "/mlx-minimax-music3/"
+      ]
     },
     {
       "id": "mlx-spatial",
@@ -299,7 +369,18 @@
       "sitemaps": [
         "https://appautomaton.com/tnt-asr/sitemap.xml"
       ],
-      "publication": "external"
+      "publication": "staged",
+      "sourceDir": "sites/tnt-asr/public",
+      "build": {
+        "kind": "static",
+        "exclude": [
+          ".nojekyll"
+        ]
+      },
+      "outputDir": ".",
+      "pages": [
+        "/tnt-asr/"
+      ]
     }
   ]
 }
