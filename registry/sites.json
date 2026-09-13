@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "phase": "publisher-handoff",
+  "phase": "modular-production",
   "origin": "https://appautomaton.com",
   "sites": [
     {
@@ -105,12 +105,12 @@
     {
       "id": "latex-arxiv-SKILL",
       "publicPath": "/latex-arxiv-SKILL/",
-      "currentPublisher": "appautomaton/latex-arxiv-SKILL",
+      "currentPublisher": "appautomaton/appautomaton.github.io",
       "sitemapSource": "https://appautomaton.com/latex-arxiv-SKILL/sitemap.xml",
       "sitemaps": [
         "https://appautomaton.com/latex-arxiv-SKILL/sitemap.xml"
       ],
-      "publication": "staged",
+      "publication": "central",
       "sourceDir": "sites/latex-arxiv-SKILL/public",
       "build": {
         "kind": "static",
@@ -144,12 +144,12 @@
     {
       "id": "mlx-atomistic",
       "publicPath": "/mlx-atomistic/",
-      "currentPublisher": "appautomaton/mlx-atomistic",
+      "currentPublisher": "appautomaton/appautomaton.github.io",
       "sitemapSource": "https://appautomaton.com/mlx-atomistic/sitemap-index.xml",
       "sitemaps": [
         "https://appautomaton.com/mlx-atomistic/sitemap-0.xml"
       ],
-      "publication": "staged",
+      "publication": "central",
       "sourceDir": "sites/mlx-atomistic/public",
       "build": {
         "kind": "static"
@@ -205,12 +205,12 @@
     {
       "id": "mlx-cv",
       "publicPath": "/mlx-cv/",
-      "currentPublisher": "appautomaton/mlx-cv",
+      "currentPublisher": "appautomaton/appautomaton.github.io",
       "sitemapSource": "https://appautomaton.com/mlx-cv/sitemap.xml",
       "sitemaps": [
         "https://appautomaton.com/mlx-cv/sitemap.xml"
       ],
-      "publication": "staged",
+      "publication": "central",
       "sourceDir": "sites/mlx-cv/public",
       "build": {
         "kind": "static",
@@ -226,12 +226,12 @@
     {
       "id": "mlx-h3",
       "publicPath": "/mlx-h3/",
-      "currentPublisher": "appautomaton/mlx-h3",
+      "currentPublisher": "appautomaton/appautomaton.github.io",
       "sitemapSource": "https://appautomaton.com/mlx-h3/sitemap.xml",
       "sitemaps": [
         "https://appautomaton.com/mlx-h3/sitemap.xml"
       ],
-      "publication": "staged",
+      "publication": "central",
       "sourceDir": "sites/mlx-h3/public",
       "build": {
         "kind": "static"
@@ -244,12 +244,12 @@
     {
       "id": "mlx-minimax-music3",
       "publicPath": "/mlx-minimax-music3/",
-      "currentPublisher": "appautomaton/mlx-minimax-music3",
+      "currentPublisher": "appautomaton/appautomaton.github.io",
       "sitemapSource": "https://appautomaton.com/mlx-minimax-music3/sitemap.xml",
       "sitemaps": [
         "https://appautomaton.com/mlx-minimax-music3/sitemap.xml"
       ],
-      "publication": "staged",
+      "publication": "central",
       "sourceDir": "sites/mlx-minimax-music3/public",
       "build": {
         "kind": "static"
@@ -262,12 +262,12 @@
     {
       "id": "mlx-spatial",
       "publicPath": "/mlx-spatial/",
-      "currentPublisher": "appautomaton/mlx-spatial",
+      "currentPublisher": "appautomaton/appautomaton.github.io",
       "sitemapSource": "https://appautomaton.com/mlx-spatial/sitemap.xml",
       "sitemaps": [
         "https://appautomaton.com/mlx-spatial/sitemap.xml"
       ],
-      "publication": "staged",
+      "publication": "central",
       "sourceDir": "sites/mlx-spatial/public",
       "build": {
         "kind": "static",
@@ -364,12 +364,12 @@
     {
       "id": "tnt-asr",
       "publicPath": "/tnt-asr/",
-      "currentPublisher": "appautomaton/tnt-asr",
+      "currentPublisher": "appautomaton/appautomaton.github.io",
       "sitemapSource": "https://appautomaton.com/tnt-asr/sitemap.xml",
       "sitemaps": [
         "https://appautomaton.com/tnt-asr/sitemap.xml"
       ],
-      "publication": "staged",
+      "publication": "central",
       "sourceDir": "sites/tnt-asr/public",
       "build": {
         "kind": "static",
