@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "phase": "publisher-handoff",
+  "phase": "modular-production",
   "origin": "https://appautomaton.com",
   "sites": [
     {
@@ -27,12 +27,12 @@
     {
       "id": "agent-designer",
       "publicPath": "/agent-designer/",
-      "currentPublisher": "appautomaton/agent-designer",
+      "currentPublisher": "appautomaton/appautomaton.github.io",
       "sitemapSource": "https://appautomaton.com/agent-designer/sitemap.xml",
       "sitemaps": [
         "https://appautomaton.com/agent-designer/sitemap.xml"
       ],
-      "publication": "staged",
+      "publication": "central",
       "sourceDir": "sites/agent-designer/public",
       "build": {
         "kind": "static"
@@ -48,12 +48,12 @@
     {
       "id": "automaton",
       "publicPath": "/automaton/",
-      "currentPublisher": "appautomaton/automaton",
+      "currentPublisher": "appautomaton/appautomaton.github.io",
       "sitemapSource": "https://appautomaton.com/automaton/sitemap.xml",
       "sitemaps": [
         "https://appautomaton.com/automaton/sitemap.xml"
       ],
-      "publication": "staged",
+      "publication": "central",
       "sourceDir": "sites/automaton/public",
       "build": {
         "kind": "static"
@@ -76,12 +76,12 @@
     {
       "id": "document-SKILLs",
       "publicPath": "/document-SKILLs/",
-      "currentPublisher": "appautomaton/document-SKILLs",
+      "currentPublisher": "appautomaton/appautomaton.github.io",
       "sitemapSource": "https://appautomaton.com/document-SKILLs/sitemap.xml",
       "sitemaps": [
         "https://appautomaton.com/document-SKILLs/sitemap.xml"
       ],
-      "publication": "staged",
+      "publication": "central",
       "sourceDir": "sites/document-SKILLs/public",
       "build": {
         "kind": "static"

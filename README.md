@@ -9,13 +9,16 @@ files. Application and library code stays in its original project repository.
 | Module | Public path | Presentation |
 | --- | --- | --- |
 | [Home](sites/home/README.md) | `/` | Material gallery and project catalog |
+| Agent Designer | `/agent-designer/` | Agent design guide |
+| Automaton | `/automaton/` | Portable stage-gated agent harness |
+| Document Skills | `/document-SKILLs/` | DOCX, PDF, PPTX, and XLSX skills |
 | [MLX Speech](sites/mlx-speech/README.md) | `/mlx-speech/` | Animated audio studio |
 | [Pi Arcweld](sites/pi-arcweld/README.md) | `/pi-arcweld/` | Typographic welding field guide |
 | [Setloom](sites/setloom/README.md) | `/setloom/` | Woven-thread music production site |
 
-These four modules are published by this repository. The other 13 project
-websites retain their existing publishers. All 17 public
-mounts and sitemap sources are listed in [the site registry](registry/sites.json).
+These seven modules are published by this repository. The other ten project
+websites retain external publishers. All 17 public mounts and sitemap sources
+are listed in [the site registry](registry/sites.json).
 No application runtime or model weights are included here.
 
 ## Develop and review
@@ -25,6 +28,9 @@ Use Node 24 or newer. No package installation is required.
 ```sh
 npm run dev
 # http://127.0.0.1:8748/
+# http://127.0.0.1:8748/agent-designer/
+# http://127.0.0.1:8748/automaton/
+# http://127.0.0.1:8748/document-SKILLs/
 # http://127.0.0.1:8748/mlx-speech/
 # http://127.0.0.1:8748/pi-arcweld/
 # http://127.0.0.1:8748/setloom/
@@ -56,13 +62,16 @@ and presentation registry actually used by the selected deployment.
 
 ```text
 sites/home/                 Homepage source and existing Node build
-sites/mlx-speech/public/    Independent static HTML, styles, scripts, and assets
-sites/pi-arcweld/public/    Independent static HTML, styles, scripts, and assets
-sites/setloom/public/       Woven-thread music production site
+sites/agent-designer/public/ Independent static HTML, styles, scripts, and assets
+sites/automaton/public/      Independent static HTML, styles, and assets
+sites/document-SKILLs/public/ Independent static HTML and sitemap
+sites/mlx-speech/public/     Independent static HTML, styles, scripts, and assets
+sites/pi-arcweld/public/     Independent static HTML, styles, scripts, and assets
+sites/setloom/public/        Woven-thread music production site
 registry/sites.json        Mounts, build adapters, sitemap leaves, publishers
 registry/baselines.json    Import revisions and deployed artifact hashes
 tooling/                   Assembly, validation, refresh, and preview
-dist/                      Complete four-site preview, generated
+dist/                      Complete seven-module preview, generated
 dist-production/           Registered production modules and discovery, generated
 ```
 
@@ -94,11 +103,15 @@ artifact available. Existing site removals or mount changes require review.
 
 Pull requests build the aggregate preview and attach it as `website-preview`.
 Main, scheduled, and manual runs refresh inputs, then upload the complete
-validated `dist-production/` artifact to Pages. The homepage, MLX Speech, Pi
-Arcweld, and Setloom are centrally published. Setloom's former Pages
-configuration, website workflow, and website-only source have been retired
-after route verification. Edit its site module here; runtime code and technical
-documentation remain in the Setloom repository.
+validated `dist-production/` artifact to Pages. The homepage, Agent Designer,
+Automaton, Document Skills, MLX Speech, Pi Arcweld, and Setloom are centrally
+published. Their original public paths remain unchanged. The latest three
+transfers passed artifact and route checks before their former Pages settings
+were removed. Cleanup PRs remove only website-specific source; setup, runtime,
+and technical documentation remain in the owning repositories. Setloom's
+former Pages configuration, website workflow, and website-only source have
+already been retired. Edit centrally published site modules here; keep
+application and library code in their project repositories.
 
 The site registry distinguishes `external`, `staged`, and `central` modules.
 External modules enter preview only. During an explicit handoff, staging puts a

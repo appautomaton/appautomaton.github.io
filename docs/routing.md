@@ -1,8 +1,8 @@
 # Project publication ownership and handoff
 
-The homepage, Pi Arcweld, MLX Speech, and Setloom are centrally published by
+The homepage and six project websites are centrally published by
 `appautomaton/appautomaton.github.io`. Their existing public URLs are unchanged.
-Thirteen other project websites retain external publishers.
+Ten other project websites retain external publishers.
 
 ## Publication states
 
@@ -31,12 +31,14 @@ Cached responses, including pre-transfer 404s, can persist briefly. Confirm the
 ordinary URL after propagation; a query string alone did not reliably bypass
 negative caching. Retain the old publisher's source until delivery is verified.
 
-The same sequence transferred Pi Arcweld, MLX Speech, and Setloom. Their ordinary
-source markers identify this repository, and their website files matched the
-central artifact. Setloom's nine files also matched over the ordinary route after
-cutover. Its former Pages configuration, website workflow, and website-only
-source were retired after verification. The temporary routing fixture and its
-workflow input were removed afterward.
+The same sequence transferred Pi Arcweld, MLX Speech, Setloom, agent-designer,
+Automaton, and Document Skills. Their ordinary source markers identify this
+repository, and their website files matched the central artifact. Setloom's nine
+files also matched over the ordinary route after cutover. Its former Pages
+configuration, website workflow, and website-only source were retired after
+verification. The temporary routing fixture and its workflow input were removed
+afterward. The first three additional transfers preserved technical documentation
+and runtime code in their owning repositories.
 
 ## Transfer another project
 
@@ -56,9 +58,14 @@ workflow input were removed afterward.
    technical documentation and runtime code in their owning project repository.
 7. Return to `modular-production` and update the ownership documentation.
 
-Before the cleanup merge, rollback uses the original source still on project
-main. After cleanup, restore the saved website and workflow from Git history
-before enabling that project publisher. Do not enable an empty publisher.
+Before cleanup, the original website remains on its published project branch.
+After cleanup, first restore the website files and workflow, if one exists, from
+the saved pre-cleanup revision while leaving Pages disabled. Then return the
+central registry entry to `external` with the project repository as
+`currentPublisher`, and publish the central artifact without that module. Restore
+the exact saved Pages settings, including branch and path, and enable the
+original workflow if present. Verify the project publisher on the ordinary route
+before considering rollback complete. Never activate an empty publisher.
 Ordinary central releases retain the last successful Pages artifact and source
 revision for restoration.
 
