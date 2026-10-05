@@ -4,35 +4,40 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Setloom: Agentic Music Production for Club Tracks and DJ Sets</title>
-<meta name="description" content="Open-source, keyboard-first music production: an agentic producer composes, renders, and revises club tracks from your plain-language direction. No DAW needed.">
+<title>Setloom: Open-Source Agentic Music Production for Coding Agents</title>
 <link rel="canonical" href="https://appautomaton.com/setloom/">
 <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1">
 <meta name="author" content="App Automaton">
-<meta name="color-scheme" content="dark">
-<meta name="theme-color" content="#0b0e13">
+<meta name="color-scheme" content="light dark">
+<meta name="theme-color" content="#ECEAE3" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0D0E0C" media="(prefers-color-scheme: dark)">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Setloom">
 <meta property="og:locale" content="en_US">
-<meta property="og:title" content="Setloom: Agentic Music Production for Club Tracks and DJ Sets">
-<meta property="og:description" content="You direct in plain language and judge by ear. The agent composes, renders, and revises. Open source, keyboard first, no DAW.">
+<meta property="og:title" content="Setloom: Open-Source Agentic Music Production for Coding Agents">
+<meta property="og:description" content="You direct in plain language and judge by ear. A coding agent composes, renders, and revises editable tracks. Open source, for Apple Silicon Macs.">
 <meta property="og:url" content="https://appautomaton.com/setloom/">
 <meta property="og:image" content="https://appautomaton.com/setloom/og-card.png">
 <meta property="og:image:type" content="image/png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
-<meta property="og:image:alt" content="The Setloom wordmark cut from woven linen, dyed threads passing through it on an indigo ground">
+<meta property="og:image:alt" content="The Setloom wordmark engraved on a five-line staff, with a lime playhead, on bone">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Setloom: Agentic Music Production for Club Tracks and DJ Sets">
-<meta name="twitter:description" content="You direct in plain language and judge by ear. The agent composes, renders, and revises. Open source, keyboard first, no DAW.">
+<meta name="twitter:title" content="Setloom: Open-Source Agentic Music Production for Coding Agents">
+<meta name="twitter:description" content="You direct in plain language and judge by ear. A coding agent composes, renders, and revises editable tracks. Open source, for Apple Silicon Macs.">
 <meta name="twitter:image" content="https://appautomaton.com/setloom/og-card.png">
-<meta name="twitter:image:alt" content="The Setloom wordmark cut from woven linen, dyed threads passing through it on an indigo ground">
+<meta name="twitter:image:alt" content="The Setloom wordmark engraved on a five-line staff, with a lime playhead, on bone">
 <link rel="icon" href="assets/mark.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="assets/touch-icon.png">
 <link rel="preconnect" href="https://api.fontshare.com">
 <link rel="preconnect" href="https://cdn.fontshare.com" crossorigin>
-<link rel="stylesheet" href="https://api.fontshare.com/v2/css?f[]=zodiak@400,401,700,701,900&amp;f[]=author@400,401,500,600&amp;display=swap">
+<link rel="stylesheet" href="https://api.fontshare.com/v2/css?f[]=melodrama@500&amp;display=swap">
+<link rel="stylesheet" href="https://api.fontshare.com/v2/css?f[]=supreme@400,401&amp;display=swap">
+<link rel="stylesheet" href="https://api.fontshare.com/v2/css?f[]=tabular@400&amp;display=swap">
+<link rel="preload" href="assets/fonts/outward-block.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="assets/style.css">
+<script>try{const t=localStorage.getItem("setloom-theme");if(t)document.documentElement.dataset.theme=t}catch(e){}</script>
+<meta name="description" content="Setloom is an open-source agentic music production harness. You direct in plain language and judge by ear. A frontier-model coding agent composes, renders, and revises editable tracks on Apple Silicon Macs.">
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -42,12 +47,10 @@
       "@id": "https://appautomaton.com/#org",
       "name": "App Automaton",
       "url": "https://appautomaton.com/",
-      "logo": {
-        "@type": "ImageObject",
-        "url": "https://appautomaton.com/assets/mark.svg"
-      },
       "sameAs": [
-        "https://github.com/appautomaton"
+        "https://github.com/appautomaton",
+        "https://soundcloud.com/appautomaton",
+        "https://appautomaton.bandcamp.com/"
       ]
     },
     {
@@ -63,35 +66,25 @@
       "@type": "WebPage",
       "@id": "https://appautomaton.com/setloom/#webpage",
       "url": "https://appautomaton.com/setloom/",
-      "name": "Setloom: Agentic Music Production for Club Tracks and DJ Sets",
-      "description": "Open-source, keyboard-first music production: an agentic producer composes, renders, and revises club tracks from your plain-language direction. No DAW needed.",
+      "name": "Setloom: Open-Source Agentic Music Production for Coding Agents",
+      "description": "Setloom is an open-source agentic music production harness. You direct in plain language and judge by ear. A frontier-model coding agent composes, renders, and revises editable tracks on Apple Silicon Macs.",
       "inLanguage": "en",
       "isPartOf": {
         "@id": "https://appautomaton.com/#website"
       },
-      "about": {
-        "@id": "https://appautomaton.com/setloom/#project"
-      },
-      "primaryImageOfPage": {
-        "@id": "https://appautomaton.com/setloom/#primaryimage"
-      },
       "breadcrumb": {
         "@id": "https://appautomaton.com/setloom/#breadcrumb"
       },
-      "datePublished": "2026-06-20",
-      "dateModified": "2026-09-11",
+      "primaryImageOfPage": {
+        "@id": "https://appautomaton.com/setloom/#card"
+      },
+      "dateModified": "2026-10-05",
+      "about": {
+        "@id": "https://appautomaton.com/setloom/#setloom"
+      },
       "mainEntity": {
-        "@id": "https://appautomaton.com/setloom/#project"
+        "@id": "https://appautomaton.com/setloom/#setloom"
       }
-    },
-    {
-      "@type": "ImageObject",
-      "@id": "https://appautomaton.com/setloom/#primaryimage",
-      "url": "https://appautomaton.com/setloom/og-card.png",
-      "contentUrl": "https://appautomaton.com/setloom/og-card.png",
-      "width": 1200,
-      "height": 630,
-      "caption": "The Setloom wordmark cut from woven linen, dyed threads passing through it on an indigo ground"
     },
     {
       "@type": "BreadcrumbList",
@@ -112,90 +105,87 @@
       ]
     },
     {
-      "@type": "SoftwareSourceCode",
-      "@id": "https://appautomaton.com/setloom/#project",
+      "@type": "ImageObject",
+      "@id": "https://appautomaton.com/setloom/#card",
+      "url": "https://appautomaton.com/setloom/og-card.png",
+      "width": 1200,
+      "height": 630,
+      "caption": "The Setloom wordmark engraved on a five-line staff, with a lime playhead, on bone"
+    },
+    {
+      "@type": [
+        "SoftwareApplication",
+        "SoftwareSourceCode"
+      ],
+      "@id": "https://appautomaton.com/setloom/#setloom",
       "name": "Setloom",
-      "description": "An open-source, keyboard-first harness for producing club tracks and DJ sets with an agentic producer. The human directs in plain language and judges by ear; the agent composes, renders, inspects, and revises each track's editable source. No DAW or plug-in is operated by the user.",
-      "url": "https://appautomaton.com/setloom/",
-      "codeRepository": "https://github.com/appautomaton/setloom",
-      "programmingLanguage": "Python",
-      "runtimePlatform": "Python 3 with uv; MLX transcription on Apple Silicon macOS",
-      "license": "https://www.gnu.org/licenses/agpl-3.0.html",
-      "keywords": "agentic music production, agentic music producer, music production agent, machine learning music tools, club tracks, DJ sets, melodic techno, MIDI, SuperCollider, audio inspection, Basic Pitch transcription, keyboard-first, open source",
-      "isPartOf": {
-        "@id": "https://appautomaton.com/#website"
-      },
-      "author": {
-        "@id": "https://appautomaton.com/#org"
-      },
-      "maintainer": {
-        "@id": "https://appautomaton.com/#org"
-      },
-      "image": {
-        "@id": "https://appautomaton.com/setloom/#primaryimage"
-      },
-      "dateModified": "2026-09-11",
       "alternateName": [
         "Set Loom",
         "setloom"
       ],
-      "isAccessibleForFree": true,
-      "audience": {
-        "@type": "Audience",
-        "audienceType": "Music producers, DJs, and developers building agentic tools"
+      "description": "Setloom is an open-source harness that lets a coding agent, such as Codex or Claude Code running a frontier model, produce music under a person's direction. The person describes the music and judges each audition by ear. The agent writes each track as editable source (MIDI performances, instrument settings and a renderer), renders it, inspects the result, and revises it. Setloom is made by App Automaton.",
+      "url": "https://appautomaton.com/setloom/",
+      "codeRepository": "https://github.com/appautomaton/setloom",
+      "softwareVersion": "0.1.0",
+      "license": "https://www.gnu.org/licenses/agpl-3.0.html",
+      "programmingLanguage": "Python",
+      "applicationCategory": "MultimediaApplication",
+      "applicationSubCategory": "Music production",
+      "operatingSystem": "macOS (Apple Silicon)",
+      "softwareRequirements": "A coding agent running a frontier model, such as Codex or Claude Code; A Mac with Apple Silicon; Python 3.11 or newer and uv",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
       },
-      "targetProduct": {
-        "@type": "SoftwareApplication",
-        "name": "Setloom",
-        "applicationCategory": "MultimediaApplication",
-        "applicationSubCategory": "Music production",
-        "operatingSystem": "macOS, Linux",
-        "softwareRequirements": "Python 3 and uv; Apple Silicon macOS for audio-to-MIDI transcription",
-        "offers": {
-          "@type": "Offer",
-          "price": "0",
-          "priceCurrency": "USD"
-        }
+      "author": {
+        "@id": "https://appautomaton.com/#org"
       },
-      "isBasedOn": {
-        "@type": "SoftwareSourceCode",
-        "name": "Basic Pitch",
-        "url": "https://github.com/spotify/basic-pitch"
-      }
+      "maker": {
+        "@id": "https://appautomaton.com/#org"
+      },
+      "image": {
+        "@id": "https://appautomaton.com/setloom/#card"
+      },
+      "dateModified": "2026-10-05"
     },
     {
       "@type": "HowTo",
-      "@id": "https://appautomaton.com/setloom/#quickstart",
-      "name": "Install Setloom and scaffold your first track",
-      "description": "Setloom runs through a single repo-local uv environment. Everything generated is file-based and reproducible.",
-      "totalTime": "PT10M",
+      "@id": "https://appautomaton.com/setloom/#install",
+      "name": "How to install Setloom",
+      "description": "Setloom installs into one repository-local uv environment in three commands.",
       "tool": [
         {
           "@type": "HowToTool",
-          "name": "Python 3 with uv"
+          "name": "A coding agent running a frontier model, such as Codex or Claude Code"
+        },
+        {
+          "@type": "HowToTool",
+          "name": "A Mac with Apple Silicon"
+        },
+        {
+          "@type": "HowToTool",
+          "name": "Python 3.11 or newer and uv"
         }
       ],
       "step": [
         {
           "@type": "HowToStep",
           "position": 1,
-          "name": "Scaffold a track",
-          "text": "Run uv run setloom new T06 --title midnight-signal --bpm 124 --key \"F# minor\", then run its assemble.py. The assembler starts as a skeleton the agent fills in.",
-          "url": "https://appautomaton.com/setloom/#start"
+          "text": "git clone https://github.com/appautomaton/setloom.git",
+          "url": "https://appautomaton.com/setloom/#install"
         },
         {
           "@type": "HowToStep",
           "position": 2,
-          "name": "Audition and inspect the render",
-          "text": "Run uv run setloom play on the rendered candidate, then uv run setloom inspect with --view all to see waveform, spectrum, stereo field, and A/B comparisons.",
-          "url": "https://appautomaton.com/setloom/#start"
+          "text": "cd setloom",
+          "url": "https://appautomaton.com/setloom/#install"
         },
         {
           "@type": "HowToStep",
           "position": 3,
-          "name": "Study a reference",
-          "text": "Run uv run --group transcription setloom transcribe to recover note candidates from reference audio, then uv run setloom anatomize with --layers to read its anatomy.",
-          "url": "https://appautomaton.com/setloom/#start"
+          "text": "uv sync --group transcription",
+          "url": "https://appautomaton.com/setloom/#install"
         }
       ]
     },
@@ -205,10 +195,10 @@
       "mainEntity": [
         {
           "@type": "Question",
-          "name": "What is Setloom?",
+          "name": "Is Setloom free?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Setloom is an open-source, keyboard-first harness for producing club tracks and DJ sets with an agentic producer. You give direction in plain language and judge the result by ear; the agent composes, edits, renders, inspects, and revises each track's editable source. It is made by App Automaton and licensed AGPL-3.0."
+            "text": "Setloom is free and open source under AGPL-3.0-only. The frontier model that drives it is billed by its provider."
           }
         },
         {
@@ -216,263 +206,305 @@
           "name": "Is Setloom a one-click music generator?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "No, and that is the point. You stay inside the loop as the ear: the agent turns your listening notes into concrete source changes, renders them, and inspects the result, so every pass moves toward the track you wanted instead of rolling the dice again. Keep pushing a piece for as long as you have something to say about it."
+            "text": "Setloom is not a one-click generator. A person stays in the loop as the listener, and each pass turns their notes into specific changes to the track's source."
           }
         },
         {
           "@type": "Question",
-          "name": "Do I need a DAW, Ableton Live, or Logic Pro?",
+          "name": "Do I need a DAW to use Setloom?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "No. You never operate a DAW or a plug-in. Each track is editable source that the agent assembles and renders. SuperCollider, Logic Pro, and Ableton Live can serve as local production surfaces when a track calls for them, driven by the agent rather than by you."
+            "text": "Setloom does not require a DAW. The user never operates a DAW or plug-in. The agent can drive SuperCollider, Ableton Live or Logic Pro when a track calls for them."
           }
         },
         {
           "@type": "Question",
-          "name": "What does the agent do, and what do I do?",
+          "name": "Which coding agents work with Setloom?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "You are the listener and creative director: you say what is wrong and whether the result is accepted. The agent is the producer: it makes the musical choices within your brief, writes the track's code, renders an audition, and revises rejected work. The harness is the studio: it scaffolds, renders, inspects, and keeps everything reproducible, and it composes nothing."
+            "text": "Setloom works with coding agents that read repository instructions, such as Codex and Claude Code. It needs a frontier model."
           }
         },
         {
           "@type": "Question",
-          "name": "What does Setloom run on?",
+          "name": "Does Setloom run on Windows or Linux?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Python 3 through one repo-local uv environment. Audio-to-MIDI transcription uses a native MLX Basic Pitch machine-learning engine on Apple Silicon Macs; the rest of the toolkit is command-line Python. Model weights, audio, and proprietary samples stay out of Git."
+            "text": "Setloom is developed for macOS on Apple Silicon. Its transcription and stem separation run on MLX, which requires Apple Silicon."
           }
         },
         {
           "@type": "Question",
-          "name": "Who owns the music Setloom produces?",
+          "name": "Can Setloom remix or rebuild an existing song?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "You do, subject to the third-party samples, models, and inputs you bring. The code is AGPL-3.0-only and the documentation is CC BY-SA 4.0."
+            "text": "Setloom can transcribe and separate a recording, rebuild it as an editable performance, and reinterpret it. Using someone else's recording remains subject to its rights."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What kind of music can Setloom make?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Setloom has no built-in genre. Released work includes electronic tracks, remixes and solo piano."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Who owns music made with Setloom?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "The person owns the music, subject to the samples, models and inputs they bring. Setloom's code is AGPL-3.0-only and its documentation is CC BY-SA 4.0."
           }
         }
       ]
+    },
+    {
+      "@type": "MusicRecording",
+      "name": "Accretion (Setloom Mix)",
+      "url": "https://soundcloud.com/appautomaton/accretion-setloom-mix",
+      "byArtist": {
+        "@id": "https://appautomaton.com/#org"
+      },
+      "description": "Made with Setloom. Published on SoundCloud."
+    },
+    {
+      "@type": "MusicRecording",
+      "name": "Pulsus Noctis (Setloom Remix)",
+      "url": "https://soundcloud.com/appautomaton/pulsus-noctis-setloom-remix",
+      "byArtist": {
+        "@id": "https://appautomaton.com/#org"
+      },
+      "description": "Made with Setloom. Published on SoundCloud."
+    },
+    {
+      "@type": "MusicRecording",
+      "name": "STRIDULATION (Setloom Mix)",
+      "url": "https://soundcloud.com/appautomaton/stridulation-setloom-mix",
+      "byArtist": {
+        "@id": "https://appautomaton.com/#org"
+      },
+      "description": "Made with Setloom. Published on SoundCloud."
+    },
+    {
+      "@type": "MusicRecording",
+      "name": "Remissionem (Setloom Remix)",
+      "url": "https://appautomaton.bandcamp.com/track/remissionem-setloom-remix",
+      "byArtist": {
+        "@id": "https://appautomaton.com/#org"
+      },
+      "description": "Made with Setloom. Published on Bandcamp."
+    },
+    {
+      "@type": "MusicRecording",
+      "name": "Anti Gravitational Wave",
+      "url": "https://appautomaton.bandcamp.com/track/anti-gravitational-wave",
+      "byArtist": {
+        "@id": "https://appautomaton.com/#org"
+      },
+      "description": "Made with Setloom. Published on Bandcamp."
     }
   ]
 }
 </script>
-</head>
-<body>
+</head><body>
 <a class="skip" href="#main">Skip to content</a>
-
-<header class="masthead">
+<header class="mast">
   <div class="shell">
-    <a class="brand" href="#main">Setloom</a>
+    <a class="brand" href="#title">Setloom</a>
+    <p class="transport" aria-hidden="true"><span class="mode"></span><span class="pos"><i>Bar </i><b></b></span><span class="tempo">♩ = <b></b></span></p>
     <nav aria-label="Page sections">
       <a href="#how">How it works</a>
-      <a href="#loop">The loop</a>
       <a href="#tools">Tools</a>
-      <a href="#start">Quick start</a>
-      <a href="https://github.com/appautomaton/setloom">GitHub</a>
+      <a href="#music">Music</a>
+      <a href="#install">Install</a>
+      <a class="keep" href="https://soundcloud.com/appautomaton"><svg class="ic i-listen" width="20" height="20" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path class="draw" pathLength="1" d="M4.75 15 V12 A7.25 7.25 0 0 1 19.25 12 V15"/><rect class="cut pop" style="--t:.35s" x="2.5" y="13" width="4.5" height="7"/><rect class="acc pop" style="--t:.42s" x="17" y="13" width="4.5" height="7"/></svg>Listen</a>
+      <a class="keep" href="https://github.com/appautomaton/setloom"><svg class="ic i-repo" width="20" height="20" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path class="draw" pathLength="1" d="M7 8 V16"/><circle class="pop" cx="7" cy="6" r="2"/><circle class="pop" style="--t:.085s" cx="7" cy="18" r="2"/><path class="draw sig" pathLength="1" style="--t:.25s" d="M17 8 V8.5 C17 12.5 7 11 7 15"/><circle class="pop" style="--t:.55s" cx="17" cy="6" r="2"/></svg>GitHub</a>
+      <button class="mode-switch" type="button" aria-label="Switch mode"><svg class="ic i-mode" width="20" height="20" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="8"/><path class="ink spin" style="--r0:-180deg;--d:1s" d="M12 4 A8 8 0 0 1 12 20 Z"/></svg></button>
     </nav>
   </div>
 </header>
 
-<div class="selvedge" aria-hidden="true">
-  <span class="t1"></span><span class="t2"></span><span class="t3"></span><span class="t4"></span>
-</div>
-
 <main id="main">
-
   <section class="hero" aria-labelledby="title">
-    <div class="hero-stage">
-      <div class="shell">
+    <div class="stage">
+      <div class="shell grid">
         <h1 id="title">
-          <span class="wordmark cloth"><svg class="weave weave-under" viewBox="0 0 1000 300" preserveAspectRatio="none" aria-hidden="true" focusable="false">
-            <path class="w1" pathLength="1" d="M-40 60 C 120 5, 200 115, 330 60 S 540 5, 660 60 S 900 115, 1040 60"/>
-            <path class="w2" pathLength="1" d="M-40 135 C 100 195, 220 75, 340 135 S 570 195, 690 135 S 920 75, 1040 135"/>
-            <path class="w3" pathLength="1" d="M-40 200 C 80 150, 200 250, 320 200 S 530 150, 650 200 S 900 250, 1040 200"/>
-            <path class="w4" pathLength="1" d="M-40 258 C 140 220, 260 296, 390 258 S 630 220, 770 258 S 950 296, 1040 258"/>
-          </svg>Setloom<svg class="weave weave-over" viewBox="0 0 1000 300" preserveAspectRatio="none" aria-hidden="true" focusable="false">
-            <path class="w1" pathLength="1" d="M-40 60 C 120 5, 200 115, 330 60 S 540 5, 660 60 S 900 115, 1040 60"/>
-            <path class="w2" pathLength="1" d="M-40 135 C 100 195, 220 75, 340 135 S 570 195, 690 135 S 920 75, 1040 135"/>
-            <path class="w3" pathLength="1" d="M-40 200 C 80 150, 200 250, 320 200 S 530 150, 650 200 S 900 250, 1040 200"/>
-            <path class="w4" pathLength="1" d="M-40 258 C 140 220, 260 296, 390 258 S 630 220, 770 258 S 950 296, 1040 258"/>
-          </svg></span>
-          <span class="h1-line">An open-source agentic producer for club tracks and DJ sets. You direct in plain language and judge by ear. The agent composes, renders, and revises.</span>
+          <span class="wordmark">
+            <span class="staff" aria-hidden="true">
+              <svg class="string" viewBox="0 0 1000 20" preserveAspectRatio="none" style="--k:.55;--period:1.9s;--wave:46px"><path d="M0 10 Q11.5 1 23 10 T46 10 T69 10 T92 10 T115 10 T138 10 T161 10 T184 10 T207 10 T230 10 T253 10 T276 10 T299 10 T322 10 T345 10 T368 10 T391 10 T414 10 T437 10 T460 10 T483 10 T506 10 T529 10 T552 10 T575 10 T598 10 T621 10 T644 10 T667 10 T690 10 T713 10 T736 10 T759 10 T782 10 T805 10 T828 10 T851 10 T874 10 T897 10 T920 10 T943 10 T966 10 T989 10 T1012 10 T1035 10 T1058 10"/></svg>
+              <svg class="string" viewBox="0 0 1000 20" preserveAspectRatio="none" style="--k:.8;--period:1.5s;--wave:38px"><path d="M0 10 Q9.5 1 19 10 T38 10 T57 10 T76 10 T95 10 T114 10 T133 10 T152 10 T171 10 T190 10 T209 10 T228 10 T247 10 T266 10 T285 10 T304 10 T323 10 T342 10 T361 10 T380 10 T399 10 T418 10 T437 10 T456 10 T475 10 T494 10 T513 10 T532 10 T551 10 T570 10 T589 10 T608 10 T627 10 T646 10 T665 10 T684 10 T703 10 T722 10 T741 10 T760 10 T779 10 T798 10 T817 10 T836 10 T855 10 T874 10 T893 10 T912 10 T931 10 T950 10 T969 10 T988 10 T1007 10 T1026 10 T1045 10"/></svg>
+              <svg class="string" viewBox="0 0 1000 20" preserveAspectRatio="none" style="--k:1;--period:1.2s;--wave:30px"><path d="M0 10 Q7.5 1 15 10 T30 10 T45 10 T60 10 T75 10 T90 10 T105 10 T120 10 T135 10 T150 10 T165 10 T180 10 T195 10 T210 10 T225 10 T240 10 T255 10 T270 10 T285 10 T300 10 T315 10 T330 10 T345 10 T360 10 T375 10 T390 10 T405 10 T420 10 T435 10 T450 10 T465 10 T480 10 T495 10 T510 10 T525 10 T540 10 T555 10 T570 10 T585 10 T600 10 T615 10 T630 10 T645 10 T660 10 T675 10 T690 10 T705 10 T720 10 T735 10 T750 10 T765 10 T780 10 T795 10 T810 10 T825 10 T840 10 T855 10 T870 10 T885 10 T900 10 T915 10 T930 10 T945 10 T960 10 T975 10 T990 10 T1005 10 T1020 10 T1035 10"/></svg>
+              <svg class="string" viewBox="0 0 1000 20" preserveAspectRatio="none" style="--k:.8;--period:.95s;--wave:24px"><path d="M0 10 Q6 1 12 10 T24 10 T36 10 T48 10 T60 10 T72 10 T84 10 T96 10 T108 10 T120 10 T132 10 T144 10 T156 10 T168 10 T180 10 T192 10 T204 10 T216 10 T228 10 T240 10 T252 10 T264 10 T276 10 T288 10 T300 10 T312 10 T324 10 T336 10 T348 10 T360 10 T372 10 T384 10 T396 10 T408 10 T420 10 T432 10 T444 10 T456 10 T468 10 T480 10 T492 10 T504 10 T516 10 T528 10 T540 10 T552 10 T564 10 T576 10 T588 10 T600 10 T612 10 T624 10 T636 10 T648 10 T660 10 T672 10 T684 10 T696 10 T708 10 T720 10 T732 10 T744 10 T756 10 T768 10 T780 10 T792 10 T804 10 T816 10 T828 10 T840 10 T852 10 T864 10 T876 10 T888 10 T900 10 T912 10 T924 10 T936 10 T948 10 T960 10 T972 10 T984 10 T996 10 T1008 10 T1020 10 T1032 10"/></svg>
+              <svg class="string" viewBox="0 0 1000 20" preserveAspectRatio="none" style="--k:.6;--period:.8s;--wave:19px"><path d="M0 10 Q4.75 1 9.5 10 T19 10 T28.5 10 T38 10 T47.5 10 T57 10 T66.5 10 T76 10 T85.5 10 T95 10 T104.5 10 T114 10 T123.5 10 T133 10 T142.5 10 T152 10 T161.5 10 T171 10 T180.5 10 T190 10 T199.5 10 T209 10 T218.5 10 T228 10 T237.5 10 T247 10 T256.5 10 T266 10 T275.5 10 T285 10 T294.5 10 T304 10 T313.5 10 T323 10 T332.5 10 T342 10 T351.5 10 T361 10 T370.5 10 T380 10 T389.5 10 T399 10 T408.5 10 T418 10 T427.5 10 T437 10 T446.5 10 T456 10 T465.5 10 T475 10 T484.5 10 T494 10 T503.5 10 T513 10 T522.5 10 T532 10 T541.5 10 T551 10 T560.5 10 T570 10 T579.5 10 T589 10 T598.5 10 T608 10 T617.5 10 T627 10 T636.5 10 T646 10 T655.5 10 T665 10 T674.5 10 T684 10 T693.5 10 T703 10 T712.5 10 T722 10 T731.5 10 T741 10 T750.5 10 T760 10 T769.5 10 T779 10 T788.5 10 T798 10 T807.5 10 T817 10 T826.5 10 T836 10 T845.5 10 T855 10 T864.5 10 T874 10 T883.5 10 T893 10 T902.5 10 T912 10 T921.5 10 T931 10 T940.5 10 T950 10 T959.5 10 T969 10 T978.5 10 T988 10 T997.5 10 T1007 10 T1016.5 10 T1026 10"/></svg>
+            </span>
+            <span class="played" aria-hidden="true">
+              <svg class="string" viewBox="0 0 1000 20" preserveAspectRatio="none" style="--k:.55;--period:1.9s;--wave:46px"><path d="M0 10 Q11.5 1 23 10 T46 10 T69 10 T92 10 T115 10 T138 10 T161 10 T184 10 T207 10 T230 10 T253 10 T276 10 T299 10 T322 10 T345 10 T368 10 T391 10 T414 10 T437 10 T460 10 T483 10 T506 10 T529 10 T552 10 T575 10 T598 10 T621 10 T644 10 T667 10 T690 10 T713 10 T736 10 T759 10 T782 10 T805 10 T828 10 T851 10 T874 10 T897 10 T920 10 T943 10 T966 10 T989 10 T1012 10 T1035 10 T1058 10"/></svg>
+              <svg class="string" viewBox="0 0 1000 20" preserveAspectRatio="none" style="--k:.8;--period:1.5s;--wave:38px"><path d="M0 10 Q9.5 1 19 10 T38 10 T57 10 T76 10 T95 10 T114 10 T133 10 T152 10 T171 10 T190 10 T209 10 T228 10 T247 10 T266 10 T285 10 T304 10 T323 10 T342 10 T361 10 T380 10 T399 10 T418 10 T437 10 T456 10 T475 10 T494 10 T513 10 T532 10 T551 10 T570 10 T589 10 T608 10 T627 10 T646 10 T665 10 T684 10 T703 10 T722 10 T741 10 T760 10 T779 10 T798 10 T817 10 T836 10 T855 10 T874 10 T893 10 T912 10 T931 10 T950 10 T969 10 T988 10 T1007 10 T1026 10 T1045 10"/></svg>
+              <svg class="string" viewBox="0 0 1000 20" preserveAspectRatio="none" style="--k:1;--period:1.2s;--wave:30px"><path d="M0 10 Q7.5 1 15 10 T30 10 T45 10 T60 10 T75 10 T90 10 T105 10 T120 10 T135 10 T150 10 T165 10 T180 10 T195 10 T210 10 T225 10 T240 10 T255 10 T270 10 T285 10 T300 10 T315 10 T330 10 T345 10 T360 10 T375 10 T390 10 T405 10 T420 10 T435 10 T450 10 T465 10 T480 10 T495 10 T510 10 T525 10 T540 10 T555 10 T570 10 T585 10 T600 10 T615 10 T630 10 T645 10 T660 10 T675 10 T690 10 T705 10 T720 10 T735 10 T750 10 T765 10 T780 10 T795 10 T810 10 T825 10 T840 10 T855 10 T870 10 T885 10 T900 10 T915 10 T930 10 T945 10 T960 10 T975 10 T990 10 T1005 10 T1020 10 T1035 10"/></svg>
+              <svg class="string" viewBox="0 0 1000 20" preserveAspectRatio="none" style="--k:.8;--period:.95s;--wave:24px"><path d="M0 10 Q6 1 12 10 T24 10 T36 10 T48 10 T60 10 T72 10 T84 10 T96 10 T108 10 T120 10 T132 10 T144 10 T156 10 T168 10 T180 10 T192 10 T204 10 T216 10 T228 10 T240 10 T252 10 T264 10 T276 10 T288 10 T300 10 T312 10 T324 10 T336 10 T348 10 T360 10 T372 10 T384 10 T396 10 T408 10 T420 10 T432 10 T444 10 T456 10 T468 10 T480 10 T492 10 T504 10 T516 10 T528 10 T540 10 T552 10 T564 10 T576 10 T588 10 T600 10 T612 10 T624 10 T636 10 T648 10 T660 10 T672 10 T684 10 T696 10 T708 10 T720 10 T732 10 T744 10 T756 10 T768 10 T780 10 T792 10 T804 10 T816 10 T828 10 T840 10 T852 10 T864 10 T876 10 T888 10 T900 10 T912 10 T924 10 T936 10 T948 10 T960 10 T972 10 T984 10 T996 10 T1008 10 T1020 10 T1032 10"/></svg>
+              <svg class="string" viewBox="0 0 1000 20" preserveAspectRatio="none" style="--k:.6;--period:.8s;--wave:19px"><path d="M0 10 Q4.75 1 9.5 10 T19 10 T28.5 10 T38 10 T47.5 10 T57 10 T66.5 10 T76 10 T85.5 10 T95 10 T104.5 10 T114 10 T123.5 10 T133 10 T142.5 10 T152 10 T161.5 10 T171 10 T180.5 10 T190 10 T199.5 10 T209 10 T218.5 10 T228 10 T237.5 10 T247 10 T256.5 10 T266 10 T275.5 10 T285 10 T294.5 10 T304 10 T313.5 10 T323 10 T332.5 10 T342 10 T351.5 10 T361 10 T370.5 10 T380 10 T389.5 10 T399 10 T408.5 10 T418 10 T427.5 10 T437 10 T446.5 10 T456 10 T465.5 10 T475 10 T484.5 10 T494 10 T503.5 10 T513 10 T522.5 10 T532 10 T541.5 10 T551 10 T560.5 10 T570 10 T579.5 10 T589 10 T598.5 10 T608 10 T617.5 10 T627 10 T636.5 10 T646 10 T655.5 10 T665 10 T674.5 10 T684 10 T693.5 10 T703 10 T712.5 10 T722 10 T731.5 10 T741 10 T750.5 10 T760 10 T769.5 10 T779 10 T788.5 10 T798 10 T807.5 10 T817 10 T826.5 10 T836 10 T845.5 10 T855 10 T864.5 10 T874 10 T883.5 10 T893 10 T902.5 10 T912 10 T921.5 10 T931 10 T940.5 10 T950 10 T959.5 10 T969 10 T978.5 10 T988 10 T997.5 10 T1007 10 T1016.5 10 T1026 10"/></svg>
+            </span>
+            <span class="word" aria-label="Setloom"><span style="--i:0;--o:-1;--n:1;--k:2;--a:0vh;--b:14.34vh">S</span><span style="--i:1;--o:1;--n:1;--k:0;--a:14.34vh;--b:28.68vh">e</span><span style="--i:2;--o:-1;--n:1;--k:4;--a:28.68vh;--b:39.47vh">t</span><span style="--i:3;--o:1;--n:1;--k:1;--a:39.47vh;--b:46.64vh">l</span><span style="--i:4;--o:-2;--n:2;--k:5;--a:46.64vh;--b:60.98vh">o</span><span style="--i:5;--o:1;--n:1;--k:3;--a:60.98vh;--b:75.32vh">o</span><span style="--i:6;--o:-1;--n:1;--k:6;--a:75.32vh;--b:96.82vh">m</span></span>
+            <span class="playhead" aria-hidden="true"></span>
+            <span class="cue-line" aria-hidden="true" data-cue="Scroll to play · sweep to pluck"></span>
+          </span>
         </h1>
-        <p class="hero-actions">
-          <a class="button button-solid" href="#start">Start with the repository</a>
-          <a class="button" href="#how">See how it works</a>
+        <p class="line">Setloom is an open-source agentic music producer. You direct in plain language and judge by ear. A coding agent composes, renders, and revises the music as editable source.</p>
+        <p class="actions">
+          <a class="btn solid" href="https://github.com/appautomaton/setloom">Get Setloom on GitHub<svg class="ic i-arrow-right" width="20" height="20" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path class="draw" pathLength="1" d="M3 12 H20"/><path class="slide" style="--dx:-6px;--t:.1s" d="M14 6 L20 12 L14 18"/></svg></a>
+          <a class="btn" href="https://soundcloud.com/appautomaton"><svg class="ic i-listen" width="20" height="20" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path class="draw" pathLength="1" d="M4.75 15 V12 A7.25 7.25 0 0 1 19.25 12 V15"/><rect class="cut pop" style="--t:.35s" x="2.5" y="13" width="4.5" height="7"/><rect class="acc pop" style="--t:.42s" x="17" y="13" width="4.5" height="7"/></svg>Listen on SoundCloud</a>
         </p>
       </div>
     </div>
   </section>
 
-  <section class="sheet premise" aria-labelledby="premise-title">
-    <div class="shell premise-grid">
-      <h2 class="statement" id="premise-title">Music production has a gatekeeper: the interface. Setloom removes it.</h2>
-      <p class="premise-body">The piano roll, the plug-in maze, the mixing-desk vocabulary: decades of craft stacked between you and the idea already playing in your head. The only skill Setloom asks for is the one you already have: hearing a track and knowing whether it moves you.</p>
+  <section class="sheet premise" aria-label="Premise">
+    <div class="shell grid">
+      <p class="lyric"><span style="--i:0">Keep</span> <span style="--i:1">the</span> <span style="--i:2">ear.</span> <span style="--i:3">Hand</span> <span style="--i:4">the</span> <span style="--i:5">studio</span> <span style="--i:6">to</span> <span style="--i:7">the</span> <span style="--i:8">agent.</span></p>
+      <p class="body">Setloom moves music production out of the DAW and into source code that a coding agent writes and renders. You still need a terminal and a frontier model. You no longer need the piano roll, the plug-in chain or the mixing vocabulary. What stays with you is the judgement: hearing a pass and saying what is wrong with it.</p>
+    </div>
+  </section>
+
+  <section class="sheet" id="what" aria-labelledby="what-title">
+    <div class="shell">
+      <div class="system" aria-hidden="true"><b>A</b><span>What it is</span><i></i></div>
+      <div class="split">
+        <div>
+          <h2 id="what-title">What is Setloom?</h2>
+          <p class="lede">Setloom is an open-source harness that lets a coding agent, such as Codex or Claude Code running a frontier model, produce music under a person's direction. The person describes the music and judges each audition by ear. The agent writes each track as editable source (MIDI performances, instrument settings and a renderer), renders it, inspects the result, and revises it. Setloom is made by App Automaton.</p>
+        </div>
+        <dl class="facts"><div><dt>Type</dt><dd>Open-source agentic music production harness</dd></div><div><dt>Maker</dt><dd>App Automaton</dd></div><div><dt>Version</dt><dd>0.1.0</dd></div><div><dt>Licence</dt><dd>AGPL-3.0-only (code), CC BY-SA 4.0 (documentation)</dd></div><div><dt>Price</dt><dd>Free. Model usage is billed by your agent's provider.</dd></div><div><dt>Language</dt><dd>Python 3.11 or newer, managed with uv</dd></div><div><dt>Platform</dt><dd>macOS on Apple Silicon</dd></div><div><dt>Requires</dt><dd>A frontier model running in a coding agent</dd></div><div><dt>Output</dt><dd>Editable MIDI, instrument settings, renderers, and mastered WAV audio</dd></div><div><dt>Source</dt><dd><a href="https://github.com/appautomaton/setloom">github.com/appautomaton/setloom</a></dd></div></dl>
+      </div>
     </div>
   </section>
 
   <section class="sheet" id="how" aria-labelledby="how-title">
     <div class="shell">
-      <h2 id="how-title">You direct. The agent produces.</h2>
-      <p class="lede">One division of labor runs Setloom: the human owns the taste, the agent owns the production, and the harness owns technical hygiene only. Nothing is final until you say so.</p>
-      <div class="roles">
-        <article class="role">
-          <h3>You<small>the listener and creative director</small></h3>
-          <p>You give direction in plain language: <em>the bass is too busy before the break; make the arp darker.</em> You judge the result and decide whether it is accepted or needs revision.</p>
-        </article>
-        <article class="role">
-          <h3>The agent<small>the producer</small></h3>
-          <p>It brings taste and makes purposeful, distinctive musical choices within your brief. It composes, edits, renders, inspects, and improves weak material before delivery. Rejected work gets a concrete revision; metrics never override your verdict.</p>
-        </article>
-        <article class="role">
-          <h3>The harness<small>the studio</small></h3>
-          <p>A small, unopinionated toolkit that scaffolds tracks, renders, inspects audio, and keeps the work reproducible. It owns technical hygiene only. It composes nothing.</p>
-        </article>
-      </div>
+      <div class="system" aria-hidden="true"><b>B</b><span>How it works</span><i></i></div>
+      <h2 id="how-title">How does Setloom work?</h2>
+      <p class="lede">Setloom splits music production into three roles: the person directs, the agent produces, and the harness supplies the studio tools.</p>
+      <div class="roles"><article class="role" data-icon-host><svg class="ic i-ear" width="48" height="48" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path class="draw" pathLength="1" d="M10 8.5 C10.6 5.8 12.9 4 15.5 4 C18.3 4 20.3 6.3 20.3 9.3 C20.3 12.3 18.6 13.7 18 16.5 C17.5 18.8 16.2 20 14.4 20 C12.9 20 11.9 19 11.6 17.6"/><path class="draw" pathLength="1" style="--t:.2s;--d:.6s" d="M13 9.4 C13.6 8 14.6 7.3 15.7 7.3 C17 7.3 17.5 8.6 17.2 10 C16.9 12 15.4 12.8 15.2 15"/><path class="draw" pathLength="1" style="--t:.35s;--d:.4s" d="M10.6 11.4 C11.9 11.4 12.6 12.3 12.3 13.8"/><path class="swell" style="--t:.35s;--ox:12px;--oy:12px" d="M3.40 18.02 A10.5 10.5 0 0 1 3.40 5.98"/><path class="swell sig" style="--t:.5s;--ox:12px;--oy:12px" d="M6.27 16.02 A7 7 0 0 1 6.27 7.98"/></svg><h3>You<small>the listener and creative director</small></h3><p>You give direction in plain language, for example <em>the bass is too busy before the break, make the arp darker</em>, and you accept or reject each audition.</p></article><article class="role" data-icon-host><svg class="ic i-compose" width="48" height="48" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><g class="drop" style="--t:0s"><ellipse class="ink" cx="7" cy="18" rx="2.6" ry="1.9" transform="rotate(-20 7 18)"/></g><g class="drop" style="--t:.085s"><ellipse class="ink" cx="16" cy="16" rx="2.6" ry="1.9" transform="rotate(-20 16 16)"/></g><path class="rise" style="--t:.2s" d="M9.45 17.2 V6.5"/><path class="rise" style="--t:.285s" d="M18.45 15.2 V4.5"/><path class="draw sig thick" pathLength="1" style="--t:.45s;--d:.5s" d="M9.45 7.5 L18.45 5.5"/></svg><h3>The agent<small>the producer</small></h3><p>The agent makes the musical choices within the brief, writes each track's source, renders an audition, inspects it, and revises rejected work. Measurements never override your verdict.</p></article><article class="role" data-icon-host><svg class="ic i-studio" width="48" height="48" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path class="faint" d="M6 3 V21 M12 3 V21 M18 3 V21"/><g class="travel" style="--dy:4.5px"><rect class="cut" x="3.5" y="12.5" width="5" height="3"/></g><g class="travel" style="--dy:11.5px;--t:.085s;--d:1s"><rect class="acc" x="9.5" y="5.5" width="5" height="3"/></g><g class="travel" style="--dy:7.5px;--t:.17s"><rect class="cut" x="15.5" y="9.5" width="5" height="3"/></g></svg><h3>The harness<small>the studio</small></h3><p>The harness provides audio inspection, transcription, stem separation, MIDI and mastering tools, and keeps every render reproducible. It composes nothing.</p></article></div>
     </div>
   </section>
 
-  <section class="sheet" id="loop" aria-labelledby="loop-title">
+  <section class="sheet loop" id="loop" aria-labelledby="loop-title">
     <div class="shell">
+      <div class="system" aria-hidden="true"><b>C</b><span>The loop</span><i></i></div>
       <h2 id="loop-title">Audition, react, revise.</h2>
-      <p class="lede">Every pass is short. The agent prepares and plays the audio the way you prefer; you listen and type. The listening gate is no-click.</p>
-      <div class="loom" aria-hidden="true">
-          <svg viewBox="0 0 1200 164" role="presentation" focusable="false">
-            <defs>
-              <pattern id="warp-field" width="24" height="164" patternUnits="userSpaceOnUse">
-                <line x1="3" y1="0" x2="3" y2="164" stroke="currentColor" stroke-width="1.5"/>
-                <line x1="13" y1="0" x2="13" y2="164" stroke="currentColor" stroke-width="0.9" opacity="0.45"/>
-              </pattern>
-              <pattern id="warp-sheet" width="24" height="4" patternUnits="userSpaceOnUse">
-                <rect width="8" height="4" fill="#fff"/>
-              </pattern>
-              <mask id="raised-warp">
-                <rect width="1200" height="164" fill="url(#warp-sheet)"/>
-              </mask>
-            </defs>
-            <rect class="loom-warp" width="1200" height="164" fill="url(#warp-field)"/>
-            <path class="weft weft-1" pathLength="1" d="M0 28 c 50 -7 100 -7 150 0 c 50 7 100 7 150 0 c 50 -7 100 -7 150 0 c 50 7 100 7 150 0 c 50 -7 100 -7 150 0 c 50 7 100 7 150 0 c 50 -7 100 -7 150 0 c 50 7 100 7 150 0"/>
-            <path class="weft weft-2" pathLength="1" d="M0 64 c 50 7 100 7 150 0 c 50 -7 100 -7 150 0 c 50 7 100 7 150 0 c 50 -7 100 -7 150 0 c 50 7 100 7 150 0 c 50 -7 100 -7 150 0 c 50 7 100 7 150 0 c 50 -7 100 -7 150 0"/>
-            <path class="weft weft-3" pathLength="1" d="M0 100 c 50 -7 100 -7 150 0 c 50 7 100 7 150 0 c 50 -7 100 -7 150 0 c 50 7 100 7 150 0 c 50 -7 100 -7 150 0 c 50 7 100 7 150 0 c 50 -7 100 -7 150 0 c 50 7 100 7 150 0"/>
-            <path class="weft weft-4" pathLength="1" d="M0 136 c 50 7 100 7 150 0 c 50 -7 100 -7 150 0 c 50 7 100 7 150 0 c 50 -7 100 -7 150 0 c 50 7 100 7 150 0 c 50 -7 100 -7 150 0 c 50 7 100 7 150 0 c 50 -7 100 -7 150 0"/>
-            <rect class="loom-warp-over" width="1200" height="164" fill="url(#warp-field)" mask="url(#raised-warp)"/>
-            <g class="shuttle">
-              <path class="shuttle-body" d="M-33 0 C -28 -7.5 -12 -12 0 -12 C 12 -12 28 -7.5 33 0 C 28 7.5 12 12 0 12 C -12 12 -28 7.5 -33 0 Z"/>
-              <path class="shuttle-slot" d="M-14 -6.2 C -7 -8.6 7 -8.6 14 -6.2 L 14 6.2 C 7 8.6 -7 8.6 -14 6.2 Z"/>
-              <circle class="shuttle-bobbin" cx="0" cy="0" r="3.5"/>
-            </g>
-          </svg>
-        </div>
-        <ol class="loop">
-          <li>Producer thesis</li>
-          <li>Source edit</li>
-          <li>Render audition</li>
-          <li>Play and inspect</li>
-          <li>Listening note</li>
-          <li>Revise or promote</li>
-        </ol>
-      <p class="threads">A set is woven from stems: <span class="th-kick">kick</span> <span class="th-bass">bass</span> <span class="th-arp">arp</span> <span class="th-pad">pad</span></p>
-      <p class="loop-note">Machine reports and plots are diagnostics. The verdict is a person listening.</p>
+      <p class="lede">Each pass goes once round the same six-step loop.</p>
     </div>
+    <div class="runway">
+      <div class="pin">
+        <div class="ring" data-icon-manual>
+          <svg viewBox="0 0 100 100" aria-hidden="true"><circle class="track" cx="50" cy="50" r="50"/><circle class="arc" cx="50" cy="50" r="50" pathLength="1"/></svg>
+          <span class="node" style="--i:0" aria-hidden="true"><svg class="ic i-intent" width="24" height="24" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path class="draw" pathLength="1" d="M3 4 H21 V16 H11 L6 20 V16 H3 Z"/><g class="pop" style="--t:.5s"><ellipse class="ink" cx="10.4" cy="12.2" rx="2.1" ry="1.55" transform="rotate(-20 10.4 12.2)"/><path d="M12.35 11.6 V6.6 C13.6 7.4 15.4 7.9 15.4 10"/></g></svg></span><span class="node" style="--i:1" aria-hidden="true"><svg class="ic i-source" width="24" height="24" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path class="slide" style="--dx:3px" d="M7 6 L2.5 12 L7 18"/><path class="slide" style="--dx:-3px" d="M17 6 L21.5 12 L17 18"/><path class="faint" d="M9.5 8 H14.5 M9.5 12 H14.5 M9.5 16 H14.5"/><g class="travel" style="--dy:4px;--t:.35s;--d:.7s"><ellipse class="acc" cx="12" cy="12" rx="2.2" ry="1.6" transform="rotate(-20 12 12)"/></g></svg></span><span class="node" style="--i:2" aria-hidden="true"><svg class="ic i-render" width="24" height="24" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path class="grow" style="--t:0.00s;--d:.6s" d="M3 10.0 V14.0"/><path class="grow" style="--t:0.06s;--d:.6s" d="M6 7.5 V16.5"/><path class="grow" style="--t:0.12s;--d:.6s" d="M9 4.5 V19.5"/><path class="grow" style="--t:0.18s;--d:.6s" d="M12 3.0 V21.0"/><path class="grow" style="--t:0.24s;--d:.6s" d="M15 6.5 V17.5"/><path class="grow" style="--t:0.30s;--d:.6s" d="M18 5.5 V18.5"/><path class="grow" style="--t:0.36s;--d:.6s" d="M21 9.0 V15.0"/></svg></span><span class="node" style="--i:3" aria-hidden="true"><svg class="ic i-inspect" width="24" height="24" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><g class="travel" style="--dx:-4px;--dy:-1px"><circle cx="10" cy="10" r="6.25"/><path d="M14.6 14.6 L20.5 20.5"/></g><path class="rise sig" style="--t:.3s;--d:.55s" d="M7.5 13 V10.5"/><path class="rise sig" style="--t:.385s;--d:.55s" d="M10 13 V7"/><path class="rise sig" style="--t:.47s;--d:.55s" d="M12.5 13 V9"/></svg></span><span class="node" style="--i:4" aria-hidden="true"><svg class="ic i-note" width="24" height="24" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path class="draw" pathLength="1" style="--d:.55s;--e:steps(7,end)" d="M4 8 H20"/><path class="draw" pathLength="1" style="--t:.55s;--d:.55s;--e:steps(7,end)" d="M4 12 H20"/><path class="draw" pathLength="1" style="--t:1.1s;--d:.35s;--e:steps(4,end)" d="M4 16 H11"/><path class="blink sig" style="--t:1.45s;--d:1.4s;--e:linear" d="M13.5 14.25 V17.75"/></svg></span><span class="node" style="--i:5" aria-hidden="true"><svg class="ic i-revise" width="24" height="24" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><g class="spin" style="--r0:-270deg;--d:1s"><path d="M18.93 8.00 A8 8 0 1 1 12.00 4.00"/><path d="M9.20 1.20 L12.00 4.00 L9.20 6.80"/></g><path class="draw sig" pathLength="1" style="--t:.75s;--d:.45s" d="M8.5 12.5 L11 15 L15.5 9.5"/></svg></span>
+          <ol class="centre"><li class="panel" style="--i:0"><svg class="ic i-intent" width="96" height="96" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path class="draw" pathLength="1" d="M3 4 H21 V16 H11 L6 20 V16 H3 Z"/><g class="pop" style="--t:.5s"><ellipse class="ink" cx="10.4" cy="12.2" rx="2.1" ry="1.55" transform="rotate(-20 10.4 12.2)"/><path d="M12.35 11.6 V6.6 C13.6 7.4 15.4 7.9 15.4 10"/></g></svg><span class="count">Step 1 of 6</span><strong>Describe</strong><span>You describe the music you want, in plain language.</span></li><li class="panel" style="--i:1"><svg class="ic i-source" width="96" height="96" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path class="slide" style="--dx:3px" d="M7 6 L2.5 12 L7 18"/><path class="slide" style="--dx:-3px" d="M17 6 L21.5 12 L17 18"/><path class="faint" d="M9.5 8 H14.5 M9.5 12 H14.5 M9.5 16 H14.5"/><g class="travel" style="--dy:4px;--t:.35s;--d:.7s"><ellipse class="acc" cx="12" cy="12" rx="2.2" ry="1.6" transform="rotate(-20 12 12)"/></g></svg><span class="count">Step 2 of 6</span><strong>Edit the source</strong><span>The agent edits the track's source: its MIDI, instruments and renderer.</span></li><li class="panel" style="--i:2"><svg class="ic i-render" width="96" height="96" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path class="grow" style="--t:0.00s;--d:.6s" d="M3 10.0 V14.0"/><path class="grow" style="--t:0.06s;--d:.6s" d="M6 7.5 V16.5"/><path class="grow" style="--t:0.12s;--d:.6s" d="M9 4.5 V19.5"/><path class="grow" style="--t:0.18s;--d:.6s" d="M12 3.0 V21.0"/><path class="grow" style="--t:0.24s;--d:.6s" d="M15 6.5 V17.5"/><path class="grow" style="--t:0.30s;--d:.6s" d="M18 5.5 V18.5"/><path class="grow" style="--t:0.36s;--d:.6s" d="M21 9.0 V15.0"/></svg><span class="count">Step 3 of 6</span><strong>Render an audition</strong><span>The agent renders the source to audio.</span></li><li class="panel" style="--i:3"><svg class="ic i-inspect" width="96" height="96" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><g class="travel" style="--dx:-4px;--dy:-1px"><circle cx="10" cy="10" r="6.25"/><path d="M14.6 14.6 L20.5 20.5"/></g><path class="rise sig" style="--t:.3s;--d:.55s" d="M7.5 13 V10.5"/><path class="rise sig" style="--t:.385s;--d:.55s" d="M10 13 V7"/><path class="rise sig" style="--t:.47s;--d:.55s" d="M12.5 13 V9"/></svg><span class="count">Step 4 of 6</span><strong>Play and inspect</strong><span>The agent plays the audition and inspects its waveform, spectrum and rhythm.</span></li><li class="panel" style="--i:4"><svg class="ic i-note" width="96" height="96" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path class="draw" pathLength="1" style="--d:.55s;--e:steps(7,end)" d="M4 8 H20"/><path class="draw" pathLength="1" style="--t:.55s;--d:.55s;--e:steps(7,end)" d="M4 12 H20"/><path class="draw" pathLength="1" style="--t:1.1s;--d:.35s;--e:steps(4,end)" d="M4 16 H11"/><path class="blink sig" style="--t:1.45s;--d:1.4s;--e:linear" d="M13.5 14.25 V17.75"/></svg><span class="count">Step 5 of 6</span><strong>Listen and note</strong><span>You listen and say what is wrong, in plain words.</span></li><li class="panel" style="--i:5"><svg class="ic i-revise" width="96" height="96" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><g class="spin" style="--r0:-270deg;--d:1s"><path d="M18.93 8.00 A8 8 0 1 1 12.00 4.00"/><path d="M9.20 1.20 L12.00 4.00 L9.20 6.80"/></g><path class="draw sig" pathLength="1" style="--t:.75s;--d:.45s" d="M8.5 12.5 L11 15 L15.5 9.5"/></svg><span class="count">Step 6 of 6</span><strong>Revise or keep</strong><span>The agent revises the source and goes round again, or you keep the track.</span></li></ol>
+        </div>
+        <p class="cue cue-round">Scroll to go round the loop</p>
+      </div>
+    </div>
+    <div class="shell"><p class="verdict">Measurements inform the agent. The verdict is always the person's.</p></div>
   </section>
 
   <section class="sheet" id="tools" aria-labelledby="tools-title">
     <div class="shell">
-      <h2 id="tools-title">A small toolkit, run from the keyboard.</h2>
-      <p class="lede">Command-line tools and opt-in diagnostics. The toolkit never composes the music; each track's own source does that.</p>
-      <dl class="tools">
-        <div><dt><code>setloom new</code></dt><dd>Scaffold a track: spec, runnable assembler, and listening-notes template from one command.</dd></div>
-        <div><dt><code>assemble.py</code></dt><dd>Each track's editable code assembles the music. Every render is reproducible from source.</dd></div>
-        <div><dt><code>setloom play</code></dt><dd>Audition a render the way you prefer. Nothing autoplays without your say.</dd></div>
-        <div><dt><code>setloom inspect</code></dt><dd>Waveform, spectrum, spectrogram, stereo field, and A/B comparisons from the command line.</dd></div>
-        <div><dt><code>setloom transcribe</code></dt><dd>Recover note candidates from reference audio with a native MLX Basic Pitch machine-learning engine on Apple Silicon.</dd></div>
-        <div><dt><code>setloom anatomize</code></dt><dd>Dissect a reference by layers to study how it is put together.</dd></div>
-        <div><dt><code>setloom.midi</code>, <code>setloom.audio</code>, <code>setloom.conductor</code></dt><dd>MIDI, DSP hygiene, and music-theory primitives that each track's code builds on.</dd></div>
-        <div><dt>SuperCollider, Logic Pro, Ableton Live</dt><dd>Local production surfaces the agent can drive when a track calls for them, with editable source and recorded settings.</dd></div>
-      </dl>
+      <div class="system" aria-hidden="true"><b>D</b><span>What it does</span><i></i></div>
+      <h2 id="tools-title">What can Setloom do?</h2>
+      <p class="lede">Setloom gives a coding agent command-line tools and Python modules for every stage of music production. The agent uses them as each track needs. There is no fixed sequence.</p>
+      <dl class="tools"><div data-icon-host><svg class="ic i-compose" width="24" height="24" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><g class="drop" style="--t:0s"><ellipse class="ink" cx="7" cy="18" rx="2.6" ry="1.9" transform="rotate(-20 7 18)"/></g><g class="drop" style="--t:.085s"><ellipse class="ink" cx="16" cy="16" rx="2.6" ry="1.9" transform="rotate(-20 16 16)"/></g><path class="rise" style="--t:.2s" d="M9.45 17.2 V6.5"/><path class="rise" style="--t:.285s" d="M18.45 15.2 V4.5"/><path class="draw sig thick" pathLength="1" style="--t:.45s;--d:.5s" d="M9.45 7.5 L18.45 5.5"/></svg><dt>Compose and arrange</dt><dd>Each track keeps its own MIDI performance, instruments and renderer.<span class="tech">Python, mido, SuperCollider</span></dd></div><div data-icon-host><svg class="ic i-transcribe" width="24" height="24" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path class="draw" pathLength="1" style="--d:.6s" d="M2 12 C3.5 6 5.5 6 7 12 S10.5 18 12 12"/><path class="faint" d="M14 8 H22 M14 16 H22"/><g class="drop" style="--t:.5s"><ellipse class="ink" cx="16.5" cy="16" rx="2.2" ry="1.6" transform="rotate(-20 16.5 16)"/></g><g class="drop" style="--t:.585s"><ellipse class="ink" cx="19.8" cy="8" rx="2.2" ry="1.6" transform="rotate(-20 19.8 8)"/></g></svg><dt>Transcribe audio to MIDI</dt><dd><code>setloom transcribe</code> recovers notes and pitch bends.<span class="tech">Basic Pitch, running natively on MLX in FP32</span></dd></div><div data-icon-host><svg class="ic i-piano" width="24" height="24" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path class="draw" pathLength="1" d="M3 4 H21 V20 H3 Z"/><path class="draw" pathLength="1" style="--t:.3s;--d:.4s" d="M7.5 12 V20"/><path class="draw" pathLength="1" style="--t:.385s;--d:.4s" d="M12 12 V20"/><path class="draw" pathLength="1" style="--t:.47s;--d:.4s" d="M16.5 12 V20"/><g class="drop" style="--dy:-3px;--t:0.550s"><rect class="ink" x="6" y="4" width="3" height="8"/></g><g class="drop" style="--dy:-3px;--t:0.635s"><rect class="ink" x="10.5" y="4" width="3" height="8"/></g><g class="drop" style="--dy:-3px;--t:0.720s"><rect class="ink" x="15" y="4" width="3" height="8"/></g></svg><dt>Transcribe piano</dt><dd><code>setloom transcribe --engine kong</code> recovers piano notes.<span class="tech">Kong piano transcription</span></dd></div><div data-icon-host><svg class="ic i-separate" width="24" height="24" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path class="draw" pathLength="1" style="--d:.4s;--e:linear" d="M2 12 H9"/><path class="draw" pathLength="1" style="--t:.4s" d="M9 12 C13 12 13 5 17 5 H22"/><path class="draw sig" pathLength="1" style="--t:.4s" d="M9 12 H22"/><path class="draw" pathLength="1" style="--t:.4s" d="M9 12 C13 12 13 19 17 19 H22"/></svg><dt>Separate stems</dt><dd><code>setloom separate</code> writes every stem estimate as float WAV.<span class="tech">A 53-stem BS-RoFormer model, converted to run natively on MLX</span></dd></div><div data-icon-host><svg class="ic i-inspect" width="24" height="24" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><g class="travel" style="--dx:-4px;--dy:-1px"><circle cx="10" cy="10" r="6.25"/><path d="M14.6 14.6 L20.5 20.5"/></g><path class="rise sig" style="--t:.3s;--d:.55s" d="M7.5 13 V10.5"/><path class="rise sig" style="--t:.385s;--d:.55s" d="M10 13 V7"/><path class="rise sig" style="--t:.47s;--d:.55s" d="M12.5 13 V9"/></svg><dt>Inspect audio</dt><dd><code>setloom inspect</code> plots waveform, spectrogram, spectrum, stereo and rhythm, with A/B comparison.<span class="tech">NumPy, SciPy</span></dd></div><div data-icon-host><svg class="ic i-master" width="24" height="24" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path class="draw sig" pathLength="1" style="--d:.5s" d="M3 5 H21"/><path class="rise" style="--t:0.300s;--d:.7s" d="M5.5 20 V13"/><path class="rise" style="--t:0.385s;--d:.7s" d="M9.5 20 V9"/><path class="rise" style="--t:0.470s;--d:.7s" d="M14.5 20 V8"/><path class="rise" style="--t:0.555s;--d:.7s" d="M18.5 20 V11"/></svg><dt>Master for release</dt><dd><code>setloom.audio</code> measures loudness and applies true-peak limiting.<span class="tech">FFmpeg, pyloudnorm</span></dd></div><div data-icon-host><svg class="ic i-play" width="24" height="24" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path class="acc pop" style="--d:.5s" d="M4.5 5 L14 12 L4.5 19 Z"/><path class="swell" style="--t:.25s;--s0:.6;--ox:10px;--oy:12px" d="M15.91 7.38 A7.5 7.5 0 0 1 15.91 16.62"/><path class="swell" style="--t:.4s;--s0:.6;--ox:10px;--oy:12px" d="M18.67 5.23 A11 11 0 0 1 18.67 18.77"/></svg><dt>Audition</dt><dd><code>setloom play</code> plays a render on request, never automatically.<span class="tech">macOS audio</span></dd></div><div data-icon-host><svg class="ic i-surfaces" width="24" height="24" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path class="faint" d="M6.34 17.66 A8 8 0 1 1 17.66 17.66"/><path class="draw sig" pathLength="1" style="--d:1s" d="M6.34 17.66 A8 8 0 1 1 18.93 8.00"/><circle cx="12" cy="12" r="4.5"/><g class="spin" style="--r0:-195deg;--d:1s"><path d="M12 12 L15.90 9.75"/></g></svg><dt>Drive instruments</dt><dd>The agent plays SuperCollider, Ableton Live and Logic Pro and records the settings.<span class="tech">Ableton Live through an MCP bridge</span></dd></div></dl>
     </div>
   </section>
 
-  <section class="sheet" id="start" aria-labelledby="start-title">
-    <div class="shell start">
-      <div>
-        <h2 id="start-title">Quick start: one command scaffolds a track.</h2>
-        <p class="lede">Setloom runs through a single repo-local <code>uv</code> environment. Everything generated is file-based and reproducible; audio and model weights stay out of Git.</p>
-        <p class="lede"><a href="https://github.com/appautomaton/setloom#quick-start">Read the full quick start on GitHub</a></p>
-      </div>
-      <div class="codeblock">
-        <div class="codebar">
-          <span>Terminal</span>
-          <button class="copy" id="copy" type="button">Copy commands</button>
-        </div>
-<pre id="quickstart" tabindex="0"><code><span class="c"># scaffold a track; assemble.py starts as a skeleton the agent fills in</span>
-<span class="p">$</span> uv run setloom new T06 --title midnight-signal --bpm 124 --key "F# minor"
-<span class="p">$</span> uv run --no-sync python music/tracks/T06/assemble.py
-
-<span class="c"># audition and inspect the render</span>
-<span class="p">$</span> uv run setloom play local/candidates/T06/seed-0/demo.wav
-<span class="p">$</span> uv run setloom inspect local/candidates/T06/seed-0/demo.wav --view all
-
-<span class="c"># study a reference: recover its notes, then read its anatomy</span>
-<span class="p">$</span> uv run --group transcription setloom transcribe reference.wav --out tmp/notes.mid
-<span class="p">$</span> uv run setloom anatomize local/corpus/audio --layers</code></pre>
-        <p class="copy-status" id="copy-status" aria-live="polite"></p>
-      </div>
-    </div>
-  </section>
-
-  <section class="sheet today" id="today" aria-labelledby="today-title">
+  <section class="sheet" id="music" aria-labelledby="music-title">
     <div class="shell">
-      <h2 id="today-title">Bring the track you can already hear.</h2>
-      <p class="premise-body">Say it in one sentence and the loom starts running: the agent writes the source, renders it, listens back, and hands you an audition before the idea has cooled. Tell it what is wrong and it goes again. Every pass leaves editable source behind, so nothing is locked and nothing has to be rebuilt from memory. How far a track travels is set by what you dare to ask for next.</p>
-      <p class="hero-actions"><a class="button button-solid" href="https://github.com/appautomaton/setloom">Open the repository</a></p>
+      <div class="system" aria-hidden="true"><b>E</b><span>Music</span><i></i></div>
+      <h2 id="music-title">What music has been made with Setloom?</h2>
+      <p class="lede">Setloom has produced released tracks in electronic, remix and piano work. The published tracks are listed below; all are by App Automaton.</p>
+      <ol class="setlist"><li><a href="https://soundcloud.com/appautomaton/accretion-setloom-mix" data-icon-host><span class="no">01</span><span class="title">Accretion (Setloom Mix)</span><span class="where">SoundCloud</span><svg class="ic i-external" width="20" height="20" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path class="draw" pathLength="1" d="M6 18 L18 6"/><path class="slide" style="--dx:-4px;--dy:4px;--t:.12s" d="M9 6 H18 V15"/></svg></a></li><li><a href="https://soundcloud.com/appautomaton/pulsus-noctis-setloom-remix" data-icon-host><span class="no">02</span><span class="title">Pulsus Noctis (Setloom Remix)</span><span class="where">SoundCloud</span><svg class="ic i-external" width="20" height="20" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path class="draw" pathLength="1" d="M6 18 L18 6"/><path class="slide" style="--dx:-4px;--dy:4px;--t:.12s" d="M9 6 H18 V15"/></svg></a></li><li><a href="https://soundcloud.com/appautomaton/stridulation-setloom-mix" data-icon-host><span class="no">03</span><span class="title">STRIDULATION (Setloom Mix)</span><span class="where">SoundCloud</span><svg class="ic i-external" width="20" height="20" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path class="draw" pathLength="1" d="M6 18 L18 6"/><path class="slide" style="--dx:-4px;--dy:4px;--t:.12s" d="M9 6 H18 V15"/></svg></a></li><li><a href="https://appautomaton.bandcamp.com/track/remissionem-setloom-remix" data-icon-host><span class="no">04</span><span class="title">Remissionem (Setloom Remix)</span><span class="where">Bandcamp</span><svg class="ic i-external" width="20" height="20" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path class="draw" pathLength="1" d="M6 18 L18 6"/><path class="slide" style="--dx:-4px;--dy:4px;--t:.12s" d="M9 6 H18 V15"/></svg></a></li><li><a href="https://appautomaton.bandcamp.com/track/anti-gravitational-wave" data-icon-host><span class="no">05</span><span class="title">Anti Gravitational Wave</span><span class="where">Bandcamp</span><svg class="ic i-external" width="20" height="20" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path class="draw" pathLength="1" d="M6 18 L18 6"/><path class="slide" style="--dx:-4px;--dy:4px;--t:.12s" d="M9 6 H18 V15"/></svg></a></li></ol>
+    </div>
+  </section>
+
+  <section class="sheet" id="install" aria-labelledby="install-title">
+    <div class="shell">
+      <div class="system" aria-hidden="true"><b>F</b><span>Install</span><i></i></div>
+      <div class="start">
+        <div>
+          <h2 id="need-title">What do you need to run Setloom?</h2>
+          <p class="lede">Setloom needs a frontier model running in a coding agent. It is a harness for that agent, not a standalone app, and does not produce music without one.</p>
+          <ul class="needs"><li>A coding agent running a frontier model, such as Codex or Claude Code</li><li>A Mac with Apple Silicon</li><li>Python 3.11 or newer and uv</li></ul>
+        </div>
+        <div>
+          <h2 id="install-title">How do you install Setloom?</h2>
+          <p class="lede">Setloom installs into one repository-local uv environment in three commands.</p>
+          <div class="codeblock">
+            <div class="codebar"><span><svg class="ic i-terminal" width="20" height="20" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path class="draw" pathLength="1" d="M2.5 4 H21.5 V20 H2.5 Z"/><path class="draw" pathLength="1" style="--t:.35s;--d:.45s" d="M6 9 L9.5 12 L6 15"/><path class="blink sig" style="--t:.7s;--d:1.4s;--e:linear" d="M12 15 H17"/></svg>Terminal</span><button class="copy" id="copy" type="button"><svg class="ic i-copy" width="20" height="20" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M8 4 H20 V16 H8 Z"/><path class="cut travel" style="--dx:4px;--dy:-4px" d="M4 8 H16 V20 H4 Z"/></svg><svg class="ic i-check" width="20" height="20" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path class="draw sig" pathLength="1" style="--d:.55s" d="M4.5 12.5 L9.5 17.5 L19.5 6.5"/></svg><span>Copy commands</span></button></div>
+            <pre id="quickstart" tabindex="0"><code><span class="c"># clone the repository and set up its one environment</span>
+<span class="p">$</span> git clone https://github.com/appautomaton/setloom.git
+<span class="p">$</span> cd setloom
+<span class="p">$</span> uv sync --group transcription
+
+<span class="c"># then open your coding agent here and describe the track you hear</span></code></pre>
+            <p class="status" id="copy-status" aria-live="polite"></p>
+          </div>
+          <p class="then">The coding agent reads the repository's AGENTS.md and chooses its tools. Full setup is in the <a href="https://github.com/appautomaton/setloom#tools">README</a>.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sheet" id="compare" aria-labelledby="compare-title">
+    <div class="shell">
+      <div class="system" aria-hidden="true"><b>G</b><span>Compared</span><i></i></div>
+      <h2 id="compare-title">How is Setloom different from AI music generators?</h2>
+      <p class="lede">Setloom produces editable source that a person revises pass by pass, while prompt-to-song generators such as Suno and Udio return finished audio from a text prompt.</p>
+      <table class="compare"><thead><tr><td></td><th scope="col">Setloom</th><th scope="col">Suno and Udio</th></tr></thead><tbody><tr><th scope="row">Output</th><td>Editable MIDI, instruments, renderer and mastered audio</td><td>A finished audio file</td></tr><tr><th scope="row">Revision</th><td>Specific changes to the source, from listening notes</td><td>A new generation from a new prompt</td></tr><tr><th scope="row">Who decides</th><td>The person, by ear, every pass</td><td>The model, per prompt</td></tr><tr><th scope="row">Where it runs</th><td>On your Mac, driven by your coding agent</td><td>On the vendor's servers</td></tr><tr><th scope="row">Source</th><td>Open source, AGPL-3.0</td><td>Closed</td></tr></tbody></table>
     </div>
   </section>
 
   <section class="sheet" id="faq" aria-labelledby="faq-title">
     <div class="shell">
-      <h2 id="faq-title">Questions, answered plainly.</h2>
-      <dl class="faq">
-        <div>
-          <dt>What is Setloom?</dt>
-          <dd>Setloom is an open-source, keyboard-first harness for producing club tracks and DJ sets with an agentic producer. You give direction in plain language and judge the result by ear; the agent composes, edits, renders, inspects, and revises each track's editable source. It is made by App Automaton and licensed AGPL-3.0.</dd>
-        </div>
-        <div>
-          <dt>Is Setloom a one-click music generator?</dt>
-          <dd>No, and that is the point. You stay inside the loop as the ear: the agent turns your listening notes into concrete source changes, renders them, and inspects the result, so every pass moves toward the track you wanted instead of rolling the dice again. Keep pushing a piece for as long as you have something to say about it.</dd>
-        </div>
-        <div>
-          <dt>Do I need a DAW, Ableton Live, or Logic Pro?</dt>
-          <dd>No. You never operate a DAW or a plug-in. Each track is editable source that the agent assembles and renders. SuperCollider, Logic Pro, and Ableton Live can serve as local production surfaces when a track calls for them, driven by the agent rather than by you.</dd>
-        </div>
-        <div>
-          <dt>What does the agent do, and what do I do?</dt>
-          <dd>You are the listener and creative director: you say what is wrong and whether the result is accepted. The agent is the producer: it makes the musical choices within your brief, writes the track's code, renders an audition, and revises rejected work. The harness is the studio: it scaffolds, renders, inspects, and keeps everything reproducible, and it composes nothing.</dd>
-        </div>
-        <div>
-          <dt>What does Setloom run on?</dt>
-          <dd>Python 3 through one repo-local uv environment. Audio-to-MIDI transcription uses a native MLX Basic Pitch machine-learning engine on Apple Silicon Macs; the rest of the toolkit is command-line Python. Model weights, audio, and proprietary samples stay out of Git.</dd>
-        </div>
-        <div>
-          <dt>Who owns the music Setloom produces?</dt>
-          <dd>You do, subject to the third-party samples, models, and inputs you bring. The code is AGPL-3.0-only and the documentation is CC BY-SA 4.0.</dd>
-        </div>
-      </dl>
+      <div class="system" aria-hidden="true"><b>H</b><span>Questions</span><i></i></div>
+      <h2 id="faq-title">Frequently asked questions</h2>
+      <dl class="faq"><div><dt>Is Setloom free?</dt><dd>Setloom is free and open source under AGPL-3.0-only. The frontier model that drives it is billed by its provider.</dd></div><div><dt>Is Setloom a one-click music generator?</dt><dd>Setloom is not a one-click generator. A person stays in the loop as the listener, and each pass turns their notes into specific changes to the track's source.</dd></div><div><dt>Do I need a DAW to use Setloom?</dt><dd>Setloom does not require a DAW. The user never operates a DAW or plug-in. The agent can drive SuperCollider, Ableton Live or Logic Pro when a track calls for them.</dd></div><div><dt>Which coding agents work with Setloom?</dt><dd>Setloom works with coding agents that read repository instructions, such as Codex and Claude Code. It needs a frontier model.</dd></div><div><dt>Does Setloom run on Windows or Linux?</dt><dd>Setloom is developed for macOS on Apple Silicon. Its transcription and stem separation run on MLX, which requires Apple Silicon.</dd></div><div><dt>Can Setloom remix or rebuild an existing song?</dt><dd>Setloom can transcribe and separate a recording, rebuild it as an editable performance, and reinterpret it. Using someone else's recording remains subject to its rights.</dd></div><div><dt>What kind of music can Setloom make?</dt><dd>Setloom has no built-in genre. Released work includes electronic tracks, remixes and solo piano.</dd></div><div><dt>Who owns music made with Setloom?</dt><dd>The person owns the music, subject to the samples, models and inputs they bring. Setloom's code is AGPL-3.0-only and its documentation is CC BY-SA 4.0.</dd></div></dl>
     </div>
   </section>
-
 </main>
 
-<footer class="sheet foot">
+<footer class="foot">
   <div class="shell">
-    <p class="foot-mark cloth" aria-hidden="true">Setloom</p>
+    <div class="coda" aria-hidden="true">
+      <span class="strings">
+        <svg class="string" viewBox="0 0 1000 20" preserveAspectRatio="none" style="--k:.55;--period:1.9s;--wave:46px"><path d="M0 10 Q11.5 1 23 10 T46 10 T69 10 T92 10 T115 10 T138 10 T161 10 T184 10 T207 10 T230 10 T253 10 T276 10 T299 10 T322 10 T345 10 T368 10 T391 10 T414 10 T437 10 T460 10 T483 10 T506 10 T529 10 T552 10 T575 10 T598 10 T621 10 T644 10 T667 10 T690 10 T713 10 T736 10 T759 10 T782 10 T805 10 T828 10 T851 10 T874 10 T897 10 T920 10 T943 10 T966 10 T989 10 T1012 10 T1035 10 T1058 10"/></svg>
+        <svg class="string" viewBox="0 0 1000 20" preserveAspectRatio="none" style="--k:.8;--period:1.5s;--wave:38px"><path d="M0 10 Q9.5 1 19 10 T38 10 T57 10 T76 10 T95 10 T114 10 T133 10 T152 10 T171 10 T190 10 T209 10 T228 10 T247 10 T266 10 T285 10 T304 10 T323 10 T342 10 T361 10 T380 10 T399 10 T418 10 T437 10 T456 10 T475 10 T494 10 T513 10 T532 10 T551 10 T570 10 T589 10 T608 10 T627 10 T646 10 T665 10 T684 10 T703 10 T722 10 T741 10 T760 10 T779 10 T798 10 T817 10 T836 10 T855 10 T874 10 T893 10 T912 10 T931 10 T950 10 T969 10 T988 10 T1007 10 T1026 10 T1045 10"/></svg>
+        <svg class="string" viewBox="0 0 1000 20" preserveAspectRatio="none" style="--k:1;--period:1.2s;--wave:30px"><path d="M0 10 Q7.5 1 15 10 T30 10 T45 10 T60 10 T75 10 T90 10 T105 10 T120 10 T135 10 T150 10 T165 10 T180 10 T195 10 T210 10 T225 10 T240 10 T255 10 T270 10 T285 10 T300 10 T315 10 T330 10 T345 10 T360 10 T375 10 T390 10 T405 10 T420 10 T435 10 T450 10 T465 10 T480 10 T495 10 T510 10 T525 10 T540 10 T555 10 T570 10 T585 10 T600 10 T615 10 T630 10 T645 10 T660 10 T675 10 T690 10 T705 10 T720 10 T735 10 T750 10 T765 10 T780 10 T795 10 T810 10 T825 10 T840 10 T855 10 T870 10 T885 10 T900 10 T915 10 T930 10 T945 10 T960 10 T975 10 T990 10 T1005 10 T1020 10 T1035 10"/></svg>
+        <svg class="string" viewBox="0 0 1000 20" preserveAspectRatio="none" style="--k:.8;--period:.95s;--wave:24px"><path d="M0 10 Q6 1 12 10 T24 10 T36 10 T48 10 T60 10 T72 10 T84 10 T96 10 T108 10 T120 10 T132 10 T144 10 T156 10 T168 10 T180 10 T192 10 T204 10 T216 10 T228 10 T240 10 T252 10 T264 10 T276 10 T288 10 T300 10 T312 10 T324 10 T336 10 T348 10 T360 10 T372 10 T384 10 T396 10 T408 10 T420 10 T432 10 T444 10 T456 10 T468 10 T480 10 T492 10 T504 10 T516 10 T528 10 T540 10 T552 10 T564 10 T576 10 T588 10 T600 10 T612 10 T624 10 T636 10 T648 10 T660 10 T672 10 T684 10 T696 10 T708 10 T720 10 T732 10 T744 10 T756 10 T768 10 T780 10 T792 10 T804 10 T816 10 T828 10 T840 10 T852 10 T864 10 T876 10 T888 10 T900 10 T912 10 T924 10 T936 10 T948 10 T960 10 T972 10 T984 10 T996 10 T1008 10 T1020 10 T1032 10"/></svg>
+        <svg class="string" viewBox="0 0 1000 20" preserveAspectRatio="none" style="--k:.6;--period:.8s;--wave:19px"><path d="M0 10 Q4.75 1 9.5 10 T19 10 T28.5 10 T38 10 T47.5 10 T57 10 T66.5 10 T76 10 T85.5 10 T95 10 T104.5 10 T114 10 T123.5 10 T133 10 T142.5 10 T152 10 T161.5 10 T171 10 T180.5 10 T190 10 T199.5 10 T209 10 T218.5 10 T228 10 T237.5 10 T247 10 T256.5 10 T266 10 T275.5 10 T285 10 T294.5 10 T304 10 T313.5 10 T323 10 T332.5 10 T342 10 T351.5 10 T361 10 T370.5 10 T380 10 T389.5 10 T399 10 T408.5 10 T418 10 T427.5 10 T437 10 T446.5 10 T456 10 T465.5 10 T475 10 T484.5 10 T494 10 T503.5 10 T513 10 T522.5 10 T532 10 T541.5 10 T551 10 T560.5 10 T570 10 T579.5 10 T589 10 T598.5 10 T608 10 T617.5 10 T627 10 T636.5 10 T646 10 T655.5 10 T665 10 T674.5 10 T684 10 T693.5 10 T703 10 T712.5 10 T722 10 T731.5 10 T741 10 T750.5 10 T760 10 T769.5 10 T779 10 T788.5 10 T798 10 T807.5 10 T817 10 T826.5 10 T836 10 T845.5 10 T855 10 T864.5 10 T874 10 T883.5 10 T893 10 T902.5 10 T912 10 T921.5 10 T931 10 T940.5 10 T950 10 T959.5 10 T969 10 T978.5 10 T988 10 T997.5 10 T1007 10 T1016.5 10 T1026 10"/></svg>
+      </span>
+      <span class="final"></span><span class="fine">Fine</span>
+    </div>
     <div class="foot-grid">
-      <p>Setloom is an open-source project by <a href="https://appautomaton.com/">App Automaton</a>. The source, issues, and full documentation live on <a href="https://github.com/appautomaton/setloom">GitHub</a>. A plain-text summary for assistants is in <a href="llms.txt">llms.txt</a>.</p>
-      <p>Code is AGPL-3.0-only and documentation is CC BY-SA 4.0. Your music is yours. Setloom and App Automaton are project names; see <a href="https://github.com/appautomaton/setloom/blob/main/LICENSES/TRADEMARKS.md">TRADEMARKS.md</a>.</p>
+      <p class="foot-mark">Setloom</p>
+      <nav aria-label="Footer">
+        <div><h3>Project</h3><ul>
+          <li><a href="https://github.com/appautomaton/setloom"><svg class="ic i-repo" width="20" height="20" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path class="draw" pathLength="1" d="M7 8 V16"/><circle class="pop" cx="7" cy="6" r="2"/><circle class="pop" style="--t:.085s" cx="7" cy="18" r="2"/><path class="draw sig" pathLength="1" style="--t:.25s" d="M17 8 V8.5 C17 12.5 7 11 7 15"/><circle class="pop" style="--t:.55s" cx="17" cy="6" r="2"/></svg><span>Source on GitHub</span></a></li>
+          <li><a href="llms.txt"><svg class="ic i-text" width="20" height="20" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path class="draw" pathLength="1" d="M5 4 H15 L19 8 V20 H5 Z"/><path d="M15 4 V8 H19"/><path class="draw" pathLength="1" style="--t:.35s;--d:.3s;--e:steps(3,end)" d="M8 8 H11"/><path class="draw" pathLength="1" style="--t:.7s;--d:.5s;--e:steps(6,end)" d="M8 12 H16"/><path class="draw" pathLength="1" style="--t:1.2s;--d:.5s;--e:steps(6,end)" d="M8 16 H16"/></svg><span>llms.txt</span></a></li>
+          <li><a href="#install"><svg class="ic i-arrow-right" width="20" height="20" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path class="draw" pathLength="1" d="M3 12 H20"/><path class="slide" style="--dx:-6px;--t:.1s" d="M14 6 L20 12 L14 18"/></svg><span>Install</span></a></li>
+        </ul></div>
+        <div><h3>Listen</h3><ul>
+          <li><a href="https://soundcloud.com/appautomaton"><svg class="ic i-listen" width="20" height="20" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path class="draw" pathLength="1" d="M4.75 15 V12 A7.25 7.25 0 0 1 19.25 12 V15"/><rect class="cut pop" style="--t:.35s" x="2.5" y="13" width="4.5" height="7"/><rect class="acc pop" style="--t:.42s" x="17" y="13" width="4.5" height="7"/></svg><span>SoundCloud</span></a></li>
+          <li><a href="https://appautomaton.bandcamp.com/"><svg class="ic i-external" width="20" height="20" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path class="draw" pathLength="1" d="M6 18 L18 6"/><path class="slide" style="--dx:-4px;--dy:4px;--t:.12s" d="M9 6 H18 V15"/></svg><span>Bandcamp</span></a></li>
+        </ul></div>
+        <div><h3>Made by</h3><ul>
+          <li><a href="https://appautomaton.com/"><svg class="ic i-external" width="20" height="20" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path class="draw" pathLength="1" d="M6 18 L18 6"/><path class="slide" style="--dx:-4px;--dy:4px;--t:.12s" d="M9 6 H18 V15"/></svg><span>App Automaton</span></a></li>
+        </ul></div>
+      </nav>
+    </div>
+    <div class="fineprint">
+      <p>Setloom is an open-source project by App Automaton. Code is AGPL-3.0-only and documentation is CC BY-SA 4.0.</p>
+      <p>Your music is yours. Setloom and App Automaton are project names. See <a href="https://github.com/appautomaton/setloom/blob/main/LICENSES/TRADEMARKS.md">TRADEMARKS.md</a>.</p>
     </div>
   </div>
 </footer>
-
 <script src="assets/main.js" defer></script>
-</body>
-</html>
+</body></html>

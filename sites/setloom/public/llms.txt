@@ -1,41 +1,133 @@
 # Setloom
 
-> Setloom is an open-source, keyboard-first harness for producing club tracks and DJ sets with an agentic producer. The human directs in plain language and judges by ear; the agent composes, renders, inspects, and revises each track's editable source. No DAW or plug-in is operated by the user. Made by App Automaton, licensed AGPL-3.0-only.
+> Setloom is an open-source agentic music producer. You direct in plain language and judge by ear. A coding agent composes, renders, and revises the music as editable source.
 
-Setloom is not a one-click music generator. It is a loop the user stays inside: the agent turns listening notes into concrete source changes, renders and inspects them reproducibly, and leaves the workspace clean enough that the next pass picks up where the last one stopped.
+Setloom moves music production out of the DAW and into source code that a coding agent writes and renders. You still need a terminal and a frontier model. You no longer need the piano roll, the plug-in chain or the mixing vocabulary. What stays with you is the judgement: hearing a pass and saying what is wrong with it.
 
-## Canonical links
+## What is Setloom?
 
-- Project site: https://appautomaton.com/setloom/
-- Source repository: https://github.com/appautomaton/setloom
-- Quick start: https://github.com/appautomaton/setloom#quick-start
-- Maintainer: https://appautomaton.com/ and https://github.com/appautomaton
+Setloom is an open-source harness that lets a coding agent, such as Codex or Claude Code running a frontier model, produce music under a person's direction. The person describes the music and judges each audition by ear. The agent writes each track as editable source (MIDI performances, instrument settings and a renderer), renders it, inspects the result, and revises it. Setloom is made by App Automaton.
 
-## Three roles
+- Type: Open-source agentic music production harness
+- Maker: App Automaton
+- Version: 0.1.0
+- Licence: AGPL-3.0-only (code), CC BY-SA 4.0 (documentation)
+- Price: Free. Model usage is billed by your agent's provider.
+- Language: Python 3.11 or newer, managed with uv
+- Platform: macOS on Apple Silicon
+- Requires: A frontier model running in a coding agent
+- Output: Editable MIDI, instrument settings, renderers, and mastered WAV audio
+- Source: https://github.com/appautomaton/setloom
 
-- The human is the listener and creative director: gives direction in plain language, judges the result, accepts or rejects.
-- The agent is the producer: makes the musical choices within the brief, writes each track's code, renders an audition, inspects it, and revises rejected work.
-- The harness is the studio: scaffolds tracks, renders, inspects audio, keeps the work reproducible, owns technical hygiene only, composes nothing.
+## How does Setloom work?
 
-## The loop
+Setloom splits music production into three roles: the person directs, the agent produces, and the harness supplies the studio tools.
 
-producer thesis -> per-track source edit -> render audition -> play and inspect (waveform, spectrum) -> human listening note -> revise or promote
+- You (the listener and creative director): You give direction in plain language, for example the bass is too busy before the break, make the arp darker, and you accept or reject each audition.
+- The agent (the producer): The agent makes the musical choices within the brief, writes each track's source, renders an audition, inspects it, and revises rejected work. Measurements never override your verdict.
+- The harness (the studio): The harness provides audio inspection, transcription, stem separation, MIDI and mastering tools, and keeps every render reproducible. It composes nothing.
 
-## Toolkit (command line, Python)
+Each pass goes once round the same six-step loop.
 
-- `setloom new`: scaffold a track (spec, runnable assembler, listening-notes template).
-- `assemble.py`: each track's editable code assembles the music; renders are reproducible from source.
-- `setloom play`: audition a render; nothing autoplays without the user's say.
-- `setloom inspect`: waveform, spectrum, spectrogram, stereo field, and A/B comparisons.
-- `setloom transcribe`: recover note candidates from reference audio with a native MLX Basic Pitch machine-learning engine on Apple Silicon.
-- `setloom anatomize`: dissect a reference by layers.
-- `setloom.midi`, `setloom.audio`, `setloom.conductor`: MIDI, DSP hygiene, and music-theory primitives for track code.
-- SuperCollider, Logic Pro, and Ableton Live can serve as agent-driven local production surfaces.
+1. Describe. You describe the music you want, in plain language.
+2. Edit the source. The agent edits the track's source: its MIDI, instruments and renderer.
+3. Render an audition. The agent renders the source to audio.
+4. Play and inspect. The agent plays the audition and inspects its waveform, spectrum and rhythm.
+5. Listen and note. You listen and say what is wrong, in plain words.
+6. Revise or keep. The agent revises the source and goes round again, or you keep the track.
 
-## Runtime
+Measurements inform the agent. The verdict is always the person's.
 
-Python 3 through one repo-local `uv` environment. Transcription runs on Apple Silicon macOS via MLX. Model weights, audio, and proprietary samples stay out of Git.
+## What can Setloom do?
 
-## License
+Setloom gives a coding agent command-line tools and Python modules for every stage of music production. The agent uses them as each track needs. There is no fixed sequence.
 
-Code: AGPL-3.0-only. Documentation: CC BY-SA 4.0. The user's music belongs to the user, subject to third-party samples, models, and inputs they bring. Setloom and App Automaton are project names.
+- Compose and arrange: Each track keeps its own MIDI performance, instruments and renderer. (Python, mido, SuperCollider)
+- Transcribe audio to MIDI: setloom transcribe recovers notes and pitch bends. (Basic Pitch, running natively on MLX in FP32)
+- Transcribe piano: setloom transcribe --engine kong recovers piano notes. (Kong piano transcription)
+- Separate stems: setloom separate writes every stem estimate as float WAV. (A 53-stem BS-RoFormer model, converted to run natively on MLX)
+- Inspect audio: setloom inspect plots waveform, spectrogram, spectrum, stereo and rhythm, with A/B comparison. (NumPy, SciPy)
+- Master for release: setloom.audio measures loudness and applies true-peak limiting. (FFmpeg, pyloudnorm)
+- Audition: setloom play plays a render on request, never automatically. (macOS audio)
+- Drive instruments: The agent plays SuperCollider, Ableton Live and Logic Pro and records the settings. (Ableton Live through an MCP bridge)
+
+## What music has been made with Setloom?
+
+Setloom has produced released tracks in electronic, remix and piano work. The published tracks are listed below; all are by App Automaton.
+
+- [Accretion (Setloom Mix)](https://soundcloud.com/appautomaton/accretion-setloom-mix) on SoundCloud
+- [Pulsus Noctis (Setloom Remix)](https://soundcloud.com/appautomaton/pulsus-noctis-setloom-remix) on SoundCloud
+- [STRIDULATION (Setloom Mix)](https://soundcloud.com/appautomaton/stridulation-setloom-mix) on SoundCloud
+- [Remissionem (Setloom Remix)](https://appautomaton.bandcamp.com/track/remissionem-setloom-remix) on Bandcamp
+- [Anti Gravitational Wave](https://appautomaton.bandcamp.com/track/anti-gravitational-wave) on Bandcamp
+
+## What do you need to run Setloom?
+
+Setloom needs a frontier model running in a coding agent. It is a harness for that agent, not a standalone app, and does not produce music without one.
+
+- A coding agent running a frontier model, such as Codex or Claude Code
+- A Mac with Apple Silicon
+- Python 3.11 or newer and uv
+
+## How do you install Setloom?
+
+Setloom installs into one repository-local uv environment in three commands.
+
+```
+git clone https://github.com/appautomaton/setloom.git
+cd setloom
+uv sync --group transcription
+```
+
+The coding agent reads the repository's AGENTS.md and chooses its tools. Full setup is in the README: https://github.com/appautomaton/setloom#tools
+
+## How is Setloom different from AI music generators?
+
+Setloom produces editable source that a person revises pass by pass, while prompt-to-song generators such as Suno and Udio return finished audio from a text prompt.
+
+- Output: Setloom: Editable MIDI, instruments, renderer and mastered audio. Suno and Udio: A finished audio file.
+- Revision: Setloom: Specific changes to the source, from listening notes. Suno and Udio: A new generation from a new prompt.
+- Who decides: Setloom: The person, by ear, every pass. Suno and Udio: The model, per prompt.
+- Where it runs: Setloom: On your Mac, driven by your coding agent. Suno and Udio: On the vendor's servers.
+- Source: Setloom: Open source, AGPL-3.0. Suno and Udio: Closed.
+
+## Frequently asked questions
+
+### Is Setloom free?
+
+Setloom is free and open source under AGPL-3.0-only. The frontier model that drives it is billed by its provider.
+
+### Is Setloom a one-click music generator?
+
+Setloom is not a one-click generator. A person stays in the loop as the listener, and each pass turns their notes into specific changes to the track's source.
+
+### Do I need a DAW to use Setloom?
+
+Setloom does not require a DAW. The user never operates a DAW or plug-in. The agent can drive SuperCollider, Ableton Live or Logic Pro when a track calls for them.
+
+### Which coding agents work with Setloom?
+
+Setloom works with coding agents that read repository instructions, such as Codex and Claude Code. It needs a frontier model.
+
+### Does Setloom run on Windows or Linux?
+
+Setloom is developed for macOS on Apple Silicon. Its transcription and stem separation run on MLX, which requires Apple Silicon.
+
+### Can Setloom remix or rebuild an existing song?
+
+Setloom can transcribe and separate a recording, rebuild it as an editable performance, and reinterpret it. Using someone else's recording remains subject to its rights.
+
+### What kind of music can Setloom make?
+
+Setloom has no built-in genre. Released work includes electronic tracks, remixes and solo piano.
+
+### Who owns music made with Setloom?
+
+The person owns the music, subject to the samples, models and inputs they bring. Setloom's code is AGPL-3.0-only and its documentation is CC BY-SA 4.0.
+
+## Links
+
+- Source: https://github.com/appautomaton/setloom
+- Music: https://soundcloud.com/appautomaton
+- Bandcamp: https://appautomaton.bandcamp.com/
+- Page: https://appautomaton.com/setloom/
