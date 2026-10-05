@@ -7,65 +7,33 @@
 <meta name="robots" content="noindex, nofollow">
 <meta name="viewport" content="width=1200">
 <title>Setloom social card</title>
-<link rel="preconnect" href="https://api.fontshare.com">
-<link rel="preconnect" href="https://cdn.fontshare.com" crossorigin>
-<link rel="stylesheet" href="https://api.fontshare.com/v2/css?f[]=zodiak@401,900&amp;f[]=author@400,500&amp;display=swap">
+<link rel="stylesheet" href="https://api.fontshare.com/v2/css?f[]=supreme@400&amp;display=block">
+<link rel="stylesheet" href="https://api.fontshare.com/v2/css?f[]=tabular@400&amp;display=block">
 <style>
-  :root {
-    --vat: #0b0e13; --ink: #efe9dc; --ink-soft: #c2bbac; --muted: #8f8b7d;
-    --indigo: #3c5f9e; --madder: #b24a34; --weld: #c9a227; --iron: #8a8f98;
-  }
+  /* The Setloom wordmark engraved on a five-line staff, with a lime playhead, on bone. The same staff as the page's hero, played to just past the t. */
+  @font-face { font-family: "Outward Block"; src: url("assets/fonts/outward-block.woff2") format("woff2"); font-display: block; }
   * { margin: 0; padding: 0; box-sizing: border-box; }
-  html, body { width: 1200px; height: 630px; overflow: hidden; }
-  body {
-    background: repeating-linear-gradient(90deg, rgba(239,233,220,.035) 0 1px, transparent 1px 11px), var(--vat);
-    color: var(--ink);
-    font-family: "Author", "Helvetica Neue", Arial, sans-serif;
-    -webkit-font-smoothing: antialiased;
-  }
-  .card { position: relative; width: 1200px; height: 630px; padding: 62px 76px 54px; display: flex; flex-direction: column; justify-content: flex-end; }
-  .mark {
-    position: relative; display: inline-block; align-self: flex-start; isolation: isolate;
-    font-family: "Zodiak", Didot, serif; font-weight: 900; font-size: 228px;
-    line-height: .88; letter-spacing: -.035em; padding-right: .05em;
-    background-image:
-      repeating-linear-gradient(90deg, rgba(11,14,19,.17) 0 1px, transparent 1px 7px),
-      repeating-linear-gradient(0deg,
-        var(--ink) 0 23px, var(--weld) 23px 24.5px,
-        var(--ink) 24.5px 47px, var(--madder) 47px 48.5px,
-        var(--ink) 48.5px 68px, var(--indigo) 68px 69.5px,
-        var(--ink) 69.5px 92px);
-    -webkit-background-clip: text; background-clip: text; color: transparent;
-  }
-  .mark svg { position: absolute; inset: -6% -11% -2% -11%; width: auto; height: 108%; overflow: visible; }
-  .mark path { fill: none; stroke-linecap: round; }
-  .mark .under { z-index: -1; -webkit-mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent); mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent); }
-  .mark .over {
-    z-index: 1;
-    -webkit-mask-image: repeating-linear-gradient(90deg, #000 0 4%, transparent 4% 14%), linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
-    mask-image: repeating-linear-gradient(90deg, #000 0 4%, transparent 4% 14%), linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
-    -webkit-mask-composite: source-in; mask-composite: intersect;
-  }
-  .line { margin-top: 34px; max-width: 33ch; font-family: "Zodiak", Didot, serif; font-weight: 400; font-style: italic; font-size: 37px; line-height: 1.24; color: var(--ink-soft); }
-  .foot { margin-top: 44px; display: flex; justify-content: space-between; font-size: 19px; color: var(--muted); }
-  .foot b { color: var(--ink-soft); font-weight: 500; }
+  html, body { width: 1200px; height: 630px; overflow: hidden; background: #ECEAE3; color: #111110; -webkit-font-smoothing: antialiased; }
+  .card { position: relative; width: 1200px; height: 630px; }
+  .mark { --space: 0.175em; --rule: 3px; position: absolute; left: 72px; top: 104px; width: 1.067em; height: 0.7em; font: 400 580px/0.858 "Outward Block", sans-serif; }
+  .staff, .played { position: absolute; top: 0; height: 0.7em; }
+  .staff { left: -72px; width: calc(72px + 1.127em); background: repeating-linear-gradient(to bottom, #A9A69C 0 var(--rule), transparent var(--rule) var(--space)); height: calc(0.7em + var(--rule)); }
+  .staff::after { content: ""; position: absolute; right: 0; top: 0; width: 22px; height: 100%; background: linear-gradient(to right, #A9A69C 0 3px, transparent 0 10px, #A9A69C 0); }
+  .played { left: 0; width: 0.52em; height: calc(0.7em + 4px); top: -0.5px; background: repeating-linear-gradient(to bottom, #111110 0 5px, transparent 5px var(--space)); }
+  .word { position: relative; display: block; height: 0.7em; white-space: nowrap; color: transparent;
+    background-color: #111110; background-image: linear-gradient(to bottom, transparent calc(1 * var(--space) - var(--rule) / 2), #C6F135 0 calc(1 * var(--space) + var(--rule) / 2), transparent 0 calc(2 * var(--space) - var(--rule) / 2), #C6F135 0 calc(2 * var(--space) + var(--rule) / 2), transparent 0 calc(3 * var(--space) - var(--rule) / 2), #C6F135 0 calc(3 * var(--space) + var(--rule) / 2), transparent 0), linear-gradient(to bottom, transparent calc(1 * var(--space) - var(--rule) / 2), #ECEAE3 0 calc(1 * var(--space) + var(--rule) / 2), transparent 0 calc(2 * var(--space) - var(--rule) / 2), #ECEAE3 0 calc(2 * var(--space) + var(--rule) / 2), transparent 0 calc(3 * var(--space) - var(--rule) / 2), #ECEAE3 0 calc(3 * var(--space) + var(--rule) / 2), transparent 0); background-size: 0.52em 100%, 100% 100%; background-repeat: no-repeat;
+    -webkit-background-clip: text; background-clip: text; }
+  .head { position: absolute; left: calc(0.52em - 6px); top: -0.035em; width: 12px; height: 0.77em; background: #C6F135; box-shadow: 0 0 0 2px #111110; }
+  .line { position: absolute; left: 784px; top: 300px; width: 352px; font: 400 30px/1.3 "Supreme", sans-serif; color: #3A3935; }
+  .foot { position: absolute; left: 72px; right: 64px; bottom: 44px; display: flex; justify-content: space-between; font: 400 18px/1 "Tabular", monospace; letter-spacing: 0.12em; text-transform: uppercase; color: #62605A; }
+  .foot b { font-weight: 400; color: #111110; }
 </style>
 </head>
 <body>
 <div class="card">
-  <span class="mark"><svg class="under" viewBox="0 0 1000 300" preserveAspectRatio="none" aria-hidden="true">
-    <path stroke="#3c5f9e" stroke-width="6" d="M-40 66 c 50 -34 100 -34 150 0 c 50 34 100 34 150 0 c 50 -34 100 -34 150 0 c 50 34 100 34 150 0 c 50 -34 100 -34 150 0 c 50 34 100 34 150 0 c 50 -34 100 -34 150 0 c 50 34 100 34 150 0"/>
-    <path stroke="#b24a34" stroke-width="5" d="M-40 132 c 50 34 100 34 150 0 c 50 -34 100 -34 150 0 c 50 34 100 34 150 0 c 50 -34 100 -34 150 0 c 50 34 100 34 150 0 c 50 -34 100 -34 150 0 c 50 34 100 34 150 0 c 50 -34 100 -34 150 0"/>
-    <path stroke="#c9a227" stroke-width="3.5" d="M-40 198 c 50 -34 100 -34 150 0 c 50 34 100 34 150 0 c 50 -34 100 -34 150 0 c 50 34 100 34 150 0 c 50 -34 100 -34 150 0 c 50 34 100 34 150 0 c 50 -34 100 -34 150 0 c 50 34 100 34 150 0"/>
-    <path stroke="#8a8f98" stroke-width="4" d="M-40 256 c 50 34 100 34 150 0 c 50 -34 100 -34 150 0 c 50 34 100 34 150 0 c 50 -34 100 -34 150 0 c 50 34 100 34 150 0 c 50 -34 100 -34 150 0 c 50 34 100 34 150 0 c 50 -34 100 -34 150 0"/>
-  </svg>Setloom<svg class="over" viewBox="0 0 1000 300" preserveAspectRatio="none" aria-hidden="true">
-    <path stroke="#3c5f9e" stroke-width="6" d="M-40 66 c 50 -34 100 -34 150 0 c 50 34 100 34 150 0 c 50 -34 100 -34 150 0 c 50 34 100 34 150 0 c 50 -34 100 -34 150 0 c 50 34 100 34 150 0 c 50 -34 100 -34 150 0 c 50 34 100 34 150 0"/>
-    <path stroke="#b24a34" stroke-width="5" d="M-40 132 c 50 34 100 34 150 0 c 50 -34 100 -34 150 0 c 50 34 100 34 150 0 c 50 -34 100 -34 150 0 c 50 34 100 34 150 0 c 50 -34 100 -34 150 0 c 50 34 100 34 150 0 c 50 -34 100 -34 150 0"/>
-    <path stroke="#c9a227" stroke-width="3.5" d="M-40 198 c 50 -34 100 -34 150 0 c 50 34 100 34 150 0 c 50 -34 100 -34 150 0 c 50 34 100 34 150 0 c 50 -34 100 -34 150 0 c 50 34 100 34 150 0 c 50 -34 100 -34 150 0 c 50 34 100 34 150 0"/>
-    <path stroke="#8a8f98" stroke-width="4" d="M-40 256 c 50 34 100 34 150 0 c 50 -34 100 -34 150 0 c 50 34 100 34 150 0 c 50 -34 100 -34 150 0 c 50 34 100 34 150 0 c 50 -34 100 -34 150 0 c 50 34 100 34 150 0 c 50 -34 100 -34 150 0"/>
-  </svg></span>
-  <p class="line">An open-source agentic producer for club tracks and DJ sets. You direct in plain language and judge by ear.</p>
-  <div class="foot"><span><b>appautomaton.com/setloom</b></span><span>github.com/appautomaton/setloom</span></div>
+  <div class="mark"><span class="staff"></span><span class="played"></span><span class="word">Setloom</span><span class="head"></span></div>
+  <p class="line">An open-source agentic music producer. You direct in plain language and judge by ear.</p>
+  <p class="foot"><b>appautomaton.com/setloom</b><span>Open source · Apple Silicon</span></p>
 </div>
 </body>
 </html>
