@@ -3,6 +3,7 @@ import {mkdir,writeFile,readFile,cp,rm} from 'node:fs/promises'
 import {dirname,join} from 'node:path'
 import {fileURLToPath} from 'node:url'
 import {catalog,ORIGIN,unitCount} from '../src/data/catalog.ts'
+import {servedFrom} from './catalog-policy.mjs'
 import {renderLlms} from './discovery-files.mjs'
 import {artworks,artworkManifest,assignArtwork} from './artwork.mjs'
 import {escapeHTML as e,editorial,icon,logo} from './interface.mjs'
@@ -107,7 +108,7 @@ const html=`<!doctype html><html lang="en" data-theme="day"><head>${head('App Au
 <section class="elsewhere" aria-labelledby="elsewhere-title"><div><span class="eyebrow">A change of scenery</span><h2 id="elsewhere-title">Same workshop.<br>A different perspective.</h2><p>RenoCrypt’s App Automaton field guide offers another way into the projects, with a character all its own.</p><a class="button" href="${fieldGuide}"><span>Visit the field guide</span><span class="button-symbol">${icon('arrow')}</span></a></div><div class="elsewhere-drawing" aria-hidden="true"><svg viewBox="0 0 320 320" fill="none" stroke="currentColor"><circle cx="160" cy="160" r="138" stroke-dasharray="1 9"/>${Array.from({length:8},(_,i)=>`<ellipse cx="160" cy="111" rx="32" ry="71" transform="rotate(${i*45} 160 160)"/>`).join('')}<circle cx="160" cy="160" r="24"/></svg></div></section></main>
 <footer data-reveal><div class="footer-top"><a class="brand" href="#top">${logo()}<span>App<br>Automaton</span></a><p>Independent thinking.<br>Shared possibilities.</p><div><a href="https://github.com/appautomaton">GitHub organization ${icon('arrow')}</a><a href="https://huggingface.co/appautomaton">Hugging Face ${icon('arrow')}</a><a href="llms.txt">Text edition ${icon('arrow')}</a><a href="colophon.html">Art & colophon ${icon('arrow')}</a><button type="button" class="share-workshop" hidden><span>Share this page</span>${icon('share')}</button><span class="share-status sr-only" role="status"></span><input class="share-url" aria-label="Link to share" readonly hidden value="https://appautomaton.com/"></div></div><div class="footer-word" aria-hidden="true"><span>Keep making.</span></div><div class="footer-bottom"><span>An <a href="https://www.appcubic.com/">AppCubic</a> workshop.</span><a href="https://www.renocrypt.com/">Research & writing at RenoCrypt ${icon('arrow')}</a><a href="#top">Back to the top ${icon('arrow')}</a></div></footer></body></html>`
 await writeFile(join(OUT,'index.html'),html)
-const sitemapUrls=[rootUrl,...hasSite.map(p=>p.site),rootUrl+'colophon.html']
+const sitemapUrls=[rootUrl,...hasSite.map(p=>p.site).filter(url=>servedFrom(ORIGIN,url)),rootUrl+'colophon.html']
 await writeFile(join(OUT,'sitemap.xml'),`<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">${sitemapUrls.map(url=>{const p=projects.find(p=>p.site===url);return `<url><loc>${e(url)}</loc>${p?.lastmod?`<lastmod>${p.lastmod}</lastmod>`:''}</url>`}).join('')}</urlset>\n`)
 const sitemaps=[...new Set([rootUrl+'sitemap.xml',...projects.map(p=>p.sitemap).filter(Boolean)])].sort()
 await writeFile(join(OUT,'robots.txt'),`User-agent: *\nAllow: /\n\n${sitemaps.map(url=>'Sitemap: '+url).join('\n')}\n`)

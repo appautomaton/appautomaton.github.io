@@ -17,7 +17,7 @@ import { join, dirname } from 'node:path'
 import { fileURLToPath, pathToFileURL } from 'node:url'
 import { serves } from './probe-response.mjs'
 import { readRepositories } from './github-repositories.mjs'
-import { homepageProblem, projectAddress, selectExhibits } from './catalog-policy.mjs'
+import { homepageProblem, projectAddress, selectExhibits, servedFrom } from './catalog-policy.mjs'
 import { auditProjectPage } from './page-audit.mjs'
 import {emptyState,loadPublishedState,reconcileState} from './catalog-state.mjs'
 const { shelves, notShown } = await import('../src/data/shelves.ts')
@@ -60,7 +60,8 @@ async function probe(repo) {
        two conventional names answers is how that list stops being a thing
        somebody has to remember to update. */
     let sitemap = null
-    for (const name_ of ['sitemap-index.xml', 'sitemap.xml']) {
+    // A project on its own host keeps its sitemap there, outside this catalog.
+    if (url === projectAddress(ORIGIN, name)) for (const name_ of ['sitemap-index.xml', 'sitemap.xml']) {
       const url = `${ORIGIN}/${name}/${name_}`
       try {
         const response=await serves(url,'GET')
@@ -118,7 +119,7 @@ try {
   process.exit(0)
 }
 
-const invalidHomepages=repos.filter(r=>!Object.hasOwn(notShown,r.name)).map(r=>homepageProblem(r,ORIGIN)).filter(Boolean)
+const invalidHomepages=repos.filter(r=>!Object.hasOwn(notShown,r.name)).map(r=>homepageProblem(r)).filter(Boolean)
 if(invalidHomepages.length)throw new Error(invalidHomepages.join('\n'))
 const probes = await Promise.all(repos.map(r => Object.hasOwn(notShown,r.name)||(!r.homepage&&!placed.has(r.name))?{hasSite:false}:probe(r)))
 

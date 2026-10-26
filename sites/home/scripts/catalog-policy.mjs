@@ -2,11 +2,17 @@
 // fallback without requiring a source edit for every newly published website.
 export const projectAddress=(origin,name)=>`${origin}/${encodeURIComponent(name)}/`
 
-export function homepageProblem(repo,origin){
+// A project lives wherever its About URL says. The catalog refuses only an
+// address it cannot safely link to.
+export function homepageProblem(repo){
  if(!repo.homepage)return null
- const expected=projectAddress(origin,repo.name)
- return repo.homepage===expected?null:`${repo.name} About URL is ${JSON.stringify(repo.homepage)}, expected ${expected}`
+ let url
+ try{url=new URL(repo.homepage)}catch{return `${repo.name} About URL ${JSON.stringify(repo.homepage)} is not a URL`}
+ return url.protocol==='https:'?null:`${repo.name} About URL ${JSON.stringify(repo.homepage)} is not an https address`
 }
+
+// The central sitemap and robots.txt may list only addresses on their own host.
+export const servedFrom=(origin,url)=>typeof url==='string'&&url.startsWith(`${origin}/`)
 
 export function automaticGroup(repo){
  const name=repo.name.toLowerCase()

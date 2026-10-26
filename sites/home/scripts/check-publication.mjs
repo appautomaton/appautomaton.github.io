@@ -2,6 +2,7 @@ import assert from 'node:assert/strict'
 import {readFile,access} from 'node:fs/promises'
 import {gzipSync} from 'node:zlib'
 import {catalog,ORIGIN,unitCount} from '../src/data/catalog.ts'
+import {servedFrom} from './catalog-policy.mjs'
 import {escapeHTML as e} from './interface.mjs'
 import {assignArtwork} from './artwork.mjs'
 import {validateState} from './catalog-state.mjs'
@@ -38,7 +39,7 @@ for(const match of html.matchAll(/srcset="([^"]+)"/g))for(const candidate of mat
 for(const name of ['UncutSans-Regular.woff2','UncutSans-Medium.woff2','UncutSans-LICENSE.txt'])await access('dist/assets/fonts/'+name)
 const sitemap=await readFile('dist/sitemap.xml','utf8')
 const robots=await readFile('dist/robots.txt','utf8')
-for(const url of [ORIGIN+'/',...projects.map(p=>p.site).filter(Boolean),ORIGIN+'/colophon.html'])assert(sitemap.includes(`<loc>${e(url)}</loc>`),`Sitemap omitted ${url}`)
+for(const url of [ORIGIN+'/',...projects.map(p=>p.site).filter(url=>servedFrom(ORIGIN,url)),ORIGIN+'/colophon.html'])assert(sitemap.includes(`<loc>${e(url)}</loc>`),`Sitemap omitted ${url}`)
 for(const url of [ORIGIN+'/sitemap.xml',...projects.map(p=>p.sitemap).filter(Boolean)])assert(robots.includes(`Sitemap: ${url}`),`robots.txt omitted ${url}`)
 assert(!/^Disallow:\s*\/$/m.test(robots),'Production blocks crawling')
 assert(html.includes('href="https://appautomaton.renocrypt.com/"'),'Missing the related field guide')

@@ -10,7 +10,8 @@ const registry = await readJSON(path)
 const byID = new Map(registry.sites.map(site => [site.id, site]))
 for (const project of catalog.flatMap(group => group.items).filter(project => project.site)) {
   const url = new URL(project.site)
-  assert.equal(url.origin, registry.origin, `Project uses a different origin: ${project.repo}`)
+  // The registry records mounts on this origin; a project on its own host has none.
+  if (url.origin !== registry.origin) continue
   const existing = byID.get(project.repo)
   if (existing) {
     assert.equal(existing.publicPath, url.pathname, `A public mount changed and needs review: ${project.repo}`)
