@@ -70,8 +70,8 @@ test('new public project websites enter the catalog automatically while editoria
  assert.equal(selected.length,5)
  const result=resolveShelves(shelves,selected)
  assert.deepEqual(result.map(s=>s.items.map(p=>p.repo)),[['new-skill'],['source-only','new-system'],['mlx-new'],['studio']])
- assert.equal(homepageProblem(repo('mlx-new'),'https://appautomaton.com'),null)
- for(const homepage of ['https://appautomaton.renocrypt.com/mlx-new/','https://appautomaton.com/another/','http://appautomaton.com/mlx-new/','javascript:alert(1)'])assert(homepageProblem(repo('mlx-new',{homepage}),'https://appautomaton.com'))
+ for(const homepage of ['https://appautomaton.com/mlx-new/','https://mlx-new.appautomaton.com','https://appautomaton.renocrypt.com/mlx-new/'])assert.equal(homepageProblem(repo('mlx-new',{homepage})),null)
+ for(const homepage of ['http://appautomaton.com/mlx-new/','javascript:alert(1)','not a url'])assert(homepageProblem(repo('mlx-new',{homepage})))
  assert.throws(()=>selectExhibits([],shelves,{}),/unavailable repositories/)
 })
 
@@ -83,6 +83,7 @@ test('project indexing guards inspect canonical metadata and both HTML and HTTP 
  assert.deepEqual(audit(),[])
  assert.match(audit(page.replace(url,'https://appautomaton.renocrypt.com/example/')).join(' '),/canonical/)
  assert.match(audit('<title>Missing canonical</title>').join(' '),/missing canonical/)
+ assert.doesNotMatch(auditProjectPage('https://example.appautomaton.com',page.replace(url,'https://example.appautomaton.com/'),new Headers()).problems.join(' '),/canonical/)
  for(const meta of ['<meta name="robots" content="noindex,follow">','<meta content="NONE" name="googlebot">','<meta name="bingbot" content="noindex">'])assert.match(audit(page+meta).join(' '),/forbids indexing/)
  assert.match(audit(page,new Headers({'X-Robots-Tag':'googlebot: noindex'})).join(' '),/forbids indexing/)
  assert.deepEqual(audit(page+'<meta name="robots" content="index, follow, max-image-preview:large">'),[])

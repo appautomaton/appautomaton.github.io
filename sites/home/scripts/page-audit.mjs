@@ -1,4 +1,11 @@
 // Read static project metadata without executing page scripts.
+
+// An address and its normalized form name the same page, e.g. a bare origin
+// and the origin with its root path.
+const sameAddress = (href, url) => {
+  try { return new URL(href, url).href === new URL(url).href } catch { return false }
+}
+
 export function auditProjectPage(url, html, headers) {
   const problems = []
   const warnings = []
@@ -6,7 +13,7 @@ export function auditProjectPage(url, html, headers) {
   const canonical = html.match(/<link[^>]+rel=["']canonical["'][^>]*>/i)?.[0]
   const href = canonical?.match(/href=["']([^"']+)["']/i)?.[1]
   if (!href) problems.push('missing canonical')
-  else if (href !== url) problems.push(`canonical points at ${href}, not ${url}`)
+  else if (!sameAddress(href, url)) problems.push(`canonical points at ${href}, not ${url}`)
 
   const directives=[headers.get('x-robots-tag')||'']
   for(const tag of html.match(/<meta\b[^>]*>/gi)||[]) {
